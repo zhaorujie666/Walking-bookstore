@@ -2,13 +2,10 @@ package com.xzsd.pc.goods.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.xzsd.pc.category.entity.CategoryList;
+import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.category.entity.GoodsCategoryVO;
 import com.xzsd.pc.goods.dao.GoodsDao;
 import com.xzsd.pc.goods.entity.*;
-import com.xzsd.pc.upload.service.UploadService;
-import com.xzsd.pc.user.dao.UserDao;
-import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.RandomUtil;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -29,12 +26,6 @@ public class GoodsService {
     @Resource
     private GoodsDao goodsDao;
 
-    @Resource
-    private UserDao userDao;
-
-    @Resource
-    private UploadService uploadService;
-
 
     /**
      * 新增商品
@@ -46,15 +37,21 @@ public class GoodsService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addGoods(GoodsInfo goodsInfo){
         //判断是否出现重复的书号
-        int count = goodsDao.countBookNumber(goodsInfo.getBookNumber());
+        int count = goodsDao.countBookNumber(goodsInfo.getIsbn());
         if(count != 0){
             return AppResponse.success("书号重复，请输入正确的书号！");
+        }
+        //判断传入的字段是否为空
+        if(null == goodsInfo.getGoodsAdvertise()){
+            goodsInfo.setGoodsAdvertise("");
+        }
+        if(null == goodsInfo.getGoodsDescribe()){
+            goodsInfo.setGoodsDescribe("");
         }
         //生成商品id
         goodsInfo.setGoodsId(StringUtil.getCommonCode(2));
         //生成商家编码
         goodsInfo.setStoreId(RandomUtil.randomLetter(3) + StringUtil.getCommonCode(2));
-
         int goods = goodsDao.addGoods(goodsInfo);
         if(goods == 0){
             return AppResponse.success("新增商品失败");
@@ -75,18 +72,22 @@ public class GoodsService {
         if(globalGoodsInfo == null){
             return AppResponse.success("查询商品详情失败！");
         }
+        //设置商品一二级分类名称
+        /*List<String> categoryName = goodsDao.getGoodsCategoryName(goodsId);
+        globalGoodsInfo.setOneClassifyName(categoryName.get(0));
+        globalGoodsInfo.setTwoClassifyName(categoryName.get(1));*/
         return AppResponse.success("查询商品详情成功！", globalGoodsInfo);
     }
 
     /**
      * 获取商品一二级分类
-     * @param parentId
+     * @param classifyId
      * @return
      * @author zhaorujie
      * @Date 2020-03-28
      */
-    public AppResponse getListGoodsCategory(String parentId){
-        List<GoodsCategoryVO> listGoodsCategory = goodsDao.getListGoodsCategory(parentId);
+    public AppResponse getListGoodsCategory(String classifyId){
+        List<GoodsCategoryVO> listGoodsCategory = goodsDao.getListGoodsCategory(classifyId);
         if(listGoodsCategory.size() == 0){
             return AppResponse.bizError("获取商品分类失败！");
         }
@@ -106,9 +107,16 @@ public class GoodsService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsInfo(GoodsInfo goodsInfo){
         //判断当前的书号有没有改变
-        int count = goodsDao.countBookNumber(goodsInfo.getBookNumber());
-        if(count != 0 && globalGoodsInfo.getBookNumber().equals(goodsInfo.getBookNumber()) == false){
+        int count = goodsDao.countBookNumber(goodsInfo.getIsbn());
+        if(count != 0 && globalGoodsInfo.getIsbn().equals(goodsInfo.getIsbn()) == false){
             return AppResponse.success("存在相同的书号，请输入正确的书号！");
+        }
+        //判断传入的字段是否为空
+        if(null == goodsInfo.getGoodsAdvertise()){
+            goodsInfo.setGoodsAdvertise("");
+        }
+        if(null == goodsInfo.getGoodsDescribe()){
+            goodsInfo.setGoodsDescribe("");
         }
         int number = goodsDao.updateGoodsInfo(goodsInfo);
         if(number == 0){
@@ -120,7 +128,7 @@ public class GoodsService {
     /**
      * 更新商品状态
      * @param goodsId
-     * @param goodsStatus
+     * @param goodsStateId
      * @param userId
      * @return
      * @author zhaorujie
@@ -128,10 +136,10 @@ public class GoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsStatus(String goodsId,
-                                         String goodsStatus,
+                                         String goodsStateId,
                                          String userId){
         List<String> listGoodsId = Arrays.asList(goodsId.split(","));
-        int count = goodsDao.updateGoodsStatus(listGoodsId, goodsStatus, userId);
+        int count = goodsDao.updateGoodsStatus(listGoodsId, goodsStateId, userId);
         if(count == 0){
             return AppResponse.success("更新商品状态失败！");
         }
@@ -168,19 +176,5 @@ public class GoodsService {
             return AppResponse.success("删除失败！");
         }
         return AppResponse.success("删除成功！");
-    }
-
-    /**
-     * 新增轮播图和热门商品时的商品列表
-     * @param goodsInfo
-     * @return
-     * @author zhaorujie
-     * @Date 2020-03-29
-     */
-    public AppResponse getSlideAndHotGoods(GoodsInfo goodsInfo){
-        PageHelper.startPage(goodsInfo.getPageNum(), goodsInfo.getPageSize());
-        List<SlideAndHotGoods> slideAndHotGoods = goodsDao.getSlideAndHotGoods(goodsInfo);
-        PageInfo<SlideAndHotGoods> pageData = new PageInfo<>(slideAndHotGoods);
-        return AppResponse.success("查询成功！", pageData);
     }
 }

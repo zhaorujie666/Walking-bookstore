@@ -1462,12 +1462,12 @@
       <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="351" parent="247" name="category_first_name">
+    <column id="351" parent="247" name="category_first">
       <Position>15</Position>
       <DataType>varchar(64)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="352" parent="247" name="category_second_name">
+    <column id="352" parent="247" name="category_second">
       <Position>16</Position>
       <DataType>varchar(64)|0s</DataType>
       <ColumnKind>normal</ColumnKind>

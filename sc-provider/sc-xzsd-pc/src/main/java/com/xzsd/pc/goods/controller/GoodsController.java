@@ -1,9 +1,9 @@
 package com.xzsd.pc.goods.controller;
 
+import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.goods.service.GoodsService;
-import com.xzsd.pc.util.AppResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @Date 2020-03-28
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/goods")
 public class GoodsController {
 
     private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
@@ -33,7 +33,7 @@ public class GoodsController {
      * @author zhaorujie
      * @Date 2020-03-28
      */
-    @PostMapping("goods/addGoods")
+    @PostMapping("addGoods")
     public AppResponse addGoods(GoodsInfo goodsInfo){
         try {
             //获取用户角色
@@ -54,7 +54,7 @@ public class GoodsController {
      * @author zhaorujie
      * @Date 2020-03-28
      */
-    @PostMapping("goods/findGoodsById")
+    @PostMapping("getGoods")
     public AppResponse getGoodsInfoById(String goodsId){
         try {
             return goodsService.getGoodsInfoById(goodsId);
@@ -67,15 +67,15 @@ public class GoodsController {
 
     /**
      * 获取商品分类
-     * @param parentId
+     * @param classifyId
      * @return
      * @author zhaorujie
      * @Date 2020-03-28
      */
-    @PostMapping("goods/firstAndSecondCategory")
-    public AppResponse getListGoodsCategory(String parentId){
+    @PostMapping("listGoodsClassify")
+    public AppResponse getListGoodsCategory(String classifyId){
         try {
-            return goodsService.getListGoodsCategory(parentId);
+            return goodsService.getListGoodsCategory(classifyId);
         }catch (Exception e){
             logger.error("获取商品分类失败");
             System.out.println(e.toString());
@@ -90,7 +90,7 @@ public class GoodsController {
      * @author zhaorujie
      * @Date 2020-03-28
      */
-    @PostMapping("goods/updateGoodsById")
+    @PostMapping("updateGoods")
     public AppResponse updateGoodsInfo(GoodsInfo goodsInfo){
         try {
             //获取用户角色
@@ -107,17 +107,17 @@ public class GoodsController {
     /**
      * 修改商品状态
      * @param goodsId
-     * @param goodsStatus
+     * @param goodsStateId
      * @return
      * @author zhaorujie
      * @Date 2020-03-28
      */
-    @PostMapping("goods/updateGoodsStatusById")
-    public AppResponse updateGoodsStatus(String goodsId, String goodsStatus){
+    @PostMapping("updateGoodsShelfState")
+    public AppResponse updateGoodsStatus(String goodsId, String goodsStateId){
         try {
             //获取用户角色
             String userId = SecurityUtils.getCurrentUserId();
-            return goodsService.updateGoodsStatus(goodsId, goodsStatus, userId);
+            return goodsService.updateGoodsStatus(goodsId, goodsStateId, userId);
         }catch (Exception e){
             logger.error("修改商品状态失败");
             System.out.println(e.toString());
@@ -132,7 +132,7 @@ public class GoodsController {
      * @author zhaorujie
      * @Date 2020-03-28
      */
-    @PostMapping("goods/listGoods")
+    @PostMapping("listGoods")
     public AppResponse getListGoods(GoodsInfo goodsInfo){
         try {
             return goodsService.getListGoods(goodsInfo);
@@ -150,7 +150,7 @@ public class GoodsController {
      * @author zhaorujie
      * @Date 2020-03-28
      */
-    @PostMapping("goods/deleteGoods")
+    @PostMapping("deleteGoods")
     public AppResponse deleteGoods(String goodsId){
         try {
             //获取用户角色
@@ -158,24 +158,6 @@ public class GoodsController {
             return goodsService.deleteGoods(goodsId, userId);
         }catch (Exception e){
             logger.error("删除商品状态失败");
-            System.out.println(e.toString());
-            throw e;
-        }
-    }
-
-    /**
-     * 新增轮播图和热门商品时的商品列表
-     * @param goodsInfo
-     * @return
-     * @author zhaorujie
-     * @Date 2020-03-29
-     */
-    @PostMapping("slideAndHot/listGoods")
-    public AppResponse getSlideAndHotGoods(GoodsInfo goodsInfo){
-        try {
-            return goodsService.getSlideAndHotGoods(goodsInfo);
-        }catch (Exception e){
-            logger.error("查询新增轮播图和热门商品时的商品列表失败");
             System.out.println(e.toString());
             throw e;
         }

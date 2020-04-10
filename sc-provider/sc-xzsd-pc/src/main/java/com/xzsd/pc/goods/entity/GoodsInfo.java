@@ -34,67 +34,67 @@ public class GoodsInfo {
     /**
      * 商家名称
      */
-    private String storeName;
+    private String supplierName;
     /**
      * 定价
      */
-    private String oldPrice;
+    private String goodsOriginalCost;
     /**
      * 售价
      */
-    private String sellingPrice;
+    private String goodsPrice;
     /**
      * 销售量
      */
-    private int sales;
+    private int goodsSales;
     /**
-     * 一级分类名
+     * 一级分类编号
      */
-    private String firstCategoryName;
+    private String oneClassifyId;
     /**
-     * 二级分类名
+     * 二级分类编号
      */
-    private String secondCategoryName;
+    private String twoClassifyId;
     /**
      * 广告词
      */
-    private String advertisement;
+    private String goodsAdvertise;
     /**
      * 商品介绍
      */
-    private String goodsIntroduction;
+    private String goodsDescribe;
     /**
      * 商品状态
      */
-    private String goodsStatus;
+    private String goodsStateId;
     /**
      * 上架时间
      */
-    private Date startTime;
+    private String goodsShelfTime;
     /**
      * 浏览量
      */
-    private String viewNumber;
+    private String goodsViewsNum;
     /**
      * 库存
      */
-    private int stock;
+    private int goodsInventory;
     /**
      * 书号
      */
-    private String bookNumber;
+    private String isbn;
     /**
      * 出版社
      */
-    private String publisher;
+    private String goodsPress;
     /**
      * 作者
      */
-    private String author;
+    private String goodsAuthor;
     /**
      * 图片上传
      */
-    private List<MultipartFile> file;
+    private String imagePath;
     /**
      * 商品图片
      */
@@ -168,132 +168,132 @@ public class GoodsInfo {
         this.storeId = storeId;
     }
 
-    public String getStoreName() {
-        return storeName;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 
-    public String getOldPrice() {
-        return oldPrice;
+    public String getGoodsOriginalCost() {
+        return goodsOriginalCost;
     }
 
-    public void setOldPrice(String oldPrice) {
-        this.oldPrice = oldPrice;
+    public void setGoodsOriginalCost(String goodsOriginalCost) {
+        this.goodsOriginalCost = goodsOriginalCost;
     }
 
-    public String getSellingPrice() {
-        return sellingPrice;
+    public String getGoodsPrice() {
+        return goodsPrice;
     }
 
-    public void setSellingPrice(String sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice;
     }
 
-    public int getSales() {
-        return sales;
+    public int getGoodsSales() {
+        return goodsSales;
     }
 
-    public void setSales(int sales) {
-        this.sales = sales;
+    public void setGoodsSales(int goodsSales) {
+        this.goodsSales = goodsSales;
     }
 
-    public String getFirstCategoryName() {
-        return firstCategoryName;
+    public String getOneClassifyId() {
+        return oneClassifyId;
     }
 
-    public void setFirstCategoryName(String firstCategoryName) {
-        this.firstCategoryName = firstCategoryName;
+    public void setOneClassifyId(String oneClassifyId) {
+        this.oneClassifyId = oneClassifyId;
     }
 
-    public String getSecondCategoryName() {
-        return secondCategoryName;
+    public String getTwoClassifyId() {
+        return twoClassifyId;
     }
 
-    public void setSecondCategoryName(String secondCategoryName) {
-        this.secondCategoryName = secondCategoryName;
+    public void setTwoClassifyId(String twoClassifyId) {
+        this.twoClassifyId = twoClassifyId;
     }
 
-    public String getAdvertisement() {
-        return advertisement;
+    public String getGoodsAdvertise() {
+        return goodsAdvertise;
     }
 
-    public void setAdvertisement(String advertisement) {
-        this.advertisement = advertisement;
+    public void setGoodsAdvertise(String goodsAdvertise) {
+        this.goodsAdvertise = goodsAdvertise;
     }
 
-    public String getGoodsIntroduction() {
-        return goodsIntroduction;
+    public String getGoodsDescribe() {
+        return goodsDescribe;
     }
 
-    public void setGoodsIntroduction(String goodsIntroduction) {
-        this.goodsIntroduction = goodsIntroduction;
+    public void setGoodsDescribe(String goodsDescribe) {
+        this.goodsDescribe = goodsDescribe;
     }
 
-    public String getGoodsStatus() {
-        return goodsStatus;
+    public String getGoodsStateId() {
+        return goodsStateId;
     }
 
-    public void setGoodsStatus(String goodsStatus) {
-        this.goodsStatus = goodsStatus;
+    public void setGoodsStateId(String goodsStateId) {
+        this.goodsStateId = goodsStateId;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public String getGoodsShelfTime() {
+        return goodsShelfTime;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setGoodsShelfTime(String goodsShelfTime) {
+        this.goodsShelfTime = goodsShelfTime;
     }
 
-    public String getViewNumber() {
-        return viewNumber;
+    public String getGoodsViewsNum() {
+        return goodsViewsNum;
     }
 
-    public void setViewNumber(String viewNumber) {
-        this.viewNumber = viewNumber;
+    public void setGoodsViewsNum(String goodsViewsNum) {
+        this.goodsViewsNum = goodsViewsNum;
     }
 
-    public int getStock() {
-        return stock;
+    public int getGoodsInventory() {
+        return goodsInventory;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setGoodsInventory(int goodsInventory) {
+        this.goodsInventory = goodsInventory;
     }
 
-    public String getBookNumber() {
-        return bookNumber;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setBookNumber(String bookNumber) {
-        this.bookNumber = bookNumber;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getGoodsPress() {
+        return goodsPress;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public void setGoodsPress(String goodsPress) {
+        this.goodsPress = goodsPress;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getGoodsAuthor() {
+        return goodsAuthor;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setGoodsAuthor(String goodsAuthor) {
+        this.goodsAuthor = goodsAuthor;
     }
 
-    public List<MultipartFile> getFile() {
-        return file;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setFile(List<MultipartFile> file) {
-        this.file = file;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getGoodsImage() {

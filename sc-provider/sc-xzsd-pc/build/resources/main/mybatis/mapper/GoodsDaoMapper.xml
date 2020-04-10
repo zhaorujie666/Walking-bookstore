@@ -5,7 +5,7 @@
     <select id="countBookNumber" parameterType="java.lang.String" resultType="int">
         select count(book_number)
         from t_goods_info
-        where book_number = #{bookNumber}
+        where book_number = #{isbn}
     </select>
 
     <!--新增商品-->
@@ -25,8 +25,8 @@
             stock,
             goods_introduction,
             advertisement,
-            category_first_name,
-            category_second_name,
+            category_first,
+            category_second,
             goods_status,
             view_num,
             start_time,
@@ -41,20 +41,20 @@
             #{goodsId},
             #{goodsName},
             #{storeId},
-            #{storeName},
-            #{author},
-            #{publisher},
-            #{bookNumber},
-            #{goodsImage},
-            #{oldPrice},
-            #{sellingPrice},
+            #{supplierName},
+            #{goodsAuthor},
+            #{goodsPress},
+            #{isbn},
+            #{imagePath},
+            #{goodsOriginalCost},
+            #{goodsPrice},
             0,
-            #{stock},
-            #{goodsIntroduction},
-            #{advertisement},
-            #{firstCategoryName},
-            #{secondCategoryName},
-            0,
+            #{goodsInventory},
+            #{goodsDescribe},
+            #{goodsAdvertise},
+            #{oneClassifyId},
+            #{twoClassifyId},
+            3,
             0,
             now(),
             0,
@@ -69,33 +69,43 @@
     <!--查询商品详情-->
     <select id="getGoodsInfoById" parameterType="java.lang.String" resultType="com.xzsd.pc.goods.entity.GoodsVTO">
         select
-        id goodsId,
-        goods_name goodsName,
-        book_number bookNumber,
-        category_first_name firstCategoryName,
-        category_second_name secondCategoryName,
-        advertisement advertisement,
-        goods_introduction goodsIntroduction,
-        store_name storeName,
-        stock stock,
-        old_price oldPrice,
-        selling_price sellingPrice,
-        publisher publisher,
-        author author,
-        goods_image goodsImage
-        from t_goods_info
-        where id = #{goodsId}
+        t1.id goodsId,
+        t1.goods_name goodsName,
+        t1.book_number isbn,
+        t1.advertisement goodsAdvertise,
+        t1.goods_introduction goodsDescribe,
+        t2.category_name oneClassifyName,
+        t3.category_name twoClassifyName,
+        t1.store_name supplierName,
+        t1.stock goodsInventory,
+        t1.old_price goodsOriginalCost,
+        t1.selling_price goodsPrice,
+        t1.publisher goodsPress,
+        t1.author goodsAuthor,
+        t1.goods_image goodsImagePath
+        from t_goods_info t1, t_goods_category t2, t_goods_category t3
+        where t1.id = #{goodsId}
+        and t2.id = t1.category_first
+        and t3.id = t1.category_second
+    </select>
+
+    <!--查询商品一二级分类名称-->
+    <select id="getGoodsCategoryName" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        t1.category_name
+        from t_goods_category t1, t_goods_info t2
+        where t2.id = #{goodsId}
+        and t1.id in (t2.category_first, t2.category_second)
     </select>
 
     <!--查询商品一二级分类列表-->
     <select id="getListGoodsCategory" parameterType="java.lang.String"
             resultType="com.xzsd.pc.category.entity.GoodsCategoryVO">
         select
-        id categoryId,
-        category_name categoryName,
-        parent_id parentId
+        id classifyId,
+        category_name classifyName
         from t_goods_category
-        where parent_id = #{parentId}
+        where parent_id = #{classifyId}
         and is_delete = 0
     </select>
 
@@ -104,18 +114,18 @@
         update t_goods_info
         set
             goods_name = #{goodsName},
-            book_number = #{bookNumber},
-            category_first_name = #{firstCategoryName},
-            category_second_name = #{secondCategoryName},
-            advertisement = #{advertisement},
-            goods_introduction = #{goodsIntroduction},
-            store_name = #{storeName},
-            stock = #{stock},
-            old_price = #{oldPrice},
-            selling_price = #{sellingPrice},
-            publisher = #{publisher},
-            author = #{author},
-            goods_image = #{goodsImage},
+            book_number = #{isbn},
+            category_first = #{oneClassifyId},
+            category_second = #{twoClassifyId},
+            advertisement = #{goodsAdvertise},
+            goods_introduction = #{goodsDescribe},
+            store_name = #{supplierName},
+            stock = #{goodsInventory},
+            old_price = #{goodsOriginalCost},
+            selling_price = #{goodsPrice},
+            publisher = #{goodsPress},
+            author = #{goodsAuthor},
+            goods_image = #{imagePath},
             update_user = #{updateUser},
             update_time = now(),
             version = version + 1
@@ -127,52 +137,51 @@
     <select id="getListGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo"
             resultType="com.xzsd.pc.goods.entity.GoodsVO">
         select
-        id goodsId,
-        goods_name goodsName,
-        old_price oldPrice,
-        selling_price sellingPrice,
-        sales sales,
-        category_first_name firstCategoryName,
-        category_second_name secondCategoryName,
-        advertisement advertisement,
-        goods_introduction goodsIntroduction,
-        goods_status goodsStatus,
-        start_time startTime,
-        view_num viewNumber,
-        store_name storeName,
-        stock stock,
-        book_number bookNumber,
-        store_id storeId,
-        goods_image goodsImage,
-        publisher publisher,
-        author author,
-        star_level starLevel,
-        version version
-        from t_goods_info
-        where is_delete = 0
+        t1.id goodsId,
+        t1.goods_name goodsName,
+        t1.old_price goodsOriginalCost,
+        t1.selling_price goodsPrice,
+        t1.sales goodsSales,
+        t2.category_name oneClassifyName,
+        t3.category_name twoClassifyName,
+        t1.advertisement goodsAdvertise,
+        t1.goods_introduction goodsDescribe,
+        t1.goods_status goodsStateId,
+        t1.start_time goodsShelfTime,
+        t1.view_num goodsViewsNum,
+        t1.store_name supplierName,
+        t1.stock goodsInventory,
+        t1.book_number isbn,
+        t1.store_id storeId,
+        t1.goods_image goodsImagePath,
+        t1.version version
+        from t_goods_info t1, t_goods_category t2, t_goods_category t3
+        where t1.is_delete = 0
+        and t2.id = t1.category_first
+        and t3.id = t1.category_second
         <if test="goodsName != null and goodsName != null">
-            and goods_name like concat('%', #{goodsName}, '%')
+            and t1.goods_name like concat('%', #{goodsName}, '%')
         </if>
-        <if test="goodsStatus != null and goodsStatus != ''">
-            and goods_status = #{goodsStatus}
+        <if test="goodsStateId != null and goodsStateId != ''">
+            and t1.goods_status = #{goodsStateId}
         </if>
-        <if test="advertisement != null and advertisement != ''">
-            and advertisement like concat('%', #{advertisement}, '%')
+        <if test="goodsAdvertise != null and goodsAdvertise != ''">
+            and t1.advertisement like concat('%', #{goodsAdvertise}, '%')
         </if>
-        <if test="publisher != null and publisher != ''">
-            and publisher like concat('%', #{publisher}, '%')
+        <if test="goodsPress != null and goodsPress != ''">
+            and t1.publisher like concat('%', #{goodsPress}, '%')
         </if>
-        <if test="author != null and author != ''">
-            and author like concat('%', #{author}, '%')
+        <if test="goodsAuthor != null and goodsAuthor != ''">
+            and t1.author like concat('%', #{goodsAuthor}, '%')
         </if>
-        order by create_time desc
+        order by t1.create_time desc
     </select>
 
     <!--修改商品状态-->
     <update id="updateGoodsStatus" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
         update t_goods_info
         set
-            goods_status = #{goodsStatus},
+            goods_status = #{goodsStateId},
             update_time = now(),
             update_user = #{loginId},
             version = version + 1
@@ -198,7 +207,7 @@
 
 
     <!--新增轮播图和热门商品时的商品列表-->
-    <select id="getSlideAndHotGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo"
+    <!--<select id="getSlideAndHotGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo"
             resultType="com.xzsd.pc.goods.entity.SlideAndHotGoods">
         select
         id goodsId,
@@ -215,5 +224,5 @@
         <if test="goodsId != null and goodsId != ''">
             and id like concat('%', #{goodsId}, '%')
         </if>
-    </select>
+    </select>-->
 </mapper>

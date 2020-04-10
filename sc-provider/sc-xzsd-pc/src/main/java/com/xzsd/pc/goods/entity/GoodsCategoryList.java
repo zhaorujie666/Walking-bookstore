@@ -4,6 +4,11 @@ import com.xzsd.pc.category.entity.GoodsCategoryVO;
 
 import java.util.List;
 
+/**
+ * 封装数据实体类
+ * @author zhaorujie
+ * @date
+ */
 public class GoodsCategoryList {
     private List<GoodsCategoryVO> goodsClassifyList;
 

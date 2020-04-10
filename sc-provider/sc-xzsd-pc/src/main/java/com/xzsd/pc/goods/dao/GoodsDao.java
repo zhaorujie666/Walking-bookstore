@@ -4,7 +4,6 @@ import com.xzsd.pc.category.entity.GoodsCategoryVO;
 import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.goods.entity.GoodsVO;
 import com.xzsd.pc.goods.entity.GoodsVTO;
-import com.xzsd.pc.goods.entity.SlideAndHotGoods;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,10 +20,10 @@ public interface GoodsDao {
 
     /**
      * 统计是否出现重复的书号个数
-     * @param bookNumber
+     * @param isbn
      * @return
      */
-    int countBookNumber(@Param("bookNumber") String bookNumber);
+    int countBookNumber(@Param("isbn") String isbn);
 
     /**
      * 新增商品
@@ -41,11 +40,18 @@ public interface GoodsDao {
     GoodsVTO getGoodsInfoById(@Param("goodsId") String goodsId);
 
     /**
-     * 查询商品一二级分类列表
-     * @param parentId
+     * 查询商品一二级分类名称
+     * @param goodsId
      * @return
      */
-    List<GoodsCategoryVO> getListGoodsCategory(@Param("parentId") String parentId);
+    List<String> getGoodsCategoryName(@Param("goodsId") String goodsId);
+
+    /**
+     * 查询商品一二级分类列表
+     * @param classifyId
+     * @return
+     */
+    List<GoodsCategoryVO> getListGoodsCategory(@Param("classifyId") String classifyId);
 
     /**
      * 修改商品的信息
@@ -64,12 +70,12 @@ public interface GoodsDao {
     /**
      * 修改商品状态
      * @param listGoodsId
-     * @param goodsStatus
+     * @param goodsStateId
      * @param loginId
      * @return
      */
     int updateGoodsStatus(@Param("listGoodsId") List<String> listGoodsId,
-                          @Param("goodsStatus") String goodsStatus,
+                          @Param("goodsStateId") String goodsStateId,
                           @Param("loginId") String loginId);
 
     /**
@@ -78,12 +84,6 @@ public interface GoodsDao {
      * @param loginId
      * @return
      */
-    int deleteGoods(List<String> listGoodsId, @Param("loginId") String loginId);
+    int deleteGoods(@Param("listGoodsId") List<String> listGoodsId, @Param("loginId") String loginId);
 
-    /**
-     * 新增轮播图和热门商品时的商品列表
-     * @param goodsInfo
-     * @return
-     */
-    List<SlideAndHotGoods> getSlideAndHotGoods(GoodsInfo goodsInfo);
 }
