@@ -46,7 +46,7 @@ public class CategoryService {
         if(count != 0){
             return AppResponse.bizError("存在相同的分类名，请重新输入！");
         }
-        goodsCategory.setCategoryId(StringUtil.getCommonCode(2));
+        goodsCategory.setClassifyId(StringUtil.getCommonCode(2));
         goodsCategory.setIsDelete(0);
         goodsCategory.setCreateUser(loginId);
         //判断是否插入成功
@@ -83,7 +83,7 @@ public class CategoryService {
     public AppResponse updateGoodsCategoryById(GoodsCategory goodsCategory, String loginId){
         int count = categoryDao.countGoodsCategoryName(goodsCategory);
         //判断当前的分类名称是否存在相同的，只有修改后存在相同的分类名才会提示重新输入
-        if(count != 0 && globalGoodsCategory.getCategoryName().equals(goodsCategory.getCategoryName()) == false){
+        if(count != 0 && globalGoodsCategory.getClassifyName().equals(goodsCategory.getClassifyName()) == false){
             return AppResponse.bizError("存在相同的分类名，请重新输入！");
         }
         goodsCategory.setUpdateUser(loginId);
@@ -107,7 +107,7 @@ public class CategoryService {
 
         List<GoodsCategoryVO> listGoodsCategory = categoryDao.getListFirstAndSecondGoodsCategory();
         CategoryList categoryList = new CategoryList();
-        categoryList.setCategoryList(listGoodsCategory);
+        categoryList.setOneClassifyList(listGoodsCategory);
         return AppResponse.success("查询成功！", categoryList);
     }
 

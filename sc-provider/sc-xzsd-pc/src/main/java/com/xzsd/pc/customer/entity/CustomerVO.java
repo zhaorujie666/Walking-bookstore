@@ -9,11 +9,11 @@ public class CustomerVO {
     /**
      * 客户账号
      */
-    private String customerAccount;
+    private String userAcct;
     /**
      * 客户姓名
      */
-    private String customerName;
+    private String userName;
     /**
      * 客户性别：0：男 1：女
      */
@@ -25,26 +25,26 @@ public class CustomerVO {
     /**
      * 邮箱
      */
-    private String email;
+    private String mail;
     /**
      * 身份证
      */
     private String idCard;
 
-    public String getCustomerAccount() {
-        return customerAccount;
+    public String getUserAcct() {
+        return userAcct;
     }
 
-    public void setCustomerAccount(String customerAccount) {
-        this.customerAccount = customerAccount;
+    public void setUserAcct(String userAcct) {
+        this.userAcct = userAcct;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getSex() {
@@ -63,12 +63,12 @@ public class CustomerVO {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getIdCard() {

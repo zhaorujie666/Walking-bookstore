@@ -13,15 +13,15 @@ public class DriverVO {
     /**
      * 司机账号
      */
-    private String driverAccount;
+    private String userAcct;
     /**
      * 密码
      */
-    private String password;
+    private String userPassword;
     /**
      * 司机姓名
      */
-    private String driverName;
+    private String userName;
     /**
      * 电话
      */
@@ -30,6 +30,10 @@ public class DriverVO {
      * 身份证
      */
     private String idCard;
+    /**
+     * 显示的头像
+     */
+    private String userImage;
     /**
      * 省名
      */
@@ -41,7 +45,7 @@ public class DriverVO {
     /**
      * 区县名
      */
-    private String countryName;
+    private String areaName;
     /**
      * 版本号
      */
@@ -59,28 +63,28 @@ public class DriverVO {
         this.driverId = driverId;
     }
 
-    public String getDriverAccount() {
-        return driverAccount;
+    public String getUserAcct() {
+        return userAcct;
     }
 
-    public void setDriverAccount(String driverAccount) {
-        this.driverAccount = driverAccount;
+    public void setUserAcct(String userAcct) {
+        this.userAcct = userAcct;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
-    public String getDriverName() {
-        return driverName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPhone() {
@@ -99,6 +103,14 @@ public class DriverVO {
         this.idCard = idCard;
     }
 
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
     public String getProvinceName() {
         return provinceName;
     }
@@ -115,12 +127,12 @@ public class DriverVO {
         this.cityName = cityName;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getAreaName() {
+        return areaName;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 
     public int getVersion() {
@@ -138,5 +150,4 @@ public class DriverVO {
     public void setDriverInfoId(String driverInfoId) {
         this.driverInfoId = driverInfoId;
     }
-
 }

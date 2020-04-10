@@ -2,6 +2,7 @@ package com.xzsd.pc.area.service;
 
 
 import com.xzsd.pc.area.dao.AreaDao;
+import com.xzsd.pc.area.entity.AreaInfo;
 import com.xzsd.pc.area.entity.AreaList;
 import com.xzsd.pc.area.entity.AreaVO;
 import com.xzsd.pc.util.AppResponse;
@@ -23,13 +24,13 @@ public class AreaService {
 
     /**
      * 查询省市区信息
-     * @param parentId
+     * @param areaInfo
      * @return
      * @Author zhaorujie
      * @Date 2020-03-25
      */
-    public AppResponse getListArea(String parentId){
-        List<AreaVO> listArea = areaDao.getListArea(parentId);
+    public AppResponse getListArea(AreaInfo areaInfo){
+        List<AreaVO> listArea = areaDao.getListArea(areaInfo);
         if(listArea.size() == 0){
             return AppResponse.bizError("查询失败！");
         }

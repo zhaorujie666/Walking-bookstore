@@ -9,11 +9,11 @@ public class SecondCategoryVO {
     /**
      * 分类id
      */
-    private String categoryId;
+    private String classifyId;
     /**
      * 分类名称
      */
-    private String categoryName;
+    private String classifyName;
     /**
      * 等级
      */
@@ -21,30 +21,30 @@ public class SecondCategoryVO {
     /**
      * 父级id
      */
-    private String parentId;
+    private String classifyParent;
     /**
      * 备注
      */
-    private String remark;
+    private String classifyComment;
     /**
      * 版本号
      */
     private int version;
 
-    public String getCategoryId() {
-        return categoryId;
+    public String getClassifyId() {
+        return classifyId;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setClassifyId(String classifyId) {
+        this.classifyId = classifyId;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getClassifyName() {
+        return classifyName;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setClassifyName(String classifyName) {
+        this.classifyName = classifyName;
     }
 
     public int getRank() {
@@ -55,20 +55,20 @@ public class SecondCategoryVO {
         this.rank = rank;
     }
 
-    public String getParentId() {
-        return parentId;
+    public String getClassifyParent() {
+        return classifyParent;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setClassifyParent(String classifyParent) {
+        this.classifyParent = classifyParent;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getClassifyComment() {
+        return classifyComment;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setClassifyComment(String classifyComment) {
+        this.classifyComment = classifyComment;
     }
 
     public int getVersion() {
@@ -78,5 +78,4 @@ public class SecondCategoryVO {
     public void setVersion(int version) {
         this.version = version;
     }
-
 }

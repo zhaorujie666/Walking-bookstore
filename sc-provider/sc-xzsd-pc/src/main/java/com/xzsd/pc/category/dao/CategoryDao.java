@@ -30,10 +30,10 @@ public interface CategoryDao {
 
     /**
      * 查询分类详情
-     * @param categoryId
+     * @param classifyId
      * @return
      */
-    GoodsCategoryVO getGoodsCategoryById(@Param("categoryId") String categoryId);
+    GoodsCategoryVO getGoodsCategoryById(@Param("classifyId") String classifyId);
 
     /**
      * 修改商品分类信息
@@ -50,17 +50,17 @@ public interface CategoryDao {
 
     /**
      * 删除商品分类
-     * @param categoryId
+     * @param classifyId
      * @param loginId
      * @return
      */
-    int deleteGoodsCategory(@Param("categoryId") String categoryId, @Param("loginId") String loginId);
+    int deleteGoodsCategory(@Param("classifyId") String classifyId, @Param("loginId") String loginId);
 
     /**
      * 获取当前分类的父级id
-     * @param categoryId
+     * @param classifyId
      * @return
      */
-    int countParentId(@Param("categoryId") String categoryId);
+    int countParentId(@Param("classifyId") String classifyId);
 
 }

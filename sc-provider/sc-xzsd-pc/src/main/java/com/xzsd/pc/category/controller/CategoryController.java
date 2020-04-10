@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @Date 2020-03-25
  */
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/goodsClassify")
 public class CategoryController {
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
@@ -33,7 +33,7 @@ public class CategoryController {
      * @author zhaorujie
      * @Date 2020-03-26
      */
-    @PostMapping("addGoodsCategory")
+    @PostMapping("addGoodsClassify")
     public AppResponse addGoodsCategory(GoodsCategory goodsCategory){
         try {
             //获取用户id
@@ -48,15 +48,15 @@ public class CategoryController {
 
     /**
      * 查询商品分类详情
-     * @param categoryId
+     * @param classifyId
      * @return
      * @author zhaorujie
      * @Date 2020-03-26
      */
-    @PostMapping("findCategoryById")
-    public AppResponse getGoodsCategoryById(String categoryId){
+    @PostMapping("getGoodsClassify")
+    public AppResponse getGoodsCategoryById(String classifyId){
         try {
-            return categoryService.getGoodsCategoryById(categoryId);
+            return categoryService.getGoodsCategoryById(classifyId);
         }catch (Exception e){
             logger.error("查询失败", e);
             System.out.println(e.toString());
@@ -71,7 +71,7 @@ public class CategoryController {
      * @author zhaorujie
      * @Date 2020-03-26
      */
-    @PostMapping("updateCategoryById")
+    @PostMapping("updateGoodsClassify")
     public AppResponse updateGoodsCategoryById(GoodsCategory goodsCategory){
         try {
             //获取用户id
@@ -90,7 +90,7 @@ public class CategoryController {
      * @author zhaorujie
      * @Date 2020-03-26
      */
-    @PostMapping("listCategory")
+    @PostMapping("listAllGoodsClassify")
     public AppResponse getListGoodsCategory(){
         try {
             return categoryService.getListGoodsCategory();
@@ -103,17 +103,17 @@ public class CategoryController {
 
     /**
      * 删除商品分类
-     * @param categoryId
+     * @param classifyId
      * @return
      * @author zhaorujie
      * @Date 2020-03-27
      */
-    @PostMapping("deleteCategory")
-    public AppResponse deleteGoodsCategory(String categoryId) {
+    @PostMapping("deleteGoodsClassify")
+    public AppResponse deleteGoodsCategory(String classifyId) {
         try {
             //获取用户id
             String userId = SecurityUtils.getCurrentUserId();
-            return categoryService.deleteGoodsCategory(categoryId, userId);
+            return categoryService.deleteGoodsCategory(classifyId, userId);
         } catch (Exception e) {
             logger.error("删除失败", e);
             System.out.println(e.toString());

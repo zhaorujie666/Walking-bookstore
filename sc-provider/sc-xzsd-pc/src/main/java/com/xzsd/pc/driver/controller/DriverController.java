@@ -1,9 +1,10 @@
 package com.xzsd.pc.driver.controller;
 
+import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import com.xzsd.pc.driver.service.DriverService;
-import com.xzsd.pc.util.AppResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +56,7 @@ public class DriverController {
      * @author zhaorujie
      * @Date 2020-03-25
      */
-    @PostMapping("findDriverById")
+    @PostMapping("getDriver")
     public AppResponse getDriverById(String driverId){
         try {
             return driverService.getDriverById(driverId);
@@ -73,7 +74,7 @@ public class DriverController {
      * @author zhaorujie
      * @Date 2020-03-25
      */
-    @PostMapping("updateDriverById")
+    @PostMapping("updateDriver")
     public AppResponse updateDriver(DriverInfo driverInfo){
         try {
             //获取用户角色
@@ -94,9 +95,12 @@ public class DriverController {
      * @Author zhaorujie
      * @Date 2020-03-25
      */
-    @PostMapping("listDriver")
+    @PostMapping("listDrivers")
     public AppResponse getListDriver(DriverInfo driverInfo){
         try {
+            //获取当前登录人的id
+            String loginUserId = SecurityUtils.getCurrentUserId();
+            driverInfo.setLoginUserId("2020040820282980355");
             return driverService.getListDriver(driverInfo);
         }catch (Exception e){
             logger.error("查询司机列表失败", e);

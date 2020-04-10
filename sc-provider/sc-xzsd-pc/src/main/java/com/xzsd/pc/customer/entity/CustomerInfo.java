@@ -11,15 +11,11 @@ public class CustomerInfo {
     /**
      * 客户账号
      */
-    private String customerAccount;
+    private String userName;
     /**
      * 客户姓名
      */
-    private String customerName;
-    /**
-     * 邀请码
-     */
-    private String invitationCode;
+    private String userAcct;
     /**
      * 客户性别：0：男 1：女
      */
@@ -29,17 +25,17 @@ public class CustomerInfo {
      */
     private String phone;
     /**
+     * 邀请码
+     */
+    private String invitationCode;
+    /**
      * 邮箱
      */
-    private String email;
+    private String mail;
     /**
      * 身份证
      */
     private String idCard;
-    /**
-     * 角色（0管理员，1店长，2司机，3用户）
-     */
-    private String role;
     /**
      * 页码
      */
@@ -59,7 +55,7 @@ public class CustomerInfo {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
     /**
      * 更新者
      */
@@ -67,46 +63,30 @@ public class CustomerInfo {
     /**
      * 更新时间
      */
-    private Date updateTime;
+    private String updateTime;
     /**
      * 版本号
      */
     private int version;
     /**
-     * 登录者id
+     * 角色
      */
-    private String loginId;
+    private String role;
 
-    public String getLoginId() {
-        return loginId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLoginId(String loginId) {
-        this.loginId = loginId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getCustomerAccount() {
-        return customerAccount;
+    public String getUserAcct() {
+        return userAcct;
     }
 
-    public void setCustomerAccount(String customerAccount) {
-        this.customerAccount = customerAccount;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getInvitationCode() {
-        return invitationCode;
-    }
-
-    public void setInvitationCode(String invitationCode) {
-        this.invitationCode = invitationCode;
+    public void setUserAcct(String userAcct) {
+        this.userAcct = userAcct;
     }
 
     public String getSex() {
@@ -125,12 +105,12 @@ public class CustomerInfo {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getIdCard() {
@@ -139,14 +119,6 @@ public class CustomerInfo {
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public int getPageSize() {
@@ -181,11 +153,11 @@ public class CustomerInfo {
         this.createUser = createUser;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -197,11 +169,11 @@ public class CustomerInfo {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -211,5 +183,21 @@ public class CustomerInfo {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public String getInvitationCode() {
+        return invitationCode;
+    }
+
+    public void setInvitationCode(String invitationCode) {
+        this.invitationCode = invitationCode;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

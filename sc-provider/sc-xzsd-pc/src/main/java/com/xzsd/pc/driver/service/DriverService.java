@@ -2,11 +2,11 @@ package com.xzsd.pc.driver.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.driver.dao.DriverDao;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import com.xzsd.pc.driver.entity.DriverVO;
 import com.xzsd.pc.user.dao.UserDao;
-import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.PasswordUtils;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -39,18 +39,23 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addDriver(DriverInfo driverInfo){
-        // 校验司机账号是否存在
+        // 校验司机账号和手机号是否存在
         int countDriverAccount = driverDao.countDriverAccount(driverInfo);
         if(countDriverAccount != 0){
-            return AppResponse.bizError("司机账号已存在，请重新输入");
+            return AppResponse.bizError("账号或手机号已存在，请重新输入");
         }
+        // 校验手机号是否存在
+        /*int countPhone = driverDao.countPhone(driverInfo);
+        if(0 != countPhone){
+            return AppResponse.bizError("手机号已存在，请重新输入");
+        }*/
         driverInfo.setDriverId(StringUtil.getCommonCode(2));
         driverInfo.setIsDelete(0);
         driverInfo.setDriverInfoId(StringUtil.getCommonCode(2));
         //密码加密
-        String password = driverInfo.getPassword();
+        String password = driverInfo.getUserPassword();
         String pwd = PasswordUtils.generatePassword(password);
-        driverInfo.setPassword(pwd);
+        driverInfo.setUserPassword(pwd);
         //新增司机
         int count = driverDao.addDriver(driverInfo);
         int num = driverDao.addDriverArea(driverInfo);
@@ -73,6 +78,12 @@ public class DriverService {
         if(globalDriverInfo == null){
             return AppResponse.bizError("查询失败");
         }
+        //查询省市区名称
+        List<String> listAreaName = driverDao.getListAreaName(driverId);
+        //再对省市区赋值
+        globalDriverInfo.setProvinceName(listAreaName.get(0));
+        globalDriverInfo.setCityName(listAreaName.get(1));
+        globalDriverInfo.setAreaName(listAreaName.get(2));
         return AppResponse.success("查询成功", globalDriverInfo);
     }
 
@@ -88,15 +99,20 @@ public class DriverService {
         //校验账号是否存在
         int count = driverDao.countDriverAccount(driverInfo);
         //判断当前账号是否是当前要修改的账号
-        if(count != 0 && globalDriverInfo.getDriverAccount().equals(driverInfo.getDriverAccount()) == false){
+        if(count != 0 && globalDriverInfo.getUserAcct().equals(driverInfo.getUserAcct()) == false){
             return AppResponse.bizError("该司机账号已存在，请重新输入！");
         }
+        // 校验手机号是否存在
+        int countPhone = driverDao.countPhone(driverInfo);
+        if(0 != countPhone && globalDriverInfo.getPhone().equals(driverInfo.getPhone()) == false){
+            return AppResponse.bizError("手机号已存在，请重新输入");
+        }
         //判断密码有没有修改
-        if(globalDriverInfo.getPassword().equals(driverInfo.getPassword()) == false){
+        if(globalDriverInfo.getUserPassword().equals(driverInfo.getUserPassword()) == false){
             //密码加密
-            String password = driverInfo.getPassword();
+            String password = driverInfo.getUserPassword();
             String pwd = PasswordUtils.generatePassword(password);
-            driverInfo.setPassword(pwd);
+            driverInfo.setUserPassword(pwd);
         }
         //修改司机信息
         int driver = driverDao.updateDriver(driverInfo);
@@ -116,7 +132,13 @@ public class DriverService {
      */
     public AppResponse getListDriver(DriverInfo driverInfo){
         PageHelper.startPage(driverInfo.getPageNum(), driverInfo.getPageSize());
-        List<DriverVO> listDriver = driverDao.getListDriver(driverInfo);
+        List<DriverVO> listDriver = null;
+        if("2".equals(driverInfo.getRole())){
+            listDriver = driverDao.getListDriverByStore(driverInfo);
+        }else if("0".equals(driverInfo.getRole()) || "1".equals(driverInfo.getRole())){
+            listDriver = driverDao.getListDriverByAdmin(driverInfo);
+        }
+
         PageInfo<DriverVO> pageData = new PageInfo<DriverVO>(listDriver);
         return AppResponse.success("查询成功！", pageData);
     }

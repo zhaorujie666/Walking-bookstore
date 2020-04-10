@@ -4,34 +4,30 @@
     <!--获取店长邀请码-->
     <select id="getInvitationCode" parameterType="java.lang.String" resultType="java.lang.String">
         select
-        invitation_code invitationCode
-        from t_user
-        where id = #{loginId}
+        invitation_code as invitationCode
+        from t_store_info
+        where manager_id = #{loginId}
     </select>
 
     <!--查询客户列表-->
     <select id="getListCustomers" parameterType="com.xzsd.pc.customer.entity.CustomerInfo"
             resultType="com.xzsd.pc.customer.entity.CustomerVO">
         select
-        user_account customerAccount,
-        user_name customerName,
-        sex,
-        phone,
-        email,
-        id_card idCard,
-        role
-        from t_user
-        where role = 3
-        and invitation_code = (
-            select invitation_code
-            from t_user
-            where id = #{loginId}
-        )
-        <if test="customerName != null and customerName != ''">
-            and user_name like concat('%', #{customerName}, '%')
+        t1.user_acct as userAcct,
+        t1.user_name as userName,
+        t1.sex as sex,
+        t1.phone as phone,
+        t1.email as mail,
+        t1.id_card as idCard
+        from t_sys_user t1, t_sys_customer t2
+        where t1.user_id = t2.customer_id
+        and t1.role = 4
+        and t2.invitation_code = #{invitationCode}
+        <if test="userName != null and userName != ''">
+            and t1.user_name like concat('%', #{userName}, '%')
         </if>
-        <if test="customerAccount != null and customerAccount != ''">
-            and user_account like concat('%', #{customerAccount}, '%')
+        <if test="userAcct != null and userAcct != ''">
+            and t1.user_acct like concat('%', #{userAcct}, '%')
         </if>
     </select>
 
@@ -39,20 +35,19 @@
     <select id="getListCustomersByAdmin" parameterType="com.xzsd.pc.customer.entity.CustomerInfo"
             resultType="com.xzsd.pc.customer.entity.CustomerVO">
         select
-        user_account customerAccount,
-        user_name customerName,
-        sex,
-        phone,
-        email,
-        id_card idCard,
-        role
-        from t_user
-        where role = 3
-        <if test="customerName != null and customerName != ''">
-            and user_name like concat('%', #{customerName}, '%')
+        user_acct as userAcct,
+        user_name as userName,
+        sex as sex,
+        phone as phone,
+        email as mail,
+        id_card as idCard
+        from t_sys_user
+        where role = 4
+        <if test="userName != null and userName != ''">
+            and user_name like concat('%', #{userName}, '%')
         </if>
-        <if test="customerAccount != null and customerAccount != ''">
-            and user_account like concat('%', #{customerAccount}, '%')
+        <if test="userAcct != null and userAcct != ''">
+            and user_acct like concat('%', #{userAcct}, '%')
         </if>
     </select>
 </mapper>

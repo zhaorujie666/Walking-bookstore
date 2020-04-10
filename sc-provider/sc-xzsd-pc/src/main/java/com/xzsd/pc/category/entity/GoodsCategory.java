@@ -12,11 +12,11 @@ public class GoodsCategory {
     /**
      * 分类id
      */
-    private String categoryId;
+    private String classifyId;
     /**
      * 分类名称
      */
-    private String categoryName;
+    private String classifyName;
     /**
      * 等级
      */
@@ -24,11 +24,11 @@ public class GoodsCategory {
     /**
      * 父级id
      */
-    private String parentId;
+    private String classifyParent;
     /**
      * 备注
      */
-    private String remark;
+    private String classifyComment;
     /**
      * 页码
      */
@@ -67,20 +67,20 @@ public class GoodsCategory {
      */
     private List<GoodsCategory> secondCategoryList;
 
-    public String getCategoryId() {
-        return categoryId;
+    public String getClassifyId() {
+        return classifyId;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setClassifyId(String classifyId) {
+        this.classifyId = classifyId;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getClassifyName() {
+        return classifyName;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setClassifyName(String classifyName) {
+        this.classifyName = classifyName;
     }
 
     public int getRank() {
@@ -91,20 +91,20 @@ public class GoodsCategory {
         this.rank = rank;
     }
 
-    public String getParentId() {
-        return parentId;
+    public String getClassifyParent() {
+        return classifyParent;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setClassifyParent(String classifyParent) {
+        this.classifyParent = classifyParent;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getClassifyComment() {
+        return classifyComment;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setClassifyComment(String classifyComment) {
+        this.classifyComment = classifyComment;
     }
 
     public int getPageSize() {
@@ -177,25 +177,5 @@ public class GoodsCategory {
 
     public void setSecondCategoryList(List<GoodsCategory> secondCategoryList) {
         this.secondCategoryList = secondCategoryList;
-    }
-
-    @Override
-    public String toString() {
-        return "GoodsCategory{" +
-                "categoryId='" + categoryId + '\'' +
-                ", categoryName='" + categoryName + '\'' +
-                ", rank=" + rank +
-                ", parentId='" + parentId + '\'' +
-                ", remark='" + remark + '\'' +
-                ", pageSize=" + pageSize +
-                ", pageNum=" + pageNum +
-                ", isDelete=" + isDelete +
-                ", createUser='" + createUser + '\'' +
-                ", createTime=" + createTime +
-                ", updateUser='" + updateUser + '\'' +
-                ", updateTime=" + updateTime +
-                ", version=" + version +
-                ", secondCategoryList=" + secondCategoryList +
-                '}';
     }
 }

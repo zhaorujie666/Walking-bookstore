@@ -1,6 +1,7 @@
 package com.xzsd.pc.area.dao;
 
 
+import com.xzsd.pc.area.entity.AreaInfo;
 import com.xzsd.pc.area.entity.AreaVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,8 +20,8 @@ public interface AreaDao {
 
     /**
      * 查询省市区
-     * @param parentId
+     * @param areaInfo
      * @return
      */
-    List<AreaVO> getListArea(@Param("parentId") String parentId);
+    List<AreaVO> getListArea(AreaInfo areaInfo);
 }

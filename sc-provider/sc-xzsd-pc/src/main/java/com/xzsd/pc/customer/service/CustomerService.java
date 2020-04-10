@@ -34,13 +34,15 @@ public class CustomerService {
      */
     public AppResponse getListCustomers(CustomerInfo customerInfo, String userId){
         //获取当前的登录用户
-        String userRole = userDao.getUserRole(userId);
-        List<CustomerVO> listCustomers;
+        //String userRole = userDao.getUserRole(userId);
+        List<CustomerVO> listCustomers = null;
         PageHelper.startPage(customerInfo.getPageNum(), customerInfo.getPageSize());
-        //判断是不是管理员,管理员查全部，店长查自己的客户
-        if("0".equals(userRole) == false){
+        //判断是不是管理员,管理员查全部，店长查自己的客户 if
+        if("2".equals(customerInfo.getRole())){
+            String invitationCode = customerDao.getInvitationCode(userId);
+            customerInfo.setInvitationCode(invitationCode);
             listCustomers = customerDao.getListCustomers(customerInfo);
-        }else{
+        }else if("0".equals(customerInfo.getRole()) || "1".equals(customerInfo.getRole())){
             listCustomers = customerDao.getListCustomersByAdmin(customerInfo);
         }
         PageInfo<CustomerVO> pageData = new PageInfo<>(listCustomers);

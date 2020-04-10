@@ -6,7 +6,7 @@
     <select id="countGoodsCategoryName" parameterType="com.xzsd.pc.category.entity.GoodsCategory" resultType="int">
         select count(category_name)
         from t_goods_category
-        where category_name = #{categoryName}
+        where category_name = #{classifyName}
     </select>
 
     <!--新增商品分类-->
@@ -24,15 +24,20 @@
             version
         )
         values(
-            #{categoryId},
-            #{categoryName},
-            #{parentId},
-            #{remark},
+            #{classifyId},
+            #{classifyName},
+            #{classifyParent},
+            <if test="classifyComment != null and classifyComment != ''">
+                #{classifyComment},
+            </if>
+            <if test="classifyComment == null">
+                '',
+            </if>
             #{isDelete},
-            <if test="parentId == 0">
+            <if test="classifyParent == 0">
                 1,
             </if>
-            <if test="parentId != 0">
+            <if test="classifyParent != 0">
                 2,
             </if>
             now(),
@@ -46,25 +51,25 @@
     <select id="getGoodsCategoryById" parameterType="java.lang.String"
             resultType="com.xzsd.pc.category.entity.GoodsCategoryVO">
         select
-        category_name categoryName,
-        remark,
-        rank,
-        parent_id parentId,
-        version
+        category_name as classifyName,
+        remark as classifyComment,
+        rank as rank,
+        parent_id classifyParent,
+        version as version
         from t_goods_category
-        where id = #{categoryId}
+        where id = #{classifyId}
     </select>
 
     <!--修改商品分类信息-->
     <update id="updateGoodsCategoryById" parameterType="com.xzsd.pc.category.entity.GoodsCategory">
         update t_goods_category
         set
-            category_name = #{categoryName},
-            remark = #{remark},
+            category_name = #{classifyName},
+            remark = #{classifyComment},
             update_user = #{updateUser},
             update_time = now(),
             version = version + 1
-        where id = #{categoryId}
+        where id = #{classifyId}
         and version = #{version}
     </update>
 
@@ -85,18 +90,20 @@
         left join t_goods_category t2
         on t1.id = t2.parent_id
         where t1.parent_id = 0
+        and t1.is_delete = 0
+        and t2.is_delete = 0
     </select>
     <!--商品一二级分类映射集合-->
     <resultMap id="listGoodsCategory" type="com.xzsd.pc.category.entity.GoodsCategoryVO">
-        <id property="categoryId" column="fid" jdbcType="VARCHAR"/>
-        <result property="categoryName" column="fcategory_name" jdbcType="VARCHAR"/>
-        <result property="parentId" column="fparent_id" jdbcType="VARCHAR"/>
+        <id property="classifyId" column="fid" jdbcType="VARCHAR"/>
+        <result property="classifyName" column="fcategory_name" jdbcType="VARCHAR"/>
+        <result property="classifyParent" column="fparent_id" jdbcType="VARCHAR"/>
         <result property="rank" column="frank" jdbcType="VARCHAR"/>
         <result property="version" column="fversion" jdbcType="VARCHAR"/>
-        <collection property="secondCategory" ofType="com.xzsd.pc.category.entity.SecondCategoryVO">
-            <result property="categoryId" column="sid" jdbcType="VARCHAR"/>
-            <result property="categoryName" column="scategory_name" jdbcType="VARCHAR"/>
-            <result property="parentId" column="sparent_id" jdbcType="VARCHAR"/>
+        <collection property="twoClassifyList" ofType="com.xzsd.pc.category.entity.SecondCategoryVO">
+            <result property="classifyId" column="sid" jdbcType="VARCHAR"/>
+            <result property="classifyName" column="scategory_name" jdbcType="VARCHAR"/>
+            <result property="classifyParent" column="sparent_id" jdbcType="VARCHAR"/>
             <result property="rank" column="srank" jdbcType="VARCHAR"/>
             <result property="version" column="sversion" jdbcType="VARCHAR"/>
         </collection>
@@ -110,7 +117,7 @@
             update_user = #{loginId},
             update_time = now(),
             version = version + 1
-        where id = #{categoryId}
+        where id = #{classifyId}
     </update>
 
     <!--获取当前分类的父级-->
@@ -118,6 +125,6 @@
         select
         count(parent_id)
         from t_goods_category
-        where parent_id = #{categoryId}
+        where parent_id = #{classifyId}
     </select>
 </mapper>

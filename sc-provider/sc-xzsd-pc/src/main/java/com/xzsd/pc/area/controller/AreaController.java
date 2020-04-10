@@ -1,6 +1,7 @@
 package com.xzsd.pc.area.controller;
 
 
+import com.xzsd.pc.area.entity.AreaInfo;
 import com.xzsd.pc.area.service.AreaService;
 import com.xzsd.pc.util.AppResponse;
 import org.slf4j.Logger;
@@ -17,7 +18,7 @@ import javax.annotation.Resource;
  * @Date 2020-03-25
  */
 @RestController
-@RequestMapping("/countryArea")
+@RequestMapping("/selectCombox")
 public class AreaController {
 
     private static final Logger logger = LoggerFactory.getLogger(AreaController.class);
@@ -27,15 +28,15 @@ public class AreaController {
 
     /**
      * 查询省市区信息
-     * @param parentId
+     * @param areaInfo
      * @return
      * @author zhaorujie
      * @Date 2020-03-25
      */
-    @PostMapping("queryArea")
-    public AppResponse getListArea(String parentId){
+    @PostMapping("listArea")
+    public AppResponse getListArea(AreaInfo areaInfo){
         try {
-            return areaService.getListArea(parentId);
+            return areaService.getListArea(areaInfo);
         }catch (Exception e){
             logger.error("用户新增失败", e);
             System.out.println(e.toString());

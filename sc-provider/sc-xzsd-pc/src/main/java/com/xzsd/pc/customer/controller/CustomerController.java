@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @Date 2020-03-25
  */
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/client")
 public class CustomerController {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
@@ -33,12 +33,12 @@ public class CustomerController {
      * @author zhaorujie
      * @Date 2020-03-26
      */
-    @PostMapping("listCustomer")
+    @PostMapping("listClients")
     public AppResponse getListCustomers(CustomerInfo customerInfo){
         try {
             //获取用户id
-            String userId = SecurityUtils.getCurrentUserId();
-            return customerService.getListCustomers(customerInfo, userId);
+            String loginUserId = SecurityUtils.getCurrentUserId();
+            return customerService.getListCustomers(customerInfo, loginUserId);
         }catch (Exception e){
             logger.error("查询失败", e);
             System.out.println(e.toString());

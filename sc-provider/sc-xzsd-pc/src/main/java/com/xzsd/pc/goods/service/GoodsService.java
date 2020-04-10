@@ -5,10 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.xzsd.pc.category.entity.CategoryList;
 import com.xzsd.pc.category.entity.GoodsCategoryVO;
 import com.xzsd.pc.goods.dao.GoodsDao;
-import com.xzsd.pc.goods.entity.GoodsInfo;
-import com.xzsd.pc.goods.entity.GoodsVO;
-import com.xzsd.pc.goods.entity.GoodsVTO;
-import com.xzsd.pc.goods.entity.SlideAndHotGoods;
+import com.xzsd.pc.goods.entity.*;
 import com.xzsd.pc.upload.service.UploadService;
 import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.util.AppResponse;
@@ -94,9 +91,9 @@ public class GoodsService {
             return AppResponse.bizError("获取商品分类失败！");
         }
         //封装成接口文档需要的名称
-        CategoryList categoryList = new CategoryList();
-        categoryList.setCategoryList(listGoodsCategory);
-        return AppResponse.success("获取商品分类成功！", categoryList);
+        GoodsCategoryList goodsClassifyList = new GoodsCategoryList();
+        goodsClassifyList.setGoodsClassifyList(listGoodsCategory);
+        return AppResponse.success("获取商品分类成功！", goodsClassifyList);
     }
 
     /**

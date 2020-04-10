@@ -3,17 +3,26 @@
 <mapper namespace="com.xzsd.pc.driver.dao.DriverDao">
     <!--统计司机账号-->
     <select id="countDriverAccount" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">
-        select count(t_user.user_account)
-        from t_user
+        select count(user_acct)
+        from t_sys_user
         where is_delete = 0
-        and user_account = #{driverAccount}
+        and user_acct = #{userAcct}
+        or phone = #{phone}
+    </select>
+
+    <!--统计手机号数量-->
+    <select id="countPhone" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">
+        select count(phone)
+        from t_sys_user
+        where is_delete = 0
+        and phone = #{phone}
     </select>
 
     <!--新增司机-->
     <insert id="addDriver" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
-        insert into t_user
-            (id,
-            user_account,
+        insert into t_sys_user(
+            user_id,
+            user_acct,
             user_password,
             user_name,
             user_image,
@@ -28,11 +37,11 @@
         )
         values(
             #{driverId},
-            #{driverAccount},
-            #{password},
-            #{driverName},
-            'E:/javaEE/20190723212040.jpg',
-            2,
+            #{userAcct},
+            #{userPassword},
+            #{userName},
+            #{imagePath},
+            3,
             #{phone},
             #{idCard},
             #{isDelete},
@@ -59,9 +68,9 @@
         values(
             #{driverInfoId},
             #{driverId},
-            #{provinceName},
-            #{cityName},
-            #{countryName},
+            #{provinceId},
+            #{cityId},
+            #{areaId},
             #{isDelete},
             now(),
             #{createUser},
@@ -69,39 +78,43 @@
             0)
     </insert>
 
+    <!--查询省市区名称-->
+    <select id="getListAreaName" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        t1.area_name
+        from t_area t1, t_driver_info t2
+        where t1.id in (t2.province, t2.city, t2.county)
+        and t2.driver_id = #{driverId}
+    </select>
+
     <!--查询司机信息详情-->
     <select id="getDriverById" parameterType="java.lang.String" resultType="com.xzsd.pc.driver.entity.DriverVO">
         select
-            u.id driverId,
-            u.user_name driverName,
-            u.phone phone,
-            u.user_account driverAccount,
-            u.user_password password,
-            u.id_card idCard,
-            d.province provinceName,
-            d.city cityName,
-            d.county countryName
-        from t_user u, t_driver_info d
-        where
-            u.id = d.driver_id
-            and u.is_delete = 0
-            and d.is_delete = 0
-            and u.id = #{driverId}
+            u.user_id as driverId,
+            u.user_name as userName,
+            u.phone as phone,
+            u.user_acct as userAcct,
+            u.user_password as userPassword,
+            u.id_card as idCard,
+            u.user_image as userImage
+        from t_sys_user u
+        where u.is_delete = 0
+        and u.user_id = #{driverId}
     </select>
 
     <!--修改司机信息-->
     <update id="updateDriver" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
-        update t_user
+        update t_sys_user
         set
-            user_name = #{driverName},
+            user_name = #{userName},
             phone = #{phone},
-            user_account = #{driverAccount},
-            user_password = #{password},
+            user_acct = #{userAcct},
+            user_password = #{userPassword},
             id_card = #{idCard},
             update_user = #{updateUser},
             update_time = now(),
             version = version + 1
-        where id = #{driverId}
+        where user_id= #{driverId}
         and version = #{version}
     </update>
 
@@ -109,9 +122,9 @@
     <update id="updateDriverArea" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
         update t_driver_info
         set
-            province = #{provinceName},
-            city = #{cityName},
-            county = #{countryName},
+            province = #{provinceId},
+            city = #{cityId},
+            county = #{areaId},
             update_user = #{updateUser},
             update_time = now(),
             version = version + 1
@@ -119,51 +132,84 @@
         and version = #{version}
     </update>
 
-    <!--查询所有的司机信息-->
-    <select id="getListDriver" parameterType="com.xzsd.pc.driver.entity.DriverInfo"
+    <!--管理员查询所有的司机信息-->
+    <select id="getListDriverByAdmin" parameterType="com.xzsd.pc.driver.entity.DriverInfo"
             resultType="com.xzsd.pc.driver.entity.DriverVO">
         select
-            u.id driverId,
-            u.user_name driverName,
-            u.phone phone,
-            u.id_card idCard,
-            u.user_account driverAccount,
-            d.province provinceName,
-            d.city cityName,
-            d.county countryName,
+            u.user_id as driverId,
+            u.user_name as userName,
+            u.phone as phone,
+            u.id_card as idCard,
+            u.user_acct userAcct,
             u.version version
-        from t_user u, t_driver_info d
+        from t_sys_user u, t_driver_info d
         where u.is_delete = 0
-        and u.role = 2
+        and u.role = 3
         and d.is_delete = 0
-        and u.id = d.driver_id
+        and u.user_id= d.driver_id
         <if test="driverId != null and driverId != ''">
-            and u.id like concat('%', #{driverId}, '%')
+            and u.user_id like concat('%', #{driverId}, '%')
         </if>
-        <if test="driverName != null and driverName != ''">
-            and u.user_name like concat('%', #{driverName}, '%')
+        <if test="userName != null and userName != ''">
+            and u.user_name like concat('%', #{userName}, '%')
         </if>
-        <if test="provinceName != null and provinceName != ''">
-            and d.province = #{provinceName}
+        <if test="provinceId != null and provinceId != ''">
+            and d.province = #{provinceId}
         </if>
-        <if test="cityName != null and cityName != ''">
-            and d.city = #{cityName}
+        <if test="cityId != null and cityId != ''">
+            and d.city = #{cityId}
         </if>
-        <if test="countryName != null and countryName != ''">
-            and d.county = #{countryName}
+        <if test="areaId != null and areaId != ''">
+            and d.county = #{areaId}
         </if>
         order by u.create_time desc
     </select>
 
+    <!--查询当前店长下的所有司机-->
+    <select id="getListDriverByStore" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="com.xzsd.pc.driver.entity.DriverVO">
+        select
+        t1.user_id as driverId,
+        t1.user_name as userName,
+        t1.phone as phone,
+        t1.id_card as idCard,
+        t1.user_acct userAcct,
+        t1.version version
+        from t_sys_user t1, t_driver_info t2, t_store_info t3
+        where t1.is_delete = 0
+        and t1.role = 3
+        and t2.is_delete = 0
+        and t1.user_id= t2.driver_id
+        and t2.province = t3.province
+        and t2.city = t3.city
+        and t2.county = t3.county
+        and t3.manager_id = #{loginUserId}
+        <if test="driverId != null and driverId != ''">
+            and u.user_id like concat('%', #{driverId}, '%')
+        </if>
+        <if test="userName != null and userName != ''">
+            and u.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="provinceId != null and provinceId != ''">
+            and t2.province = #{provinceId}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            and t2.city = #{cityId}
+        </if>
+        <if test="areaId != null and areaId != ''">
+            and t2.county = #{areaId}
+        </if>
+        order by t1.create_time desc
+    </select>
+
     <!--删除司机-->
     <update id="deleteDriverById" parameterType="java.lang.String">
-        update t_user
+        update t_sys_user
         set 
             is_delete = 1,
             update_time = now(),
             update_user = #{loginId},
             version = version + 1
-        where id in 
+        where user_id in
         <foreach item="driverId" index="index" collection="listDriverId" open="(" separator="," close=")">
             #{driverId}
         </foreach>

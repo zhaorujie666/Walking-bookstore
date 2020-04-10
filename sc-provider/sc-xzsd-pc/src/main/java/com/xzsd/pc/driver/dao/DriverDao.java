@@ -24,6 +24,13 @@ public interface DriverDao {
     int countDriverAccount(DriverInfo driverInfo);
 
     /**
+     * 统计手机数量
+     * @param driverInfo
+     * @return
+     */
+    int countPhone(DriverInfo driverInfo);
+
+    /**
      * 新增司机
      * @param driverInfo
      * @return
@@ -36,6 +43,13 @@ public interface DriverDao {
      * @return
      */
     int addDriverArea(DriverInfo driverInfo);
+
+    /**
+     * 查询省市区名称
+     * @param driverId
+     * @return
+     */
+    List<String> getListAreaName(@Param("driverId") String driverId);
 
     /**
      * 查询司机信息
@@ -59,11 +73,18 @@ public interface DriverDao {
     int updateDriverArea(DriverInfo driverInfo);
 
     /**
-     *获取所有的司机信息
+     *管理员查询所有的司机信息
      * @param driverInfo
      * @return 司机信息
      */
-    List<DriverVO> getListDriver(DriverInfo driverInfo);
+    List<DriverVO> getListDriverByAdmin(DriverInfo driverInfo);
+
+    /**
+     * 查询当前店长下的所有司机
+     * @param driverInfo
+     * @return
+     */
+    List<DriverVO> getListDriverByStore(DriverInfo driverInfo);
 
     /**
      * 删除司机
