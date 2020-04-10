@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.topcolumn.dao.TopColumnDao">
+    <!--查询顶部栏-->
+    <select id="getTopColumn" parameterType="java.lang.String"
+            resultType="com.xzsd.pc.topcolumn.entity.TopColumn">
+        select
+        user_name as userName,
+        user_image as userImage,
+        user_id as userId,
+        role as role
+        from t_sys_user
+        where user_id = #{loginUserId}
+    </select>
+</mapper>

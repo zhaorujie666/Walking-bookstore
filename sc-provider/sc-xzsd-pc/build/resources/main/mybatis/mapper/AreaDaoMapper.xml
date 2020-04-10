@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.area.dao.AreaDao">
+    <select id="getListArea" parameterType="java.lang.String"
+            resultType="com.xzsd.pc.area.entity.AreaVO">
+        select
+            id areaId,
+            area_name areaName,
+            parent_id parentId,
+            rank,
+            mername merName
+        from t_area
+        where parent_id = #{parentId}
+        and is_delete = 0
+    </select>
+</mapper>

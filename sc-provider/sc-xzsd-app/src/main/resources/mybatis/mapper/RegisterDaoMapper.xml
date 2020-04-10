@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.register.dao.RegisterDao">
+    <!--注册用户-->
+    <insert id="registerUser" parameterType="com.xzsd.app.register.entity.Register">
+        insert into t_sys_user(
+            user_code,
+            user_account,
+            user_password,
+            user_name,
+            role,
+            sex,
+            phone,
+            id_card,
+            email,
+            invitation_code,
+            is_delete,
+            create_time,
+            create_user,
+            update_time,
+            version
+        )
+        values (
+            #{userCode},
+            #{userAcct},
+            #{userPassword},
+            #{userName},
+            4,
+            #{sex},
+            #{phone},
+            #{idCard},
+            #{mail},
+            #{inviteCode},
+            0,
+            now(),
+            #{userCode},
+            now(),
+            0
+        )
+    </insert>
+
+    <!--统计用户账号-->
+    <select id="countUserAcct" parameterType="com.xzsd.app.register.entity.Register" resultType="int">
+        select count(user_account)
+        from t_sys_user
+        where user_account = #{userAcct}
+    </select>
+</mapper>

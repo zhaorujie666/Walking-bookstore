@@ -1,0 +1,23 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.neusoft.security.core.properties.SecurityProperties",
+      "name": "sc.security",
+      "type": "com.neusoft.security.core.properties.SecurityProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.neusoft.security.core.properties.SecurityProperties",
+      "name": "sc.security.login",
+      "type": "com.neusoft.security.core.properties.LoginProperties"
+    },
+    {
+      "sourceType": "com.neusoft.security.core.properties.SecurityProperties",
+      "name": "sc.security.validate-code",
+      "description": "验证码配置",
+      "type": "com.neusoft.security.core.properties.ValidateCodeProperties"
+    }
+  ]
+}

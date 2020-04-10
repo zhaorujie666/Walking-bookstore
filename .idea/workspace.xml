@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="walkingbookstore@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="walkingbookstore@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="walkingbookstore@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="walkingbookstore: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/sc-provider/sc-xzsd-app">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sc2019" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sc2019" type="f1a62948:ProjectNode" />
+                <item name="sc-provider" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sc2019" type="f1a62948:ProjectNode" />
+                <item name="sc-provider" type="2d1252cf:ModuleNode" />
+                <item name="sc-xzsd-app" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sc2019" type="f1a62948:ProjectNode" />
+                <item name="sc-provider" type="2d1252cf:ModuleNode" />
+                <item name="sc-xzsd-app" type="2d1252cf:ModuleNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sc2019" type="f1a62948:ProjectNode" />
+                <item name="sc-provider" type="2d1252cf:ModuleNode" />
+                <item name="sc-xzsd-app" type="2d1252cf:ModuleNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sc2019" type="f1a62948:ProjectNode" />
+                <item name="sc-provider" type="2d1252cf:ModuleNode" />
+                <item name="sc-xzsd-app" type="2d1252cf:ModuleNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="sc2019" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ZQXxc5vjQ51sW2dLoRfqDRWJuq" />
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="dynamic.classpath" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.26551723" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.xzsd.app.homepage.entity" />
+      <recent name="com.xzsd.app.utils" />
+      <recent name="com.xzsd.pc.util" />
+      <recent name="com.xzsd.pc.menu.entity" />
+      <recent name="com.xzsd.app" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\javaEE\workSpaceIDEA\sc2019\sc-provider\sc-xzsd-app\src\main\java\com\xzsd\app" />
+      <recent name="E:\javaEE\workSpaceIDEA\sc2019\sc-provider\sc-xzsd-pc\src\main\java\com\xzsd\pc\menu\service" />
+      <recent name="E:\javaEE\workSpaceIDEA\sc2019\sc-provider\sc-xzsd-pc\src\main\java\com\xzsd\pc\menu\entity" />
+      <recent name="E:\javaEE\workSpaceIDEA\sc2019\sc-provider\sc-xzsd-pc\src\main\java\com\xzsd\pc\menu\dao" />
+      <recent name="E:\javaEE\workSpaceIDEA\sc2019\sc-provider\sc-xzsd-pc\src\main\java\com\xzsd\pc\menu\controller" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ScXzsdPcApplication">
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScAdminServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-monitor.sc-admin-server.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.admin.server.ScAdminServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc-api-gateway_main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.gateway.ScApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-api-gateway.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.neusoft.gateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.gateway.ScApiGatewayApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-config-server.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="app.ScConfigServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScEurekaApplication " type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-eureka-server.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="app.ScEurekaApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScJobApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-support.sc-job.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.job.ScJobApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScLogApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-support.sc-log.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.log.ScLogApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-provider.sc-project.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.project.ScProjectApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScSecurityUaaApplication " type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-security.sc-security-uaa.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.neusoft.oauth.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.oauth.ScSecurityUaaApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-provider.sc-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.service.ScServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScShardingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-support.sc-shardingjdbc.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.support.sharding.ScShardingApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-provider.sc-web.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.web.ScWebApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScWebAuthApplication " type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-provider.sc-web-auth.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.neusoft.webauth.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.webauth.ScWebAuthApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScWebStaticApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-web-static.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.webstatic.ScWebStaticApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScXzsdAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="sc2019.sc-provider.sc-xzsd-app.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xzsd.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xzsd.app.ScXzsdAppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScXzsdPcApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-provider.sc-xzsd-pc.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xzsd.pc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xzsd.pc.ScXzsdPcApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScZipkinApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sc2019.sc-monitor.sc-zipkin-server.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.zipkin.ScZipkinApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.ScApiGatewayApplication" />
+      <item itemvalue="Spring Boot.ScEurekaApplication " />
+      <item itemvalue="Spring Boot.ScSecurityUaaApplication " />
+      <item itemvalue="Spring Boot.ScWebAuthApplication " />
+      <item itemvalue="Spring Boot.ScXzsdPcApplication" />
+      <item itemvalue="Spring Boot.ScConfigServerApplication" />
+      <item itemvalue="Spring Boot.ScZipkinApplication" />
+      <item itemvalue="Spring Boot.ScAdminServerApplication" />
+      <item itemvalue="Spring Boot.ScServiceApplication" />
+      <item itemvalue="Spring Boot.ScProjectApplication" />
+      <item itemvalue="Spring Boot.ScWebApplication" />
+      <item itemvalue="Spring Boot.ScLogApplication" />
+      <item itemvalue="Spring Boot.ScJobApplication" />
+      <item itemvalue="Spring Boot.ScShardingApplication" />
+      <item itemvalue="Spring Boot.ScWebStaticApplication" />
+      <item itemvalue="Spring Boot.ScXzsdAppApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.ScXzsdAppApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="" />
+      <created>1583056146279</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583056146279</updated>
+      <workItem from="1583056275787" duration="367000" />
+      <workItem from="1584772539765" duration="535000" />
+      <workItem from="1584773104637" duration="8482000" />
+      <workItem from="1585011720694" duration="18000" />
+      <workItem from="1586143888441" duration="7496000" />
+      <workItem from="1586235475571" duration="719000" />
+      <workItem from="1586236655311" duration="1259000" />
+      <workItem from="1586238612690" duration="24172000" />
+      <workItem from="1586303665700" duration="9193000" />
+      <workItem from="1586313768543" duration="23740000" />
+      <workItem from="1586390138024" duration="16944000" />
+      <workItem from="1586421516679" duration="11680000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/userinfo/service/UserInfoService.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

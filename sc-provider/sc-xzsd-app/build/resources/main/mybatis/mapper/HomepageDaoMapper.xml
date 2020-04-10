@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.homepage.dao.HomepageDao">
+    <!--查询首页轮播图-->
+    <select id="getListSlideshow" resultType="com.xzsd.app.homepage.entity.Slideshow">
+        select
+        image_url as slideshowPath,
+        goods_id as goodsId
+        from t_sys_slide
+        where slide_status = 1
+        and is_delete = 0
+        and now() in(start_time, end_time)
+    </select>
+
+    <!--查询首页轮播图展示的数量-->
+    <select id="getSlideshowNumber" resultType="int">
+        select
+        dic_value
+        from t_dictionary
+        where dic_type = 'hotGoodsShowNumber'
+    </select>
+
+    <!--查询热门位商品-->
+    <select id="getListHotGoods" parameterType="com.xzsd.app.homepage.entity.HotGoods"
+            resultType="com.xzsd.app.homepage.entity.HotGoodsVO">
+        select
+        t1.goods_id as goodsId,
+        t2.goods_name as goodsName,
+        t2.goods_image as goodsImagePath,
+        t2.selling_price as goodsPrice
+        from t_hot_goods t1, t_goods_info t2
+        where t1.goods_id = t2.id
+        limit #{showNumber}
+    </select>
+</mapper>

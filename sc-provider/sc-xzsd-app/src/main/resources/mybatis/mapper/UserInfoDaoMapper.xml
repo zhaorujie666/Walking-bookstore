@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.userinfo.dao.UserInfoDao">
+    <!--查询登录用户角色-->
+    <select id="getLoginUserRole" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        role as role
+        from t_sys_user
+        where user_code = #{loginUserId}
+    </select>
+
+    <!--查询店长个人信息-->
+    <select id="getStoreInfo" parameterType="java.lang.String"
+            resultType="com.xzsd.app.userinfo.entity.UserInfo">
+        select
+        t1.user_name as userName,
+        t1.user_image as userImage,
+        t1.role as role,
+        t2.province as provinceName,
+        t2.city as cityName,
+        t2.county as areaName,
+        t2.store_address as address,
+        t1.version as version
+        from t_sys_user t1, t_store_info t2
+        where t1.user_code = t2.manager_id
+        and user_code = #{loginUserId}
+    </select>
+
+    <!--查询司机个人信息-->
+    <select id="getDriverInfo" parameterType="java.lang.String"
+            resultType="com.xzsd.app.userinfo.entity.UserInfo">
+        select
+        user_name as userName,
+        user_image as userImage,
+        role as role,
+        phone as phone,
+        version as version
+        from t_sys_user
+        where user_code = #{loginUserId}
+    </select>
+
+    <!--查询客户个人信息-->
+    <select id="getCustomerInfo" parameterType="java.lang.String"
+            resultType="com.xzsd.app.userinfo.entity.UserInfo">
+        select
+        user_name as userName,
+        user_image as userImage,
+        role as role,
+        version as version
+        from t_sys_user
+        where user_code = #{loginUserId}
+    </select>
+
+    <!--修改用户个人信息（修改名称或头像）-->
+    <update id="updateUserInfo" parameterType="com.xzsd.app.userinfo.entity.UserInfo">
+        update t_sys_user
+        set
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="imagePath != null and imagePath != ''">
+                user_image = #{imagePath},
+            </if>
+            update_user = #{userId},
+            update_time = now(),
+            version = version + 1
+        where user_code = #{userId}
+        and version = #{version}
+    </update>
+
+    <!--修改用户密码-->
+    <update id="updateUserPassword" parameterType="com.xzsd.app.userinfo.entity.UserInfo">
+        update t_sys_user
+        set
+            user_password = #{userNewPassword},
+            version = version + 1,
+            update_time = now(),
+            update_user = #{userId}
+        where user_code = #{userId}
+        and version = #{version}
+    </update>
+
+    <!--获取登录用户的密码-->
+    <select id="getUserPasswordById" parameterType="java.lang.String"
+            resultType="java.lang.String">
+        select
+        user_password
+        from t_sys_user
+        where user_code = #{userId}
+    </select>
+</mapper>

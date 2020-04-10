@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.slide.dao.SlideDao">
+    <!--统计sort出现的次数-->
+    <select id="countSort" parameterType="com.xzsd.pc.slide.entity.SlideInfo" resultType="int">
+        select count(sort)
+        from t_slide
+        where sort = #{sort}
+    </select>
+
+    <!--新增轮播图-->
+    <insert id="addSlide" parameterType="com.xzsd.pc.slide.entity.SlideInfo">
+        insert into t_slide(
+            id,
+            goods_id,
+            image_url,
+            sort,
+            slide_status,
+            start_time,
+            end_time,
+            is_delete,
+            create_time,
+            create_user,
+            update_time,
+            version
+        )
+        values (
+            #{slideId},
+            #{goodsId},
+            #{slideImage},
+            #{sort},
+            0,
+            #{startTime},
+            #{startTime},
+            0,
+            now(),
+            #{createUser},
+            now(),
+            0
+        )
+    </insert>
+
+    <!--查询轮播图列表-->
+    <select id="getListSlide" parameterType="com.xzsd.pc.slide.entity.SlideInfo"
+            resultType="com.xzsd.pc.slide.entity.SlideVO">
+        select
+        id slideId,
+        sort sort,
+        image_url slideImage,
+        slide_status slideStatus,
+        start_time startTime,
+        end_time endTime
+        from t_slide
+        where is_delete = 0
+        <if test="slideStatus != null and slideStatus != ''">
+            and slide_status = #{slideStatus}
+        </if>
+        order by sort asc
+    </select>
+
+    <!--修改轮播图状态-->
+    <update id="updateSlideStatus" parameterType="java.lang.String">
+        update t_slide
+        set
+            slide_status = #{slideStatus},
+            update_time = now(),
+            update_user = #{loginId},
+            version = version + 1
+        where id in
+        <foreach item="slideId" index="index" collection="listSlideId" open="(" separator="," close=")">
+            #{slideId}
+        </foreach>
+    </update>
+
+    <!--删除轮播图-->
+    <update id="deleteSlide" parameterType="java.lang.String">
+        update t_slide
+        set
+            is_delete = 1,
+            update_time = now(),
+            update_user = #{loginId},
+            version = version + 1
+        where id in
+        <foreach item="slideId" index="index" collection="listSlideId" open="(" separator="," close=")">
+            #{slideId}
+        </foreach>
+    </update>
+</mapper>

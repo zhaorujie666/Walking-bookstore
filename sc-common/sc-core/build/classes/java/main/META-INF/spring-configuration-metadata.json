@@ -1,0 +1,28 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.neusoft.core.property.ScCloudProperties",
+      "name": "sc.cloud",
+      "type": "com.neusoft.core.property.ScCloudProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.neusoft.core.property.ScCloudProperties",
+      "defaultValue": false,
+      "name": "sc.cloud.dev",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.neusoft.core.property.ScCloudProperties",
+      "name": "sc.cloud.swagger",
+      "type": "com.neusoft.core.property.SwaggerProperties"
+    },
+    {
+      "sourceType": "com.neusoft.core.property.ScCloudProperties",
+      "name": "sc.cloud.task",
+      "type": "com.neusoft.core.property.AsyncTaskProperties"
+    }
+  ]
+}

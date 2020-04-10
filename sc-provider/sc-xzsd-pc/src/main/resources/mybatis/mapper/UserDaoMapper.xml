@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.user.dao.UserDao">
+
+    <!--获取登录者角色-->
+    <select id="getUserRole" parameterType="java.lang.String" resultType="java.lang.String">
+        select role
+        from t_sys_user
+        where user_id = #{loginUserId}
+    </select>
+
+    <!--查询是否出现重复的邀请码-->
+   <!-- <select id="countInvitationCode" parameterType="java.lang.String" resultType="int">
+        select count(invitation_code)
+        from t_sys_user
+        where invitation_code = #{invitationCode}
+    </select>-->
+
+    <!--统计用户账号-->
+    <select id="countUserAccount" parameterType="com.xzsd.pc.user.entity.UserInfo" resultType="int">
+        select count(user_acct)
+        from t_sys_user
+        where user_acct = #{userAcct}
+    </select>
+
+    <!--统计手机号-->
+    <select id="countPhone" parameterType="com.xzsd.pc.user.entity.UserInfo" resultType="int">
+        select count(phone)
+        from t_sys_user
+        where phone = #{phone}
+    </select>
+
+    <!--添加用户-->
+    <insert id="addUser" parameterType="com.xzsd.pc.user.entity.UserInfo">
+        insert into
+        t_sys_user (
+            user_id,
+            user_acct,
+            user_password,
+            user_name,
+            role,
+            user_image,
+            sex,
+            phone,
+            id_card,
+            email,
+            is_delete,
+            create_time,
+            create_user,
+            update_time,
+            version
+        )
+        values (
+            #{userId},
+            #{userAcct},
+            #{userPassword},
+            #{userName},
+            #{role},
+            #{imagePath},
+            #{sex},
+            #{phone},
+            <if test="idCard != null and idCard != ''">
+                #{idCard},
+            </if>
+            <if test="idCard == null">
+                '',
+            </if>
+            <if test="mail != null and mail != ''">
+                #{mail},
+            </if>
+            <if test="mail == null">
+                '',
+            </if>
+            0,
+            now(),
+            #{createUser},
+            now(),
+            0
+        )
+    </insert>
+
+    <!--查询用户详情-->
+    <select id="getUserInfoById" parameterType="java.lang.String" resultType="com.xzsd.pc.user.entity.UserVO">
+        select
+        user_id as userId,
+        user_acct as userAcct,
+        user_name as userName,
+        sex as sex,
+        phone as phone,
+        email as mail,
+        id_card as idCard,
+        user_password as userPassword,
+        user_image as userImage,
+        role as role
+        from t_sys_user
+        where user_id = #{userId}
+    </select>
+
+    <!--更新用户信息-->
+    <update id="updateUserInfo" parameterType="com.xzsd.pc.user.entity.UserInfo">
+        update t_sys_user
+        set
+            user_acct = #{userAcct},
+            user_name = #{userName},
+            sex = #{sex},
+            phone = #{phone},
+            email = #{mail},
+            id_card = #{idCard},
+            user_password = #{userPassword},
+            role = #{role},
+            update_time = now(),
+            update_user = #{updateUser},
+            version = version + 1
+        where user_id = #{userId}
+        and version = #{version}
+    </update>
+
+    <!--查询用户列表（分页）-->
+    <select id="getListUser" parameterType="com.xzsd.pc.user.entity.UserInfo"
+            resultType="com.xzsd.pc.user.entity.UserVO">
+        select
+        user_id as userId,
+        user_acct as userAcct,
+        user_name as userName,
+        user_image as userImage,
+        role as role,
+        sex as sex,
+        phone as phone,
+        email as mail,
+        id_card as idCard,
+        version as version
+        from t_sys_user
+        where is_delete = 0
+        and role not in (3,4)
+        <if test="userAcct != null and userAcct != ''">
+            and user_acct like concat('%', #{userAcct}, '%')
+        </if>
+        <if test="userName != null and userName != ''">
+            and user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="role != null and role != ''">
+            and role = #{role}
+        </if>
+        order by create_time desc
+    </select>
+
+    <!--删除用户-->
+    <update id="deleteUser" parameterType="java.lang.String">
+        update t_sys_user
+        set
+            is_delete = 1,
+            update_time = now(),
+            update_user = #{loginUserId},
+            version = version + 1
+        where user_id in
+        <foreach item="userId" index="index" collection="listUserId" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </update>
+</mapper>

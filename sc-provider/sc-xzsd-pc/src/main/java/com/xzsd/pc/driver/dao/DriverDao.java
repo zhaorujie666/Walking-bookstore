@@ -1,0 +1,82 @@
+package com.xzsd.pc.driver.dao;
+
+import com.xzsd.pc.driver.entity.DriverInfo;
+import com.xzsd.pc.driver.entity.DriverVO;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+/**
+ * @ClassName DriverDao
+ * @Description Driver
+ * @Author zhaorujie
+ * @Date 2020-03-24
+ */
+@Mapper
+public interface DriverDao {
+
+    /**
+     * 统计司机账号数量
+     * @param driverInfo 司机信息
+     * @return
+     */
+    int countDriverAccount(DriverInfo driverInfo);
+
+    /**
+     * 新增司机
+     * @param driverInfo
+     * @return
+     */
+    int addDriver(DriverInfo driverInfo);
+
+    /**
+     * 新增司机地址信息
+     * @param driverInfo
+     * @return
+     */
+    int addDriverArea(DriverInfo driverInfo);
+
+    /**
+     * 查询司机信息
+     * @param driverId
+     * @return
+     */
+    DriverVO getDriverById(@Param("driverId") String driverId);
+
+    /**
+     * 修改司机信息
+     * @param driverInfo
+     * @return
+     */
+    int updateDriver(DriverInfo driverInfo);
+
+    /**
+     * 修改司机地区信息
+     * @param driverInfo
+     * @return
+     */
+    int updateDriverArea(DriverInfo driverInfo);
+
+    /**
+     *获取所有的司机信息
+     * @param driverInfo
+     * @return 司机信息
+     */
+    List<DriverVO> getListDriver(DriverInfo driverInfo);
+
+    /**
+     * 删除司机
+     * @param listDriverId
+     * @param loginId
+     * @return
+     */
+    int deleteDriverById(@Param("listDriverId") List<String> listDriverId, @Param("loginId") String loginId);
+    /**
+     * 删除司机地区
+     * @param listDriverId
+     * @param loginId
+     * @return
+     */
+    int deleteDriverAreaById(@Param("listDriverId") List<String> listDriverId, @Param("loginId") String loginId);
+}
