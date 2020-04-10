@@ -9,15 +9,15 @@ public class SlideVO {
     /**
      * 轮播图id
      */
-    private String slideId;
+    private String slideshowId;
     /**
      * 轮播图图片
      */
-    private String slideImage;
+    private String slideshowPath;
     /**
      * 排序
      */
-    private int sort;
+    private int slideshowNum;
     /**
      * 有效期起
      */
@@ -29,30 +29,34 @@ public class SlideVO {
     /**
      * 轮播图状态
      */
-    private String slideStatus;
+    private String slideshowStateId;
+    /**
+     * 版本号
+     */
+    private int version;
 
-    public String getSlideId() {
-        return slideId;
+    public String getSlideshowId() {
+        return slideshowId;
     }
 
-    public void setSlideId(String slideId) {
-        this.slideId = slideId;
+    public void setSlideshowId(String slideshowId) {
+        this.slideshowId = slideshowId;
     }
 
-    public String getSlideImage() {
-        return slideImage;
+    public String getSlideshowPath() {
+        return slideshowPath;
     }
 
-    public void setSlideImage(String slideImage) {
-        this.slideImage = slideImage;
+    public void setSlideshowPath(String slideshowPath) {
+        this.slideshowPath = slideshowPath;
     }
 
-    public int getSort() {
-        return sort;
+    public int getSlideshowNum() {
+        return slideshowNum;
     }
 
-    public void setSort(int sort) {
-        this.sort = sort;
+    public void setSlideshowNum(int slideshowNum) {
+        this.slideshowNum = slideshowNum;
     }
 
     public String getStartTime() {
@@ -71,12 +75,19 @@ public class SlideVO {
         this.endTime = endTime;
     }
 
-    public String getSlideStatus() {
-        return slideStatus;
+    public String getSlideshowStateId() {
+        return slideshowStateId;
     }
 
-    public void setSlideStatus(String slideStatus) {
-        this.slideStatus = slideStatus;
+    public void setSlideshowStateId(String slideshowStateId) {
+        this.slideshowStateId = slideshowStateId;
     }
 
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 }

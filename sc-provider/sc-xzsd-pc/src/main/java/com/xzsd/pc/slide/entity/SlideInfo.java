@@ -14,15 +14,15 @@ public class SlideInfo {
     /**
      * 轮播图id
      */
-    private String slideId;
+    private String slideshowId;
     /**
-     * 轮播图图片
+     * 轮播图图片上传返回的路径
      */
-    private String slideImage;
+    private String imagePath;
     /**
      * 排序
      */
-    private int sort;
+    private int slideshowNum;
     /**
      * 有效期起
      */
@@ -42,7 +42,7 @@ public class SlideInfo {
     /**
      * 轮播图状态
      */
-    private String slideStatus;
+    private String slideshowStateId;
     /**
      * 页码
      */
@@ -62,7 +62,7 @@ public class SlideInfo {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
     /**
      * 更新者
      */
@@ -70,38 +70,34 @@ public class SlideInfo {
     /**
      * 更新时间
      */
-    private Date updateTime;
+    private String updateTime;
     /**
      * 版本号
      */
     private int version;
-    /**
-     * 图片上传
-     */
-    private List<MultipartFile> file;
 
-    public String getSlideId() {
-        return slideId;
+    public String getSlideshowId() {
+        return slideshowId;
     }
 
-    public void setSlideId(String slideId) {
-        this.slideId = slideId;
+    public void setSlideshowId(String slideshowId) {
+        this.slideshowId = slideshowId;
     }
 
-    public String getSlideImage() {
-        return slideImage;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setSlideImage(String slideImage) {
-        this.slideImage = slideImage;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
-    public int getSort() {
-        return sort;
+    public int getSlideshowNum() {
+        return slideshowNum;
     }
 
-    public void setSort(int sort) {
-        this.sort = sort;
+    public void setSlideshowNum(int slideshowNum) {
+        this.slideshowNum = slideshowNum;
     }
 
     public String getStartTime() {
@@ -136,12 +132,12 @@ public class SlideInfo {
         this.goodsName = goodsName;
     }
 
-    public String getSlideStatus() {
-        return slideStatus;
+    public String getSlideshowStateId() {
+        return slideshowStateId;
     }
 
-    public void setSlideStatus(String slideStatus) {
-        this.slideStatus = slideStatus;
+    public void setSlideshowStateId(String slideshowStateId) {
+        this.slideshowStateId = slideshowStateId;
     }
 
     public int getPageSize() {
@@ -176,11 +172,11 @@ public class SlideInfo {
         this.createUser = createUser;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -192,11 +188,11 @@ public class SlideInfo {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -206,13 +202,5 @@ public class SlideInfo {
 
     public void setVersion(int version) {
         this.version = version;
-    }
-
-    public List<MultipartFile> getFile() {
-        return file;
-    }
-
-    public void setFile(List<MultipartFile> file) {
-        this.file = file;
     }
 }

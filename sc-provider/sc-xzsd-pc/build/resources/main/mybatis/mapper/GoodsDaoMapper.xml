@@ -204,25 +204,4 @@
             #{goodsId}
         </foreach>
     </update>
-
-
-    <!--新增轮播图和热门商品时的商品列表-->
-    <!--<select id="getSlideAndHotGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo"
-            resultType="com.xzsd.pc.goods.entity.SlideAndHotGoods">
-        select
-        id goodsId,
-        goods_name goodsName,
-        goods_status goodsStatus,
-        category_first_name firstCategoryName,
-        category_second_name secondCategoryName
-        from t_goods_info
-        where is_delete = 0
-        and goods_status = 1
-        <if test="goodsName != null and goodsName != ''">
-            and goods_name like concat('%', #{goodsName}, '%')
-        </if>
-        <if test="goodsId != null and goodsId != ''">
-            and id like concat('%', #{goodsId}, '%')
-        </if>
-    </select>-->
 </mapper>

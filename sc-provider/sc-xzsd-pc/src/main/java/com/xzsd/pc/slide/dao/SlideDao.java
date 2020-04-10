@@ -1,5 +1,7 @@
 package com.xzsd.pc.slide.dao;
 
+import com.xzsd.pc.goods.entity.GoodsInfo;
+import com.xzsd.pc.slide.entity.SlideAndHotGoods;
 import com.xzsd.pc.slide.entity.SlideInfo;
 import com.xzsd.pc.slide.entity.SlideVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,6 +21,7 @@ public interface SlideDao {
      * @return
      */
     int countSort(SlideInfo slideInfo);
+
     /**
      * 新增轮播图
      * @param slideInfo
@@ -36,12 +39,12 @@ public interface SlideDao {
     /**
      * 修改轮播图状态
      * @param listSlideId
-     * @param slideStatus
+     * @param slideshowStateId
      * @param loginId
      * @return
      */
     int updateSlideStatus(@Param("listSlideId") List<String> listSlideId,
-                          @Param("slideStatus") String slideStatus,
+                          @Param("slideshowStateId") String slideshowStateId,
                           @Param("loginId") String loginId);
 
     /**
@@ -51,4 +54,11 @@ public interface SlideDao {
      * @return
      */
     int deleteSlide(@Param("listSlideId") List<String> listSlideId, @Param("loginId") String loginId);
+
+    /**
+     * 新增轮播图和热门商品时的商品列表
+     * @param goodsInfo
+     * @return
+     */
+    List<SlideAndHotGoods> getSlideAndHotGoods(GoodsInfo goodsInfo);
 }

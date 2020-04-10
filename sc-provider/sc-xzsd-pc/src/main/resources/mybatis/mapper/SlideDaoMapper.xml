@@ -3,14 +3,15 @@
 <mapper namespace="com.xzsd.pc.slide.dao.SlideDao">
     <!--统计sort出现的次数-->
     <select id="countSort" parameterType="com.xzsd.pc.slide.entity.SlideInfo" resultType="int">
-        select count(sort)
-        from t_slide
-        where sort = #{sort}
+        select count(*)
+        from t_sys_slide
+        where sort = #{slideshowNum}
+        or goods_id = #{goodsId}
     </select>
 
     <!--新增轮播图-->
     <insert id="addSlide" parameterType="com.xzsd.pc.slide.entity.SlideInfo">
-        insert into t_slide(
+        insert into t_sys_slide(
             id,
             goods_id,
             image_url,
@@ -25,13 +26,13 @@
             version
         )
         values (
-            #{slideId},
+            #{slideshowId},
             #{goodsId},
-            #{slideImage},
-            #{sort},
-            0,
+            #{imagePath},
+            #{slideshowNum},
+            1,
             #{startTime},
-            #{startTime},
+            #{endTime},
             0,
             now(),
             #{createUser},
@@ -44,25 +45,25 @@
     <select id="getListSlide" parameterType="com.xzsd.pc.slide.entity.SlideInfo"
             resultType="com.xzsd.pc.slide.entity.SlideVO">
         select
-        id slideId,
-        sort sort,
-        image_url slideImage,
-        slide_status slideStatus,
+        id slideshowId,
+        sort slideshowNum,
+        image_url slideshowPath,
+        slide_status slideshowStateId,
         start_time startTime,
         end_time endTime
-        from t_slide
+        from t_sys_slide
         where is_delete = 0
-        <if test="slideStatus != null and slideStatus != ''">
-            and slide_status = #{slideStatus}
+        <if test="slideshowStateId != null and slideshowStateId != ''">
+            and slide_status = #{slideshowStateId}
         </if>
         order by sort asc
     </select>
 
     <!--修改轮播图状态-->
     <update id="updateSlideStatus" parameterType="java.lang.String">
-        update t_slide
+        update t_sys_slide
         set
-            slide_status = #{slideStatus},
+            slide_status = #{slideshowStateId},
             update_time = now(),
             update_user = #{loginId},
             version = version + 1
@@ -74,7 +75,7 @@
 
     <!--删除轮播图-->
     <update id="deleteSlide" parameterType="java.lang.String">
-        update t_slide
+        update t_sys_slide
         set
             is_delete = 1,
             update_time = now(),
@@ -85,4 +86,26 @@
             #{slideId}
         </foreach>
     </update>
+
+    <!--新增轮播图和热门商品时的商品列表-->
+    <select id="getSlideAndHotGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo"
+            resultType="com.xzsd.pc.slide.entity.SlideAndHotGoods">
+        select
+        t1.id goodsId,
+        t1.goods_name goodsName,
+        t1.goods_status goodsStateId,
+        t2.category_name oneClassifyName,
+        t3.category_name twoClassifyName
+        from t_goods_info t1, t_goods_category t2, t_goods_category t3
+        where t1.is_delete = 0
+        and t2.id = t1.category_first
+        and t3.id = t1.category_second
+        and t1.goods_status = 1
+        <if test="goodsName != null and goodsName != ''">
+            and t1.goods_name like concat('%', #{goodsName}, '%')
+        </if>
+        <if test="goodsId != null and goodsId != ''">
+            and t1.id like concat('%', #{goodsId}, '%')
+        </if>
+    </select>
 </mapper>
