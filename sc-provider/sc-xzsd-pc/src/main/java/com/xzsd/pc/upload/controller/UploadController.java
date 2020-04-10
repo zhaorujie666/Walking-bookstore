@@ -18,7 +18,7 @@ import java.util.List;
  * @date 2020-3-28
  */
 @RestController
-@RequestMapping("/image")
+@RequestMapping("/imageUpload")
 public class UploadController {
     private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
