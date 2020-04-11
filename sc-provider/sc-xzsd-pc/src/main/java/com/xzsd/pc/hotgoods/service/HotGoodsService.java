@@ -1,12 +1,13 @@
-package com.xzsd.pc.hot.service;
+package com.xzsd.pc.hotgoods.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.xzsd.pc.hot.dao.HotGoodsDao;
-import com.xzsd.pc.hot.entity.HotGoodsInfo;
-import com.xzsd.pc.hot.entity.HotGoodsVO;
+import com.neusoft.core.restful.AppResponse;
+import com.xzsd.pc.hotgoods.dao.HotGoodsDao;
+import com.xzsd.pc.hotgoods.entity.HotGoodsInfo;
+import com.xzsd.pc.hotgoods.entity.HotGoodsShowNumber;
+import com.xzsd.pc.hotgoods.entity.HotGoodsVO;
 import com.xzsd.pc.user.dao.UserDao;
-import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,23 +35,29 @@ public class HotGoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addHotGoods(HotGoodsInfo hotGoodsInfo){
+        //校验排序是否重复
         int num = hotGoodsDao.countSort(hotGoodsInfo);
         if(num != 0){
             return AppResponse.bizError("出现重复的排序，请重新输入！");
         }
-        hotGoodsInfo.setHotId(StringUtil.getCommonCode(2));
+        //校验商品是否已经被选择
+        int goodsIsUse = hotGoodsDao.countGoodsIsUse(hotGoodsInfo);
+        if(goodsIsUse!= 0 && globalHotGoods.getGoodsId().equals(hotGoodsInfo.getGoodsId()) == false){
+            return AppResponse.bizError("该商品已经被选择，请重新选择");
+        }
+        hotGoodsInfo.setHotGoodsId(StringUtil.getCommonCode(2));
         hotGoodsDao.addHotGoods(hotGoodsInfo);
         return AppResponse.success("新增热门商品成功！");
     }
 
     /**
      * 查询热门商品详情
-     * @param hotId
+     * @param hotGoodsId
      * @return
      */
     HotGoodsVO globalHotGoods = null;
-    public AppResponse getHotGoodsById(String hotId){
-        globalHotGoods = hotGoodsDao.getHotGoodsById(hotId);
+    public AppResponse getHotGoodsById(String hotGoodsId){
+        globalHotGoods = hotGoodsDao.getHotGoodsById(hotGoodsId);
         if(globalHotGoods == null){
             return AppResponse.bizError("查询热门商品详情失败");
         }
@@ -64,9 +71,15 @@ public class HotGoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateHotGoods(HotGoodsInfo hotGoodsInfo){
+        //校验排序是否重复
         int num = hotGoodsDao.countSort(hotGoodsInfo);
-        if(num != 0 && globalHotGoods.getSort() != hotGoodsInfo.getSort()){
-            return AppResponse.bizError("存在相同的排序，请重新输入");
+        if(num != 0 && globalHotGoods.getHotGoodsNum() != hotGoodsInfo.getHotGoodsNum()){
+            return AppResponse.bizError("出现相同的排序，请重新输入");
+        }
+        //校验商品是否已经被选择
+        int goodsIsUse = hotGoodsDao.countGoodsIsUse(hotGoodsInfo);
+        if(goodsIsUse!= 0 && globalHotGoods.getGoodsId().equals(hotGoodsInfo.getGoodsId()) == false){
+            return AppResponse.bizError("该商品已经被选择，请重新选择");
         }
         int count = hotGoodsDao.updateHotGoods(hotGoodsInfo);
         if(count == 0){
@@ -88,14 +101,22 @@ public class HotGoodsService {
     }
 
     /**
+     * 查询热门商品展示数量
+     * @return
+     */
+    public AppResponse getHotGoodsShowNumber(){
+        HotGoodsShowNumber hotGoodsShowNumber = hotGoodsDao.getHotGoodsShowNumber();
+        return AppResponse.success("查询热门商品展示数量成功", hotGoodsShowNumber);
+    }
+
+    /**
      * 修改热门商品展示数量
-     * @param showNumber
-     * @param userId
+     * @param hotGoodsShowNumber
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse modifyShowNumber(String showNumber, String userId){
-        int count = hotGoodsDao.modifyShowNumber(showNumber, userId);
+    public AppResponse modifyShowNumber(HotGoodsShowNumber hotGoodsShowNumber){
+        int count = hotGoodsDao.modifyShowNumber(hotGoodsShowNumber);
         if(count == 0){
             return AppResponse.bizError("修改热门商品展示数量失败");
         }
@@ -104,13 +125,13 @@ public class HotGoodsService {
 
     /**
      * 删除热门位商品
-     * @param hotId
+     * @param hotGoodsId
      * @param userId
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse deleteHotGoods(String hotId, String userId){
-        List<String> listHotId = Arrays.asList(hotId.split(","));
+    public AppResponse deleteHotGoods(String hotGoodsId, String userId){
+        List<String> listHotId = Arrays.asList(hotGoodsId.split(","));
         int count = hotGoodsDao.deleteHotGoods(listHotId, userId);
         if(count == 0){
             return AppResponse.bizError("删除失败！");

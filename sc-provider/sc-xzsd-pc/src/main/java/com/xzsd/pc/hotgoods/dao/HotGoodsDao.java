@@ -1,7 +1,8 @@
-package com.xzsd.pc.hot.dao;
+package com.xzsd.pc.hotgoods.dao;
 
-import com.xzsd.pc.hot.entity.HotGoodsInfo;
-import com.xzsd.pc.hot.entity.HotGoodsVO;
+import com.xzsd.pc.hotgoods.entity.HotGoodsInfo;
+import com.xzsd.pc.hotgoods.entity.HotGoodsShowNumber;
+import com.xzsd.pc.hotgoods.entity.HotGoodsVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,6 +24,13 @@ public interface HotGoodsDao {
     int countSort(HotGoodsInfo hotGoodsInfo);
 
     /**
+     * 统计该商品是否已经被使用
+     * @param hotGoodsInfo
+     * @return
+     */
+    int countGoodsIsUse(HotGoodsInfo hotGoodsInfo);
+
+    /**
      * 新增热门商品
      * @param hotGoodsInfo
      * @return
@@ -31,10 +39,10 @@ public interface HotGoodsDao {
 
     /**
      * 查询热门商品详情
-     * @param hotId
+     * @param hotGoodsId
      * @return
      */
-    HotGoodsVO getHotGoodsById(@Param("hotId") String hotId);
+    HotGoodsVO getHotGoodsById(@Param("hotGoodsId") String hotGoodsId);
 
     /**
      * 修改热门位商品
@@ -51,12 +59,17 @@ public interface HotGoodsDao {
     List<HotGoodsVO> getListHotGoods(HotGoodsInfo hotGoodsInfo);
 
     /**
-     * 修改热门商品展示数量
-     * @param showNumber
-     * @param loginId
+     * 查询热门位商品展示数量
      * @return
      */
-    int modifyShowNumber(@Param("showNumber") String showNumber, @Param("loginId") String loginId);
+    HotGoodsShowNumber getHotGoodsShowNumber();
+
+    /**
+     * 修改热门商品展示数量
+     * @param hotGoodsShowNumber
+     * @return
+     */
+    int modifyShowNumber(HotGoodsShowNumber hotGoodsShowNumber);
 
     /**
      * 删除热门位商品

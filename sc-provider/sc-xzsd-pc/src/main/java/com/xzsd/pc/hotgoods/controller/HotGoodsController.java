@@ -1,9 +1,10 @@
-package com.xzsd.pc.hot.controller;
+package com.xzsd.pc.hotgoods.controller;
 
+import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
-import com.xzsd.pc.hot.entity.HotGoodsInfo;
-import com.xzsd.pc.hot.service.HotGoodsService;
-import com.xzsd.pc.util.AppResponse;
+import com.xzsd.pc.hotgoods.entity.HotGoodsInfo;
+import com.xzsd.pc.hotgoods.entity.HotGoodsShowNumber;
+import com.xzsd.pc.hotgoods.service.HotGoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ import javax.annotation.Resource;
  * @date 2020-3-31
  */
 @RestController
-@RequestMapping("/goodsHot")
+@RequestMapping("/hotGoods")
 public class HotGoodsController {
 
     private static final Logger logger = LoggerFactory.getLogger(HotGoodsController.class);
@@ -33,7 +34,7 @@ public class HotGoodsController {
      * @author zhaorujie
      * @date 2020-3-31
      */
-    @PostMapping("/addGoodsHot")
+    @PostMapping("addHotGoods")
     public AppResponse addHotGoods(HotGoodsInfo hotGoodsInfo){
         try {
             //获取用户角色
@@ -49,21 +50,22 @@ public class HotGoodsController {
 
     /**
      * 查询热门商品详情
-     * @param hotId
+     * @param hotGoodsId
      * @return
      * @author zhaorujie
      * @date 2020-3-31
      */
-    @PostMapping("/findGoodsHotById")
-    public AppResponse getHotGoodsById(String hotId){
+    @PostMapping("getHotGoods")
+    public AppResponse getHotGoodsById(String hotGoodsId){
         try {
-            return hotGoodsService.getHotGoodsById(hotId);
+            return hotGoodsService.getHotGoodsById(hotGoodsId);
         }catch (Exception e){
             logger.error("查询热门商品详情失败");
             System.out.println(e.toString());
             throw e;
         }
     }
+
 
     /**
      * 修改热门商品信息
@@ -72,7 +74,7 @@ public class HotGoodsController {
      * @author zhaorujie
      * @date 2020-3-31
      */
-    @PostMapping("/updateUserById")
+    @PostMapping("updateHotGoods")
     public AppResponse updateHotGoods(HotGoodsInfo hotGoodsInfo){
         try {
             //获取用户角色
@@ -93,7 +95,7 @@ public class HotGoodsController {
      * @author zhaorujie
      * @date 2020-3-31
      */
-    @PostMapping("/listGoodsHot")
+    @PostMapping("listHotGoods")
     public AppResponse getListHotGoods(HotGoodsInfo hotGoodsInfo){
         try {
             return hotGoodsService.getListHotGoods(hotGoodsInfo);
@@ -105,17 +107,33 @@ public class HotGoodsController {
     }
 
     /**
+     * 查询热门商品展示数量
+     * @return
+     */
+    @PostMapping("getHotGoodsShowNum")
+    public AppResponse getHotGoodsShowNumber(){
+        try {
+            return hotGoodsService.getHotGoodsShowNumber();
+        }catch (Exception e){
+            logger.error("查询热门商品展示数量成功");
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
      * 修改热门位商品展示数量
-     * @param showNumber
-     * @param userId
+     * @param hotGoodsShowNumber
      * @return
      * @author zhaorujie
      * @date 2020-3-31
      */
-    @PostMapping("/showNumber")
-    public AppResponse modifyShowNumber(String showNumber, String userId){
+    @PostMapping("updateHotGoodsShowNum")
+    public AppResponse modifyShowNumber(HotGoodsShowNumber hotGoodsShowNumber){
         try {
-            return hotGoodsService.modifyShowNumber(showNumber, userId);
+            String loginUserId = SecurityUtils.getCurrentUserId();
+            hotGoodsShowNumber.setUpdateUser(loginUserId);
+            return hotGoodsService.modifyShowNumber(hotGoodsShowNumber);
         }catch (Exception e){
             logger.error("修改热门位商品展示数量失败");
             System.out.println(e.toString());
@@ -125,16 +143,16 @@ public class HotGoodsController {
 
     /**
      * 删除热门位商品
-     * @param hotId
-     * @param userId
+     * @param hotGoodsId
      * @return
      * @author zhaorujie
      * @date 2020-3-31
      */
-    @PostMapping("/deleteGoodsHot")
-    public AppResponse deleteHotGoods(String hotId, String userId){
+    @PostMapping("deleteHotGoods")
+    public AppResponse deleteHotGoods(String hotGoodsId){
         try {
-            return hotGoodsService.deleteHotGoods(hotId, userId);
+            String userId = SecurityUtils.getCurrentUserId();
+            return hotGoodsService.deleteHotGoods(hotGoodsId, userId);
         }catch (Exception e){
             logger.error("删除热门位商品失败");
             System.out.println(e.toString());

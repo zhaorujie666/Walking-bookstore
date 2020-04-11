@@ -1,4 +1,4 @@
-package com.xzsd.pc.hot.entity;
+package com.xzsd.pc.hotgoods.entity;
 
 /**
  * @Description 实体类
@@ -9,7 +9,7 @@ public class HotGoodsInfo {
     /**
      * 热门商品Id
      */
-    private String hotId;
+    private String hotGoodsId;
     /**
      * 商品名称
      */
@@ -17,7 +17,7 @@ public class HotGoodsInfo {
     /**
      * 排序
      */
-    private int sort;
+    private int hotGoodsNum;
     /**
      * 商品id
      */
@@ -25,11 +25,11 @@ public class HotGoodsInfo {
     /**
      * 商品售价
      */
-    private String sellingPrice;
+    private String goodsPrice;
     /**
      * 商品介绍
      */
-    private String goodsIntroduction;
+    private String goodsDescribe;
     /**
      * 页码
      */
@@ -61,14 +61,14 @@ public class HotGoodsInfo {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
-    public String getHotId() {
-        return hotId;
+    public String getHotGoodsId() {
+        return hotGoodsId;
     }
 
-    public void setHotId(String hotId) {
-        this.hotId = hotId;
+    public void setHotGoodsId(String hotGoodsId) {
+        this.hotGoodsId = hotGoodsId;
     }
 
     public String getGoodsName() {
@@ -79,12 +79,12 @@ public class HotGoodsInfo {
         this.goodsName = goodsName;
     }
 
-    public int getSort() {
-        return sort;
+    public int getHotGoodsNum() {
+        return hotGoodsNum;
     }
 
-    public void setSort(int sort) {
-        this.sort = sort;
+    public void setHotGoodsNum(int hotGoodsNum) {
+        this.hotGoodsNum = hotGoodsNum;
     }
 
     public String getGoodsId() {
@@ -95,20 +95,20 @@ public class HotGoodsInfo {
         this.goodsId = goodsId;
     }
 
-    public String getSellingPrice() {
-        return sellingPrice;
+    public String getGoodsPrice() {
+        return goodsPrice;
     }
 
-    public void setSellingPrice(String sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice;
     }
 
-    public String getGoodsIntroduction() {
-        return goodsIntroduction;
+    public String getGoodsDescribe() {
+        return goodsDescribe;
     }
 
-    public void setGoodsIntroduction(String goodsIntroduction) {
-        this.goodsIntroduction = goodsIntroduction;
+    public void setGoodsDescribe(String goodsDescribe) {
+        this.goodsDescribe = goodsDescribe;
     }
 
     public int getPageSize() {
@@ -167,11 +167,11 @@ public class HotGoodsInfo {
         this.updateTime = updateTime;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 }
