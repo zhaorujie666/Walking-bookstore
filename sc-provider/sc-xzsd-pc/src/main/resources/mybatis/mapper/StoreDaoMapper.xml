@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.store.dao.StoreDao">
-
     <!--统计营业执照数量-->
     <select id="countBusinessCode" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
         select count(business_code)
         from t_store_info
         where is_delete = 0
         and business_code = #{businessCode}
+        and is_delete = 0
+    </select>
+
+    <!--校验是否出现重复的邀请码-->
+    <select id="countInviteCode" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
+        select count(invitation_code)
+        from t_store_info
+        where is_delete = 0
+        and invitation_code = #{inviteCode}
         and is_delete = 0
     </select>
 
@@ -18,6 +26,7 @@
             store_name,
             manager_id,
             business_code,
+            invitation_code,
             phone,
             province,
             city,
@@ -30,14 +39,15 @@
             version
         )
         values (
-            #{storeCode},
+            #{storeId},
             #{storeName},
-            #{managerId},
+            #{userId},
             #{businessCode},
+            #{inviteCode},
             #{phone},
-            #{provinceName},
-            #{cityName},
-            #{countryName},
+            #{provinceId},
+            #{cityId},
+            #{areaId},
             #{address},
             #{isDelete},
             now(),
@@ -50,23 +60,30 @@
     <!--查询店长编号id-->
     <select id="getManagerId" parameterType="com.xzsd.pc.store.entity.StoreInfo"
             resultType="com.xzsd.pc.store.entity.StoreInfo">
-        select * from t_user where id = #{managerId}
+        select * from
+         t_sys_user
+         where user_id= #{userId}
+         and is_delete = 0
+         and is_delete = 0
     </select>
 
     <!--查询门店详情信息-->
     <select id="getStoreInfoById" parameterType="java.lang.String" resultType="com.xzsd.pc.store.entity.StoreVO">
         select
-        id storeCode,
-        store_name storeName,
-        phone,
-        manager_id managerId,
-        business_code businessCode,
-        province provinceName,
-        city cityName,
-        county countryName,
-        store_address address
-        from t_store_info
-        where id = #{storeCode}
+        t1.id storeId,
+        t1.store_name storeName,
+        t1.phone phone,
+        t1.manager_id userId,
+        t1.business_code businessCode,
+        t2.area_name provinceName,
+        t3.area_name cityName,
+        t4.area_name areaName,
+        t1.store_address address
+        from t_store_info t1, t_area t2, t_area t3, t_area t4
+        where t1.id = #{storeId}
+        and t2.id = t1.province
+        and t3.id = t1.city
+        and t4.id = t1.county
     </select>
 
     <!--修改店详情信息-->
@@ -75,56 +92,90 @@
         set
             store_name = #{storeName},
             phone = #{phone},
-            manager_id = #{managerId},
+            manager_id = #{userId},
             business_code = #{businessCode},
-            province = #{provinceName},
-            city = #{cityName},
-            county = #{countryName},
+            province = #{provinceId},
+            city = #{cityId},
+            county = #{areaId},
             store_address = #{address},
             version = version + 1
-        where id = #{storeCode}
+        where id = #{storeId}
         and version = #{version}
     </update>
 
-    <!--查询所有门店信息-->
+    <!--店长查询自己门店信息-->
     <select id="getListStore" parameterType="com.xzsd.pc.store.entity.StoreInfo"
             resultType="com.xzsd.pc.store.entity.StoreVO">
         select
-        s.id storeCode,
-        s.store_name storeName,
-        s.phone phone,
-        s.province provinceName,
-        s.city cityName,
-        s.county countryName,
-        s.store_address address,
-        u.user_name managerName,
-        u.invitation_code invitationCode,
-        u.user_account storeAccount,
-        s.version version
-        from t_user u, t_store_info s
-        where u.id = s.manager_id
-        and u.role = 1
-        and u.is_delete = 0
-        and s.is_delete = 0
-        <if test="storeCode != null and storeCode != ''">
-            and s.id like concat('%', #{storeCode}, '%')
+        t2.id storeId,
+        t2.store_name storeName,
+        t2.phone phone,
+        t2.store_address address,
+        t1.user_name userName,
+        t2.invitation_code inviteCode,
+        t1.user_acct userAcct,
+        t2.version version
+        from t_sys_user t1, t_store_info t2
+        where t1.user_id = t2.manager_id
+        and t1.user_id = #{userId}
+        and t1.is_delete = 0
+        and t2.is_delete = 0
+        <if test="storeId != null and storeId != ''">
+            and t2.id like concat('%', #{storeId}, '%')
         </if>
         <if test="storeName != null and storeName != ''">
-            and s.store_name like concat('%', #{storeName}, '%')
+            and t2.store_name like concat('%', #{storeName}, '%')
         </if>
-        <if test="managerName != null and managerName != ''">
-            and u.user_name like concat('%', #{managerName}, '%')
+        <if test="userName != null and userName != ''">
+            and t1.user_name like concat('%', #{userName}, '%')
         </if>
-        <if test="provinceName != null and provinceName != ''">
-            and s.province = #{provinceName}
+        <if test="provinceId != null and provinceId != ''">
+            and t2.province = #{provinceId}
         </if>
-        <if test="cityName != null and cityName != ''">
-            and s.city = #{cityName}
+        <if test="cityId != null and cityId != ''">
+            and t2.city = #{cityId}
         </if>
-        <if test="countryName != null and countryName != ''">
-            and s.county = #{countryName}
+        <if test="areaId != null and areaId != ''">
+            and t2.county = #{areaId}
         </if>
-        order by s.create_time desc
+        order by t2.create_time desc
+    </select>
+
+    <!--管理员查询所有门店信息-->
+    <select id="getListStoreByAdmin" parameterType="com.xzsd.pc.store.entity.StoreInfo"
+            resultType="com.xzsd.pc.store.entity.StoreVO">
+        select
+        t2.id storeId,
+        t2.store_name storeName,
+        t2.phone phone,
+        t2.store_address address,
+        t1.user_name userName,
+        t2.invitation_code inviteCode,
+        t1.user_acct userAcct,
+        t2.version version
+        from t_sys_user t1, t_store_info t2
+        where t1.user_id = t2.manager_id
+        and t1.is_delete = 0
+        and t2.is_delete = 0
+        <if test="storeId != null and storeId != ''">
+            and t2.id like concat('%', #{storeId}, '%')
+        </if>
+        <if test="storeName != null and storeName != ''">
+            and t2.store_name like concat('%', #{storeName}, '%')
+        </if>
+        <if test="userName != null and userName != ''">
+            and t1.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="provinceId != null and provinceId != ''">
+            and t2.province = #{provinceId}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            and t2.city = #{cityId}
+        </if>
+        <if test="areaId != null and areaId != ''">
+            and t2.county = #{areaId}
+        </if>
+        order by t2.create_time desc
     </select>
 
     <!--删除门店信息-->
@@ -133,11 +184,11 @@
         set
             is_delete = 1,
             update_time = now(),
-            update_user = #{userId},
+            update_user = #{loginUserId},
             version = version + 1
         where id in
-        <foreach item="storeCode" index="index" collection="listStoreCode" open="(" separator="," close=")">
-            #{storeCode}
+        <foreach item="storeId" index="index" collection="listStoreId" open="(" separator="," close=")">
+            #{storeId}
         </foreach>
     </update>
 </mapper>

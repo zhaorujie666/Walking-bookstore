@@ -34,7 +34,7 @@ public class StoreController {
      * @author zhaorujie
      * @Date 2020-03-25
      */
-    @PostMapping("/addStore")
+    @PostMapping("addStore")
     public AppResponse addStore(StoreInfo storeInfo){
         try {
             //获取用户角色
@@ -50,15 +50,15 @@ public class StoreController {
 
     /**
      * 查询门店详情
-     * @param storeCode
+     * @param storeId
      * @return
      * @author zhaorujie
      * @Date 2020-03-26
      */
-    @PostMapping("/findStoreById")
-    public AppResponse getStoreInfoById(String storeCode){
+    @PostMapping("getStore")
+    public AppResponse getStoreInfoById(String storeId){
         try {
-            return storeService.getStoreInfoById(storeCode);
+            return storeService.getStoreInfoById(storeId);
         }catch (Exception e){
             logger.error("查询门店详情失败", e);
             System.out.println(e.toString());
@@ -73,7 +73,7 @@ public class StoreController {
      * @author zhaorujie
      * @Date 2020-03-26
      */
-    @PostMapping("/updateStoreById")
+    @PostMapping("updateStore")
     public AppResponse updateStore(StoreInfo storeInfo){
         try {
             //获取用户角色
@@ -94,9 +94,12 @@ public class StoreController {
      * @author zhaorujie
      * @Date 2020-03-26
      */
-    @PostMapping("/listStore")
+    @PostMapping("listStores")
     public AppResponse getListStore(StoreInfo storeInfo){
         try {
+            //获取当前登录者的id
+            String loginUserId = SecurityUtils.getCurrentUserId();
+            storeInfo.setUserId(loginUserId);
             return storeService.getListStore(storeInfo);
         }catch (Exception e){
             logger.error("查询门店信息列表成功", e);
@@ -107,16 +110,16 @@ public class StoreController {
 
     /**
      * 删除门店
-     * @param storeCode
-     * @param userId
+     * @param storeId
      * @return
      * @author zhaorujie
      * @Date 2020-03-26
      */
-    @PostMapping("/deleteStore")
-    public AppResponse deleteStoreById(String storeCode, String userId){
+    @PostMapping("deleteStore")
+    public AppResponse deleteStoreById(String storeId){
         try {
-            return storeService.deleteStoreById(storeCode, userId);
+            String userId = SecurityUtils.getCurrentUserId();
+            return storeService.deleteStoreById(storeId, userId);
         }catch (Exception e){
             logger.error("删除门店成功", e);
             System.out.println(e.toString());

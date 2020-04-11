@@ -19,11 +19,11 @@ public class StoreInfo {
     /**
      * 门店编码
      */
-    private String storeCode;
+    private String storeId;
     /**
      * 店长编码
      */
-    private String managerId;
+    private String userId;
     /**
      * 门店名称
      */
@@ -35,7 +35,7 @@ public class StoreInfo {
     /**
      * 店长名称
      */
-    private String managerName;
+    private String userName;
     /**
      * 电话
      */
@@ -43,27 +43,31 @@ public class StoreInfo {
     /**
      * 邀请码
      */
-    private String invitationCode;
+    private String inviteCode;
     /**
      * 门店账号
      */
-    private String storeAccount;
+    private String userAcct;
     /**
-     * 省名
+     * 省级编号
      */
-    private String provinceName;
+    private String provinceId;
     /**
-     * 城市名
+     * 城市级编号
      */
-    private String cityName;
+    private String cityId;
     /**
-     * 区县名
+     * 区级编号
      */
-    private String countryName;
+    private String areaId;
     /**
      * 地址
      */
     private String address;
+    /**
+     * 用户角色
+     */
+    private String role;
     /**
      * 作废标记 0为存在，1为作废
      */
@@ -89,7 +93,6 @@ public class StoreInfo {
      */
     private String version;
 
-
     public int getPageSize() {
         return pageSize;
     }
@@ -106,20 +109,20 @@ public class StoreInfo {
         this.pageNum = pageNum;
     }
 
-    public String getStoreCode() {
-        return storeCode;
+    public String getStoreId() {
+        return storeId;
     }
 
-    public void setStoreCode(String storeCode) {
-        this.storeCode = storeCode;
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 
-    public String getManagerId() {
-        return managerId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setManagerId(String managerId) {
-        this.managerId = managerId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getStoreName() {
@@ -138,12 +141,12 @@ public class StoreInfo {
         this.businessCode = businessCode;
     }
 
-    public String getManagerName() {
-        return managerName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPhone() {
@@ -154,44 +157,44 @@ public class StoreInfo {
         this.phone = phone;
     }
 
-    public String getInvitationCode() {
-        return invitationCode;
+    public String getInviteCode() {
+        return inviteCode;
     }
 
-    public void setInvitationCode(String invitationCode) {
-        this.invitationCode = invitationCode;
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
     }
 
-    public String getStoreAccount() {
-        return storeAccount;
+    public String getUserAcct() {
+        return userAcct;
     }
 
-    public void setStoreAccount(String storeAccount) {
-        this.storeAccount = storeAccount;
+    public void setUserAcct(String userAcct) {
+        this.userAcct = userAcct;
     }
 
-    public String getProvinceName() {
-        return provinceName;
+    public String getProvinceId() {
+        return provinceId;
     }
 
-    public void setProvinceName(String provinceName) {
-        this.provinceName = provinceName;
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getCityId() {
+        return cityId;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getAreaId() {
+        return areaId;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
     }
 
     public String getAddress() {
@@ -200,6 +203,14 @@ public class StoreInfo {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getIsDelete() {

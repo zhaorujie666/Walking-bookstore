@@ -21,6 +21,13 @@ public interface StoreDao {
      * @return
      */
     int countBusinessCode(StoreInfo storeInfo);
+
+    /**
+     * 校验是否出现重复的邀请码
+     * @param storeInfo
+     * @return
+     */
+    int countInviteCode(StoreInfo storeInfo);
     /**
      * 新增门店
      * @param storeInfo
@@ -37,10 +44,10 @@ public interface StoreDao {
 
     /**
      * 查询门店详情信息
-     * @param storeCode
+     * @param storeId
      * @return
      */
-    StoreVO getStoreInfoById(@Param("storeCode") String storeCode);
+    StoreVO getStoreInfoById(@Param("storeId") String storeId);
 
     /**
      * 修改店详情信息
@@ -50,16 +57,24 @@ public interface StoreDao {
     int updateStore(StoreInfo storeInfo);
 
     /**
-     * 查询所有门店信息
+     * 店长查询自己门店信息
      * @param storeInfo
      * @return
      */
     List<StoreVO> getListStore(StoreInfo storeInfo);
 
     /**
-     * 删除门店信息
-     * @param listStoreCode
+     * 管理员查询所有门店信息
+     * @param storeInfo
      * @return
      */
-    int deleteStoreById(List<String> listStoreCode, @Param("userId") String userId);
+    List<StoreVO> getListStoreByAdmin(StoreInfo storeInfo);
+
+    /**
+     * 删除门店信息
+     * @param listStoreId
+     * @param loginUserId
+     * @return
+     */
+    int deleteStoreById(@Param("listStoreId") List<String> listStoreId, @Param("loginUserId") String loginUserId);
 }

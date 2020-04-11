@@ -9,11 +9,11 @@ public class StoreVO {
     /**
      * 门店编码
      */
-    private String storeCode;
+    private String storeId;
     /**
      * 店长编码
      */
-    private String managerId;
+    private String userId;
     /**
      * 门店名称
      */
@@ -25,7 +25,7 @@ public class StoreVO {
     /**
      * 店长名称
      */
-    private String managerName;
+    private String userName;
     /**
      * 电话
      */
@@ -33,11 +33,11 @@ public class StoreVO {
     /**
      * 邀请码
      */
-    private String invitationCode;
+    private String inviteCode;
     /**
      * 门店账号
      */
-    private String storeAccount;
+    private String userAcct;
     /**
      * 省名
      */
@@ -49,7 +49,7 @@ public class StoreVO {
     /**
      * 区县名
      */
-    private String countryName;
+    private String areaName;
     /**
      * 地址
      */
@@ -59,21 +59,20 @@ public class StoreVO {
      */
     private String version;
 
-
-    public String getStoreCode() {
-        return storeCode;
+    public String getStoreId() {
+        return storeId;
     }
 
-    public void setStoreCode(String storeCode) {
-        this.storeCode = storeCode;
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 
-    public String getManagerId() {
-        return managerId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setManagerId(String managerId) {
-        this.managerId = managerId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getStoreName() {
@@ -92,12 +91,12 @@ public class StoreVO {
         this.businessCode = businessCode;
     }
 
-    public String getManagerName() {
-        return managerName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPhone() {
@@ -108,20 +107,20 @@ public class StoreVO {
         this.phone = phone;
     }
 
-    public String getInvitationCode() {
-        return invitationCode;
+    public String getInviteCode() {
+        return inviteCode;
     }
 
-    public void setInvitationCode(String invitationCode) {
-        this.invitationCode = invitationCode;
+    public void setInviteCode(String inviteCode) {
+        this.inviteCode = inviteCode;
     }
 
-    public String getStoreAccount() {
-        return storeAccount;
+    public String getUserAcct() {
+        return userAcct;
     }
 
-    public void setStoreAccount(String storeAccount) {
-        this.storeAccount = storeAccount;
+    public void setUserAcct(String userAcct) {
+        this.userAcct = userAcct;
     }
 
     public String getProvinceName() {
@@ -140,12 +139,12 @@ public class StoreVO {
         this.cityName = cityName;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getAreaName() {
+        return areaName;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 
     public String getAddress() {
