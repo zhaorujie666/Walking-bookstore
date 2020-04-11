@@ -6,6 +6,7 @@
         select count(sort)
         from t_hot_goods
         where sort = #{sort}
+        and is_delete = 0
     </select>
 
     <!--新增热门商品-->

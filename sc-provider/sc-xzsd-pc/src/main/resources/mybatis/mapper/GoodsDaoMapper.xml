@@ -6,6 +6,7 @@
         select count(book_number)
         from t_goods_info
         where book_number = #{isbn}
+        and is_delete = 0
     </select>
 
     <!--新增商品-->

@@ -7,6 +7,7 @@
         from t_sys_slide
         where sort = #{slideshowNum}
         or goods_id = #{goodsId}
+        and is_delete = 0
     </select>
 
     <!--新增轮播图-->

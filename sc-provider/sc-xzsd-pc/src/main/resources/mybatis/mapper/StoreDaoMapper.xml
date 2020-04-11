@@ -8,6 +8,7 @@
         from t_store_info
         where is_delete = 0
         and business_code = #{businessCode}
+        and is_delete = 0
     </select>
 
     <!--新增门店信息-->
