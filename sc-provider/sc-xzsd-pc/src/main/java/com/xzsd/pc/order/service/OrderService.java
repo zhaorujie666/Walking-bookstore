@@ -87,11 +87,6 @@ public class OrderService {
             order.setUpdateUser(orderInfo.getUpdateUser());
             orderList.add(order);
         }
-
-        for (int i = 0; i < orderList.size(); i++) {
-            System.out.println(orderList.get(i).getOrderStateId());
-            System.out.println(orderList.get(i).getVersion());
-        }
         int count = orderDao.updateOrderStatus(orderList);
         if(count == 0){
             return AppResponse.bizError("更新订单状态失败");
