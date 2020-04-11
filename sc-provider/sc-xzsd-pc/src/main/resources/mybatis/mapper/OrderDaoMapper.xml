@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.order.dao.OrderDao">
-    <!--查询订单列表（分页）-->
+    <!--店长查询自己用户订单列表（分页）-->
     <select id="getListOrder" parameterType="com.xzsd.pc.order.entity.OrderInfo"
             resultType="com.xzsd.pc.order.entity.OrderVO">
         select
             t1.id orderId,
-            t1.total_price totalPrice,
-            t1.order_status orderStatus,
-            t1.defray_status defrayStatus,
+            t1.total_price orderAllCost,
+            t1.order_status orderStateId,
             t1.store_id storeId,
             t2.user_name userName,
             t2.phone phone,
-            t1.defray_time defrayTime,
+            t1.defray_time payTime,
             t1.version version
-        from t_order_info t1, t_user t2
-        where t1.user_id = t2.id
+        from t_order_info t1, t_sys_user t2
+        where t1.user_id = t2.user_id
         and t1.is_delete = 0
         and t1.store_id = (select id
             from t_store_info
-            where manager_id = #{loginId}
+            where manager_id = #{loginUserId}
         )
         <if test="userName != null and userName != ''">
             and t2.user_name like concat('%', #{userName}, '%')
@@ -27,32 +26,38 @@
         <if test="orderId != null and orderId != ''">
             and t1.id like concat('%', #{orderId}, '%')
         </if>
-        <if test="defrayTimeStart != null and defrayTimeStart != '' and defrayTimeEnd != null and defrayTimeEnd != ''">
-            and t1.defray_time between #{defrayTimeStart} and #{defrayTimeEnd}
+        <if test="payTimeStart != null and payTimeStart != '' and payTimeEnd == null">
+            and t1.defray_time &gt;= #{payTimeStart}
+        </if>
+        <if test="payTimeStart == null and payTimeEnd != null and payTimeEnd != ''">
+            and t1.defray_time &lt;= #{payTimeEnd}
+        </if>
+        <if test="payTimeStart != null and payTimeStart != '' and payTimeEnd != null and payTimeEnd != ''">
+            and t1.defray_time between #{payTimeStart} and #{payTimeEnd}
         </if>
         <if test="phone != null and phone != ''">
             and t2.phone like concat('%', #{phone}, '%')
         </if>
-        <if test="orderStatus != null and orderStatus != ''">
-            and t1.order_status = #{orderStatus}
+        <if test="orderStateId != null and orderStateId != ''">
+            and t1.order_status = #{orderStateId}
         </if>
+        order by t1.create_time desc
     </select>
 
     <!--管理员查询全部订单（分页）-->
     <select id="getListOrderByAdmin" parameterType="com.xzsd.pc.order.entity.OrderInfo"
             resultType="com.xzsd.pc.order.entity.OrderVO">
         select
-        t1.id orderId,
-        t1.total_price totalPrice,
-        t1.order_status orderStatus,
-        t1.defray_status defrayStatus,
-        t1.store_id storeId,
-        t2.user_name userName,
-        t2.phone phone,
-        t1.defray_time defrayTime,
-        t1.version version
-        from t_order_info t1, t_user t2
-        where t1.user_id = t2.id
+        t1.id as orderId,
+        t1.total_price as orderAllCost,
+        t1.order_status as orderStateId,
+        t1.store_id as storeId,
+        t2.user_name as userName,
+        t2.phone as phone,
+        t1.defray_time as payTime,
+        t1.version as version
+        from t_order_info t1, t_sys_user t2
+        where t1.user_id = t2.user_id
         and t1.is_delete = 0
         <if test="userName != null and userName != ''">
             and t2.user_name like concat('%', #{userName}, '%')
@@ -60,14 +65,20 @@
         <if test="orderId != null and orderId != ''">
             and t1.id like concat('%', #{orderId}, '%')
         </if>
-        <if test="defrayTimeStart != null and defrayTimeStart != '' and defrayTimeEnd != null and defrayTimeEnd != ''">
-            and t1.defray_time between #{defrayTimeStart} and #{defrayTimeEnd}
+        <if test="payTimeStart != null and payTimeStart != '' and payTimeEnd == null">
+            and t1.defray_time &gt;= #{payTimeStart}
+        </if>
+        <if test="payTimeStart == null and payTimeEnd != null and payTimeEnd != ''">
+            and t1.defray_time &lt;= #{payTimeEnd}
+        </if>
+        <if test="payTimeStart != null and payTimeStart!= '' and payTimeEnd != null and payTimeEnd!= ''">
+            and t1.defray_time between #{payTimeStart} and #{payTimeEnd}
         </if>
         <if test="phone != null and phone != ''">
             and t2.phone like concat('%', #{phone}, '%')
         </if>
-        <if test="orderStatus != null and orderStatus != ''">
-            and t1.order_status = #{orderStatus}
+        <if test="orderStateId != null and orderStateId != ''">
+            and t1.order_status = #{orderStateId}
         </if>
         order by t1.create_time desc
     </select>
@@ -80,23 +91,29 @@
         t1.user_id userId,
         t1.goods_id goodsId,
         t2.goods_name goodsName,
-        t1.buy_number buyNumber,
-        t1.total_price totalPrice,
-        t2.selling_price sellingPrice,
-        t2.old_price oldPrice
+        t1.buy_number goodsCount,
+        t1.total_price theGoodsAllPrice,
+        t2.selling_price goodsPrice,
+        t2.old_price goodsShelfCost
         from t_order_details t1, t_goods_info t2
         where t1.order_id = #{orderId}
         and t1.goods_id = t2.id
     </select>
 
-    <!--修改订单状态-->
-    <update id="updateOrderStatus" parameterType="com.xzsd.pc.order.entity.OrderInfo">
-        update t_order_info
-        set
-            order_status = #{orderStatus},
-            update_user = #{loginId},
-            update_time = now(),
-            version = version + 1
-        where id = #{orderId}
+    <!--修改订单状态(可以批量更新)-->
+    <update id="updateOrderStatus" parameterType="java.util.List">
+        <foreach item="item" index="index" collection="orderList" open="" separator=";" close="">
+            update t_order_info
+            <set>
+                order_status = #{item.orderStateId},
+                update_user = #{item.updateUser, jdbcType=VARCHAR},
+                update_time = now(),
+                version = version + 1
+            </set>
+            <where>
+                id = #{item.orderId, jdbcType=VARCHAR}
+                and version = #{item.version}
+            </where>
+        </foreach>
     </update>
 </mapper>

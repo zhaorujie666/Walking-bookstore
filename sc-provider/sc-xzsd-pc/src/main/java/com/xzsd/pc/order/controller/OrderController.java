@@ -33,12 +33,13 @@ public class OrderController {
      * @author zhaorujie
      * @date 2020-3-31
      */
-    @PostMapping("listOrder")
+    @PostMapping("listOrders")
     public AppResponse getListOrder(OrderInfo orderInfo){
         try {
             //获取用户角色
             String userId = SecurityUtils.getCurrentUserId();
-            return orderService.getListOrder(orderInfo, userId);
+            orderInfo.setLoginUserId("2020040820282980355");
+            return orderService.getListOrder(orderInfo);
         }catch (Exception e){
             logger.error("查询订单列表失败");
             System.out.println(e.toString());
@@ -53,7 +54,7 @@ public class OrderController {
      * @author zhaorujie
      * @date 2020-3-31
      */
-    @PostMapping("findOrderById")
+    @PostMapping("getListOrder")
     public AppResponse getOrderDetailsById(String orderId){
         try {
             return orderService.getOrderDetailsById(orderId);
@@ -67,13 +68,15 @@ public class OrderController {
     /**
      * 修改订单状态
      * @param orderInfo
-     * @param userId
      * @return
      */
-    @PostMapping("updateOrderStatusById")
-    public AppResponse updateOrderStatus(OrderInfo orderInfo, String userId){
+    @PostMapping("updateOrderState")
+    public AppResponse updateOrderStatus(OrderInfo orderInfo){
         try {
-            return orderService.updateOrderStatus(orderInfo, userId);
+            //获取用户角色
+            String userId = SecurityUtils.getCurrentUserId();
+            orderInfo.setUpdateUser(userId);
+            return orderService.updateOrderStatus(orderInfo);
         }catch (Exception e){
             logger.error("修改订单状态失败");
             System.out.println(e.toString());

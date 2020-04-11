@@ -25,19 +25,19 @@ public class OrderDetails {
     /**
      *单个商品的购买数量
      */
-    private int buyNumber;
+    private int goodsCount;
     /**
      * 商品总价
      */
-    private String totalPrice;
+    private String theGoodsAllPrice;
     /**
      * 商品售价
      */
-    private String sellingPrice;
+    private String goodsPrice;
     /**
      * 商品定价
      */
-    private String oldPrice;
+    private String goodsShelfCost;
 
     public String getOrderId() {
         return orderId;
@@ -71,35 +71,35 @@ public class OrderDetails {
         this.goodsName = goodsName;
     }
 
-    public int getBuyNumber() {
-        return buyNumber;
+    public int getGoodsCount() {
+        return goodsCount;
     }
 
-    public void setBuyNumber(int buyNumber) {
-        this.buyNumber = buyNumber;
+    public void setGoodsCount(int goodsCount) {
+        this.goodsCount = goodsCount;
     }
 
-    public String getTotalPrice() {
-        return totalPrice;
+    public String getTheGoodsAllPrice() {
+        return theGoodsAllPrice;
     }
 
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTheGoodsAllPrice(String theGoodsAllPrice) {
+        this.theGoodsAllPrice = theGoodsAllPrice;
     }
 
-    public String getSellingPrice() {
-        return sellingPrice;
+    public String getGoodsPrice() {
+        return goodsPrice;
     }
 
-    public void setSellingPrice(String sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice;
     }
 
-    public String getOldPrice() {
-        return oldPrice;
+    public String getGoodsShelfCost() {
+        return goodsShelfCost;
     }
 
-    public void setOldPrice(String oldPrice) {
-        this.oldPrice = oldPrice;
+    public void setGoodsShelfCost(String goodsShelfCost) {
+        this.goodsShelfCost = goodsShelfCost;
     }
 }

@@ -21,15 +21,11 @@ public class OrderVO {
     /**
      * 订单状态(0已下单， 1待取货， 2已取货， 3已完成未评价， 4已完成已评价， 5已取消)
      */
-    private String orderStatus;
+    private String orderStateId;
     /**
      * 订单总价
      */
-    private String totalPrice;
-    /**
-     * 支付状态
-     */
-    private String defrayStatus;
+    private String orderAllCost;
     /**
      * 门店编码
      */
@@ -37,11 +33,11 @@ public class OrderVO {
     /**
      * 支付时间
      */
-    private String defrayTime;
+    private String payTime;
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
     public String getOrderId() {
         return orderId;
@@ -67,28 +63,20 @@ public class OrderVO {
         this.phone = phone;
     }
 
-    public String getOrderStatus() {
-        return orderStatus;
+    public String getOrderStateId() {
+        return orderStateId;
     }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setOrderStateId(String orderStateId) {
+        this.orderStateId = orderStateId;
     }
 
-    public String getTotalPrice() {
-        return totalPrice;
+    public String getOrderAllCost() {
+        return orderAllCost;
     }
 
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getDefrayStatus() {
-        return defrayStatus;
-    }
-
-    public void setDefrayStatus(String defrayStatus) {
-        this.defrayStatus = defrayStatus;
+    public void setOrderAllCost(String orderAllCost) {
+        this.orderAllCost = orderAllCost;
     }
 
     public String getStoreId() {
@@ -99,19 +87,19 @@ public class OrderVO {
         this.storeId = storeId;
     }
 
-    public String getDefrayTime() {
-        return defrayTime;
+    public String getPayTime() {
+        return payTime;
     }
 
-    public void setDefrayTime(String defrayTime) {
-        this.defrayTime = defrayTime;
+    public void setPayTime(String payTime) {
+        this.payTime = payTime;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 }

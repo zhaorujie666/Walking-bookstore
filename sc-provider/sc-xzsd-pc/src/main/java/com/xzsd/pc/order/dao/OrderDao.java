@@ -40,8 +40,8 @@ public interface OrderDao {
 
     /**
      * 修改订单状态
-     * @param orderInfo
+     * @param orderList
      * @return
      */
-    int updateOrderStatus(OrderInfo orderInfo);
+    int updateOrderStatus(@Param("orderList") List<OrderInfo> orderList);
 }

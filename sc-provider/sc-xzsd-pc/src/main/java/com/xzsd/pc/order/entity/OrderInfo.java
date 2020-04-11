@@ -23,15 +23,15 @@ public class OrderInfo {
     /**
      * 登录者Id
      */
-    private String loginId;
+    private String loginUserId;
     /**
      * 支付时间起
      */
-    private String defrayTimeStart;
+    private String payTimeStart;
     /**
      * 支付时间止
      */
-    private String defrayTimeEnd;
+    private String payTimeEnd;
     /**
      * 下单人电话
      */
@@ -39,11 +39,15 @@ public class OrderInfo {
     /**
      * 订单状态(0已下单， 1待取货， 2已取货， 3已完成未评价， 4已完成已评价， 5已取消)
      */
-    private String orderStatus;
+    private String orderStateId;
+    /**
+     * 角色编号（当前登录的角色）
+     */
+    private String role;
     /**
      * 订单总价
      */
-    private String totalPrice;
+    private String orderAllCost;
     /**
      * 支付状态
      */
@@ -55,7 +59,7 @@ public class OrderInfo {
     /**
      * 支付时间
      */
-    private String defrayTime;
+    private String payTime;
     /**
      * 页码
      */
@@ -87,15 +91,7 @@ public class OrderInfo {
     /**
      * 版本号
      */
-    private int version;
-
-    public String getLoginId() {
-        return loginId;
-    }
-
-    public void setLoginId(String loginId) {
-        this.loginId = loginId;
-    }
+    private String version;
 
     public String getOrderId() {
         return orderId;
@@ -121,20 +117,28 @@ public class OrderInfo {
         this.userId = userId;
     }
 
-    public String getDefrayTimeStart() {
-        return defrayTimeStart;
+    public String getLoginUserId() {
+        return loginUserId;
     }
 
-    public void setDefrayTimeStart(String defrayTimeStart) {
-        this.defrayTimeStart = defrayTimeStart;
+    public void setLoginUserId(String loginUserId) {
+        this.loginUserId = loginUserId;
     }
 
-    public String getDefrayTimeEnd() {
-        return defrayTimeEnd;
+    public String getPayTimeStart() {
+        return payTimeStart;
     }
 
-    public void setDefrayTimeEnd(String defrayTimeEnd) {
-        this.defrayTimeEnd = defrayTimeEnd;
+    public void setPayTimeStart(String payTimeStart) {
+        this.payTimeStart = payTimeStart;
+    }
+
+    public String getPayTimeEnd() {
+        return payTimeEnd;
+    }
+
+    public void setPayTimeEnd(String payTimeEnd) {
+        this.payTimeEnd = payTimeEnd;
     }
 
     public String getPhone() {
@@ -145,20 +149,28 @@ public class OrderInfo {
         this.phone = phone;
     }
 
-    public String getOrderStatus() {
-        return orderStatus;
+    public String getOrderStateId() {
+        return orderStateId;
     }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setOrderStateId(String orderStateId) {
+        this.orderStateId = orderStateId;
     }
 
-    public String getTotalPrice() {
-        return totalPrice;
+    public String getRole() {
+        return role;
     }
 
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getOrderAllCost() {
+        return orderAllCost;
+    }
+
+    public void setOrderAllCost(String orderAllCost) {
+        this.orderAllCost = orderAllCost;
     }
 
     public String getDefrayStatus() {
@@ -177,12 +189,12 @@ public class OrderInfo {
         this.storeId = storeId;
     }
 
-    public String getDefrayTime() {
-        return defrayTime;
+    public String getPayTime() {
+        return payTime;
     }
 
-    public void setDefrayTime(String defrayTime) {
-        this.defrayTime = defrayTime;
+    public void setPayTime(String payTime) {
+        this.payTime = payTime;
     }
 
     public int getPageSize() {
@@ -241,11 +253,11 @@ public class OrderInfo {
         this.updateTime = updateTime;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 }
