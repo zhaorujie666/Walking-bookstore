@@ -67,7 +67,7 @@ public class CustomerInfo {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
     /**
      * 角色
      */
@@ -103,6 +103,14 @@ public class CustomerInfo {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getInvitationCode() {
+        return invitationCode;
+    }
+
+    public void setInvitationCode(String invitationCode) {
+        this.invitationCode = invitationCode;
     }
 
     public String getMail() {
@@ -177,20 +185,12 @@ public class CustomerInfo {
         this.updateTime = updateTime;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
-    }
-
-    public String getInvitationCode() {
-        return invitationCode;
-    }
-
-    public void setInvitationCode(String invitationCode) {
-        this.invitationCode = invitationCode;
     }
 
     public String getRole() {

@@ -87,7 +87,7 @@ public class StoreInfo {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
 
     public int getPageSize() {
@@ -242,37 +242,11 @@ public class StoreInfo {
         this.updateTime = updateTime;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
-    }
-
-    @Override
-    public String toString() {
-        return "StoreInfo{" +
-                "pageSize=" + pageSize +
-                ", pageNum=" + pageNum +
-                ", storeCode='" + storeCode + '\'' +
-                ", managerId='" + managerId + '\'' +
-                ", storeName='" + storeName + '\'' +
-                ", businessCode='" + businessCode + '\'' +
-                ", managerName='" + managerName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", invitationCode='" + invitationCode + '\'' +
-                ", storeAccount='" + storeAccount + '\'' +
-                ", provinceName='" + provinceName + '\'' +
-                ", cityName='" + cityName + '\'' +
-                ", countryName='" + countryName + '\'' +
-                ", address='" + address + '\'' +
-                ", isDelete=" + isDelete +
-                ", createUser='" + createUser + '\'' +
-                ", createTime=" + createTime +
-                ", updateUser='" + updateUser + '\'' +
-                ", updateTime=" + updateTime +
-                ", version=" + version +
-                '}';
     }
 }

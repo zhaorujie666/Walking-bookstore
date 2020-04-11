@@ -8,6 +8,7 @@
         where is_delete = 0
         and user_acct = #{userAcct}
         or phone = #{phone}
+        and is_delete = 0
     </select>
 
     <!--统计手机号数量-->
@@ -16,6 +17,7 @@
         from t_sys_user
         where is_delete = 0
         and phone = #{phone}
+        and is_delete = 0
     </select>
 
     <!--新增司机-->

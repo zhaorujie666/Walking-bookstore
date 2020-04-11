@@ -60,7 +60,7 @@ public class GoodsCategory {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
     /**
      * 二级分类
@@ -163,11 +163,11 @@ public class GoodsCategory {
         this.updateTime = updateTime;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 

@@ -126,7 +126,7 @@ public class GoodsInfo {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
     public int getPageSize() {
         return pageSize;
@@ -352,11 +352,11 @@ public class GoodsInfo {
         this.updateTime = updateTime;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 }

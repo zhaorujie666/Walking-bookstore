@@ -2,11 +2,11 @@ package com.xzsd.pc.store.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.store.dao.StoreDao;
 import com.xzsd.pc.store.entity.StoreInfo;
 import com.xzsd.pc.store.entity.StoreVO;
 import com.xzsd.pc.user.dao.UserDao;
-import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +24,6 @@ import java.util.List;
 public class StoreService {
     @Resource
     private StoreDao storeDao;
-
-    @Resource
-    private UserDao userDao;
 
     /**
      * 新增门店信息

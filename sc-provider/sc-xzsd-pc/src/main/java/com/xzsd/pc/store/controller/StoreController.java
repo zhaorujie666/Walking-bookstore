@@ -1,9 +1,9 @@
 package com.xzsd.pc.store.controller;
 
+import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
 import com.xzsd.pc.store.entity.StoreInfo;
 import com.xzsd.pc.store.service.StoreService;
-import com.xzsd.pc.util.AppResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;

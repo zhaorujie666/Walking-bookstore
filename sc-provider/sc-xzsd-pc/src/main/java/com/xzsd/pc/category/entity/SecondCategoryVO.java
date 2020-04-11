@@ -29,7 +29,7 @@ public class SecondCategoryVO {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
     public String getClassifyId() {
         return classifyId;
@@ -71,11 +71,11 @@ public class SecondCategoryVO {
         this.classifyComment = classifyComment;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 }

@@ -87,7 +87,7 @@ public class UserInfo {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
     public String getUserId() {
         return userId;
@@ -241,11 +241,11 @@ public class UserInfo {
         this.updateTime = updateTime;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 }

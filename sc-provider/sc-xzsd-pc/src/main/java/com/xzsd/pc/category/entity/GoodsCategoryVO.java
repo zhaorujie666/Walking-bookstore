@@ -31,7 +31,7 @@ public class GoodsCategoryVO {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
     /**
      * 二级分类
      */
@@ -77,11 +77,11 @@ public class GoodsCategoryVO {
         this.classifyComment = classifyComment;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 

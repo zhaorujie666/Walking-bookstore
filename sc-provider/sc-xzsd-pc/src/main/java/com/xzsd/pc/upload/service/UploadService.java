@@ -1,7 +1,7 @@
 package com.xzsd.pc.upload.service;
 
+import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.upload.entity.Upload;
-import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.COSClientUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,8 +15,6 @@ import java.util.List;
  */
 @Service
 public class UploadService {
-
-    //public static Upload upload = new Upload();
 
     /**
      * 图片上传

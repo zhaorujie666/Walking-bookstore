@@ -1,11 +1,11 @@
 package com.xzsd.pc.category.service;
 
+import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.category.dao.CategoryDao;
 import com.xzsd.pc.category.entity.CategoryList;
 import com.xzsd.pc.category.entity.GoodsCategory;
 import com.xzsd.pc.category.entity.GoodsCategoryVO;
 import com.xzsd.pc.user.dao.UserDao;
-import com.xzsd.pc.util.AppResponse;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +24,6 @@ public class CategoryService {
     @Resource
     private CategoryDao categoryDao;
 
-    @Resource
-    private UserDao userDao;
-
     /**
      * 新增商品分类
      * @param goodsCategory
@@ -35,11 +32,6 @@ public class CategoryService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addGoodsCategory(GoodsCategory goodsCategory, String loginId){
-        //判断是否是管理员
-//        String loginRole = userDao.getLoginRole(loginId);
-//        if("0".equals(loginRole) == false){
-//            return AppResponse.success("你没有权限！");
-//        }
 
         //校验是否存在相同的分类名
         int count = categoryDao.countGoodsCategoryName(goodsCategory);

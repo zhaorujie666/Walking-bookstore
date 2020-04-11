@@ -1,11 +1,11 @@
 package com.xzsd.pc.area.service;
 
 
+import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.area.dao.AreaDao;
 import com.xzsd.pc.area.entity.AreaInfo;
 import com.xzsd.pc.area.entity.AreaList;
 import com.xzsd.pc.area.entity.AreaVO;
-import com.xzsd.pc.util.AppResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

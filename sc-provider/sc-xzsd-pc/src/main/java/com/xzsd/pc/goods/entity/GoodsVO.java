@@ -81,7 +81,7 @@ public class GoodsVO {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
 
     public String getGoodsId() {
         return goodsId;
@@ -227,11 +227,11 @@ public class GoodsVO {
         this.goodsAuthor = goodsAuthor;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 }

@@ -49,7 +49,7 @@ public class DriverVO {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
     /**
      * 司机地址信息表id
      */
@@ -135,11 +135,11 @@ public class DriverVO {
         this.areaName = areaName;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 

@@ -1,9 +1,9 @@
 package com.xzsd.pc.area.controller;
 
 
+import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.area.entity.AreaInfo;
 import com.xzsd.pc.area.service.AreaService;
-import com.xzsd.pc.util.AppResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zrj.hot.dao.HotGoodsDao">
+<mapper namespace="com.xzsd.pc.hotgoods.dao.HotGoodsDao">
     <!--统计排序是否出现重复的序号-->
-    <select id="countSort" parameterType="com.xzsd.pc.hot.entity.HotGoodsInfo" resultType="int">
+    <select id="countSort" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
         select count(sort)
         from t_hot_goods
-        where sort = #{sort}
+        where sort = #{hotGoodsNum}
+        and is_delete = 0
+    </select>
+
+    <!--统计该商品是否已经被使用-->
+    <select id="countGoodsIsUse" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
+        select count(goods_id)
+        from t_hot_goods
+        where goods_id = #{goodsId}
+        and is_delete = 0
     </select>
 
     <!--新增热门商品-->
-    <insert id="addHotGoods" parameterType="com.xzsd.pc.hot.entity.HotGoodsInfo">
+    <insert id="addHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
         insert into t_hot_goods(
             id,
             goods_id,
@@ -21,9 +30,9 @@
             version
         )
         values(
-            #{hotId},
+            #{hotGoodsId},
             #{goodsId},
-            #{sort},
+            #{hotGoodsNum},
             0,
             now(),
             #{createUser},
@@ -33,60 +42,72 @@
     </insert>
 
     <!--查询热门商品详情-->
-    <select id="getHotGoodsById" parameterType="java.lang.String" resultType="com.xzsd.pc.hot.entity.HotGoodsVO">
+    <select id="getHotGoodsById" parameterType="java.lang.String" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsVO">
         select
-        t1.id hotId,
+        t1.id hotGoodsId,
         t2.goods_name goodsName,
-        t1.sort sort,
+        t1.sort hotGoodsNum,
         t2.id goodsId
         from t_hot_goods t1, t_goods_info t2
         where t1.goods_id = t2.id
-        and t1.id = #{hotId}
+        and t1.id = #{hotGoodsId}
     </select>
 
     <!--修改热门位商品-->
-    <update id="updateHotGoods" parameterType="com.xzsd.pc.hot.entity.HotGoodsInfo">
+    <update id="updateHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
         update t_hot_goods
         set
             goods_id = #{goodsId},
-            sort = #{sort},
+            sort = #{hotGoodsNum},
             update_time = now(),
             update_user = #{updateUser},
             version = version + 1
-        where id = #{hotId}
+        where id = #{hotGoodsId}
         and version = #{version}
     </update>
 
     <!--查询热门商品列表（分页）-->
-    <select id="getListHotGoods" parameterType="com.xzsd.pc.hot.entity.HotGoodsInfo"
-            resultType="com.xzsd.pc.hot.entity.HotGoodsVO">
+    <select id="getListHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo"
+            resultType="com.xzsd.pc.hotgoods.entity.HotGoodsVO">
         select
-        t1.id hotId,
-        t1.sort sort,
+        t1.id hotGoodsId,
+        t1.sort hotGoodsNum,
         t1.goods_id goodsId,
         t2.goods_name goodsName,
-        t2.selling_price sellingPrice,
-        t2.goods_introduction goodsIntroduction,
+        t2.selling_price goodsPrice,
+        t2.goods_introduction goodsDescribe,
         t1.version version
         from t_hot_goods t1, t_goods_info t2
         where t1.goods_id = t2.id
-        <if test="goodsName != null and goodsName != ''">
-            and t2.goods_name like concat('%', #{goodsName}, '%')
-        </if>
+        and t1.is_delete = 0
         <if test="goodsId != null and goodsId != ''">
             and t1.goods_id like concat('%', #{goodsId}, '%')
         </if>
+        <if test="goodsName != null and goodsName != ''">
+            and t2.goods_name like concat('%', #{goodsName}, '%')
+        </if>
+        order by t1.create_time desc
+    </select>
+
+    <!--查询热门位商品展示数量-->
+    <select id="getHotGoodsShowNumber" resultType="com.xzsd.pc.hotgoods.entity.HotGoodsShowNumber">
+        select
+        dic_value as hotGoodsShowNum,
+        version as version
+        from t_dictionary
+        where dic_type = 'hotGoodsShowNumber'
     </select>
 
     <!--修改热门商品展示数量-->
-    <update id="modifyShowNumber" parameterType="java.lang.String">
+    <update id="modifyShowNumber" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsShowNumber">
         update t_dictionary
         set
-            dic_value = #{showNumber},
-            update_user = #{loginId},
+            dic_value = #{hotGoodsShowNum},
+            update_user = #{updateUser},
             update_time = now(),
             version = version + 1
         where dic_type = 'hotGoodsShowNumber'
+        and version = #{version}
     </update>
 
     <!--删除热门位商品-->
@@ -98,8 +119,8 @@
             update_user = #{loginId},
             version = version + 1
         where id in
-        <foreach item="hotId" index="index" collection="listHotId" open="(" separator="," close=")">
-            #{hotId}
+        <foreach item="hotGoodsId" index="index" collection="listHotId" open="(" separator="," close=")">
+            #{hotGoodsId}
         </foreach>
     </update>
 </mapper>

@@ -49,15 +49,7 @@ public class UserVO {
     /**
      * 版本号
      */
-    private int version;
-
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
+    private String version;
 
     public String getUserId() {
         return userId;
@@ -137,5 +129,13 @@ public class UserVO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 }

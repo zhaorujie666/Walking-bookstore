@@ -2,13 +2,13 @@ package com.xzsd.pc.order.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.order.dao.OrderDao;
 import com.xzsd.pc.order.entity.OrderDetails;
 import com.xzsd.pc.order.entity.OrderDetailsList;
 import com.xzsd.pc.order.entity.OrderInfo;
 import com.xzsd.pc.order.entity.OrderVO;
 import com.xzsd.pc.user.dao.UserDao;
-import com.xzsd.pc.util.AppResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -83,7 +83,7 @@ public class DriverInfo {
     /**
      * 版本号
      */
-    private int version;
+    private String version;
     /**
      * 司机地址信息表id
      */
@@ -96,22 +96,6 @@ public class DriverInfo {
      * 登录用户id
      */
     private String loginUserId;
-
-    public String getLoginUserId() {
-        return loginUserId;
-    }
-
-    public void setLoginUserId(String loginUserId) {
-        this.loginUserId = loginUserId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public int getPageSize() {
         return pageSize;
@@ -257,11 +241,11 @@ public class DriverInfo {
         this.updateTime = updateTime;
     }
 
-    public int getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(String version) {
         this.version = version;
     }
 
@@ -271,5 +255,21 @@ public class DriverInfo {
 
     public void setDriverInfoId(String driverInfoId) {
         this.driverInfoId = driverInfoId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getLoginUserId() {
+        return loginUserId;
+    }
+
+    public void setLoginUserId(String loginUserId) {
+        this.loginUserId = loginUserId;
     }
 }

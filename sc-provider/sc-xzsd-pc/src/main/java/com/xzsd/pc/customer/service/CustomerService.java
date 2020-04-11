@@ -2,11 +2,11 @@ package com.xzsd.pc.customer.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.customer.dao.CustomerDao;
 import com.xzsd.pc.customer.entity.CustomerInfo;
 import com.xzsd.pc.customer.entity.CustomerVO;
 import com.xzsd.pc.user.dao.UserDao;
-import com.xzsd.pc.util.AppResponse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
