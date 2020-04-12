@@ -78,12 +78,12 @@ public class DriverService {
         if(globalDriverInfo == null){
             return AppResponse.bizError("查询失败");
         }
-        //查询省市区名称
+        /*//查询省市区名称
         List<String> listAreaName = driverDao.getListAreaName(driverId);
         //再对省市区赋值
         globalDriverInfo.setProvinceName(listAreaName.get(0));
         globalDriverInfo.setCityName(listAreaName.get(1));
-        globalDriverInfo.setAreaName(listAreaName.get(2));
+        globalDriverInfo.setAreaName(listAreaName.get(2));*/
         return AppResponse.success("查询成功", globalDriverInfo);
     }
 
@@ -96,16 +96,21 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver(DriverInfo driverInfo){
-        //校验账号是否存在
-        int count = driverDao.countDriverAccount(driverInfo);
         //判断当前账号是否是当前要修改的账号
-        if(count != 0 && globalDriverInfo.getUserAcct().equals(driverInfo.getUserAcct()) == false){
-            return AppResponse.bizError("该司机账号已存在，请重新输入！");
+        if(globalDriverInfo.getUserAcct().equals(driverInfo.getUserAcct()) == false){
+            //校验账号是否存在
+            int count = driverDao.countDriverAccount(driverInfo);
+            if(count != 0){
+                return AppResponse.bizError("该司机账号已存在，请重新输入！");
+            }
         }
-        // 校验手机号是否存在
-        int countPhone = driverDao.countPhone(driverInfo);
-        if(0 != countPhone && globalDriverInfo.getPhone().equals(driverInfo.getPhone()) == false){
-            return AppResponse.bizError("手机号已存在，请重新输入");
+        //判断当前手机号是否是修改
+        if(globalDriverInfo.getPhone().equals(driverInfo.getPhone()) == false){
+            // 校验手机号是否存在
+            int countPhone = driverDao.countPhone(driverInfo);
+            if(0 != countPhone){
+                return AppResponse.bizError("手机号已存在，请重新输入");
+            }
         }
         //判断密码有没有修改
         if(globalDriverInfo.getUserPassword().equals(driverInfo.getUserPassword()) == false){
