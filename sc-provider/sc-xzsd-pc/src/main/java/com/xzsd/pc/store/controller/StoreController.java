@@ -76,7 +76,7 @@ public class StoreController {
     @PostMapping("updateStore")
     public AppResponse updateStore(StoreInfo storeInfo){
         try {
-            //获取用户角色
+            //获取用户的id
             String userId = SecurityUtils.getCurrentUserId();
             storeInfo.setUpdateUser(userId);
             return storeService.updateStore(storeInfo);
@@ -102,7 +102,7 @@ public class StoreController {
             storeInfo.setUserId(loginUserId);
             return storeService.getListStore(storeInfo);
         }catch (Exception e){
-            logger.error("查询门店信息列表成功", e);
+            logger.error("查询门店信息列表失败", e);
             System.out.println(e.toString());
             throw e;
         }

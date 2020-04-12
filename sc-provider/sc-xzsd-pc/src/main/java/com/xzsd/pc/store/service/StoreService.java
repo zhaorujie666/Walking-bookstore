@@ -47,7 +47,7 @@ public class StoreService {
         storeInfo.setIsDelete(0);
         //设置随机邀请码
         storeInfo.setInviteCode(RandomUtil.randomLetter(6));
-        //教研邀请码是否重复
+        //校验邀请码是否重复
         int inviteCode = storeDao.countInviteCode(storeInfo);
         while(inviteCode != 0){
             //设置随机邀请码
@@ -64,16 +64,15 @@ public class StoreService {
 
     /**
      * 查询门店详情
-     * @param storeCode
+     * @param storeId
      * @return
      */
-    StoreVO globalStoreInfo = null;
-    public AppResponse getStoreInfoById(String storeCode){
-        globalStoreInfo = storeDao.getStoreInfoById(storeCode);
-        if(globalStoreInfo == null){
+    public AppResponse getStoreInfoById(String storeId){
+        StoreVO storeInfo = storeDao.getStoreInfoById(storeId);
+        if(storeInfo == null){
             return AppResponse.bizError("查询失败");
         }
-        return AppResponse.success("查询成功", globalStoreInfo);
+        return AppResponse.success("查询成功", storeInfo);
     }
 
     /**
@@ -83,18 +82,26 @@ public class StoreService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateStore(StoreInfo storeInfo){
-        //校验店长编号是否存在
-        StoreInfo managerId = storeDao.getManagerId(storeInfo);
-        if(managerId == null){
-            return AppResponse.success("该店长编号不存在，请重新输入！");
+        StoreVO store = storeDao.getStoreInfoById(storeInfo.getStoreId());
+        //判断店长id有没有修改
+        if(!store.getUserId().equals(storeInfo.getUserId()) ){
+            //校验店长编号是否存在
+            StoreInfo managerId = storeDao.getManagerId(storeInfo);
+            if(managerId == null){
+                return AppResponse.success("该店长编号不存在，请重新输入！");
+            }
         }
-        //校验营业执政编码是否存在
-        int count = storeDao.countBusinessCode(storeInfo);
-        if(count != 0 && globalStoreInfo.getBusinessCode().equals(storeInfo.getBusinessCode()) == false){
-            return AppResponse.success("营业执照编码已存在，请重新输入！");
+        //判断营业执政编码有没有修改
+        if(!store.getBusinessCode().equals(storeInfo.getBusinessCode())){
+            //校验营业执政编码是否存在
+            int count = storeDao.countBusinessCode(storeInfo);
+            if(count != 0){
+                return AppResponse.success("营业执照编码已存在，请重新输入！");
+            }
         }
-        int store = storeDao.updateStore(storeInfo);
-        if(store == 0){
+        //更新门店
+        int num = storeDao.updateStore(storeInfo);
+        if(num == 0){
             return AppResponse.success("修改门店信息失败");
         }
         return AppResponse.success("修改门店信息成功");

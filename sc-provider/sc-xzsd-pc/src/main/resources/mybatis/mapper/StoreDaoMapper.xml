@@ -3,10 +3,9 @@
 <mapper namespace="com.xzsd.pc.store.dao.StoreDao">
     <!--统计营业执照数量-->
     <select id="countBusinessCode" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
-        select count(business_code)
+        select count(*)
         from t_store_info
-        where is_delete = 0
-        and business_code = #{businessCode}
+        where business_code = #{businessCode}
         and is_delete = 0
     </select>
 
@@ -14,8 +13,7 @@
     <select id="countInviteCode" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
         select count(invitation_code)
         from t_store_info
-        where is_delete = 0
-        and invitation_code = #{inviteCode}
+        where invitation_code = #{inviteCode}
         and is_delete = 0
     </select>
 
@@ -63,7 +61,6 @@
         select * from
          t_sys_user
          where user_id= #{userId}
-         and is_delete = 0
          and is_delete = 0
     </select>
 
