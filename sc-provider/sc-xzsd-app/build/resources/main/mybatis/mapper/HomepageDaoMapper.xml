@@ -9,10 +9,10 @@
         from t_sys_slide
         where slide_status = 1
         and is_delete = 0
-        and now() in(start_time, end_time)
+        and now() between start_time and end_time
     </select>
 
-    <!--查询首页轮播图展示的数量-->
+    <!--查询热门位展示的数量-->
     <select id="getSlideshowNumber" resultType="int">
         select
         dic_value

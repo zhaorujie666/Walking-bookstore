@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.goods.dao.GoodsDao">
+    <!--查询商品详情-->
+    <select id="getGoodsInfoById" parameterType="java.lang.String"
+            resultType="com.xzsd.app.goods.entity.GoodsInfo">
+        select
+        id as goodsId,
+        goods_name as goodsName,
+        book_number as isbn,
+        goods_introduction as goodsDescribe,
+        selling_price as goodsPrice,
+        goods_image as goodsImagePath,
+        star_level as goodsEvaluateScore,
+        author as goodsAuthor,
+        publisher as goodsPress,
+        version as version
+        from t_goods_info
+        where is_delete = 0
+        and id = #{goodsId}
+    </select>
+
+    <!--查询商品评价列表-->
+    <select id="getListGoodsEvaluation" parameterType="com.xzsd.app.goods.entity.GoodsEvaluation"
+            resultMap="goodsEvaluation">
+        select
+        t2.user_acct as userAcct,
+        t1.appraise_info as evaluateContent,
+        t1.star_level as evaluateScore,
+        t1.create_time as createTime,
+        t3.appraise_image as imagePath
+        from t_goods_appraise t1, t_sys_user t2, t_goods_appraise_images t3
+        where t1.user_id = t2.user_id
+        and t1.goods_id = #{goodsId}
+        and t1.is_delete = 0
+        and t3.is_delete = 0
+		and t1.id = t3.appraise_id
+		<if test="evaluateScore == 1">
+            and t1.star_level in(0,1)
+        </if>
+        <if test="evaluateScore == 3">
+            and t1.star_level in(2,3)
+        </if>
+        <if test="evaluateScore == 5">
+            and t1.star_level in(4,5)
+        </if>
+    </select>
+    <!--查询商品评价映射-->
+    <resultMap id="goodsEvaluation" type="com.xzsd.app.goods.entity.GoodsEvaluationVO">
+        <result property="userAcct" column="userAcct"/>
+        <result property="evaluateContent" column="evaluateContent"/>
+        <result property="evaluateScore" column="evaluateScore"/>
+        <result property="createTime" column="createTime"/>
+        <collection property="imageList" ofType="com.xzsd.app.goods.entity.EvaluationImage">
+            <result property="imagePath" column="imagePath"/>
+        </collection>
+    </resultMap>
+
+    <!--查询商品评一级分类-->
+    <select id="getFirstGoodsCategory" resultType="com.xzsd.app.goods.entity.GoodsCategory">
+        select
+        id as classifyId,
+        category_name as classifyName
+        from t_goods_category
+        where is_delete = 0
+        and parent_id = 0
+    </select>
+
+    <!--查询商品二级分类级商品信息-->
+    <select id="getSecondGoodsCategory" parameterType="java.lang.String" resultMap="SecondGoodsCategory">
+        select
+        t1.id as classifyId,
+        t1.category_name as classifyName,
+        t2.id as goodsId,
+        t2.goods_name as goodsName,
+        t2.goods_image as goodsImagePath,
+        t2.selling_price as goodsPrice
+        from t_goods_category t1 left join t_goods_info t2
+        on t2.category_second = t1.id
+	    where t1.parent_id = #{classifyId}
+        and t1.is_delete = 0
+        and t2.is_delete = 0
+    </select>
+
+    <!--查询商品二级分类级商品信息映射-->
+    <resultMap id="SecondGoodsCategory" type="com.xzsd.app.goods.entity.GoodsCategory">
+        <id property="classifyId" column="classifyId"/>
+        <result property="classifyName" column="classifyName"/>
+        <collection property="goodsList" ofType="com.xzsd.app.goods.entity.GoodsInfo">
+            <id property="goodsId" column="goodsId"/>
+            <result property="goodsName" column="goodsName"/>
+            <result property="goodsImagePath" column="goodsImagePath"/>
+            <result property="goodsPrice" column="goodsPrice"/>
+        </collection>
+    </resultMap>
+</mapper>
