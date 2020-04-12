@@ -8,7 +8,6 @@
         where is_delete = 0
         and user_acct = #{userAcct}
         or phone = #{phone}
-        and is_delete = 0
     </select>
 
     <!--统计手机号数量-->
@@ -17,7 +16,6 @@
         from t_sys_user
         where is_delete = 0
         and phone = #{phone}
-        and is_delete = 0
     </select>
 
     <!--新增司机-->
@@ -92,16 +90,23 @@
     <!--查询司机信息详情-->
     <select id="getDriverById" parameterType="java.lang.String" resultType="com.xzsd.pc.driver.entity.DriverVO">
         select
-            u.user_id as driverId,
-            u.user_name as userName,
-            u.phone as phone,
-            u.user_acct as userAcct,
-            u.user_password as userPassword,
-            u.id_card as idCard,
-            u.user_image as userImage
-        from t_sys_user u
-        where u.is_delete = 0
-        and u.user_id = #{driverId}
+            t1.user_id as driverId,
+            t1.user_name as userName,
+            t1.phone as phone,
+            t1.user_acct as userAcct,
+            t1.user_password as userPassword,
+            t1.id_card as idCard,
+            t1.user_image as userImage,
+            t3.area_name as provinceName,
+            t4.area_name as cityName,
+            t5.area_name as areaName
+        from t_sys_user t1, t_driver_info t2, t_area t3, t_area t4, t_area t5
+        where t1.is_delete = 0
+        and t1.user_id = t2.driver_id
+        and t2.province = t3.id
+        and t2.city = t4.id
+        and t2.county = t5.id
+        and t1.user_id = #{driverId}
     </select>
 
     <!--修改司机信息-->
