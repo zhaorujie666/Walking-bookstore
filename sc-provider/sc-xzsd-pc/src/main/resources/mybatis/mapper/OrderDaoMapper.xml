@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xzsd.pc.order.dao.OrderDao">
+<mapper namespace="com.xzsd.pc.orderInfo.dao.OrderDao">
     <!--店长查询自己用户订单列表（分页）-->
-    <select id="getListOrder" parameterType="com.xzsd.pc.order.entity.OrderInfo"
-            resultType="com.xzsd.pc.order.entity.OrderVO">
+    <select id="getListOrder" parameterType="com.xzsd.pc.orderInfo.entity.OrderInfo"
+            resultType="com.xzsd.pc.orderInfo.entity.OrderVO">
         select
             t1.id orderId,
             t1.total_price orderAllCost,
@@ -41,12 +41,12 @@
         <if test="orderStateId != null and orderStateId != ''">
             and t1.order_status = #{orderStateId}
         </if>
-        order by t1.create_time desc
+        orderInfo by t1.create_time desc
     </select>
 
     <!--管理员查询全部订单（分页）-->
-    <select id="getListOrderByAdmin" parameterType="com.xzsd.pc.order.entity.OrderInfo"
-            resultType="com.xzsd.pc.order.entity.OrderVO">
+    <select id="getListOrderByAdmin" parameterType="com.xzsd.pc.orderInfo.entity.OrderInfo"
+            resultType="com.xzsd.pc.orderInfo.entity.OrderVO">
         select
         t1.id as orderId,
         t1.total_price as orderAllCost,
@@ -80,12 +80,12 @@
         <if test="orderStateId != null and orderStateId != ''">
             and t1.order_status = #{orderStateId}
         </if>
-        order by t1.create_time desc
+        orderInfo by t1.create_time desc
     </select>
 
     <!--查询订单详情-->
     <select id="getOrderDetailsById" parameterType="java.lang.String"
-            resultType="com.xzsd.pc.order.entity.OrderDetails">
+            resultType="com.xzsd.pc.orderInfo.entity.OrderDetails">
         select
         t1.order_id orderId,
         t1.user_id userId,

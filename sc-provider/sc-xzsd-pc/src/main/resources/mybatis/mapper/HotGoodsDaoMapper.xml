@@ -87,7 +87,7 @@
         <if test="goodsName != null and goodsName != ''">
             and t2.goods_name like concat('%', #{goodsName}, '%')
         </if>
-        order by t1.create_time desc
+        orderInfo by t1.create_time desc
     </select>
 
     <!--查询热门位商品展示数量-->

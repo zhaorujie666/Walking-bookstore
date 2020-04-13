@@ -176,7 +176,7 @@
         <if test="goodsAuthor != null and goodsAuthor != ''">
             and t1.author like concat('%', #{goodsAuthor}, '%')
         </if>
-        order by t1.create_time desc
+        orderInfo by t1.create_time desc
     </select>
 
     <!--修改商品状态-->

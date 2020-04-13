@@ -42,7 +42,7 @@
         and t1.user_id = #{userId}
         and t1.is_delete = 0
         and t2.is_delete = 0
-        order by t1.create_time desc
+        orderInfo by t1.create_time desc
     </select>
 
     <!--修改购物车购买数量-->

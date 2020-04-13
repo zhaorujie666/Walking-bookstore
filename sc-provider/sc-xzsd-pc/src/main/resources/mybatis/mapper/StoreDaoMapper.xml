@@ -136,7 +136,7 @@
         <if test="areaId != null and areaId != ''">
             and t2.county = #{areaId}
         </if>
-        order by t2.create_time desc
+        orderInfo by t2.create_time desc
     </select>
 
     <!--管理员查询所有门店信息-->
@@ -173,7 +173,7 @@
         <if test="areaId != null and areaId != ''">
             and t2.county = #{areaId}
         </if>
-        order by t2.create_time desc
+        orderInfo by t2.create_time desc
     </select>
 
     <!--删除门店信息-->

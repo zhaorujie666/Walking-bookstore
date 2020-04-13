@@ -36,7 +36,7 @@
             sort_no
         from t_sys_menu
         where is_deleted = 0
-        order by sort_no
+        orderInfo by sort_no
     </select>
     <!--获取用户菜单-->
     <select id="listUserMenus" resultMap="BaseResultMap">

@@ -94,7 +94,7 @@
             <include refid="Example_Where_Clause" />
         </if>
         <if test="orderByClause != null" >
-            order by ${orderByClause}
+            orderInfo by ${orderByClause}
         </if>
         <include refid="MySqlPaginationSuffix" />
     </select>

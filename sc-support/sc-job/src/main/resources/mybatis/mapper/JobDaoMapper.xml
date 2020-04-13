@@ -19,7 +19,7 @@
         <if test="jobName!=null and jobName!='' ">
             and t.job_name like concat(concat('%',#{jobName}),'%')
         </if>
-        order by t.gmt_create
+        orderInfo by t.gmt_create
     </select>
 
     <select id="getScheduleJobById" resultType="com.neusoft.job.entity.ScheduleJob">

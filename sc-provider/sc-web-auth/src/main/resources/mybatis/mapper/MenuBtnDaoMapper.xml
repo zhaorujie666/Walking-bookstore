@@ -41,7 +41,7 @@
         from t_sys_menu_button
         where menu_code = #{menuCode}
         and is_deleted = 0
-        order by sort_no
+        orderInfo by sort_no
     </select>
     <!--删除菜单按钮-->
     <update id="deleteMenuBtn" parameterType="com.neusoft.webauth.menu.entity.MenuBtn">
