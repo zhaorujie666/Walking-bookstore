@@ -47,7 +47,8 @@
         t1.id hotGoodsId,
         t2.goods_name goodsName,
         t1.sort hotGoodsNum,
-        t2.id goodsId
+        t2.id goodsId,
+        t1.version version
         from t_hot_goods t1, t_goods_info t2
         where t1.goods_id = t2.id
         and t1.id = #{hotGoodsId}

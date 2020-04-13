@@ -83,7 +83,8 @@
         t1.selling_price goodsPrice,
         t1.publisher goodsPress,
         t1.author goodsAuthor,
-        t1.goods_image goodsImagePath
+        t1.goods_image goodsImagePath,
+        t1.version version
         from t_goods_info t1, t_goods_category t2, t_goods_category t3
         where t1.id = #{goodsId}
         and t2.id = t1.category_first

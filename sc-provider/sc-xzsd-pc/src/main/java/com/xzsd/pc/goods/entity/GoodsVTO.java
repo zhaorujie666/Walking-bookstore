@@ -62,6 +62,10 @@ public class GoodsVTO {
      * 商品图片
      */
     private String goodsImagePath;
+    /**
+     * 版本号
+     */
+    private String version;
 
     public String getGoodsId() {
         return goodsId;
@@ -173,5 +177,13 @@ public class GoodsVTO {
 
     public void setGoodsImagePath(String goodsImagePath) {
         this.goodsImagePath = goodsImagePath;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 }

@@ -99,7 +99,8 @@
             t1.user_image as userImage,
             t3.area_name as provinceName,
             t4.area_name as cityName,
-            t5.area_name as areaName
+            t5.area_name as areaName,
+            t2.version as version
         from t_sys_user t1, t_driver_info t2, t_area t3, t_area t4, t_area t5
         where t1.is_delete = 0
         and t1.user_id = t2.driver_id
