@@ -8,6 +8,7 @@ import com.xzsd.app.shoppingcart.dao.ShoppingCartDao;
 import com.xzsd.app.shoppingcart.entity.ShoppingCart;
 import com.xzsd.app.shoppingcart.entity.ShoppingCartVO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ public class ShoppingCartService {
      * @author zhaorujie
      * @date 2020/4/12
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse addShoppingCart(ShoppingCart shoppingCart){
         //设置购物车id
         shoppingCart.setShopCartId(StringUtil.getCommonCode(2));
@@ -63,6 +65,7 @@ public class ShoppingCartService {
      * @author zhaorujie
      * @date 2020/4/12
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse updateShoppingCart(ShoppingCart shoppingCart){
         int count = shoppingCartDao.updateShoppingCart(shoppingCart);
         if(0 == count){
@@ -79,6 +82,7 @@ public class ShoppingCartService {
      * @author zhaorujie
      * @date 2020/4/12
      */
+    @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteShoppingCart(String shopCartId, String userId){
         //分割购物车id
         List<String> listShopCartId = Arrays.asList(shopCartId.split(","));
