@@ -65,8 +65,7 @@
         <if test="roleName != null and roleName != ''">
             and role_name like concat('%', #{roleName}, '%')
         </if>
-
-          orderInfo by gmt_create desc
+        order by gmt_create desc
     </select>
 
     <!--用户管理-角色授权，查询用户已授权角色信息-->

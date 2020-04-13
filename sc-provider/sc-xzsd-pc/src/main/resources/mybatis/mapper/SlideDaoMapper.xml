@@ -57,7 +57,7 @@
         <if test="slideshowStateId != null and slideshowStateId != ''">
             and slide_status = #{slideshowStateId}
         </if>
-        orderInfo by sort asc
+        order by sort asc
     </select>
 
     <!--修改轮播图状态-->

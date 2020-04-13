@@ -137,7 +137,7 @@
         <if test="role != null and role != ''">
             and role = #{role}
         </if>
-        orderInfo by create_time desc
+        order by create_time desc
     </select>
 
     <!--删除用户-->

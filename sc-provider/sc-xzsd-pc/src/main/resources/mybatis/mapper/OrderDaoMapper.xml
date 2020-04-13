@@ -41,7 +41,7 @@
         <if test="orderStateId != null and orderStateId != ''">
             and t1.order_status = #{orderStateId}
         </if>
-        orderInfo by t1.create_time desc
+        order by t1.create_time desc
     </select>
 
     <!--管理员查询全部订单（分页）-->
@@ -80,7 +80,7 @@
         <if test="orderStateId != null and orderStateId != ''">
             and t1.order_status = #{orderStateId}
         </if>
-        orderInfo by t1.create_time desc
+        order by t1.create_time desc
     </select>
 
     <!--查询订单详情-->

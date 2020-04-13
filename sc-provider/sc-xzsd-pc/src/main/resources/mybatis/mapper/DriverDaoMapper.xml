@@ -170,7 +170,7 @@
         <if test="areaId != null and areaId != ''">
             and d.county = #{areaId}
         </if>
-        orderInfo by u.create_time desc
+        order by u.create_time desc
     </select>
 
     <!--查询当前店长下的所有司机-->

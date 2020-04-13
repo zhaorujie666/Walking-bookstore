@@ -115,7 +115,7 @@
         <if test="userName != null and userName != ''">
             and a.user_name like concat('%', #{userName}, '%')
         </if>
-        orderInfo by create_time desc
+        order by create_time desc
     </select>
     <!--修改用户信息-->
     <update id="updateUser" parameterType="com.neusoft.webauth.user.entity.UserInfo">

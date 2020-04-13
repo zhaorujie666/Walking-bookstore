@@ -42,7 +42,7 @@
         <if test="postName != null and postName != ''">
             and a.post_name like concat('%', #{postName}, '%')
         </if>
-        orderInfo by gmt_create desc
+        order by gmt_create desc
     </select>
     <!--查询所有岗位-->
     <select id="getAllPosts" resultMap="BaseResultMap">
@@ -227,7 +227,7 @@
         <if test="postName != null and postName != ''">
             and a.post_name like concat('%', #{postName}, '%')
         </if>
-        orderInfo by a.gmt_create desc
+        order by a.gmt_create desc
     </select>
     <!--用户管理-设置岗位，查询用户已授权的岗位-->
     <select id="listUserPosts" parameterType="map" resultType="string">
