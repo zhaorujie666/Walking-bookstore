@@ -206,7 +206,7 @@
         <if test="areaId != null and areaId != ''">
             and t2.county = #{areaId}
         </if>
-        orderInfo by t1.create_time desc
+        order by t1.create_time desc
     </select>
 
     <!--删除司机-->

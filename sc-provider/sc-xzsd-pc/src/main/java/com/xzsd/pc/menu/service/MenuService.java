@@ -71,13 +71,12 @@ public class MenuService {
      * @param menuId
      * @return
      */
-    Menu globalMenu = null;
     public AppResponse getMenuById(String menuId){
-        globalMenu = menuDao.getMenuById(menuId);
-        if(globalMenu == null){
+        Menu menu = menuDao.getMenuById(menuId);
+        if(menu == null){
             return AppResponse.bizError("查询用户详情失败");
         }
-        return AppResponse.success("查询用户详情成功！", globalMenu);
+        return AppResponse.success("查询用户详情成功！", menu);
     }
 
     /**
@@ -88,15 +87,15 @@ public class MenuService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateMenu(Menu menu){
+        Menu menuInfo = menuDao.getMenuById(menu.getMenuId());
         //判断是否存在相同的菜单名
         int count = menuDao.countMenuName(menu);
-        System.out.println(globalMenu.getMenuName().equals(menu.getMenuName()) == false);
-        if(count != 0 && globalMenu.getMenuName().equals(menu.getMenuName()) == false){
+        if(count != 0 && menuInfo.getMenuName().equals(menu.getMenuName()) == false){
             return AppResponse.bizError("存在相同的菜单名，请重新输入");
         }
         //判断是否存在相同的菜单路由
         int countMenuUrl = menuDao.countMenuUrl(menu);
-        if(0 != countMenuUrl && globalMenu.getMenuPath().equals(menu.getMenuPath()) == false){
+        if(0 != countMenuUrl && menuInfo.getMenuPath().equals(menu.getMenuPath()) == false){
             return AppResponse.bizError("存在相同的菜单路由，请重新输入");
         }
         int updateMenu = menuDao.updateMenu(menu);

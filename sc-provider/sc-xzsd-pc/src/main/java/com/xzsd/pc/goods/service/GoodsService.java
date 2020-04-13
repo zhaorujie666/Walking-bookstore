@@ -66,17 +66,16 @@ public class GoodsService {
      * @author zhaorujie
      * @Date 2020-03-28
      */
-    GoodsVTO globalGoodsInfo = null;
     public AppResponse getGoodsInfoById(String goodsId){
-        globalGoodsInfo = goodsDao.getGoodsInfoById(goodsId);
-        if(globalGoodsInfo == null){
+        GoodsVTO goodsInfo = goodsDao.getGoodsInfoById(goodsId);
+        if(goodsInfo == null){
             return AppResponse.success("查询商品详情失败！");
         }
         //设置商品一二级分类名称
         /*List<String> categoryName = goodsDao.getGoodsCategoryName(goodsId);
         globalGoodsInfo.setOneClassifyName(categoryName.get(0));
         globalGoodsInfo.setTwoClassifyName(categoryName.get(1));*/
-        return AppResponse.success("查询商品详情成功！", globalGoodsInfo);
+        return AppResponse.success("查询商品详情成功！", goodsInfo);
     }
 
     /**
@@ -106,9 +105,10 @@ public class GoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsInfo(GoodsInfo goodsInfo){
+        GoodsVTO goods = goodsDao.getGoodsInfoById(goodsInfo.getGoodsId());
         //判断当前的书号有没有改变
         int count = goodsDao.countBookNumber(goodsInfo.getIsbn());
-        if(count != 0 && globalGoodsInfo.getIsbn().equals(goodsInfo.getIsbn()) == false){
+        if(count != 0 && goods.getIsbn().equals(goodsInfo.getIsbn()) == false){
             return AppResponse.success("存在相同的书号，请输入正确的书号！");
         }
         //判断传入的字段是否为空

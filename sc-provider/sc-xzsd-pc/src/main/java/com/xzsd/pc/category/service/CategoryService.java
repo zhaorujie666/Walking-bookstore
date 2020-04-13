@@ -53,16 +53,14 @@ public class CategoryService {
     /**
      * 查询商品分类详情
      * @param categoryId
-     * @param loginId
      * @return
      */
-    GoodsCategoryVO globalGoodsCategory = null;
     public AppResponse getGoodsCategoryById(String categoryId){
-        globalGoodsCategory = categoryDao.getGoodsCategoryById(categoryId);
-        if(globalGoodsCategory == null){
+        GoodsCategoryVO goodsCategory = categoryDao.getGoodsCategoryById(categoryId);
+        if(goodsCategory == null){
             return AppResponse.bizError("查询分类详情失败！");
         }
-        return AppResponse.success("查询分类详情成功！", globalGoodsCategory);
+        return AppResponse.success("查询分类详情成功！", goodsCategory);
     }
 
     /**
@@ -73,9 +71,10 @@ public class CategoryService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsCategoryById(GoodsCategory goodsCategory, String loginId){
+        GoodsCategoryVO category = categoryDao.getGoodsCategoryById(goodsCategory.getClassifyId());
         int count = categoryDao.countGoodsCategoryName(goodsCategory);
         //判断当前的分类名称是否存在相同的，只有修改后存在相同的分类名才会提示重新输入
-        if(count != 0 && globalGoodsCategory.getClassifyName().equals(goodsCategory.getClassifyName()) == false){
+        if(count != 0 && category.getClassifyName().equals(goodsCategory.getClassifyName()) == false){
             return AppResponse.bizError("存在相同的分类名，请重新输入！");
         }
         goodsCategory.setUpdateUser(loginId);
@@ -91,12 +90,6 @@ public class CategoryService {
      * @return
      */
     public AppResponse getListGoodsCategory(){
-        //判断是否是管理员
-        /*String loginRole = userDao.getLoginRole(loginId);
-        if("0".equals(loginRole) == false){
-            return AppResponse.success("你没有权限！");
-        }*/
-
         List<GoodsCategoryVO> listGoodsCategory = categoryDao.getListFirstAndSecondGoodsCategory();
         CategoryList categoryList = new CategoryList();
         categoryList.setOneClassifyList(listGoodsCategory);

@@ -44,6 +44,7 @@
         <if test="evaluateScore == 5">
             and t1.star_level in(4,5)
         </if>
+        order by t1.create_time desc
     </select>
     <!--查询商品评价映射-->
     <resultMap id="goodsEvaluation" type="com.xzsd.app.goods.entity.GoodsEvaluationVO">
@@ -64,6 +65,7 @@
         from t_goods_category
         where is_delete = 0
         and parent_id = 0
+        order by create_time desc
     </select>
 
     <!--查询商品二级分类级商品信息-->
@@ -80,6 +82,7 @@
 	    where t1.parent_id = #{classifyId}
         and t1.is_delete = 0
         and t2.is_delete = 0
+        order by t1.create_time desc
     </select>
 
     <!--查询商品二级分类级商品信息映射-->

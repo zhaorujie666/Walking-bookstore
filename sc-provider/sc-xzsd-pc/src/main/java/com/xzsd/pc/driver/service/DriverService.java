@@ -72,10 +72,9 @@ public class DriverService {
      * @Author zhaorujie
      * @Date 2020-03-24
      */
-    DriverVO globalDriverInfo = null;
     public AppResponse getDriverById(String driverId){
-        globalDriverInfo = driverDao.getDriverById(driverId);
-        if(globalDriverInfo == null){
+        DriverVO driverInfo = driverDao.getDriverById(driverId);
+        if(driverInfo == null){
             return AppResponse.bizError("查询失败");
         }
         /*//查询省市区名称
@@ -84,7 +83,7 @@ public class DriverService {
         globalDriverInfo.setProvinceName(listAreaName.get(0));
         globalDriverInfo.setCityName(listAreaName.get(1));
         globalDriverInfo.setAreaName(listAreaName.get(2));*/
-        return AppResponse.success("查询成功", globalDriverInfo);
+        return AppResponse.success("查询成功", driverInfo);
     }
 
     /**
@@ -96,8 +95,9 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver(DriverInfo driverInfo){
+        DriverVO driver = driverDao.getDriverById(driverInfo.getDriverId());
         //判断当前账号是否是当前要修改的账号
-        if(globalDriverInfo.getUserAcct().equals(driverInfo.getUserAcct()) == false){
+        if(driver.getUserAcct().equals(driverInfo.getUserAcct()) == false){
             //校验账号是否存在
             int count = driverDao.countDriverAccount(driverInfo);
             if(count != 0){
@@ -105,7 +105,7 @@ public class DriverService {
             }
         }
         //判断当前手机号是否是修改
-        if(globalDriverInfo.getPhone().equals(driverInfo.getPhone()) == false){
+        if(driver.getPhone().equals(driverInfo.getPhone()) == false){
             // 校验手机号是否存在
             int countPhone = driverDao.countPhone(driverInfo);
             if(0 != countPhone){
@@ -113,16 +113,16 @@ public class DriverService {
             }
         }
         //判断密码有没有修改
-        if(globalDriverInfo.getUserPassword().equals(driverInfo.getUserPassword()) == false){
+        if(driver.getUserPassword().equals(driverInfo.getUserPassword()) == false){
             //密码加密
             String password = driverInfo.getUserPassword();
             String pwd = PasswordUtils.generatePassword(password);
             driverInfo.setUserPassword(pwd);
         }
         //修改司机信息
-        int driver = driverDao.updateDriver(driverInfo);
+        int count= driverDao.updateDriver(driverInfo);
         int driverArea = driverDao.updateDriverArea(driverInfo);
-        if(driver == 0 && driverArea == 0) {
+        if(count == 0 && driverArea == 0) {
             return AppResponse.bizError("修改失败");
         }
         return AppResponse.success("修改成功");

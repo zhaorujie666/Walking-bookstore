@@ -9,8 +9,10 @@
         version as version
         from t_sys_menu
         where is_delete = 0
+        order by create_time asc
     </select>
 
+    <!--新增菜单-->
     <insert id="addMenu" parameterType="com.xzsd.pc.menu.entity.Menu">
         insert into t_sys_menu(
             menu_id,

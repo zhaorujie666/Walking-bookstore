@@ -33,8 +33,6 @@ public class CustomerService {
      * @return
      */
     public AppResponse getListCustomers(CustomerInfo customerInfo, String userId){
-        //获取当前的登录用户
-        //String userRole = userDao.getUserRole(userId);
         List<CustomerVO> listCustomers = null;
         PageHelper.startPage(customerInfo.getPageNum(), customerInfo.getPageSize());
         //判断是不是管理员,管理员查全部，店长查自己的客户 if

@@ -50,16 +50,6 @@ public class UserService {
         String password = userInfo.getUserPassword();
         String pwd = PasswordUtils.generatePassword(password);
         userInfo.setUserPassword(pwd);
-        /*//邀请码
-        userInfo.setInvitationCode(RandomUtil.randomLetter(6));
-        String role = userInfo.getRole();
-        if("1".equals(role)){
-            int invitationCode = userDao.countInvitationCode(userInfo.getInvitationCode());
-            while(invitationCode != 0){
-                userInfo.setInvitationCode(RandomUtil.randomLetter(6));
-                invitationCode = userDao.countInvitationCode(userInfo.getInvitationCode());
-            }
-        }*/
         int count = userDao.addUser(userInfo);
         if(count == 0){
             return AppResponse.bizError("新增用户失败");
@@ -72,13 +62,12 @@ public class UserService {
      * @param userId
      * @return
      */
-    UserVO globalUserInfo = null;
     public AppResponse getUserInfoById(String userId){
-        globalUserInfo = userDao.getUserInfoById(userId);
-        if(globalUserInfo == null){
+        UserVO userInfo = userDao.getUserInfoById(userId);
+        if(userInfo == null){
             return AppResponse.bizError("查询失败");
         }
-        return AppResponse.success("查询成功", globalUserInfo);
+        return AppResponse.success("查询成功", userInfo);
     }
 
     /**
@@ -88,31 +77,18 @@ public class UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUserInfo(UserInfo userInfo){
+        UserVO user = userDao.getUserInfoById(userInfo.getUserId());
         //校验是否存在相同的账号
         int num = userDao.countUserAccount(userInfo);
-        if(num != 0 && globalUserInfo.getUserAcct().equals(userInfo.getUserAcct()) == false){
+        if(num != 0 && user.getUserAcct().equals(userInfo.getUserAcct()) == false){
             return AppResponse.bizError("存在相同的用户账号，请重新输入！");
         }
         //校验是否存在相同的手机号
         int countPhone = userDao.countPhone(userInfo);
-        if(0 != countPhone && globalUserInfo.getPhone().equals(userInfo.getPhone()) == false){
+        if(0 != countPhone && user.getPhone().equals(userInfo.getPhone()) == false){
             return AppResponse.bizError("该手机号已经存在，请重新输入");
         }
-        /*String role = userInfo.getRole();
-        //判断是否有店长改为其他角色，如果是店长改为其他角色就设置邀请码为空
-        if("1".equals(role) == false){
-            userInfo.setInvitationCode(null);
-        }else{
-            userInfo.setInvitationCode(RandomUtil.randomLetter(6));
-        }*/
-        //判断密码有没有修改
-        /*if(globalUserInfo.getPassword().equals(userInfo.getPassword()) == false){
-            //密码加密
-            String password = userInfo.getPassword();
-            String pwd = PasswordUtils.generatePassword(password);
-            userInfo.setPassword(pwd);
-        }*/
-        if(globalUserInfo.getUserPassword().equals(userInfo.getUserPassword()) == false){
+        if(user.getUserPassword().equals(userInfo.getUserPassword()) == false){
             String password = userInfo.getUserPassword();
             String pwd = PasswordUtils.generatePassword(password);
             userInfo.setUserPassword(pwd);

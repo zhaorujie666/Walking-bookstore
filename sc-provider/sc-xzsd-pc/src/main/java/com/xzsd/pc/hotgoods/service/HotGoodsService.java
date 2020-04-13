@@ -42,7 +42,7 @@ public class HotGoodsService {
         }
         //校验商品是否已经被选择
         int goodsIsUse = hotGoodsDao.countGoodsIsUse(hotGoodsInfo);
-        if(goodsIsUse!= 0 && globalHotGoods.getGoodsId().equals(hotGoodsInfo.getGoodsId()) == false){
+        if(goodsIsUse!= 0){
             return AppResponse.bizError("该商品已经被选择，请重新选择");
         }
         hotGoodsInfo.setHotGoodsId(StringUtil.getCommonCode(2));
@@ -55,13 +55,12 @@ public class HotGoodsService {
      * @param hotGoodsId
      * @return
      */
-    HotGoodsVO globalHotGoods = null;
     public AppResponse getHotGoodsById(String hotGoodsId){
-        globalHotGoods = hotGoodsDao.getHotGoodsById(hotGoodsId);
-        if(globalHotGoods == null){
+        HotGoodsVO hotGoods = hotGoodsDao.getHotGoodsById(hotGoodsId);
+        if(hotGoods == null){
             return AppResponse.bizError("查询热门商品详情失败");
         }
-        return AppResponse.success("查询热门商品详情成功！", globalHotGoods);
+        return AppResponse.success("查询热门商品详情成功！", hotGoods);
     }
 
     /**
@@ -71,14 +70,15 @@ public class HotGoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateHotGoods(HotGoodsInfo hotGoodsInfo){
+        HotGoodsVO hotGoods = hotGoodsDao.getHotGoodsById(hotGoodsInfo.getHotGoodsId());
         //校验排序是否重复
         int num = hotGoodsDao.countSort(hotGoodsInfo);
-        if(num != 0 && globalHotGoods.getHotGoodsNum() != hotGoodsInfo.getHotGoodsNum()){
+        if(num != 0 && hotGoods.getHotGoodsNum() != hotGoodsInfo.getHotGoodsNum()){
             return AppResponse.bizError("出现相同的排序，请重新输入");
         }
         //校验商品是否已经被选择
         int goodsIsUse = hotGoodsDao.countGoodsIsUse(hotGoodsInfo);
-        if(goodsIsUse!= 0 && globalHotGoods.getGoodsId().equals(hotGoodsInfo.getGoodsId()) == false){
+        if(goodsIsUse!= 0 && hotGoods.getGoodsId().equals(hotGoodsInfo.getGoodsId()) == false){
             return AppResponse.bizError("该商品已经被选择，请重新选择");
         }
         int count = hotGoodsDao.updateHotGoods(hotGoodsInfo);

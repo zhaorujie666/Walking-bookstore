@@ -108,5 +108,6 @@
         <if test="goodsId != null and goodsId != ''">
             and t1.id like concat('%', #{goodsId}, '%')
         </if>
+        order by t1.create_time desc
     </select>
 </mapper>
