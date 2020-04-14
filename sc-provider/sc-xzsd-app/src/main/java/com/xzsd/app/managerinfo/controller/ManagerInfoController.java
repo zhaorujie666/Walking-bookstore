@@ -32,7 +32,7 @@ public class ManagerInfoController {
     public AppResponse getListDriver(){
         try {
             String userId = SecurityUtils.getCurrentUserId();
-            return managerInfoService.getListDriver("2020040919381184560");
+            return managerInfoService.getListDriver(userId);
         }catch (Exception e){
             logger.error("查询司机信息列表失败");
             System.out.println(e.toString());
