@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.customerime.dao.CustomerMeDao">
+    <!--修改邀请码-->
+    <update id="updateInviteCode" parameterType="com.xzsd.app.customerime.entity.CustomerMe">
+        update t_sys_customer
+        set
+            invitation_code = #{inviteCode},
+            update_time = now(),
+            update_user = #{userId},
+            version = version + 1
+        where customer_id = #{userId}
+        and is_delete = 0
+    </update>
+</mapper>
