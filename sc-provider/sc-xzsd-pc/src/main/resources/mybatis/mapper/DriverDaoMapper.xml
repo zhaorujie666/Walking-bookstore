@@ -130,9 +130,15 @@
     <update id="updateDriverArea" parameterType="com.xzsd.pc.driver.entity.DriverInfo">
         update t_driver_info
         set
-            province = #{provinceId},
-            city = #{cityId},
-            county = #{areaId},
+            <if test="provinceId != null and provinceId != ''">
+                province = #{provinceId},
+            </if>
+            <if test="cityId != null and cityId != ''">
+                city = #{cityId},
+            </if>
+            <if test="areaId != null and areaId != ''">
+                county = #{areaId},
+            </if>
             update_user = #{updateUser},
             update_time = now(),
             version = version + 1

@@ -92,9 +92,15 @@
             phone = #{phone},
             manager_id = #{userId},
             business_code = #{businessCode},
-            province = #{provinceId},
-            city = #{cityId},
-            county = #{areaId},
+            <if test="provinceId != null and provinceId != ''">
+                province = #{provinceId},
+            </if>
+            <if test="cityId != null and cityId != ''">
+                city = #{cityId},
+            </if>
+            <if test="areaId != null and areaId != ''">
+                county = #{areaId},
+            </if>
             store_address = #{address},
             version = version + 1
         where id = #{storeId}
