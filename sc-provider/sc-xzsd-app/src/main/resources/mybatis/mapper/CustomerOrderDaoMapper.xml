@@ -139,6 +139,7 @@
             <result column="goodsPrice" property="goodsPrice"/>
             <result column="goodsImagePath" property="goodsImagePath"/>
             <result column="cartGoodsCount" property="cartGoodsCount"/>
+            <result column="goodsDescribe" property="goodsDescribe"/>
         </collection>
     </resultMap>
     
@@ -156,6 +157,7 @@
         t3.goods_name as goodsName,
         t3.selling_price as goodsPrice,
         t3.goods_image as goodsImagePath,
+        t3.goods_introduction as goodsDescribe,
         t4.store_name as storeName,
         t4.store_address as address,
         t5.area_name as provinceName,
