@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.app.managerorder.dao.ManagerOrderDao">
+
+    <!--查询店长订单列表-->
+    <select id="getListManagerOrder" parameterType="com.xzsd.app.managerorder.entity.ManagerOrder"
+            resultType="com.xzsd.app.managerorder.entity.ManagerOrderVO">
+        select
+        distinct
+        t2.id as orderId,
+        t2.order_status as orderStateId,
+        t6.user_name as userName,
+        t6.phone as phone,
+        t2.total_price as orderAllCost,
+        t2.total_count as orderAllGoodsCount,
+        t2.version as version,
+        t5.customer_id as userId
+        from t_store_info t1, t_order_info t2,
+        t_order_details t3, t_goods_info t4,
+        t_sys_customer t5, t_sys_user t6
+        where t1.manager_id = #{userId}
+        and t1.id = t2.store_id
+        and t2.id = t3.order_id
+        and t3.goods_id = t4.id
+        and t1.invitation_code = t5.invitation_code
+        and t5.customer_id = t6.user_id
+        and t2.is_delete = 0
+        and t3.is_delete = 0
+        <if test="orderStateId != null and orderStateId != ''">
+            and t2.order_status = #{orderStateId}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            and (t4.goods_name like concat('%', #{keyword}, '%')
+            or t1.id like concat('%', #{keyword}, '%'))
+        </if>
+    </select>
+
+    <!--查询店长订单下的商品-->
+    <select id="getListOrderGoods" parameterType="com.xzsd.app.managerorder.entity.ManagerOrder"
+            resultType="com.xzsd.app.managerorder.entity.GoodsInfo">
+        select
+        t2.id as orderId,
+        t4.id as goodsId,
+        t4.goods_image as goodsImagePath,
+        t4.goods_name as goodsName,
+        t4.selling_price as goodsPrice,
+        t4.goods_introduction as goodsDescribe,
+        t3.buy_number as cartGoodsCount
+        from t_store_info t1
+        left join t_order_info t2
+        on t1.id = t2.store_id
+        left join t_order_details t3
+        on t2.id = t3.order_id
+        left join t_goods_info t4
+        on t3.goods_id = t4.id
+        where t1.manager_id = #{userId}
+        and t2.is_delete = 0
+        and t3.is_delete = 0
+    </select>
+
+    <!--更新订单状态-->
+    <update id="updateOrderStatus" parameterType="com.xzsd.app.managerorder.entity.ManagerOrder">
+        update t_order_info
+        set
+            order_status = #{orderStateId},
+            update_user = #{userId},
+            update_time = now(),
+            version = version + 1
+        where id = #{orderId}
+        and version = #{version}
+    </update>
+
+    <!--查询订单详情映射-->
+    <resultMap id="orderDetailsById" type="com.xzsd.app.managerorder.entity.ManagerOrderVO">
+        <id column="orderId" property="orderId"/>
+        <result column="orderStateId" property="orderStateId"/>
+        <result column="orderAllGoodsCount" property="orderAllGoodsCount"/>
+        <result column="orderAllCost" property="orderAllCost"/>
+        <result column="crateTime" property="crateTime"/>
+        <result column="storeName" property="storeName"/>
+        <result column="userName" property="userName"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="provinceName" property="provinceName"/>
+        <result column="cityName" property="cityName"/>
+        <result column="areaName" property="areaName"/>
+        <collection property="goodsList" ofType="com.xzsd.app.managerorder.entity.GoodsInfo">
+            <id column="goodsId" property="goodsId"/>
+            <result column="goodsName" property="goodsName"/>
+            <result column="goodsPrice" property="goodsPrice"/>
+            <result column="goodsImagePath" property="goodsImagePath"/>
+            <result column="cartGoodsCount" property="cartGoodsCount"/>
+            <result column="goodsDescribe" property="goodsDescribe"/>
+        </collection>
+    </resultMap>
+
+    <!--查询订单详情-->
+    <select id="getManagerOrderDetailsById" parameterType="java.lang.String"
+            resultMap="orderDetailsById">
+        select
+        t1.id as orderId,
+        t1.order_status as orderStateId,
+        t1.total_count as orderAllGoodsCount,
+        t1.total_price as orderAllCost,
+        t1.create_time as crateTime,
+        t2.buy_number as cartGoodsCount,
+        t3.id as goodsId,
+        t3.goods_name as goodsName,
+        t3.selling_price as goodsPrice,
+        t3.goods_image as goodsImagePath,
+        t3.goods_introduction as goodsDescribe,
+        t4.store_name as storeName,
+        t4.store_address as address,
+        t5.area_name as provinceName,
+        t6.area_name as cityName,
+        t7.area_name as areaName,
+        t8.user_name as userName,
+        t8.phone as phone
+        from t_order_info t1
+        left join t_order_details t2
+        on t1.id = t2.order_id
+        left join t_goods_info t3
+        on t2.goods_id = t3.id
+        left join t_store_info t4
+        on t1.store_id = t4.id
+        left join t_area t5
+        on t4.province = t5.id
+        left join t_area t6
+        on t4.city = t6.id
+        left join t_area t7
+        on t4.county = t7.id
+        left join t_sys_user t8
+        on t1.user_id = t8.user_id
+        where t1.id = #{orderId}
+        and t1.is_delete = 0
+        and t2.is_delete = 0
+    </select>
+</mapper>
