@@ -30,6 +30,7 @@
         t2.selling_price as goodsPrice
         from t_hot_goods t1, t_goods_info t2
         where t1.goods_id = t2.id
+        order by t1.sort asc
         limit #{showNumber}
     </select>
 </mapper>
