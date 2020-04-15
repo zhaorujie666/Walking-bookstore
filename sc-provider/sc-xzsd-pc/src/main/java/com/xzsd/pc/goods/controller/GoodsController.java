@@ -106,18 +106,18 @@ public class GoodsController {
 
     /**
      * 修改商品状态
-     * @param goodsId
-     * @param goodsStateId
+     * @param goodsInfo
      * @return
      * @author zhaorujie
      * @Date 2020-03-28
      */
     @PostMapping("updateGoodsShelfState")
-    public AppResponse updateGoodsStatus(String goodsId, String goodsStateId){
+    public AppResponse updateGoodsStatus(GoodsInfo goodsInfo){
         try {
             //获取用户角色
             String userId = SecurityUtils.getCurrentUserId();
-            return goodsService.updateGoodsStatus(goodsId, goodsStateId, userId);
+            goodsInfo.setUpdateUser(userId);
+            return goodsService.updateGoodsStatus(goodsInfo);
         }catch (Exception e){
             logger.error("修改商品状态失败");
             System.out.println(e.toString());

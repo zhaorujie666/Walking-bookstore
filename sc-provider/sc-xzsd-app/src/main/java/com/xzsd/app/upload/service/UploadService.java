@@ -48,11 +48,10 @@ public class UploadService {
         }catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(url);
+        //封装数据
         Upload upload = new Upload();
         upload.setImagePath(url);
         return AppResponse.success("图片上传成功！", upload);
-        //return url;
     }
 
     /**

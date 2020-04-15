@@ -12,11 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * @DescriptionDemo 实现类
+ * @DescriptionDemo 商品增删改查
  * @Author zhaorujie
  * @Date 2020-03-28
  */
@@ -39,7 +40,7 @@ public class GoodsService {
         //判断是否出现重复的书号
         int count = goodsDao.countBookNumber(goodsInfo.getIsbn());
         if(count != 0){
-            return AppResponse.success("书号重复，请输入正确的书号！");
+            return AppResponse.bizError("书号重复，请输入正确的书号！");
         }
         //判断传入的字段是否为空
         if(null == goodsInfo.getGoodsAdvertise()){
@@ -54,7 +55,7 @@ public class GoodsService {
         goodsInfo.setStoreId(RandomUtil.randomLetter(3) + StringUtil.getCommonCode(2));
         int goods = goodsDao.addGoods(goodsInfo);
         if(goods == 0){
-            return AppResponse.success("新增商品失败");
+            return AppResponse.bizError("新增商品失败");
         }
         return AppResponse.success("新增商品成功");
     }
@@ -69,12 +70,8 @@ public class GoodsService {
     public AppResponse getGoodsInfoById(String goodsId){
         GoodsVTO goodsInfo = goodsDao.getGoodsInfoById(goodsId);
         if(goodsInfo == null){
-            return AppResponse.success("查询商品详情失败！");
+            return AppResponse.bizError("查询商品详情失败！");
         }
-        //设置商品一二级分类名称
-        /*List<String> categoryName = goodsDao.getGoodsCategoryName(goodsId);
-        globalGoodsInfo.setOneClassifyName(categoryName.get(0));
-        globalGoodsInfo.setTwoClassifyName(categoryName.get(1));*/
         return AppResponse.success("查询商品详情成功！", goodsInfo);
     }
 
@@ -109,7 +106,7 @@ public class GoodsService {
         //判断当前的书号有没有改变
         int count = goodsDao.countBookNumber(goodsInfo.getIsbn());
         if(count != 0 && goods.getIsbn().equals(goodsInfo.getIsbn()) == false){
-            return AppResponse.success("存在相同的书号，请输入正确的书号！");
+            return AppResponse.bizError("存在相同的书号，请输入正确的书号！");
         }
         //判断传入的字段是否为空
         if(null == goodsInfo.getGoodsAdvertise()){
@@ -120,28 +117,38 @@ public class GoodsService {
         }
         int number = goodsDao.updateGoodsInfo(goodsInfo);
         if(number == 0){
-            return AppResponse.success("修改商品信息失败！");
+            return AppResponse.bizError("修改商品信息失败！");
         }
         return AppResponse.success("修改商品信息成功！");
     }
 
     /**
      * 更新商品状态
-     * @param goodsId
-     * @param goodsStateId
-     * @param userId
+     * @param goodsInfo
      * @return
      * @author zhaorujie
      * @Date 2020-03-28
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse updateGoodsStatus(String goodsId,
-                                         String goodsStateId,
-                                         String userId){
-        List<String> listGoodsId = Arrays.asList(goodsId.split(","));
-        int count = goodsDao.updateGoodsStatus(listGoodsId, goodsStateId, userId);
+    public AppResponse updateGoodsStatus(GoodsInfo goodsInfo){
+        List<String> listGoodsId = Arrays.asList(goodsInfo.getGoodsId().split(","));
+        List<String> listVersion = Arrays.asList(goodsInfo.getVersion().split(","));
+        List<GoodsInfo> goodsInfoList = new ArrayList<>();
+        for (int i = 0; i < listGoodsId.size() && i <listVersion.size(); i++) {
+            GoodsInfo info = new GoodsInfo();
+            //设置商品id
+            info.setGoodsId(listGoodsId.get(i));
+            //设置版本号
+            info.setVersion(listVersion.get(i));
+            //设置更新人
+            info.setUpdateUser(goodsInfo.getUpdateUser());
+            //设置商品状态
+            info.setGoodsStateId(goodsInfo.getGoodsStateId());
+            goodsInfoList.add(info);
+        }
+        int count = goodsDao.updateGoodsStatus(goodsInfoList);
         if(count == 0){
-            return AppResponse.success("更新商品状态失败！");
+            return AppResponse.bizError("更新商品状态失败！");
         }
         return AppResponse.success("更新商品状态成功！");
     }
@@ -171,9 +178,29 @@ public class GoodsService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteGoods(String goodsId, String userId){
         List<String> list = Arrays.asList(goodsId.split(","));
-        int count = goodsDao.deleteGoods(list, userId);
+        List<String> goodsIdList = goodsDao.querySlideAndHotGoods(list);
+        //去除已经被轮播图和热门商品使用的商品id
+        List<String> listGoodsId = new ArrayList<>();
+        int flag = 0;
+        int j = 0;
+        for (int i = 0; i < list.size(); i++) {
+            for(j = 0; j < goodsIdList.size(); j++){
+               if(!list.get(i).equals(goodsIdList.get(j))){
+                   flag++;
+               }
+            }
+            //判断次数是否相同，相同就说明该商品不被用于轮播图或热门商品
+            if(flag == j){
+                listGoodsId.add(list.get(i));
+            }
+            flag = 0;
+        }
+        if(listGoodsId.size() == 0){
+            return AppResponse.bizError("该商品已经被用于轮播图或热门商品，所有不能删除");
+        }
+        int count = goodsDao.deleteGoods(listGoodsId, userId);
         if(count == 0){
-            return AppResponse.success("删除失败！");
+            return AppResponse.bizError("删除失败！");
         }
         return AppResponse.success("删除成功！");
     }

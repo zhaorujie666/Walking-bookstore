@@ -86,7 +86,8 @@
         id_card as idCard,
         user_password as userPassword,
         user_image as userImage,
-        role as role
+        role as role,
+        version as version
         from t_sys_user
         where user_id = #{userId}
     </select>

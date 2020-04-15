@@ -22,13 +22,14 @@
 
     <!--查询商品评价列表-->
     <select id="getListGoodsEvaluation" parameterType="com.xzsd.app.goods.entity.GoodsEvaluation"
-            resultMap="goodsEvaluation">
+            resultType="com.xzsd.app.goods.entity.GoodsEvaluationVO">
         select
+        distinct
         t2.user_acct as userAcct,
         t1.appraise_info as evaluateContent,
         t1.star_level as evaluateScore,
         t1.create_time as createTime,
-        t3.appraise_image as imagePath
+        t1.user_id as userId
         from t_goods_appraise t1, t_sys_user t2, t_goods_appraise_images t3
         where t1.user_id = t2.user_id
         and t1.goods_id = #{goodsId}
@@ -46,16 +47,21 @@
         </if>
         order by t1.create_time desc
     </select>
-    <!--查询商品评价映射-->
-    <resultMap id="goodsEvaluation" type="com.xzsd.app.goods.entity.GoodsEvaluationVO">
-        <result property="userAcct" column="userAcct"/>
-        <result property="evaluateContent" column="evaluateContent"/>
-        <result property="evaluateScore" column="evaluateScore"/>
-        <result property="createTime" column="createTime"/>
-        <collection property="imageList" ofType="com.xzsd.app.goods.entity.EvaluationImage">
-            <result property="imagePath" column="imagePath"/>
-        </collection>
-    </resultMap>
+
+    <!--查询每个评价商品的所有图片-->
+    <select id="getListGoodsImage" parameterType="com.xzsd.app.goods.entity.GoodsEvaluation"
+            resultType="com.xzsd.app.goods.entity.EvaluationImage">
+        select
+        t2.user_id as userId,
+        t3.appraise_image as imagePath
+        from t_goods_appraise t1, t_sys_user t2, t_goods_appraise_images t3
+        where t1.user_id = t2.user_id
+        and t1.id = t3.appraise_id
+        and t1.goods_id = #{goodsId}
+        and t1.is_delete = 0
+        and t3.is_delete = 0
+        order by t3.sort asc
+    </select>
 
     <!--查询商品评一级分类-->
     <select id="getFirstGoodsCategory" resultType="com.xzsd.app.goods.entity.GoodsCategory">

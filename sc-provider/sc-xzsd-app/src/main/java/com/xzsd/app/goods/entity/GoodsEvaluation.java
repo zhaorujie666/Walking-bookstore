@@ -1,6 +1,5 @@
 package com.xzsd.app.goods.entity;
 
-import javax.validation.constraints.Null;
 import java.util.List;
 
 /**

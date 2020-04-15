@@ -11,5 +11,6 @@
         role as role
         from t_sys_user
         where user_id = #{loginUserId}
+        and is_delete = 0
     </select>
 </mapper>

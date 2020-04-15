@@ -7,9 +7,21 @@ package com.xzsd.app.goods.entity;
  */
 public class EvaluationImage {
     /**
+     * 用户id
+     */
+    private String userId;
+    /**
      * 评价图片
      */
     private String imagePath;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getImagePath() {
         return imagePath;

@@ -23,6 +23,10 @@ public class Menu {
      */
     private String isMenu;
     /**
+     * 角色编号
+     */
+    private String role;
+    /**
      * 删除标记（0存在，1删除）
      */
     private String isDelete;
@@ -81,6 +85,14 @@ public class Menu {
 
     public void setIsMenu(String isMenu) {
         this.isMenu = isMenu;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getIsDelete() {

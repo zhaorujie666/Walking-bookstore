@@ -38,14 +38,10 @@ public interface SlideDao {
 
     /**
      * 修改轮播图状态
-     * @param listSlideId
-     * @param slideshowStateId
-     * @param loginId
+     * @param slideInfoList
      * @return
      */
-    int updateSlideStatus(@Param("listSlideId") List<String> listSlideId,
-                          @Param("slideshowStateId") String slideshowStateId,
-                          @Param("loginId") String loginId);
+    int updateSlideStatus(@Param("slideInfoList") List<SlideInfo> slideInfoList);
 
     /**
      * 删除轮播图

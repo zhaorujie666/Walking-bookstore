@@ -69,14 +69,10 @@ public interface GoodsDao {
 
     /**
      * 修改商品状态
-     * @param listGoodsId
-     * @param goodsStateId
-     * @param loginId
+     * @param goodsInfoList
      * @return
      */
-    int updateGoodsStatus(@Param("listGoodsId") List<String> listGoodsId,
-                          @Param("goodsStateId") String goodsStateId,
-                          @Param("loginId") String loginId);
+    int updateGoodsStatus(@Param("goodsInfoList") List<GoodsInfo> goodsInfoList);
 
     /**
      * 删除商品
@@ -86,4 +82,10 @@ public interface GoodsDao {
      */
     int deleteGoods(@Param("listGoodsId") List<String> listGoodsId, @Param("loginId") String loginId);
 
+    /**
+     * 查询删除的商品是否已经被轮播图或热门商品使用
+     * @param listGoodsId
+     * @return
+     */
+    List<String> querySlideAndHotGoods(@Param("listGoodsId") List<String> listGoodsId);
 }

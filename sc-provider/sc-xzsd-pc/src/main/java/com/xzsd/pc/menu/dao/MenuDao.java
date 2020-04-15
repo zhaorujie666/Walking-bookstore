@@ -65,4 +65,11 @@ public interface MenuDao {
      * @return
      */
     int deleteMenu(@Param("menuId") String menuId, @Param("loginUserId") String loginUserId);
+
+    /**
+     * 根据角色查询首页菜单显示的功能
+     * @param role
+     * @return
+     */
+    List<Menu> getPageHomeMenu(@Param("role") String role);
 }

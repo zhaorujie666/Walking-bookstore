@@ -125,4 +125,22 @@ public class MenuController {
             throw e;
         }
     }
+
+    /**
+     * 根据角色查询菜单
+     * @param role
+     * @return
+     * @author zhaorujie
+     * @date 2020-4-15
+     */
+    @PostMapping("listMenuHome")
+    public AppResponse getPageHomeMenu(String role){
+        try {
+            return menuService.getPageHomeMenu(role);
+        }catch (Exception e){
+            logger.error("根据角色查询菜单失败");
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }

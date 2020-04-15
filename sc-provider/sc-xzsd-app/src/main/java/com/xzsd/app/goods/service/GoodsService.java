@@ -8,6 +8,7 @@ import com.xzsd.app.goods.entity.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,9 +45,23 @@ public class GoodsService {
      * @data 2020/4/12
      */
     public AppResponse getListGoodsEvaluation(GoodsEvaluation goodsEvaluation){
+        //分页
         PageHelper.startPage(goodsEvaluation.getPageNum(), goodsEvaluation.getPageSize());
+        //查询当前商品的所有评价
         List<GoodsEvaluationVO> listGoodsEvaluation = goodsDao.getListGoodsEvaluation(goodsEvaluation);
         PageInfo<GoodsEvaluationVO> pageData = new PageInfo<>(listGoodsEvaluation);
+        //查询当前商品的所有评价下的每个用户的评价图片
+        List<EvaluationImage> listGoodsImage = goodsDao.getListGoodsImage(goodsEvaluation);
+        for (int i = 0; i < listGoodsEvaluation.size(); i++) {
+            List<EvaluationImage> imageList = new ArrayList<>();
+            for(int j = 0; j < listGoodsImage.size(); j++){
+                //判断用户的id是否相等
+                if(listGoodsEvaluation.get(i).getUserId().equals(listGoodsImage.get(j).getUserId())){
+                    imageList.add(listGoodsImage.get(j));
+                }
+            }
+            listGoodsEvaluation.get(i).setImageList(imageList);
+        }
         return AppResponse.success("查询商品评价成功",pageData);
     }
 

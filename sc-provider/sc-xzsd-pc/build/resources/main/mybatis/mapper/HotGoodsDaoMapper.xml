@@ -47,7 +47,8 @@
         t1.id hotGoodsId,
         t2.goods_name goodsName,
         t1.sort hotGoodsNum,
-        t2.id goodsId
+        t2.id goodsId,
+        t1.version version
         from t_hot_goods t1, t_goods_info t2
         where t1.goods_id = t2.id
         and t1.id = #{hotGoodsId}
@@ -86,7 +87,7 @@
         <if test="goodsName != null and goodsName != ''">
             and t2.goods_name like concat('%', #{goodsName}, '%')
         </if>
-        order by t1.create_time desc
+        order by t1.sort asc
     </select>
 
     <!--查询热门位商品展示数量-->
@@ -96,6 +97,7 @@
         version as version
         from t_dictionary
         where dic_type = 'hotGoodsShowNumber'
+        and is_delete = 0
     </select>
 
     <!--修改热门商品展示数量-->

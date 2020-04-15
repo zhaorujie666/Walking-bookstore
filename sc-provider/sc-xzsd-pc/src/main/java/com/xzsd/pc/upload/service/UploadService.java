@@ -6,6 +6,7 @@ import com.xzsd.pc.util.COSClientUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,8 @@ public class UploadService {
         COSClientUtil cosClientUtil = new COSClientUtil();
         String name, imgUrl;
         String  url = "";
+        System.out.println(imageFile.size());
+        List<String> listImage = new ArrayList<>();
         try {
             if(imageFile.size() == 1){
                 //上传一张图片
@@ -34,6 +37,7 @@ public class UploadService {
                 imgUrl = cosClientUtil.getImgUrl(name);
                 String[] split = imgUrl.split("\\?");
                 url = split[0];
+                listImage.add(split[0]);
             }else if(imageFile.size() > 1){
                 //上传多张图片
                 for (MultipartFile image : imageFile) {
@@ -41,16 +45,19 @@ public class UploadService {
                     imgUrl = cosClientUtil.getImgUrl(name);
                     String[] split = imgUrl.split("\\?");
                     url = url + split[0] + ",";
+                    listImage.add(split[0]);
                 }
             }
         }catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(url);
+        //封装数据
         Upload upload = new Upload();
         upload.setImagePath(url);
+        for (int i = 0; i < listImage.size(); i++) {
+            System.out.println(listImage.get(i));
+        }
         return AppResponse.success("图片上传成功！", upload);
-        //return url;
     }
 
     /**

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,19 +52,29 @@ public class SlideService {
 
     /**
      * 修改轮播图状态
-     * @param slideshowId
-     * @param slideshowStateId
-     * @param userId
+     * @param slideInfo
      * @return
      * @author zhaorujie
      * @date 2020-3-29
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse updateSlideStatus(String slideshowId,
-                                         String slideshowStateId,
-                                         String userId){
-        List<String> listSlideId = Arrays.asList(slideshowId.split(","));
-        int count = slideDao.updateSlideStatus(listSlideId, slideshowStateId, userId);
+    public AppResponse updateSlideStatus(SlideInfo slideInfo){
+        List<String> listSlideId = Arrays.asList(slideInfo.getSlideshowId().split(","));
+        List<String> listVersion = Arrays.asList(slideInfo.getVersion().split(","));
+        List<SlideInfo> slideInfoList = new ArrayList<>();
+        for (int i = 0; i < listSlideId.size() && i < listVersion.size(); i++) {
+            SlideInfo info = new SlideInfo();
+            //设置轮播图id
+            info.setSlideshowId(listSlideId.get(i));
+            //设置轮播图版本号
+            info.setVersion(listVersion.get(i));
+            //设置轮播图状态
+            info.setSlideshowStateId(slideInfo.getSlideshowStateId());
+            //设置更新人
+            info.setUpdateUser(slideInfo.getUpdateUser());
+            slideInfoList.add(info);
+        }
+        int count = slideDao.updateSlideStatus(slideInfoList);
         if(count == 0){
             return AppResponse.bizError("修改轮播图状态失败！");
         }

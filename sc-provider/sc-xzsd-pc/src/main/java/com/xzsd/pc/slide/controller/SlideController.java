@@ -69,19 +69,18 @@ public class SlideController {
 
     /**
      * 修改轮播图状态
-     * @param slideshowId
-     * @param slideshowStateId
+     * @param slideInfo
      * @return
      * @author zhaorujie
      * @date 2020-3-29
      */
     @PostMapping("updateSlideshowHomeState")
-    public AppResponse updateSlideStatus(String slideshowId,
-                                         String slideshowStateId){
+    public AppResponse updateSlideStatus(SlideInfo slideInfo){
         try {
             //获取用户角色
             String userId = SecurityUtils.getCurrentUserId();
-            return slideService.updateSlideStatus(slideshowId, slideshowStateId, userId);
+            slideInfo.setUpdateUser(userId);
+            return slideService.updateSlideStatus(slideInfo);
         }catch (Exception e){
             logger.error("修改轮播图状态失败");
             System.out.println(e.toString());

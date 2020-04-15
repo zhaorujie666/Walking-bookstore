@@ -52,6 +52,7 @@
     <select id="getGoodsCategoryById" parameterType="java.lang.String"
             resultType="com.xzsd.pc.category.entity.GoodsCategoryVO">
         select
+        id as classifyId,
         category_name as classifyName,
         remark as classifyComment,
         rank as rank,
@@ -93,6 +94,7 @@
         where t1.parent_id = 0
         and t1.is_delete = 0
         and t2.is_delete = 0
+        order by t1.create_time desc
     </select>
     <!--商品一二级分类映射集合-->
     <resultMap id="listGoodsCategory" type="com.xzsd.pc.category.entity.GoodsCategoryVO">

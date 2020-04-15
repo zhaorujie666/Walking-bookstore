@@ -30,6 +30,7 @@
         <if test="userAcct != null and userAcct != ''">
             and t1.user_acct like concat('%', #{userAcct}, '%')
         </if>
+        and t2.create_time desc
     </select>
 
     <!--查询登录者为管理员时的用户列表-->

@@ -61,16 +61,18 @@
     </select>
 
     <!--修改轮播图状态-->
-    <update id="updateSlideStatus" parameterType="java.lang.String">
-        update t_sys_slide
-        set
-            slide_status = #{slideshowStateId},
+    <update id="updateSlideStatus" parameterType="java.util.List">
+        <foreach item="item" index="index" collection="slideInfoList" open="" separator=";" close="">
+            update t_sys_slide
+            set
+            slide_status = #{item.slideshowStateId},
             update_time = now(),
-            update_user = #{loginId},
+            update_user = #{item.updateUser, jdbcType=VARCHAR},
             version = version + 1
-        where id in
-        <foreach item="slideId" index="index" collection="listSlideId" open="(" separator="," close=")">
-            #{slideId}
+            <where>
+                id = #{item.slideshowId, jdbcType=VARCHAR}
+                and version = #{item.version, jdbcType=VARCHAR}
+            </where>
         </foreach>
     </update>
 

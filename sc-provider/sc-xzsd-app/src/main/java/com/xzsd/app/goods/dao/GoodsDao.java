@@ -1,9 +1,6 @@
 package com.xzsd.app.goods.dao;
 
-import com.xzsd.app.goods.entity.GoodsCategory;
-import com.xzsd.app.goods.entity.GoodsEvaluation;
-import com.xzsd.app.goods.entity.GoodsEvaluationVO;
-import com.xzsd.app.goods.entity.GoodsInfo;
+import com.xzsd.app.goods.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,6 +24,13 @@ public interface GoodsDao {
      * @return
      */
     List<GoodsEvaluationVO> getListGoodsEvaluation(GoodsEvaluation goodsEvaluation);
+
+    /**
+     * 查询每个评价商品的所有图片
+     * @param goodsEvaluation
+     * @return
+     */
+    List<EvaluationImage> getListGoodsImage(GoodsEvaluation goodsEvaluation);
 
     /**
      * 查询商品一级分类

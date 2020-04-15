@@ -32,6 +32,10 @@ public class GoodsEvaluationVO {
      * 封装评价图片
      */
     private List<EvaluationImage> imageList;
+    /**
+     * 用户id
+     */
+    private String userId;
 
     public String getGoodsId() {
         return goodsId;
@@ -79,5 +83,13 @@ public class GoodsEvaluationVO {
 
     public void setImageList(List<EvaluationImage> imageList) {
         this.imageList = imageList;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

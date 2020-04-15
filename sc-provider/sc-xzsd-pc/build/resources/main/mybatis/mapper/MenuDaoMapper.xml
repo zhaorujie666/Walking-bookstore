@@ -9,8 +9,10 @@
         version as version
         from t_sys_menu
         where is_delete = 0
+        order by create_time asc
     </select>
 
+    <!--新增菜单-->
     <insert id="addMenu" parameterType="com.xzsd.pc.menu.entity.Menu">
         insert into t_sys_menu(
             menu_id,
@@ -96,4 +98,16 @@
             version = version + 1
         where menu_id = #{menuId}
     </update>
+
+    <!--根据角色查询首页菜单显示的功能-->
+    <select id="getPageHomeMenu" parameterType="java.lang.String" resultType="com.xzsd.pc.menu.entity.Menu">
+        select
+        menu_id as menuId,
+        menu_name as menuName
+        from t_sys_menu
+        where is_delete = 0
+        <if test="role == 2">
+            and is_manager = 1
+        </if>
+    </select>
 </mapper>

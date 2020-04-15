@@ -127,6 +127,10 @@ public class GoodsInfo {
      * 版本号
      */
     private String version;
+    /**
+     * 用户id
+     */
+    private String userId;
 
     public int getPageSize() {
         return pageSize;
@@ -358,5 +362,13 @@ public class GoodsInfo {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

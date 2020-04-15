@@ -83,7 +83,8 @@
         t1.selling_price goodsPrice,
         t1.publisher goodsPress,
         t1.author goodsAuthor,
-        t1.goods_image goodsImagePath
+        t1.goods_image goodsImagePath,
+        t1.version version
         from t_goods_info t1, t_goods_category t2, t_goods_category t3
         where t1.id = #{goodsId}
         and t2.id = t1.category_first
@@ -179,16 +180,18 @@
     </select>
 
     <!--修改商品状态-->
-    <update id="updateGoodsStatus" parameterType="com.xzsd.pc.goods.entity.GoodsInfo">
-        update t_goods_info
-        set
-            goods_status = #{goodsStateId},
+    <update id="updateGoodsStatus" parameterType="java.util.List">
+        <foreach item="item" index="index" collection="goodsInfoList" open="" separator=";" close="">
+            update t_goods_info
+            set
+            goods_status = #{item.goodsStateId},
             update_time = now(),
-            update_user = #{loginId},
+            update_user = #{item.updateUser, jdbcType=VARCHAR},
             version = version + 1
-        where id in
-        <foreach item="goodsId" index="index" collection="listGoodsId" open="(" separator="," close=")">
-            #{goodsId}
+            <where>
+                id = #{item.goodsId, jdbcType=VARCHAR}
+                and version = #{item.version, jdbcType=VARCHAR}
+            </where>
         </foreach>
     </update>
 
@@ -205,4 +208,19 @@
             #{goodsId}
         </foreach>
     </update>
+
+    <!--查询删除的商品是否已经被轮播图或热门商品使用-->
+    <select id="querySlideAndHotGoods" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        distinct t1.id as goodsId
+        from t_goods_info t1, t_sys_slide t2, t_hot_goods t3
+        where (t1.id = t2.goods_id or t1.id = t3.goods_id)
+        and t1.is_delete = 0
+        and t2.is_delete = 0
+        and t3.is_delete = 0
+        and t1.id in
+        <foreach item="goodsId" index="index" collection="listGoodsId" open="(" separator="," close=")">
+            #{goodsId}
+        </foreach>
+    </select>
 </mapper>
