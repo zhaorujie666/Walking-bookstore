@@ -254,4 +254,32 @@
             0)
         </foreach>
     </insert>
+
+    <!--查询每个商品的评价等级之和-->
+    <select id="getEvaluationGoodsRank" parameterType="java.lang.String"
+            resultType="com.xzsd.app.customerorder.entity.GoodsInfo">
+        select
+        goods_id as goodsId,
+        avg (star_level) as average
+        from t_goods_appraise
+        where is_delete = 0
+        and goods_id in
+        <foreach item="goodsId" index="index" collection="listGoodsId" open="(" separator="," close=")">
+            #{goodsId}
+        </foreach>
+        group by goods_id
+    </select>
+
+    <!--更新商品星级-->
+    <update id="updateGoodsRank" parameterType="java.util.List">
+        <foreach item="item" index="index" collection="listGoods" open="" separator=";" close="">
+            update t_goods_info
+            set
+                star_level = #{item.average, jdbcType=DOUBLE},
+                version = version + 1
+            <where>
+                id = #{item.goodsId, jdbcType=VARCHAR}
+            </where>
+        </foreach>
+    </update>
 </mapper>

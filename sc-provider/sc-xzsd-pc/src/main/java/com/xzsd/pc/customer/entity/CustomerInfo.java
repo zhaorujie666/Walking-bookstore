@@ -72,6 +72,10 @@ public class CustomerInfo {
      * 角色
      */
     private String role;
+    /**
+     * 用户id
+     */
+    private String userId;
 
     public String getUserName() {
         return userName;
@@ -199,5 +203,13 @@ public class CustomerInfo {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

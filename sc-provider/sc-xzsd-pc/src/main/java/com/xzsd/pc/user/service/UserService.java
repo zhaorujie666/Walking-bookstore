@@ -37,12 +37,12 @@ public class UserService {
         //校验是否存在相同的用户账号
         int num = userDao.countUserAccount(userInfo);
         if(num != 0){
-            return AppResponse.bizError("存在相同的用户账号，请重新输入！");
+            return AppResponse.versionError("存在相同的用户账号，请重新输入！");
         }
         //校验是否存在相同的手机号
         int countPhone = userDao.countPhone(userInfo);
         if(0 != countPhone){
-            return AppResponse.bizError("该手机号已经存在，请重新输入");
+            return AppResponse.versionError("该手机号已经存在，请重新输入");
         }
         //设置id
         userInfo.setUserId(StringUtil.getCommonCode(2));
@@ -52,7 +52,7 @@ public class UserService {
         userInfo.setUserPassword(pwd);
         int count = userDao.addUser(userInfo);
         if(count == 0){
-            return AppResponse.bizError("新增用户失败");
+            return AppResponse.versionError("新增用户失败");
         }
         return AppResponse.success("新增用户成功");
     }
@@ -65,7 +65,7 @@ public class UserService {
     public AppResponse getUserInfoById(String userId){
         UserVO userInfo = userDao.getUserInfoById(userId);
         if(userInfo == null){
-            return AppResponse.bizError("查询失败");
+            return AppResponse.versionError("查询失败");
         }
         return AppResponse.success("查询成功", userInfo);
     }
@@ -78,17 +78,21 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUserInfo(UserInfo userInfo){
         UserVO user = userDao.getUserInfoById(userInfo.getUserId());
-        //校验是否存在相同的账号
-        int num = userDao.countUserAccount(userInfo);
-        if(num != 0 && user.getUserAcct().equals(userInfo.getUserAcct()) == false){
-            return AppResponse.bizError("存在相同的用户账号，请重新输入！");
+        if(!user.getUserAcct().equals(userInfo.getUserAcct())){
+            //校验是否存在相同的账号
+            int num = userDao.countUserAccount(userInfo);
+            if(num != 0){
+                return AppResponse.versionError("存在相同的用户账号，请重新输入！");
+            }
         }
-        //校验是否存在相同的手机号
-        int countPhone = userDao.countPhone(userInfo);
-        if(0 != countPhone && user.getPhone().equals(userInfo.getPhone()) == false){
-            return AppResponse.bizError("该手机号已经存在，请重新输入");
+        if(!user.getPhone().equals(userInfo.getPhone())){
+            //校验是否存在相同的手机号
+            int countPhone = userDao.countPhone(userInfo);
+            if(countPhone != 0){
+                return AppResponse.versionError("该手机号已经存在，请重新输入");
+            }
         }
-        if(user.getUserPassword().equals(userInfo.getUserPassword()) == false){
+        if(!user.getUserPassword().equals(userInfo.getUserPassword())){
             String password = userInfo.getUserPassword();
             String pwd = PasswordUtils.generatePassword(password);
             userInfo.setUserPassword(pwd);
@@ -96,7 +100,7 @@ public class UserService {
 
         int count = userDao.updateUserInfo(userInfo);
         if(count == 0){
-            return AppResponse.bizError("修改失败，请刷新页面");
+            return AppResponse.versionError("修改失败");
         }
         return AppResponse.success("修改成功");
     }
@@ -125,7 +129,7 @@ public class UserService {
         List<String> listUserId = Arrays.asList(userId.split(","));
         int count = userDao.deleteUser(listUserId, loginUserId);
         if(count == 0){
-            return AppResponse.bizError("删除用户失败，请刷新页面");
+            return AppResponse.versionError("删除用户失败，请刷新页面");
         }
         return AppResponse.success("删除用户成功");
     }

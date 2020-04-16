@@ -27,7 +27,7 @@ public class OrderService {
 
     @Resource
     private OrderDao orderDao;
-    
+
     @Resource
     private UserDao userDao;
 
@@ -57,7 +57,7 @@ public class OrderService {
     public AppResponse getOrderDetailsById(String orderId){
         List<OrderDetails> orderDetails = orderDao.getOrderDetailsById(orderId);
         if(orderDetails.size() == 0){
-            return AppResponse.bizError("查询订单详情失败！");
+            return AppResponse.versionError("查询订单详情失败！");
         }
         //封装成接口文档需要的名称
         OrderDetailsList orderDetailsList = new OrderDetailsList();
@@ -72,9 +72,10 @@ public class OrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateOrderStatus(OrderInfo orderInfo){
+        String role = userDao.getUserRole(orderInfo.getLoginUserId());
         //判断只有店长才能修改订单
-        if("2".equals(orderInfo.getRole()) == false){
-            return AppResponse.bizError("您不能修改订单状态，只有店长才可以！");
+        if("2".equals(role) == false){
+            return AppResponse.versionError("您不能修改订单状态，只有店长才可以！");
         }
         List<String> listOrderId = Arrays.asList(orderInfo.getOrderId().split(","));
         List<String> listVersion = Arrays.asList(orderInfo.getVersion().split(","));
@@ -89,7 +90,7 @@ public class OrderService {
         }
         int count = orderDao.updateOrderStatus(orderList);
         if(count == 0){
-            return AppResponse.bizError("更新订单状态失败");
+            return AppResponse.versionError("更新订单状态失败");
         }
         return AppResponse.success("更新订单状态成功");
     }

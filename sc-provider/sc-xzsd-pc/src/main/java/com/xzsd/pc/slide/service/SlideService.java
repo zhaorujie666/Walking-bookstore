@@ -40,12 +40,12 @@ public class SlideService {
         //校验是否存在相同的排序
         int countSort = slideDao.countSort(slideInfo);
         if(countSort != 0){
-            return AppResponse.bizError("出现重复的排序或当前的商品已被选择，请重新输入！");
+            return AppResponse.versionError("出现重复的排序或当前的商品已被选择，请重新输入！");
         }
         slideInfo.setSlideshowId(StringUtil.getCommonCode(2));
         int count = slideDao.addSlide(slideInfo);
         if(count == 0){
-            return AppResponse.bizError("新增轮播图失败！");
+            return AppResponse.versionError("新增轮播图失败！");
         }
         return AppResponse.success("新增轮播图成功！");
     }
@@ -76,7 +76,7 @@ public class SlideService {
         }
         int count = slideDao.updateSlideStatus(slideInfoList);
         if(count == 0){
-            return AppResponse.bizError("修改轮播图状态失败！");
+            return AppResponse.versionError("修改轮播图状态失败！");
         }
         return AppResponse.success("修改轮播图状态成功！");
     }
@@ -108,7 +108,7 @@ public class SlideService {
         List<String> listSlideId = Arrays.asList(slideshowId.split(","));
         int count = slideDao.deleteSlide(listSlideId, userId);
         if(count == 0){
-            return AppResponse.bizError("删除轮播图失败！");
+            return AppResponse.versionError("删除轮播图失败！");
         }
         return AppResponse.success("删除轮播图成功！");
     }

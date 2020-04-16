@@ -42,13 +42,13 @@ public class OrderService {
         List<String> listGoodsNum = Arrays.asList(orderInfo.getClientGoodsNum().split(","));
         List<OrderInfo> orderInfoList = new ArrayList<>();
         int totalGoodsNum = 0;
-        int totalGoodsPrice = 0;
+        double totalGoodsPrice = 0;
         //遍历每一个商品，商品价格和购买数量
         for (int i = 0; i < listGoodsId.size() && i < listGoodsPrice.size() &&  i< listGoodsNum.size(); i++) {
             //计算订单总购买数
             totalGoodsNum = totalGoodsNum + Integer.valueOf(listGoodsNum.get(i));
             //计算订单总价格
-            totalGoodsPrice = totalGoodsPrice + Integer.valueOf(listGoodsPrice.get(i)) * Integer.valueOf(listGoodsNum.get(i));
+            totalGoodsPrice = totalGoodsPrice + Double.valueOf(listGoodsPrice.get(i)) * Integer.valueOf(listGoodsNum.get(i));
             OrderInfo order = new OrderInfo();
             //设置订单详情表Id
             order.setOrderDetailsId(StringUtil.getCommonCode(2));
@@ -60,7 +60,7 @@ public class OrderService {
             //设置单个商品的购买数量
             order.setClientGoodsNum(listGoodsNum.get(i));
             //设置单个商品的购买数量乘与商品价格
-            int totalPrice = Integer.valueOf(listGoodsPrice.get(i)) * Integer.valueOf(listGoodsNum.get(i));
+            Double totalPrice = Double.valueOf(listGoodsPrice.get(i)) * Integer.valueOf(listGoodsNum.get(i));
             order.setTotalGoodsPrice(String.valueOf(totalPrice));
             orderInfoList.add(order);
         }
@@ -165,7 +165,10 @@ public class OrderService {
         List<EvaluationOrder> evaluationOrderList = new ArrayList<>();
         //评价商品图片集合
         List<EvaluationImages> evaluationImagesList = new ArrayList<>();
+        //获取评价商品集合
         List<EvaluationGoods> evaluateList = evaluationOrder.getEvaluateList();
+        //商品id集合，为更新商品等级
+        List<String> listGoodsId = new ArrayList<>();
         for (int i = 0; i < evaluateList.size(); i++) {
             EvaluationOrder evaluationOrderInfo = new EvaluationOrder();
             //设置评价id
@@ -177,6 +180,7 @@ public class OrderService {
             evaluationOrderInfo.setUserId(userId);
             //设置商品id
             evaluationOrderInfo.setGoodsId(evaluateList.get(i).getGoodsId());
+            listGoodsId.add(evaluateList.get(i).getGoodsId());
             //设置是商品等级
             evaluationOrderInfo.setEvaluateScore(evaluateList.get(i).getEvaluateScore());
             //设置评价内容
@@ -189,7 +193,7 @@ public class OrderService {
                 evaluationImages.setImageId(StringUtil.getCommonCode(2));
                 //设置图片排序
                 evaluationImages.setImageNum(imageList.get(j).getImageNum());
-                //设置鱼片路径
+                //设置图片路径
                 evaluationImages.setImagePath(imageList.get(j).getImagePath());
                 //设置评价表id
                 evaluationImages.setEvaluationId(evaluationId);
@@ -202,6 +206,13 @@ public class OrderService {
         int num = orderDao.addEvaluateOrderGoodsImages(evaluationImagesList);
         if(0 == count || 0 == num){
             return AppResponse.bizError("新增评价失败");
+        }
+        //根据评价商品的id查询该商品的星级平均数
+        List<GoodsInfo> goodsInfo = orderDao.getEvaluationGoodsRank(listGoodsId);
+        //更新商品的星级
+        int rank = orderDao.updateGoodsRank(goodsInfo);
+        if(0 == rank){
+            return AppResponse.bizError("更新商品等级失败");
         }
         return AppResponse.success("新增评价成功");
     }

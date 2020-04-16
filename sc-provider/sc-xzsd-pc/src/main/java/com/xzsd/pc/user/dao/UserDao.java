@@ -18,13 +18,6 @@ public interface UserDao {
     String getUserRole(@Param("loginUserId") String loginUserId);
 
     /**
-     * 查询是否出现重复的邀请码
-     * @param invitationCode
-     * @return
-     */
-    //int countInvitationCode(@Param("invitationCode") String invitationCode);
-
-    /**
      * 统计用户账号
      * @param userInfo
      * @return

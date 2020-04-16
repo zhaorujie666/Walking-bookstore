@@ -27,6 +27,14 @@ public class GoodsVTO {
      */
     private String goodsPrice;
     /**
+     * 一级分类编号
+     */
+    private String oneClassifyId;
+    /**
+     * 二级分类编号
+     */
+    private String twoClassifyId;
+    /**
      * 一级分类名称
      */
     private String oneClassifyName;
@@ -185,5 +193,21 @@ public class GoodsVTO {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getOneClassifyId() {
+        return oneClassifyId;
+    }
+
+    public void setOneClassifyId(String oneClassifyId) {
+        this.oneClassifyId = oneClassifyId;
+    }
+
+    public String getTwoClassifyId() {
+        return twoClassifyId;
+    }
+
+    public void setTwoClassifyId(String twoClassifyId) {
+        this.twoClassifyId = twoClassifyId;
     }
 }

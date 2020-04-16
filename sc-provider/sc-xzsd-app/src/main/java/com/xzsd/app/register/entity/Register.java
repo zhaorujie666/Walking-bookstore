@@ -9,7 +9,11 @@ public class Register {
     /**
      * 用户编码
      */
-    private String userCode;
+    private String userId;
+    /**
+     * 客户id
+     */
+    private String customerId;
     /**
      * 用户账号
      */
@@ -42,13 +46,25 @@ public class Register {
      * 绑定店长邀请码
      */
     private String inviteCode;
+    /**
+     * 用户头像
+     */
+    private String userImage;
 
-    public String getUserCode() {
-        return userCode;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getUserAcct() {
@@ -113,5 +129,13 @@ public class Register {
 
     public void setInviteCode(String inviteCode) {
         this.inviteCode = inviteCode;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 }

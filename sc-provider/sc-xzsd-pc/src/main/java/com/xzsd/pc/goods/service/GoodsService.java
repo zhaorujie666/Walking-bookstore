@@ -40,7 +40,7 @@ public class GoodsService {
         //判断是否出现重复的书号
         int count = goodsDao.countBookNumber(goodsInfo.getIsbn());
         if(count != 0){
-            return AppResponse.bizError("书号重复，请输入正确的书号！");
+            return AppResponse.versionError("书号重复，请输入正确的书号！");
         }
         //判断传入的字段是否为空
         if(null == goodsInfo.getGoodsAdvertise()){
@@ -55,7 +55,7 @@ public class GoodsService {
         goodsInfo.setStoreId(RandomUtil.randomLetter(3) + StringUtil.getCommonCode(2));
         int goods = goodsDao.addGoods(goodsInfo);
         if(goods == 0){
-            return AppResponse.bizError("新增商品失败");
+            return AppResponse.versionError("新增商品失败");
         }
         return AppResponse.success("新增商品成功");
     }
@@ -70,7 +70,7 @@ public class GoodsService {
     public AppResponse getGoodsInfoById(String goodsId){
         GoodsVTO goodsInfo = goodsDao.getGoodsInfoById(goodsId);
         if(goodsInfo == null){
-            return AppResponse.bizError("查询商品详情失败！");
+            return AppResponse.versionError("查询商品详情失败！");
         }
         return AppResponse.success("查询商品详情成功！", goodsInfo);
     }
@@ -85,7 +85,7 @@ public class GoodsService {
     public AppResponse getListGoodsCategory(String classifyId){
         List<GoodsCategoryVO> listGoodsCategory = goodsDao.getListGoodsCategory(classifyId);
         if(listGoodsCategory.size() == 0){
-            return AppResponse.bizError("获取商品分类失败！");
+            return AppResponse.versionError("获取商品分类失败！");
         }
         //封装成接口文档需要的名称
         GoodsCategoryList goodsClassifyList = new GoodsCategoryList();
@@ -104,9 +104,11 @@ public class GoodsService {
     public AppResponse updateGoodsInfo(GoodsInfo goodsInfo){
         GoodsVTO goods = goodsDao.getGoodsInfoById(goodsInfo.getGoodsId());
         //判断当前的书号有没有改变
-        int count = goodsDao.countBookNumber(goodsInfo.getIsbn());
-        if(count != 0 && goods.getIsbn().equals(goodsInfo.getIsbn()) == false){
-            return AppResponse.bizError("存在相同的书号，请输入正确的书号！");
+        if(goods.getIsbn().equals(goodsInfo.getIsbn()) == false){
+            int count = goodsDao.countBookNumber(goodsInfo.getIsbn());
+            if(0 != count){
+                return AppResponse.versionError("存在相同的书号，请输入正确的书号！");
+            }
         }
         //判断传入的字段是否为空
         if(null == goodsInfo.getGoodsAdvertise()){
@@ -117,7 +119,7 @@ public class GoodsService {
         }
         int number = goodsDao.updateGoodsInfo(goodsInfo);
         if(number == 0){
-            return AppResponse.bizError("修改商品信息失败！");
+            return AppResponse.versionError("修改商品信息失败！");
         }
         return AppResponse.success("修改商品信息成功！");
     }
@@ -131,6 +133,7 @@ public class GoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsStatus(GoodsInfo goodsInfo){
+        //分割字符
         List<String> listGoodsId = Arrays.asList(goodsInfo.getGoodsId().split(","));
         List<String> listVersion = Arrays.asList(goodsInfo.getVersion().split(","));
         List<GoodsInfo> goodsInfoList = new ArrayList<>();
@@ -148,7 +151,7 @@ public class GoodsService {
         }
         int count = goodsDao.updateGoodsStatus(goodsInfoList);
         if(count == 0){
-            return AppResponse.bizError("更新商品状态失败！");
+            return AppResponse.versionError("更新商品状态失败！");
         }
         return AppResponse.success("更新商品状态成功！");
     }
@@ -196,11 +199,11 @@ public class GoodsService {
             flag = 0;
         }
         if(listGoodsId.size() == 0){
-            return AppResponse.bizError("该商品已经被用于轮播图或热门商品，所有不能删除");
+            return AppResponse.versionError("该商品已经被用于轮播图或热门商品，所有不能删除");
         }
         int count = goodsDao.deleteGoods(listGoodsId, userId);
         if(count == 0){
-            return AppResponse.bizError("删除失败！");
+            return AppResponse.versionError("删除失败！");
         }
         return AppResponse.success("删除成功！");
     }

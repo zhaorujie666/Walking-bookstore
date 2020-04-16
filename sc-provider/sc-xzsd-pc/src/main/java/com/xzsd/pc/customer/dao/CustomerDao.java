@@ -16,13 +16,6 @@ import java.util.List;
 @Mapper
 public interface CustomerDao {
     /**
-     * 获取店长邀请码
-     * @param loginId
-     * @return
-     */
-    String getInvitationCode(@Param("loginId") String loginId);
-
-    /**
      * 查询当前登录用户是店长时的所有客户信息
      * @param customerInfo
      * @return

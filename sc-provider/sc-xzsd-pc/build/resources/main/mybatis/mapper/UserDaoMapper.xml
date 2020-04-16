@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.user.dao.UserDao">
-
     <!--获取登录者角色-->
     <select id="getUserRole" parameterType="java.lang.String" resultType="java.lang.String">
         select role
@@ -127,7 +126,7 @@
         version as version
         from t_sys_user
         where is_delete = 0
-        and role not in (3,4)
+        and role in (0, 1, 2)
         <if test="userAcct != null and userAcct != ''">
             and user_acct like concat('%', #{userAcct}, '%')
         </if>

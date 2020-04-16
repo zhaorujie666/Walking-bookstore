@@ -7,7 +7,6 @@
         from t_sys_user
         where is_delete = 0
         and user_acct = #{userAcct}
-        or phone = #{phone}
     </select>
 
     <!--统计手机号数量-->
@@ -77,15 +76,6 @@
             now(),
             0)
     </insert>
-
-    <!--查询省市区名称-->
-    <select id="getListAreaName" parameterType="java.lang.String" resultType="java.lang.String">
-        select
-        t1.area_name
-        from t_area t1, t_driver_info t2
-        where t1.id in (t2.province, t2.city, t2.county)
-        and t2.driver_id = #{driverId}
-    </select>
 
     <!--查询司机信息详情-->
     <select id="getDriverById" parameterType="java.lang.String" resultType="com.xzsd.pc.driver.entity.DriverVO">

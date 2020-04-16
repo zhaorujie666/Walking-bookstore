@@ -36,7 +36,7 @@ public class CategoryService {
         //校验是否存在相同的分类名
         int count = categoryDao.countGoodsCategoryName(goodsCategory);
         if(count != 0){
-            return AppResponse.bizError("存在相同的分类名，请重新输入！");
+            return AppResponse.versionError("存在相同的分类名，请重新输入！");
         }
         goodsCategory.setClassifyId(StringUtil.getCommonCode(2));
         goodsCategory.setIsDelete(0);
@@ -44,7 +44,7 @@ public class CategoryService {
         //判断是否插入成功
         int categoryNum = categoryDao.addGoodsCategory(goodsCategory);
         if(categoryNum == 0){
-            return AppResponse.bizError("新增失败！");
+            return AppResponse.versionError("新增失败！");
         }
         return AppResponse.success("新增成功！");
     }
@@ -58,7 +58,7 @@ public class CategoryService {
     public AppResponse getGoodsCategoryById(String categoryId){
         GoodsCategoryVO goodsCategory = categoryDao.getGoodsCategoryById(categoryId);
         if(goodsCategory == null){
-            return AppResponse.bizError("查询分类详情失败！");
+            return AppResponse.versionError("查询分类详情失败！");
         }
         return AppResponse.success("查询分类详情成功！", goodsCategory);
     }
@@ -72,15 +72,17 @@ public class CategoryService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsCategoryById(GoodsCategory goodsCategory, String loginId){
         GoodsCategoryVO category = categoryDao.getGoodsCategoryById(goodsCategory.getClassifyId());
-        int count = categoryDao.countGoodsCategoryName(goodsCategory);
         //判断当前的分类名称是否存在相同的，只有修改后存在相同的分类名才会提示重新输入
-        if(count != 0 && category.getClassifyName().equals(goodsCategory.getClassifyName()) == false){
-            return AppResponse.bizError("存在相同的分类名，请重新输入！");
+        if(!category.getClassifyName().equals(goodsCategory.getClassifyName())){
+            int count = categoryDao.countGoodsCategoryName(goodsCategory);
+            if(0 != count){
+                return AppResponse.versionError("存在相同的分类名，请重新输入！");
+            }
         }
         goodsCategory.setUpdateUser(loginId);
         int categoryNum = categoryDao.updateGoodsCategoryById(goodsCategory);
         if(categoryNum == 0){
-            return AppResponse.bizError("修改失败！");
+            return AppResponse.versionError("修改失败！");
         }
         return AppResponse.success("修改成功！");
     }
@@ -107,11 +109,11 @@ public class CategoryService {
         //查询是否存在二级分类
         int num = categoryDao.countParentId(categoryId);
         if(num != 0){
-            return AppResponse.bizError("存在二级分类，不能删除！");
+            return AppResponse.versionError("存在二级分类，不能删除！");
         }
         int count = categoryDao.deleteGoodsCategory(categoryId, loginId);
         if(count == 0){
-            return AppResponse.bizError("删除失败");
+            return AppResponse.versionError("删除失败");
         }
         return AppResponse.success("删除成功");
     }

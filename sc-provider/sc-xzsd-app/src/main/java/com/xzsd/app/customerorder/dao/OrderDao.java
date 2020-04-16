@@ -75,4 +75,18 @@ public interface OrderDao {
      * @return
      */
     int addEvaluateOrderGoodsImages(@Param("evaluationImages") List<EvaluationImages> evaluationImages);
+
+    /**
+     * 查询每个商品的评价等级之和
+     * @param listGoodsId
+     * @return
+     */
+    List<GoodsInfo> getEvaluationGoodsRank(@Param("listGoodsId") List<String> listGoodsId);
+
+    /**
+     * 更新商品星级
+     * @param listGoods
+     * @return
+     */
+    int updateGoodsRank(@Param("listGoods") List<GoodsInfo> listGoods);
 }

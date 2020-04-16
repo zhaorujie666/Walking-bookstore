@@ -55,6 +55,7 @@
         select count(menu_name)
         from t_sys_menu
         where menu_name = #{menuName}
+        and is_delete = 0
     </select>
 
     <!--统计是否存在相同的菜单路由-->
@@ -62,6 +63,7 @@
         select count(menu_path)
         from t_sys_menu
         where menu_path = #{menuPath}
+        and is_delete = 0
     </select>
 
     <!--查询菜单详情-->
@@ -71,7 +73,8 @@
         menu_name as menuName,
         menu_path as menuPath,
         is_menu as isMenu,
-        remark as menuComment
+        remark as menuComment,
+        version as version
         from t_sys_menu
         where menu_id = #{menuId}
     </select>

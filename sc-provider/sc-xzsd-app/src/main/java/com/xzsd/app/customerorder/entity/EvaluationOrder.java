@@ -35,7 +35,7 @@ public class EvaluationOrder {
     /**
      * 评价星级
      */
-    private String evaluateScore;
+    private int evaluateScore;
 
     public String getEvaluationId() {
         return evaluationId;
@@ -85,11 +85,11 @@ public class EvaluationOrder {
         this.evaluateContent = evaluateContent;
     }
 
-    public String getEvaluateScore() {
+    public int getEvaluateScore() {
         return evaluateScore;
     }
 
-    public void setEvaluateScore(String evaluateScore) {
+    public void setEvaluateScore(int evaluateScore) {
         this.evaluateScore = evaluateScore;
     }
 }

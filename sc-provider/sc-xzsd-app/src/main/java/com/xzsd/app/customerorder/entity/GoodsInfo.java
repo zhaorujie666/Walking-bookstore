@@ -34,6 +34,14 @@ public class GoodsInfo {
      * 订单id
      */
     private String orderId;
+    /**
+     * 商品星级平均数
+     */
+    private String average;
+    /**
+     * 总数
+     */
+    private int totalCount;
 
     public String getGoodsId() {
         return goodsId;
@@ -89,5 +97,21 @@ public class GoodsInfo {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public String getAverage() {
+        return average;
+    }
+
+    public void setAverage(String average) {
+        this.average = average;
+    }
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
     }
 }

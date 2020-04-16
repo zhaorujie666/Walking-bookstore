@@ -37,8 +37,9 @@ public class CustomerController {
     public AppResponse getListCustomers(CustomerInfo customerInfo){
         try {
             //获取用户id
-            String loginUserId = SecurityUtils.getCurrentUserId();
-            return customerService.getListCustomers(customerInfo, loginUserId);
+            String userId = SecurityUtils.getCurrentUserId();
+            customerInfo.setUserId(userId);
+            return customerService.getListCustomers(customerInfo);
         }catch (Exception e){
             logger.error("查询失败", e);
             System.out.println(e.toString());

@@ -19,7 +19,7 @@ public class EvaluationGoods {
     /**
      * 评价星级
      */
-    private String evaluateScore;
+    private int evaluateScore;
     /**
      * 评价图片集合
      */
@@ -41,11 +41,11 @@ public class EvaluationGoods {
         this.evaluateContent = evaluateContent;
     }
 
-    public String getEvaluateScore() {
+    public int getEvaluateScore() {
         return evaluateScore;
     }
 
-    public void setEvaluateScore(String evaluateScore) {
+    public void setEvaluateScore(int evaluateScore) {
         this.evaluateScore = evaluateScore;
     }
 

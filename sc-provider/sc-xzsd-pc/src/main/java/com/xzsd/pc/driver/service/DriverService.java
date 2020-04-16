@@ -6,7 +6,6 @@ import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.driver.dao.DriverDao;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import com.xzsd.pc.driver.entity.DriverVO;
-import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.util.PasswordUtils;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @DescriptionDemo 实现类
+ * @DescriptionDemo 司机的实现类
  * @Author zhaorujie
  * @Date 2020-03-24
  */
@@ -26,9 +25,6 @@ public class DriverService {
 
     @Resource
     private DriverDao driverDao;
-
-    @Resource
-    private UserDao userDao;
 
     /**
      * demo 新增用户
@@ -42,13 +38,13 @@ public class DriverService {
         // 校验司机账号和手机号是否存在
         int countDriverAccount = driverDao.countDriverAccount(driverInfo);
         if(countDriverAccount != 0){
-            return AppResponse.bizError("账号或手机号已存在，请重新输入");
+            return AppResponse.versionError("账号已存在，请重新输入");
         }
         // 校验手机号是否存在
-        /*int countPhone = driverDao.countPhone(driverInfo);
+        int countPhone = driverDao.countPhone(driverInfo);
         if(0 != countPhone){
-            return AppResponse.bizError("手机号已存在，请重新输入");
-        }*/
+            return AppResponse.versionError("手机号已存在，请重新输入");
+        }
         driverInfo.setDriverId(StringUtil.getCommonCode(2));
         driverInfo.setIsDelete(0);
         driverInfo.setDriverInfoId(StringUtil.getCommonCode(2));
@@ -60,7 +56,7 @@ public class DriverService {
         int count = driverDao.addDriver(driverInfo);
         int num = driverDao.addDriverArea(driverInfo);
         if(count == 0 && num == 0){
-            return AppResponse.bizError("新增失败！");
+            return AppResponse.versionError("新增失败！");
         }
         return AppResponse.success("新增成功！");
     }
@@ -75,14 +71,8 @@ public class DriverService {
     public AppResponse getDriverById(String driverId){
         DriverVO driverInfo = driverDao.getDriverById(driverId);
         if(driverInfo == null){
-            return AppResponse.bizError("查询失败");
+            return AppResponse.versionError("查询失败");
         }
-        /*//查询省市区名称
-        List<String> listAreaName = driverDao.getListAreaName(driverId);
-        //再对省市区赋值
-        globalDriverInfo.setProvinceName(listAreaName.get(0));
-        globalDriverInfo.setCityName(listAreaName.get(1));
-        globalDriverInfo.setAreaName(listAreaName.get(2));*/
         return AppResponse.success("查询成功", driverInfo);
     }
 
@@ -101,7 +91,7 @@ public class DriverService {
             //校验账号是否存在
             int count = driverDao.countDriverAccount(driverInfo);
             if(count != 0){
-                return AppResponse.bizError("该司机账号已存在，请重新输入！");
+                return AppResponse.versionError("该司机账号已存在，请重新输入！");
             }
         }
         //判断当前手机号是否是修改
@@ -109,7 +99,7 @@ public class DriverService {
             // 校验手机号是否存在
             int countPhone = driverDao.countPhone(driverInfo);
             if(0 != countPhone){
-                return AppResponse.bizError("手机号已存在，请重新输入");
+                return AppResponse.versionError("手机号已存在，请重新输入");
             }
         }
         //判断密码有没有修改
@@ -122,8 +112,8 @@ public class DriverService {
         //修改司机信息
         int count= driverDao.updateDriver(driverInfo);
         int driverArea = driverDao.updateDriverArea(driverInfo);
-        if(count == 0 && driverArea == 0) {
-            return AppResponse.bizError("修改失败");
+        if(count == 0 || driverArea == 0) {
+            return AppResponse.versionError("修改失败");
         }
         return AppResponse.success("修改成功");
     }
@@ -143,7 +133,6 @@ public class DriverService {
         }else if("0".equals(driverInfo.getRole()) || "1".equals(driverInfo.getRole())){
             listDriver = driverDao.getListDriverByAdmin(driverInfo);
         }
-
         PageInfo<DriverVO> pageData = new PageInfo<DriverVO>(listDriver);
         return AppResponse.success("查询成功！", pageData);
     }
@@ -161,7 +150,7 @@ public class DriverService {
         int count = driverDao.deleteDriverById(listDriverId, loginId);
         int num = driverDao.deleteDriverAreaById(listDriverId, loginId);
         if(count == 0 && num == 0){
-            return AppResponse.success("删除失败！");
+            return AppResponse.versionError("删除失败！");
         }
         return AppResponse.success("删除成功！");
     }

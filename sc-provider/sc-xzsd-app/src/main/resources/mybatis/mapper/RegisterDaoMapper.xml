@@ -4,8 +4,8 @@
     <!--注册用户-->
     <insert id="registerUser" parameterType="com.xzsd.app.register.entity.Register">
         insert into t_sys_user(
-            user_code,
-            user_account,
+            user_id,
+            user_acct,
             user_password,
             user_name,
             role,
@@ -13,7 +13,7 @@
             phone,
             id_card,
             email,
-            invitation_code,
+            user_image,
             is_delete,
             create_time,
             create_user,
@@ -21,7 +21,7 @@
             version
         )
         values (
-            #{userCode},
+            #{userId},
             #{userAcct},
             #{userPassword},
             #{userName},
@@ -30,19 +30,51 @@
             #{phone},
             #{idCard},
             #{mail},
-            #{inviteCode},
+            #{userImage},
             0,
             now(),
-            #{userCode},
+            #{userId},
             now(),
             0
         )
     </insert>
 
-    <!--统计用户账号-->
-    <select id="countUserAcct" parameterType="com.xzsd.app.register.entity.Register" resultType="int">
-        select count(user_account)
+    <!--新增邀请码-->
+    <insert id="addInviteCode" parameterType="com.xzsd.app.register.entity.Register">
+        insert into t_sys_customer(
+            id,
+            customer_id,
+            invitation_code,
+            is_delete,
+            create_time,
+            create_user,
+            update_time,
+            update_user,
+            version
+        )
+        values (
+            #{customerId},
+            #{userId},
+            <if test="inviteCode != null and inviteCode != ''">
+                #{inviteCode},
+            </if>
+            <if test="inviteCode == null">
+                '',
+            </if>
+            0,
+            now(),
+            #{userId},
+            now(),
+            #{userId},
+            0
+        )
+    </insert>
+
+    <!--统计用户账号和手机号-->
+    <select id="countUserAcctAndPhone" parameterType="com.xzsd.app.register.entity.Register" resultType="int">
+        select count(*)
         from t_sys_user
-        where user_account = #{userAcct}
+        where is_delete = 0
+        and (user_acct = #{userAcct} or phone = #{phone})
     </select>
 </mapper>

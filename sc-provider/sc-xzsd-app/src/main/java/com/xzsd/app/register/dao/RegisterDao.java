@@ -18,9 +18,16 @@ public interface RegisterDao {
     int registerUser(Register register);
 
     /**
+     * 新增邀请码
+     * @param register
+     * @return
+     */
+    int addInviteCode(Register register);
+
+    /**
      * 统计用户账号
      * @param register
      * @return
      */
-    int countUserAcct(Register register);
+    int countUserAcctAndPhone(Register register);
 }

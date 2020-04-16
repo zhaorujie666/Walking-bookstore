@@ -36,12 +36,12 @@ public class StoreService {
         //校验是否存在相同的营业执政编码
         int countBusinessCode = storeDao.countBusinessCode(storeInfo);
         if(countBusinessCode != 0){
-            return AppResponse.bizError("营业执照编码已存在，请重新输入！");
+            return AppResponse.versionError("营业执照编码已存在，请重新输入！");
         }
         //校验店长的编号是否存在
         StoreInfo managerId = storeDao.getManagerId(storeInfo);
         if(managerId == null){
-            return AppResponse.bizError("该店长编号不存在，请重新输入！");
+            return AppResponse.versionError("该店长编号不存在，请重新输入！");
         }
         storeInfo.setStoreId(StringUtil.getCommonCode(2));
         storeInfo.setIsDelete(0);
@@ -57,7 +57,7 @@ public class StoreService {
         //新增门店信息
         int store = storeDao.addStore(storeInfo);
         if(store == 0){
-            return AppResponse.bizError("新增失败");
+            return AppResponse.versionError("新增失败");
         }
         return AppResponse.success("新增门店信息成功");
     }
@@ -70,7 +70,7 @@ public class StoreService {
     public AppResponse getStoreInfoById(String storeId){
         StoreVO storeInfo = storeDao.getStoreInfoById(storeId);
         if(storeInfo == null){
-            return AppResponse.bizError("查询失败");
+            return AppResponse.versionError("查询失败");
         }
         return AppResponse.success("查询成功", storeInfo);
     }
@@ -88,7 +88,7 @@ public class StoreService {
             //校验店长编号是否存在
             StoreInfo managerId = storeDao.getManagerId(storeInfo);
             if(managerId == null){
-                return AppResponse.success("该店长编号不存在，请重新输入！");
+                return AppResponse.versionError("该店长编号不存在，请重新输入！");
             }
         }
         //判断营业执政编码有没有修改
@@ -96,13 +96,13 @@ public class StoreService {
             //校验营业执政编码是否存在
             int count = storeDao.countBusinessCode(storeInfo);
             if(count != 0){
-                return AppResponse.success("营业执照编码已存在，请重新输入！");
+                return AppResponse.versionError("营业执照编码已存在，请重新输入！");
             }
         }
         //更新门店
         int num = storeDao.updateStore(storeInfo);
         if(num == 0){
-            return AppResponse.success("修改门店信息失败");
+            return AppResponse.versionError("修改门店信息失败");
         }
         return AppResponse.success("修改门店信息成功");
     }
@@ -138,7 +138,7 @@ public class StoreService {
         List<String> listStoreId = Arrays.asList(storeId.split(","));
         int count = storeDao.deleteStoreById(listStoreId, loginUserId);
         if(count == 0){
-            return AppResponse.bizError("删除失败！");
+            return AppResponse.versionError("删除失败！");
         }
         return AppResponse.success("删除成功！");
     }

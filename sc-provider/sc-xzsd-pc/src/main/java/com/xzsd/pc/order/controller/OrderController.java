@@ -38,7 +38,7 @@ public class OrderController {
         try {
             //获取用户角色
             String userId = SecurityUtils.getCurrentUserId();
-            orderInfo.setLoginUserId("2020040820282980355");
+            orderInfo.setLoginUserId(userId);
             return orderService.getListOrder(orderInfo);
         }catch (Exception e){
             logger.error("查询订单列表失败");
@@ -76,6 +76,7 @@ public class OrderController {
             //获取用户角色
             String userId = SecurityUtils.getCurrentUserId();
             orderInfo.setUpdateUser(userId);
+            orderInfo.setLoginUserId(userId);
             return orderService.updateOrderStatus(orderInfo);
         }catch (Exception e){
             logger.error("修改订单状态失败");

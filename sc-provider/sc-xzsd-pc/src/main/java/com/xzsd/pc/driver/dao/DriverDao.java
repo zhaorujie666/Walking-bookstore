@@ -45,13 +45,6 @@ public interface DriverDao {
     int addDriverArea(DriverInfo driverInfo);
 
     /**
-     * 查询省市区名称
-     * @param driverId
-     * @return
-     */
-    List<String> getListAreaName(@Param("driverId") String driverId);
-
-    /**
      * 查询司机信息
      * @param driverId
      * @return

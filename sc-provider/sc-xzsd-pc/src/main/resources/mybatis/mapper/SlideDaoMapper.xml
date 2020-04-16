@@ -5,9 +5,8 @@
     <select id="countSort" parameterType="com.xzsd.pc.slide.entity.SlideInfo" resultType="int">
         select count(*)
         from t_sys_slide
-        where sort = #{slideshowNum}
-        or goods_id = #{goodsId}
-        and is_delete = 0
+        where is_delete = 0
+        and (sort = #{slideshowNum} or goods_id = #{goodsId})
     </select>
 
     <!--新增轮播图-->
@@ -46,12 +45,13 @@
     <select id="getListSlide" parameterType="com.xzsd.pc.slide.entity.SlideInfo"
             resultType="com.xzsd.pc.slide.entity.SlideVO">
         select
-        id slideshowId,
-        sort slideshowNum,
-        image_url slideshowPath,
-        slide_status slideshowStateId,
-        start_time startTime,
-        end_time endTime
+        id as slideshowId,
+        sort as slideshowNum,
+        image_url as slideshowPath,
+        slide_status as slideshowStateId,
+        start_time as startTime,
+        end_time as endTime,
+        version as version
         from t_sys_slide
         where is_delete = 0
         <if test="slideshowStateId != null and slideshowStateId != ''">
@@ -94,13 +94,14 @@
     <select id="getSlideAndHotGoods" parameterType="com.xzsd.pc.goods.entity.GoodsInfo"
             resultType="com.xzsd.pc.slide.entity.SlideAndHotGoods">
         select
-        t1.id goodsId,
-        t1.goods_name goodsName,
-        t1.goods_status goodsStateId,
-        t2.category_name oneClassifyName,
-        t3.category_name twoClassifyName
+        t1.id as goodsId,
+        t1.goods_name as goodsName,
+        t1.goods_status as goodsStateId,
+        t2.category_name as oneClassifyName,
+        t3.category_name as twoClassifyName
         from t_goods_info t1, t_goods_category t2, t_goods_category t3
         where t1.is_delete = 0
+        and t1.goods_status = 1
         and t2.id = t1.category_first
         and t3.id = t1.category_second
         and t1.goods_status = 1

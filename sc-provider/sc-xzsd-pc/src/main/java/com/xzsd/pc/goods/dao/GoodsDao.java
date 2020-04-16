@@ -40,13 +40,6 @@ public interface GoodsDao {
     GoodsVTO getGoodsInfoById(@Param("goodsId") String goodsId);
 
     /**
-     * 查询商品一二级分类名称
-     * @param goodsId
-     * @return
-     */
-    List<String> getGoodsCategoryName(@Param("goodsId") String goodsId);
-
-    /**
      * 查询商品一二级分类列表
      * @param classifyId
      * @return

@@ -100,7 +100,7 @@ public class DriverController {
         try {
             //获取当前登录人的id
             String loginUserId = SecurityUtils.getCurrentUserId();
-            driverInfo.setLoginUserId("2020040820282980355");
+            driverInfo.setLoginUserId(loginUserId);
             return driverService.getListDriver(driverInfo);
         }catch (Exception e){
             logger.error("查询司机列表失败", e);

@@ -20,8 +20,8 @@ import javax.ws.rs.POST;
 @RestController
 @RequestMapping("register")
 public class RegisterController {
-
     public static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
+
     @Resource
     private RegisterService registerService;
 

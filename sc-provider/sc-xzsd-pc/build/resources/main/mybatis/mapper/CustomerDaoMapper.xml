@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.customer.dao.CustomerDao">
-    <!--获取店长邀请码-->
-    <select id="getInvitationCode" parameterType="java.lang.String" resultType="java.lang.String">
-        select
-        invitation_code as invitationCode
-        from t_store_info
-        where manager_id = #{loginId}
-        and is_delete = 0
-    </select>
-
-    <!--查询客户列表-->
+    <!--店长查询自己客户列表-->
     <select id="getListCustomers" parameterType="com.xzsd.pc.customer.entity.CustomerInfo"
             resultType="com.xzsd.pc.customer.entity.CustomerVO">
         select
@@ -20,17 +11,18 @@
         t1.phone as phone,
         t1.email as mail,
         t1.id_card as idCard
-        from t_sys_user t1, t_sys_customer t2
+        from t_sys_user t1, t_sys_customer t2, t_store_info t3
         where t1.user_id = t2.customer_id
+        and t2.invitation_code = t3.invitation_code
         and t1.role = 4
-        and t2.invitation_code = #{invitationCode}
+        and t3.manager_id = #{userId}
         <if test="userName != null and userName != ''">
             and t1.user_name like concat('%', #{userName}, '%')
         </if>
         <if test="userAcct != null and userAcct != ''">
             and t1.user_acct like concat('%', #{userAcct}, '%')
         </if>
-        and t2.create_time desc
+        order by t2.create_time desc
     </select>
 
     <!--查询登录者为管理员时的用户列表-->
@@ -51,5 +43,6 @@
         <if test="userAcct != null and userAcct != ''">
             and user_acct like concat('%', #{userAcct}, '%')
         </if>
+        order by create_time desc
     </select>
 </mapper>
