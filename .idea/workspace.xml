@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="门店管理修改门店信息功能修改">
+    <list default="true" id="9c8584e3-c1ce-4b77-932f-464935fa490b" name="Default" comment="修改管理端门店和司机省市区修改问题">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_alibaba_fastjson_1_2_68.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/annotation-processors.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/annotation-processors.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.3.1/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ce7d2fda-3852-4251-a4f5-aa4b47cce8d9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ce7d2fda-3852-4251-a4f5-aa4b47cce8d9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-app/sc2019.sc-provider.sc-xzsd-app.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-app/sc2019.sc-provider.sc-xzsd-app.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-app/sc2019.sc-provider.sc-xzsd-app.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/sc-provider/sc-xzsd-app/sc2019.sc-provider.sc-xzsd-app.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/driver/service/DriverService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/driver/service/DriverService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/store/controller/StoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/store/controller/StoreController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/store/service/StoreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/classes/java/main/com/xzsd/pc/store/service/StoreService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/driver/service/DriverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/java/com/xzsd/pc/driver/service/DriverService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/DriverDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/src/main/resources/mybatis/mapper/DriverDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-api-gateway/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-api-gateway/build/resources/main/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-project/build/resources/main/mybatis/mapper/schoolmanage/TBDataSchoolInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-project/build/resources/main/mybatis/mapper/schoolmanage/TBDataSchoolInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/classes/java/main/com/xzsd/app/homepage/controller/HomepageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/classes/java/main/com/xzsd/app/homepage/controller/HomepageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/classes/java/main/com/xzsd/app/homepage/service/HomepageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/classes/java/main/com/xzsd/app/homepage/service/HomepageService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/classes/java/main/com/xzsd/app/register/controller/RegisterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/classes/java/main/com/xzsd/app/register/controller/RegisterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/classes/java/main/com/xzsd/app/register/service/RegisterService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/classes/java/main/com/xzsd/app/register/service/RegisterService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/classes/java/main/com/xzsd/app/userinfo/entity/UserInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/classes/java/main/com/xzsd/app/userinfo/entity/UserInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/resources/main/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/resources/main/mybatis/mapper/HomepageDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/resources/main/mybatis/mapper/HomepageDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/resources/main/mybatis/mapper/UserInfoDaoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/build/resources/main/mybatis/mapper/UserInfoDaoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/customerorder/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/customerorder/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/sc-provider/sc-xzsd-pc/build/resources/main/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-security/sc-security-client/build/classes/java/main/com/neusoft/security/client/authorize/StaticAuthorizeConfigProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/sc-security/sc-security-client/build/classes/java/main/com/neusoft/security/client/authorize/StaticAuthorizeConfigProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc-security/sc-security-client/build/libs/sc-security-client-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sc-security/sc-security-client/build/libs/sc-security-client-0.0.1-SNAPSHOT.jar" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,6 +81,9 @@
         <task path="$PROJECT_DIR$/sc-provider/sc-xzsd-app">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -74,37 +94,13 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="sc2019" type="f1a62948:ProjectNode" />
-                <item name="sc-provider" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="sc2019" type="f1a62948:ProjectNode" />
-                <item name="sc-provider" type="2d1252cf:ModuleNode" />
-                <item name="sc-xzsd-app" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="sc2019" type="f1a62948:ProjectNode" />
-                <item name="sc-provider" type="2d1252cf:ModuleNode" />
-                <item name="sc-xzsd-app" type="2d1252cf:ModuleNode" />
-                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="sc2019" type="f1a62948:ProjectNode" />
-                <item name="sc-provider" type="2d1252cf:ModuleNode" />
-                <item name="sc-xzsd-app" type="2d1252cf:ModuleNode" />
-                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
-                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="sc2019" type="f1a62948:ProjectNode" />
-                <item name="sc-provider" type="2d1252cf:ModuleNode" />
-                <item name="sc-xzsd-app" type="2d1252cf:ModuleNode" />
-                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
-                <item name="main" type="396b929e:GradleViewContributor$SourceSetNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -149,11 +145,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.xzsd.app.managerorder.entity" />
+      <recent name="com.xzsd.app.customerorder.entity" />
+      <recent name="com.xzsd.app.shoppingcart.entity" />
+      <recent name="com.xzsd.app.goods.entity" />
       <recent name="com.xzsd.pc.slide.entity" />
-      <recent name="com.xzsd.pc.hot.entity" />
-      <recent name="com.xzsd.app.homepage.entity" />
-      <recent name="com.xzsd.app.utils" />
-      <recent name="com.xzsd.pc.util" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\javaEE\workSpaceIDEA\sc2019\sc-provider\sc-xzsd-app\src\main\java\com\xzsd\app" />
@@ -175,7 +171,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ScXzsdPcApplication">
+  <component name="RunManager" selected="Spring Boot.ScXzsdAppApplication">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -202,7 +198,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ScApiGatewayApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+    <configuration name="ScApiGatewayApplication " type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="sc2019.sc-api-gateway.main" />
       <extension name="coverage">
         <pattern>
@@ -211,13 +207,7 @@
         </pattern>
       </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.gateway.ScApiGatewayApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ScApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="sc-api-gateway_main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.neusoft.gateway.ScApiGatewayApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -334,7 +324,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ScXzsdAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+    <configuration name="ScXzsdAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="sc2019.sc-provider.sc-xzsd-app.main" />
       <extension name="coverage">
         <pattern>
@@ -387,7 +377,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Spring Boot.ScApiGatewayApplication" />
       <item itemvalue="Spring Boot.ScEurekaApplication " />
       <item itemvalue="Spring Boot.ScSecurityUaaApplication " />
       <item itemvalue="Spring Boot.ScWebAuthApplication " />
@@ -403,14 +392,8 @@
       <item itemvalue="Spring Boot.ScShardingApplication" />
       <item itemvalue="Spring Boot.ScWebStaticApplication" />
       <item itemvalue="Spring Boot.ScXzsdAppApplication" />
-      <item itemvalue="Spring Boot.ScApiGatewayApplication (1)" />
+      <item itemvalue="Spring Boot.ScApiGatewayApplication " />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Spring Boot.ScApiGatewayApplication (1)" />
-        <item itemvalue="Spring Boot.ScXzsdAppApplication" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -437,7 +420,18 @@
       <workItem from="1586477039738" duration="40185000" />
       <workItem from="1586573926066" duration="21748000" />
       <workItem from="1586606394605" duration="4462000" />
-      <workItem from="1586654806346" duration="4410000" />
+      <workItem from="1586654806346" duration="23146000" />
+      <workItem from="1586735861379" duration="23992000" />
+      <workItem from="1586765328284" duration="15026000" />
+      <workItem from="1586820902560" duration="4220000" />
+      <workItem from="1586826569322" duration="21543000" />
+      <workItem from="1586851755708" duration="11796000" />
+      <workItem from="1586909084608" duration="9158000" />
+      <workItem from="1586919528433" duration="2754000" />
+      <workItem from="1586929793260" duration="12765000" />
+      <workItem from="1586993232539" duration="16169000" />
+      <workItem from="1587018477068" duration="13434000" />
+      <workItem from="1587084594833" duration="23336000" />
     </task>
     <task id="LOCAL-00001" summary="省市区、商品分类、客户管理、司机管理已修改完成">
       <created>1586503480931</created>
@@ -523,7 +517,147 @@
       <option name="project" value="LOCAL" />
       <updated>1586657856031</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="司机管理修改查询司机信息">
+      <created>1586659912853</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1586659912853</updated>
+    </task>
+    <task id="LOCAL-00014" summary="app端个人信息">
+      <created>1586660337891</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1586660337891</updated>
+    </task>
+    <task id="LOCAL-00015" summary="app客户端首页已修改完成">
+      <created>1586661324476</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1586661324476</updated>
+    </task>
+    <task id="LOCAL-00016" summary="app客户端商品">
+      <created>1586674927509</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1586674927509</updated>
+    </task>
+    <task id="LOCAL-00017" summary="app客户端购物车已完成">
+      <created>1586694123523</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1586694123523</updated>
+    </task>
+    <task id="LOCAL-00018" summary="查询详情时加了查id和version">
+      <created>1586736630567</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1586736630567</updated>
+    </task>
+    <task id="LOCAL-00019" summary="commit">
+      <created>1586744384143</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1586744384143</updated>
+    </task>
+    <task id="LOCAL-00020" summary="app客户端购物车增加时间回滚">
+      <created>1586750880975</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1586750880975</updated>
+    </task>
+    <task id="LOCAL-00021" summary="commit">
+      <created>1586760710364</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1586760710364</updated>
+    </task>
+    <task id="LOCAL-00022" summary="修改service中查询详情的方法和在查列表时加上order by xxx">
+      <created>1586769711070</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1586769711070</updated>
+    </task>
+    <task id="LOCAL-00023" summary="修改热门商品按序号排序">
+      <created>1586769874999</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1586769874999</updated>
+    </task>
+    <task id="LOCAL-00024" summary="APP客户端订单完成">
+      <created>1586835036335</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1586835036335</updated>
+    </task>
+    <task id="LOCAL-00025" summary="APP客户端邀请码完成">
+      <created>1586839359134</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1586839359134</updated>
+    </task>
+    <task id="LOCAL-00026" summary="修改管理端门店和司机省市区修改问题">
+      <created>1586842248668</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1586842248668</updated>
+    </task>
+    <task id="LOCAL-00027" summary="店长订单完成">
+      <created>1586861655925</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1586861655925</updated>
+    </task>
+    <task id="LOCAL-00028" summary="店长的个人信息完成">
+      <created>1586863318291</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1586863318291</updated>
+    </task>
+    <task id="LOCAL-00029" summary="司机端完成">
+      <created>1586869195971</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1586869196012</updated>
+    </task>
+    <task id="LOCAL-00030" summary="2020/4/15修改并优化代码">
+      <created>1586937067968</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1586937067969</updated>
+    </task>
+    <task id="LOCAL-00031" summary="2020/4/16修改完善">
+      <created>1587028646830</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1587028646830</updated>
+    </task>
+    <task id="LOCAL-00032" summary="2020/4/17修改完成3">
+      <created>1587114246420</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1587114246420</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,27 +685,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="省市区、商品分类、客户管理、司机管理已修改完成" />
-    <MESSAGE value="商品管理已修改完成" />
-    <MESSAGE value="图片上传已修改完成" />
-    <MESSAGE value="轮播图管理已修改完成" />
     <MESSAGE value="修改xml文件" />
     <MESSAGE value="订单管理已修改完成" />
     <MESSAGE value="热门商品管理已修改完成" />
     <MESSAGE value="修改version为String类型" />
     <MESSAGE value="门店管理已经修改完成" />
     <MESSAGE value="门店管理修改门店信息功能修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="门店管理修改门店信息功能修改" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/sc-provider/sc-xzsd-app/src/main/java/com/xzsd/app/userinfo/service/UserInfoService.java</url>
-          <line>73</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="司机管理修改查询司机信息" />
+    <MESSAGE value="app端个人信息" />
+    <MESSAGE value="app客户端首页已修改完成" />
+    <MESSAGE value="app客户端购物车已完成" />
+    <MESSAGE value="查询详情时加了查id和version" />
+    <MESSAGE value="app客户端商品" />
+    <MESSAGE value="app客户端购物车增加时间回滚" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="修改service中查询详情的方法和在查列表时加上order by xxx" />
+    <MESSAGE value="修改热门商品按序号排序" />
+    <MESSAGE value="APP客户端订单完成" />
+    <MESSAGE value="APP客户端邀请码完成" />
+    <MESSAGE value="修改管理端门店和司机省市区修改问题" />
+    <MESSAGE value="店长订单完成" />
+    <MESSAGE value="店长的个人信息完成" />
+    <MESSAGE value="司机端完成" />
+    <MESSAGE value="2020/4/15修改并优化代码" />
+    <MESSAGE value="2020/4/16修改完善" />
+    <MESSAGE value="2020/4/17修改完成3" />
+    <option name="LAST_COMMIT_MESSAGE" value="2020/4/17修改完成3" />
   </component>
 </project>

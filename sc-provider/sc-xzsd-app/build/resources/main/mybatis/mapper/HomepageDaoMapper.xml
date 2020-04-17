@@ -10,6 +10,7 @@
         where slide_status = 1
         and is_delete = 0
         and now() between start_time and end_time
+        order by sort asc
     </select>
 
     <!--查询热门位展示的数量-->
@@ -18,6 +19,7 @@
         dic_value
         from t_dictionary
         where dic_type = 'hotGoodsShowNumber'
+        and is_delete = 0
     </select>
 
     <!--查询热门位商品-->

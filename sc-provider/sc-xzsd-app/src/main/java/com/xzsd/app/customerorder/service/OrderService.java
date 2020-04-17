@@ -152,7 +152,7 @@ public class OrderService {
     }
 
     /**
-     * 查询订单评价列表
+     * 查询订单评价列表的商品信息
      * @param orderId
      * @return
      * @author zhaorujie
@@ -161,11 +161,11 @@ public class OrderService {
     public AppResponse getListOrderEvaluation(String orderId){
         List<GoodsInfo> orderEvaluation = orderDao.getListOrderEvaluation(orderId);
         if(orderEvaluation.size() == 0){
-            return AppResponse.versionError("查询订单评价列表失败");
+            return AppResponse.versionError("查询订单评价列表的商品信息失败");
         }
         OrderInfoVO orderInfo= new OrderInfoVO();
         orderInfo.setGoodsList(orderEvaluation);
-        return AppResponse.success("查询订单评价列表成功", orderInfo);
+        return AppResponse.success("查询订单评价列表的商品信息成功", orderInfo);
     }
 
     /**
