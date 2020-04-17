@@ -20,7 +20,7 @@ public class DriverInfoService {
     private DriverInfoDao driverInfoDao;
 
     /**
-     * 查询门店信息
+     * 查询当前司机负责送货的门店信息
      * @param driverInfo
      * @return
      * @author zhaorujie
@@ -29,7 +29,7 @@ public class DriverInfoService {
     public AppResponse getListStoreInfo(DriverInfo driverInfo){
         List<DriverInfo> listStoreInfo = driverInfoDao.getListStoreInfo(driverInfo);
         if(listStoreInfo.size() == 0){
-            return AppResponse.bizError("查询门店信息失败");
+            return AppResponse.versionError("查询门店信息失败");
         }
         for (int i = 0; i < listStoreInfo.size(); i++) {
             listStoreInfo.get(i).setAddress(listStoreInfo.get(i).getProvinceName()

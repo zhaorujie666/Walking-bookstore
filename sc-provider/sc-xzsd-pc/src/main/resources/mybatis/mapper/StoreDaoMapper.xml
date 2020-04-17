@@ -58,10 +58,12 @@
     <!--查询店长编号id-->
     <select id="getManagerId" parameterType="com.xzsd.pc.store.entity.StoreInfo"
             resultType="com.xzsd.pc.store.entity.StoreInfo">
-        select * from
-         t_sys_user
-         where user_id= #{userId}
-         and is_delete = 0
+        select
+        user_id as userId,
+        phone as phone
+        from t_sys_user
+        where user_id= #{userId}
+        and is_delete = 0
     </select>
 
     <!--查询门店详情信息-->

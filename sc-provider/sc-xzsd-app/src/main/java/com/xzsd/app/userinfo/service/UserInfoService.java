@@ -29,6 +29,7 @@ public class UserInfoService {
      * @date 2020/4/8
      */
     public AppResponse getUserInfo(String loginUserId){
+        //获取用户角色
         String loginUserRole = userInfoDao.getLoginUserRole(loginUserId);
         UserInfo userInfo = null;
         if("2".equals(loginUserRole)){
@@ -40,7 +41,7 @@ public class UserInfoService {
             userInfo = userInfoDao.getCustomerInfo(loginUserId);
         }
         if(userInfo == null){
-            return AppResponse.bizError("查询用户个人信息失败！");
+            return AppResponse.versionError("查询用户个人信息失败！");
         }
         return AppResponse.success("查询用户个人信息成功", userInfo);
     }
@@ -55,7 +56,7 @@ public class UserInfoService {
     public AppResponse updateUserInfo(UserInfo userInfo){
         int count = userInfoDao.updateUserInfo(userInfo);
         if(0 == count){
-            return AppResponse.bizError("更新用户个人信息失败，请刷新页面！");
+            return AppResponse.versionError("更新用户个人信息失败，请刷新页面！");
         }
         return AppResponse.success("更新用户个人信息成功");
     }
@@ -73,7 +74,7 @@ public class UserInfoService {
         //判断原密码和数据库存的密码是否相同
         boolean flag = PasswordUtils.equalPassword(userInfo.getUserPassword(), userPassword);
         if(!flag){
-            return AppResponse.bizError("输入的原密码不正确，请重新输入");
+            return AppResponse.versionError("输入的原密码不正确，请重新输入");
         }
         //密码加密
         String userNewPassword = userInfo.getUserNewPassword();
@@ -81,7 +82,7 @@ public class UserInfoService {
         userInfo.setUserNewPassword(pwd);
         int count = userInfoDao.updateUserPassword(userInfo);
         if(0 == count){
-            return AppResponse.bizError("修改密码失败");
+            return AppResponse.versionError("修改密码失败");
         }
         return AppResponse.success("修改密码成功");
     }

@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("userInformation")
 public class UserInfoController {
-    public static final Logger logger = LoggerFactory.getLogger(UserInfoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserInfoController.class);
 
     @Resource
     private UserInfoService userInfoService;
@@ -32,7 +32,7 @@ public class UserInfoController {
      * @author zhaorujie
      * @date 2020/4/8
      */
-    @PostMapping("getAppUser")
+    @PostMapping("getUser")
     public AppResponse getUserInfo(){
         try {
             String loginUserId = SecurityUtils.getCurrentUserId();
@@ -75,7 +75,7 @@ public class UserInfoController {
     public AppResponse updateUserPassword(UserInfo userInfo){
         try {
             String loginUserId = SecurityUtils.getCurrentUserId();
-            userInfo.setUserId(loginUserId);
+            userInfo.setUserId("2020041708581515222");
             return userInfoService.updateUserPassword(userInfo);
         }catch (Exception e){
             logger.error("修改密码失败");

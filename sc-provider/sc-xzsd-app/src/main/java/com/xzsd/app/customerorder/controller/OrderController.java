@@ -24,7 +24,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("clientOrder")
 public class OrderController {
-    public static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @Resource
     private OrderService orderService;
@@ -41,7 +41,7 @@ public class OrderController {
         try {
             //获取登录id
             String userId = SecurityUtils.getCurrentUserId();
-            orderInfo.setUserId(userId);
+            orderInfo.setUserId("2020041709114513419");
             return orderService.addCustomerOrder(orderInfo);
         }catch (Exception e){
             logger.error("新增订单失败");

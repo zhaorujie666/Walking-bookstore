@@ -32,7 +32,7 @@ public class GoodsService {
     public AppResponse getGoodsInfoById(String goodsId){
         GoodsInfo goodsInfo = goodsDao.getGoodsInfoById(goodsId);
         if(null == goodsInfo){
-            return AppResponse.bizError("查询商品详情失败");
+            return AppResponse.versionError("查询商品详情失败");
         }
         return AppResponse.success("查询商品详情成功", goodsInfo);
     }
@@ -74,7 +74,7 @@ public class GoodsService {
     public AppResponse getFirstGoodsCategory(){
         List<GoodsCategory> firstGoodsCategory = goodsDao.getFirstGoodsCategory();
         if(firstGoodsCategory.size() == 0){
-            return AppResponse.bizError("获取商品一级分类失败");
+            return AppResponse.versionError("获取商品一级分类失败");
         }
         //封装数据
         FirstCategoryList firstCategory = new FirstCategoryList();
@@ -92,11 +92,11 @@ public class GoodsService {
     public AppResponse getSecondGoodsCategory(String classifyId){
         List<GoodsCategory> secondGoodsCategory = goodsDao.getSecondGoodsCategory(classifyId);
         if(secondGoodsCategory.size() == 0){
-            return AppResponse.bizError("获取商品二级分类及商品失败");
+            return AppResponse.versionError("获取商品二级分类及商品失败");
         }
         //封装数据
         SecondCategoryList secondCategory = new SecondCategoryList();
         secondCategory.setTowClassifyList(secondGoodsCategory);
-        return AppResponse.success("获取商品二级分类及商品失败", secondCategory);
+        return AppResponse.success("获取商品二级分类及商品成功", secondCategory);
     }
 }

@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Description 实现类
+ * @Description 轮播图的实现类
  * @author zhaorujie
  * @date 2020-3-29
  */

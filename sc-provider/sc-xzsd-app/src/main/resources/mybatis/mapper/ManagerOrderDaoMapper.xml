@@ -24,6 +24,7 @@
         and t3.goods_id = t4.id
         and t1.invitation_code = t5.invitation_code
         and t5.customer_id = t6.user_id
+        and t2.user_id = t6.user_id
         and t2.is_delete = 0
         and t3.is_delete = 0
         <if test="orderStateId != null and orderStateId != ''">

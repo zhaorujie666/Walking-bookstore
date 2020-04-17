@@ -15,7 +15,7 @@ import java.util.*;
 
 /**
  * @ClassName MenuService
- * @Description 菜单管理
+ * @Description 菜单管理，增删改查
  * @Author zhaorujie
  * @Date 2020-4-8
  */

@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/clientShopCart")
 public class ShoppingCartController {
-    public static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
 
     @Resource
     private ShoppingCartService shoppingCartService;

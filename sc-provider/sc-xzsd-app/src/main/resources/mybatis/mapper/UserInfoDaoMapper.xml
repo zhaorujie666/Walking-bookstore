@@ -6,7 +6,7 @@
         select
         role as role
         from t_sys_user
-        where user_code = #{loginUserId}
+        where user_id = #{loginUserId}
     </select>
 
     <!--查询店长个人信息-->
@@ -16,14 +16,24 @@
         t1.user_name as userName,
         t1.user_image as userImage,
         t1.role as role,
-        t2.province as provinceName,
-        t2.city as cityName,
-        t2.county as areaName,
+        t3.area_name as provinceName,
+        t4.area_name as cityName,
+        t5.area_name as areaName,
         t2.store_address as address,
-        t1.version as version
-        from t_sys_user t1, t_store_info t2
-        where t1.user_code = t2.manager_id
-        and user_code = #{loginUserId}
+        t1.version as version,
+        t6.id as storeId,
+        t6.invitation_code as inviteCode,
+        t6.store_name as storeName
+        from t_sys_user t1, t_store_info t2,
+        t_area t3, t_area t4,
+        t_area t5, t_store_info t6
+        where t1.user_id = t2.manager_id
+        and t2.province = t3.id
+        and t2.city = t4.id
+        and t2.county = t5.id
+        and t1.user_id = t6.manager_id
+        and t1.user_id = #{loginUserId}
+        and t1.is_delete = 0
     </select>
 
     <!--查询司机个人信息-->
@@ -31,24 +41,31 @@
             resultType="com.xzsd.app.userinfo.entity.UserInfo">
         select
         user_name as userName,
+        user_name as driverName,
         user_image as userImage,
         role as role,
         phone as phone,
         version as version
         from t_sys_user
-        where user_code = #{loginUserId}
+        where user_id = #{loginUserId}
+        and is_delete = 0
     </select>
 
     <!--查询客户个人信息-->
     <select id="getCustomerInfo" parameterType="java.lang.String"
             resultType="com.xzsd.app.userinfo.entity.UserInfo">
         select
-        user_name as userName,
-        user_image as userImage,
-        role as role,
-        version as version
-        from t_sys_user
-        where user_code = #{loginUserId}
+        t1.user_name as userName,
+        t1.user_image as userImage,
+        t1.role as role,
+        t1.version as version,
+        t3.store_name as storeName,
+        t3.id as storeId
+        from t_sys_user t1, t_sys_customer t2, t_store_info t3
+        where t1.user_id = t2.customer_id
+        and t2.invitation_code = t3.invitation_code
+        and user_id = #{loginUserId}
+        and t1.is_delete = 0
     </select>
 
     <!--修改用户个人信息（修改名称或头像）-->
@@ -64,7 +81,7 @@
             update_user = #{userId},
             update_time = now(),
             version = version + 1
-        where user_code = #{userId}
+        where user_id = #{userId}
         and version = #{version}
     </update>
 
@@ -76,16 +93,19 @@
             version = version + 1,
             update_time = now(),
             update_user = #{userId}
-        where user_code = #{userId}
-        and version = #{version}
+        where user_id = #{userId}
+        <if test="role == 2 or role == 3">
+            and version = #{version}
+        </if>
+
     </update>
 
     <!--获取登录用户的密码-->
     <select id="getUserPasswordById" parameterType="java.lang.String"
             resultType="java.lang.String">
         select
-        user_password
+        user_password as userPassword
         from t_sys_user
-        where user_code = #{userId}
+        where user_id = #{userId}
     </select>
 </mapper>

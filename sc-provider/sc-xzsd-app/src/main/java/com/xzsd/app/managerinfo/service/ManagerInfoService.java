@@ -21,7 +21,7 @@ public class ManagerInfoService {
     private MangerInfoDao mangerInfoDao;
 
     /**
-     * 查询司机信息列表
+     * 查询给当前门店送货的所有司机信息列表
      * @param userId
      * @return
      * @author zhaorujie
@@ -30,7 +30,7 @@ public class ManagerInfoService {
     public AppResponse getListDriver(String userId){
         List<ManagerInfo> listDriver = mangerInfoDao.getListDriver(userId);
         if(listDriver.size() == 0){
-            return AppResponse.bizError("查询司机信息列表失败");
+            return AppResponse.versionError("查询司机信息列表失败");
         }
         //封装数据
         ManagerInfoList list = new ManagerInfoList();

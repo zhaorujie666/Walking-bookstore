@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/clientGoods")
 public class GoodsController {
-    public static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
+    private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
 
     @Resource
     private GoodsService goodsService;

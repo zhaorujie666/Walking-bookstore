@@ -40,11 +40,23 @@ public class OrderService {
         List<String> listGoodsId = Arrays.asList(orderInfo.getGoodsId().split(","));
         List<String> listGoodsPrice = Arrays.asList(orderInfo.getGoodsPrice().split(","));
         List<String> listGoodsNum = Arrays.asList(orderInfo.getClientGoodsNum().split(","));
+        //查询商品的库存情况
+        List<GoodsInfo> listGoodsInventory = orderDao.getListGoodsInventory(listGoodsId);
         List<OrderInfo> orderInfoList = new ArrayList<>();
         int totalGoodsNum = 0;
         double totalGoodsPrice = 0;
         //遍历每一个商品，商品价格和购买数量
-        for (int i = 0; i < listGoodsId.size() && i < listGoodsPrice.size() &&  i< listGoodsNum.size(); i++) {
+        for (int i = 0; i < listGoodsId.size() && i < listGoodsPrice.size() &&  i< listGoodsNum.size() && i < listGoodsInventory.size(); i++) {
+            //判断当前购买商品的商品是否超过商品的库存数量
+            if(listGoodsInventory.get(i).getGoodsInventory() < Integer.valueOf(listGoodsNum.get(i))){
+                return AppResponse.success("当前购买的商品已超过库存，请重新选择购买数量", listGoodsInventory.get(i).getGoodsName());
+            }
+            //库存数量减去当前购买的数量
+            listGoodsInventory.get(i).setGoodsInventory(listGoodsInventory.get(i).getGoodsInventory() - Integer.valueOf(listGoodsNum.get(i)));
+            //判断商品的库存是否等于0，如果等于0就把商品的状态改为（0：售罄）
+            if(listGoodsInventory.get(i).getGoodsInventory() == 0){
+                listGoodsInventory.get(i).setGoodsStatus("0");
+            }
             //计算订单总购买数
             totalGoodsNum = totalGoodsNum + Integer.valueOf(listGoodsNum.get(i));
             //计算订单总价格
@@ -71,7 +83,12 @@ public class OrderService {
         int count = orderDao.addCustomerOrder(orderInfo);
         int num = orderDao.addCustomerOrderGoodsInfo(orderInfoList);
         if(0 == count || 0 == num){
-            return AppResponse.bizError("新增订单失败");
+            return AppResponse.versionError("新增订单失败");
+        }
+        //更新商品库存，只有库存为0在更新商品状态
+        int goodsInventory = orderDao.updateGoodsInventory(listGoodsInventory);
+        if(0 == goodsInventory){
+            return AppResponse.versionError("更新商品库存失败");
         }
         return AppResponse.success("新增订单成功");
     }
@@ -113,7 +130,7 @@ public class OrderService {
     public AppResponse updateOrderStatus(OrderInfo orderInfo){
         int count = orderDao.updateOrderStatus(orderInfo);
         if(0 == count){
-            return AppResponse.bizError("修改订单状态失败");
+            return AppResponse.versionError("修改订单状态失败");
         }
         return AppResponse.success("修改订单状态成功");
     }
@@ -128,7 +145,7 @@ public class OrderService {
     public AppResponse getCustomerOrderById(String orderId){
         OrderInfoVO customerOrder = orderDao.getCustomerOrderById(orderId);
         if(null == customerOrder){
-            return AppResponse.bizError("查询订单详情失败");
+            return AppResponse.versionError("查询订单详情失败");
         }
         customerOrder.setAddress(customerOrder.getProvinceName() + customerOrder.getCityName() + customerOrder.getAreaName() + customerOrder.getAddress());
         return AppResponse.success("查询订单详情成功", customerOrder);
@@ -144,7 +161,7 @@ public class OrderService {
     public AppResponse getListOrderEvaluation(String orderId){
         List<GoodsInfo> orderEvaluation = orderDao.getListOrderEvaluation(orderId);
         if(orderEvaluation.size() == 0){
-            return AppResponse.bizError("查询订单评价列表失败");
+            return AppResponse.versionError("查询订单评价列表失败");
         }
         OrderInfoVO orderInfo= new OrderInfoVO();
         orderInfo.setGoodsList(orderEvaluation);

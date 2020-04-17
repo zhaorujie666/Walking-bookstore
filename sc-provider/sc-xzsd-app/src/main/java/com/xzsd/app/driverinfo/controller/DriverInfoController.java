@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("driverHome")
 public class DriverInfoController {
-    public static final Logger logger = LoggerFactory.getLogger(DriverInfoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(DriverInfoController.class);
 
     @Resource
     private DriverInfoService driverInfoService;
@@ -36,7 +36,7 @@ public class DriverInfoController {
     public AppResponse getListStoreInfo(DriverInfo driverInfo){
         try {
             String userId = SecurityUtils.getCurrentUserId();
-            driverInfo.setUserId("2020041012404174968");
+            driverInfo.setUserId(userId);
             return driverInfoService.getListStoreInfo(driverInfo);
         }catch (Exception e){
             logger.error("查询负责送货的所有门店失败");

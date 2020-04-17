@@ -29,7 +29,7 @@ public class CustomerMeService {
     public AppResponse updateInviteCode(CustomerMe customerMe){
         int count = customerMeDao.updateInviteCode(customerMe);
         if(0 == count){
-            return AppResponse.bizError("修改邀请码失败");
+            return AppResponse.versionError("修改邀请码失败");
         }
         return AppResponse.success("修改邀请码成功");
     }

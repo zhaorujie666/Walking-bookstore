@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Description 实现类
+ * @Description 热门商品实现类，增删改查
  * @author zhaorujie
  * @date 2020-3-31
  */

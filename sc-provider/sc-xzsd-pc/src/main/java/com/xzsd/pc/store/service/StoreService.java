@@ -17,12 +17,13 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @DescriptionDemo 实现类
+ * @DescriptionDemo 门店的实现类
  * @Author zhaorujie
  * @Date 2020-03-25
  */
 @Service
 public class StoreService {
+
     @Resource
     private StoreDao storeDao;
 

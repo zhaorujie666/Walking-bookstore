@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @DescriptionDemo 实现类
+ * @DescriptionDemo 商品分类的实现类
  * @Author zhaorujie
  * @Date 2020-03-25
  */

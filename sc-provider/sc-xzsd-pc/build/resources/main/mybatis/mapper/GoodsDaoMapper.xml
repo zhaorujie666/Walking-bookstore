@@ -77,6 +77,8 @@
         t1.goods_introduction goodsDescribe,
         t2.category_name oneClassifyName,
         t3.category_name twoClassifyName,
+        t1.category_first as oneClassifyId,
+        t1.category_second as twoClassifyId,
         t1.store_name supplierName,
         t1.stock goodsInventory,
         t1.old_price goodsOriginalCost,
@@ -91,21 +93,13 @@
         and t3.id = t1.category_second
     </select>
 
-    <!--查询商品一二级分类名称-->
-    <select id="getGoodsCategoryName" parameterType="java.lang.String" resultType="java.lang.String">
-        select
-        t1.category_name
-        from t_goods_category t1, t_goods_info t2
-        where t2.id = #{goodsId}
-        and t1.id in (t2.category_first, t2.category_second)
-    </select>
-
     <!--查询商品一二级分类列表-->
     <select id="getListGoodsCategory" parameterType="java.lang.String"
             resultType="com.xzsd.pc.category.entity.GoodsCategoryVO">
         select
         id classifyId,
-        category_name classifyName
+        category_name classifyName,
+        rank as rank
         from t_goods_category
         where parent_id = #{classifyId}
         and is_delete = 0

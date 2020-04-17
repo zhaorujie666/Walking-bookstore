@@ -16,8 +16,6 @@ import java.util.List;
 @Service
 public class UploadService {
 
-    //public static Upload upload = new Upload();
-
     /**
      * 图片上传
      * @param

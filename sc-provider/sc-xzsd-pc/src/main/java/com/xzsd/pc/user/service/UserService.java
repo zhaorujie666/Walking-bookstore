@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @DescriptionDemo 实现类
+ * @DescriptionDemo 用户的实现类
  * @Author zhaorujie
  * @Date 2020-03-25
  */

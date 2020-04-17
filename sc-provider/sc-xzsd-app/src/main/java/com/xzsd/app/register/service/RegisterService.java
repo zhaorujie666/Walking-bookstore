@@ -30,7 +30,7 @@ public class RegisterService {
     public AppResponse registerUser(Register register){
         int count = registerDao.countUserAcctAndPhone(register);
         if(0 != count){
-            return AppResponse.bizError("存在相同的账号或手机号，请重新输入！");
+            return AppResponse.versionError("存在相同的账号或手机号，请重新输入！");
         }
         register.setUserId(StringUtil.getCommonCode(2));
         register.setCustomerId(StringUtil.getCommonCode(2));
@@ -41,7 +41,7 @@ public class RegisterService {
         int registerCount = registerDao.registerUser(register);
         int num = registerDao.addInviteCode(register);
         if(0 == registerCount || 0 == num){
-            return AppResponse.bizError("注册用户失败，请重新注册！");
+            return AppResponse.versionError("注册用户失败，请重新注册！");
         }
         return AppResponse.success("注册用户成功！");
     }

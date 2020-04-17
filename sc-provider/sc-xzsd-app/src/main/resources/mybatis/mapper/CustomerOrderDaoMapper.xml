@@ -65,6 +65,39 @@
             0)
         </foreach>
     </insert>
+    
+    <!--查询新增订单中的商品库存数量-->
+    <select id="getListGoodsInventory" parameterType="java.lang.String"
+            resultType="com.xzsd.app.customerorder.entity.GoodsInfo">
+        select
+        id as goodsId,
+        goods_name as goodsName,
+        stock as goodsInventory,
+        goods_status as goodsStatus
+        from t_goods_info
+        where id in
+        <foreach item="goodsId" index="index" collection="listGoodsId" open="(" separator="," close=")">
+            #{goodsId}
+        </foreach>
+    </select>
+
+    <!--更新商品的库存数量-->
+    <update id="updateGoodsInventory" parameterType="java.util.List">
+        <foreach item="item" index="index" collection="goodsInfoList" open="" separator=";" close="">
+            update t_goods_info
+            set
+                stock = #{item.goodsInventory, jdbcType=INTEGER},
+                sales = sales + 1,
+                update_time = now(),
+                <if test="item.goodsStatus != null and item.goodsStatus != ''">
+                    goods_status = #{item.goodsStatus, jdbcType=VARCHAR},
+                </if>
+                 version = version + 1
+            <where>
+                id = #{item.goodsId, jdbcType=VARCHAR}
+            </where>
+        </foreach>
+    </update>
 
     <!--查询订单列表（分页）-->
     <select id="getListCustomerOrder" parameterType="com.xzsd.app.customerorder.entity.OrderInfo"
@@ -255,7 +288,7 @@
         </foreach>
     </insert>
 
-    <!--查询每个商品的评价等级之和-->
+    <!--查询每个商品的评价等级的平均数-->
     <select id="getEvaluationGoodsRank" parameterType="java.lang.String"
             resultType="com.xzsd.app.customerorder.entity.GoodsInfo">
         select

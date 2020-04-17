@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Description OrderDao实现类
+ * @Description OrderDao订单实现类
  * @author zhaorujie
  * @date 2020-3-30
  */

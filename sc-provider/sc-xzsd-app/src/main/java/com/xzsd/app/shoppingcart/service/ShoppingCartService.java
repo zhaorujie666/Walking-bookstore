@@ -38,7 +38,7 @@ public class ShoppingCartService {
         shoppingCart.setShopCartId(StringUtil.getCommonCode(2));
         int count = shoppingCartDao.addShoppingCart(shoppingCart);
         if(0 == count){
-            return AppResponse.bizError("新增购物车失败");
+            return AppResponse.versionError("新增购物车失败");
         }
         return AppResponse.success("新增购物车成功");
     }
@@ -69,7 +69,7 @@ public class ShoppingCartService {
     public AppResponse updateShoppingCart(ShoppingCart shoppingCart){
         int count = shoppingCartDao.updateShoppingCart(shoppingCart);
         if(0 == count){
-            return AppResponse.bizError("修改购物车购买数量失败");
+            return AppResponse.versionError("修改购物车购买数量失败");
         }
         return AppResponse.success("修改购物车购买数量成功");
     }
@@ -88,7 +88,7 @@ public class ShoppingCartService {
         List<String> listShopCartId = Arrays.asList(shopCartId.split(","));
         int count = shoppingCartDao.deleteShoppingCart(listShopCartId, userId);
         if(0 == count){
-            return AppResponse.bizError("删除购物车失败");
+            return AppResponse.versionError("删除购物车失败");
         }
         return AppResponse.success("删除购物车成功");
     }

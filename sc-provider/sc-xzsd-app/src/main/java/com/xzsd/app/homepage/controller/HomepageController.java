@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @RequestMapping("clientHome")
 public class HomepageController {
 
-    public static final Logger logger = LoggerFactory.getLogger(HomepageController.class);
+    private static final Logger logger = LoggerFactory.getLogger(HomepageController.class);
 
     @Resource
     private HomepageService homepageService;

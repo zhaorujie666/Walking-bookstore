@@ -31,6 +31,10 @@ public class UserInfo {
      */
     private String storeName;
     /**
+     * 门店id
+     */
+    private String storeId;
+    /**
      * 店长邀请码
      */
     private String inviteCode;
@@ -66,6 +70,10 @@ public class UserInfo {
      * 新密码
      */
     private String userNewPassword;
+    /**
+     * 司机名称
+     */
+    private String driverName;
 
     public String getUserId() {
         return userId;
@@ -113,6 +121,14 @@ public class UserInfo {
 
     public void setStoreName(String storeName) {
         this.storeName = storeName;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 
     public String getInviteCode() {
@@ -187,24 +203,11 @@ public class UserInfo {
         this.userNewPassword = userNewPassword;
     }
 
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", imagePath='" + imagePath + '\'' +
-                ", userImage='" + userImage + '\'' +
-                ", role='" + role + '\'' +
-                ", storeName='" + storeName + '\'' +
-                ", inviteCode='" + inviteCode + '\'' +
-                ", provinceName='" + provinceName + '\'' +
-                ", cityName='" + cityName + '\'' +
-                ", areaName='" + areaName + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", version=" + version +
-                ", userPassword='" + userPassword + '\'' +
-                ", userNewPassword='" + userNewPassword + '\'' +
-                '}';
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
     }
 }

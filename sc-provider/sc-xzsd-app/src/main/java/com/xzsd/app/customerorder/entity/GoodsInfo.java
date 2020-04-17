@@ -42,6 +42,14 @@ public class GoodsInfo {
      * 总数
      */
     private int totalCount;
+    /**
+     * 商品库存
+     */
+    private int goodsInventory;
+    /**
+     * 商品状态
+     */
+    private String goodsStatus;
 
     public String getGoodsId() {
         return goodsId;
@@ -113,5 +121,21 @@ public class GoodsInfo {
 
     public void setTotalCount(int totalCount) {
         this.totalCount = totalCount;
+    }
+
+    public int getGoodsInventory() {
+        return goodsInventory;
+    }
+
+    public void setGoodsInventory(int goodsInventory) {
+        this.goodsInventory = goodsInventory;
+    }
+
+    public String getGoodsStatus() {
+        return goodsStatus;
+    }
+
+    public void setGoodsStatus(String goodsStatus) {
+        this.goodsStatus = goodsStatus;
     }
 }

@@ -28,6 +28,20 @@ public interface OrderDao {
     int addCustomerOrderGoodsInfo(@Param("orderInfoList") List<OrderInfo> orderInfoList);
 
     /**
+     * 查询新增订单中的商品库存数量
+     * @param listGoodsId
+     * @return
+     */
+    List<GoodsInfo> getListGoodsInventory(@Param("listGoodsId") List<String> listGoodsId);
+
+    /**
+     * 更新商品的库存数量
+     * @param goodsInfoList
+     * @return
+     */
+    int updateGoodsInventory(@Param("goodsInfoList") List<GoodsInfo> goodsInfoList);
+
+    /**
      * 查询订单列表（分页）
      * @param orderInfo
      * @return
@@ -77,7 +91,7 @@ public interface OrderDao {
     int addEvaluateOrderGoodsImages(@Param("evaluationImages") List<EvaluationImages> evaluationImages);
 
     /**
-     * 查询每个商品的评价等级之和
+     * 查询每个商品的评价等级的平均数
      * @param listGoodsId
      * @return
      */
