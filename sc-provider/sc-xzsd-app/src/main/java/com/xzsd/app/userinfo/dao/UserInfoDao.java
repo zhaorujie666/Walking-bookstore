@@ -19,6 +19,13 @@ public interface UserInfoDao {
     String getLoginUserRole(@Param("loginUserId") String loginUserId);
 
     /**
+     * 获取客户的邀请码
+     * @param loginUserId
+     * @return
+     */
+    String getUserInviteCode(@Param("loginUserId") String loginUserId);
+
+    /**
      * 查询店长个人信息
      *
      * @param loginUserId
@@ -38,9 +45,10 @@ public interface UserInfoDao {
      * 查询客户个人信息
      *
      * @param loginUserId
+     * @param inviteCode
      * @return
      */
-    UserInfo getCustomerInfo(@Param("loginUserId") String loginUserId);
+    UserInfo getCustomerInfo(@Param("loginUserId") String loginUserId, @Param("inviteCode") String inviteCode);
 
     /**
      * 修改用户个人信息（修改名称或头像）

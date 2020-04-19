@@ -7,6 +7,7 @@ import com.neusoft.core.restful.AppResponse;
 import com.neusoft.util.StringUtil;
 import com.xzsd.app.customerorder.dao.OrderDao;
 import com.xzsd.app.customerorder.entity.*;
+import com.xzsd.app.userinfo.dao.UserInfoDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,9 @@ public class OrderService {
     @Resource
     private OrderDao orderDao;
 
+    @Resource
+    private UserInfoDao userInfoDao;
+
     /**
      * 新增订单
      * @param orderInfo
@@ -34,6 +38,10 @@ public class OrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addCustomerOrder(OrderInfo orderInfo){
+        String inviteCode = userInfoDao.getUserInviteCode(orderInfo.getUserId());
+        if("".equals(inviteCode)){
+            return AppResponse.versionError("请先绑定店铺邀请码，再来购买");
+        }
         //设置订单id
         orderInfo.setOrderId(StringUtil.getCommonCode(2));
         //分割字符

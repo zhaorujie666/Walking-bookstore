@@ -3,4 +3,5 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-actuator',
             project(":sc-common:sc-common-log")
 
+
 }

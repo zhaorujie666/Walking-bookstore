@@ -75,7 +75,7 @@ public class UserInfoController {
     public AppResponse updateUserPassword(UserInfo userInfo){
         try {
             String loginUserId = SecurityUtils.getCurrentUserId();
-            userInfo.setUserId("2020041708581515222");
+            userInfo.setUserId(loginUserId);
             return userInfoService.updateUserPassword(userInfo);
         }catch (Exception e){
             logger.error("修改密码失败");

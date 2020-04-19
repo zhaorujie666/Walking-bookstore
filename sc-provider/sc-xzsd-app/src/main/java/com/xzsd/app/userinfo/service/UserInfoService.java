@@ -38,7 +38,8 @@ public class UserInfoService {
         }else if("3".equals(loginUserRole)){
             userInfo = userInfoDao.getDriverInfo(loginUserId);
         }else if("4".equals(loginUserRole)){
-            userInfo = userInfoDao.getCustomerInfo(loginUserId);
+            String inviteCode = userInfoDao.getUserInviteCode(loginUserId);
+            userInfo = userInfoDao.getCustomerInfo(loginUserId, inviteCode);
         }
         if(userInfo == null){
             return AppResponse.versionError("查询用户个人信息失败！");

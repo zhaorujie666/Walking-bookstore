@@ -1,6 +1,5 @@
 package com.xzsd.app.homepage.service;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
@@ -51,6 +50,9 @@ public class HomepageService {
     public AppResponse getListHotGoods(HotGoods hotGoods){
         //获取热门位商品展示数量
         int number = homepageDao.getSlideshowNumber();
+        if(0 == number){
+            return AppResponse.success("查询热门位商品成功", null);
+        }
         hotGoods.setShowNumber(number);
         //分页
         PageHelper.startPage(hotGoods.getPageNum(), hotGoods.getPageSize());

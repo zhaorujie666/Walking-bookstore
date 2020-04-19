@@ -35,6 +35,18 @@ public class DriverVO {
      */
     private String userImage;
     /**
+     * 省级编号
+     */
+    private String provinceId;
+    /**
+     * 市级编号
+     */
+    private String cityId;
+    /**
+     * 区级编号
+     */
+    private String areaId;
+    /**
      * 省名
      */
     private String provinceName;
@@ -109,6 +121,30 @@ public class DriverVO {
 
     public void setUserImage(String userImage) {
         this.userImage = userImage;
+    }
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
     }
 
     public String getProvinceName() {
