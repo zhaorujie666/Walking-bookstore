@@ -79,7 +79,7 @@ public class OrderService {
             order.setUserId(orderInfo.getUserId());
             //设置单个商品的购买数量
             order.setClientGoodsNum(listGoodsNum.get(i));
-            //设置单个商品的购买数量乘与商品价格
+            //计算单个商品的总金额（购买数量 * 商品价格）
             Double totalPrice = Double.valueOf(listGoodsPrice.get(i)) * Integer.valueOf(listGoodsNum.get(i));
             order.setTotalGoodsPrice(String.valueOf(totalPrice));
             orderInfoList.add(order);
@@ -93,7 +93,7 @@ public class OrderService {
         if(0 == count || 0 == num){
             return AppResponse.versionError("新增订单失败");
         }
-        //更新商品库存，只有库存为0在更新商品状态
+        //更新商品库存和销售量，只有库存为0时再更新商品状态
         int goodsInventory = orderDao.updateGoodsInventory(listGoodsInventory);
         if(0 == goodsInventory){
             return AppResponse.versionError("更新商品库存失败");
@@ -230,14 +230,14 @@ public class OrderService {
         int count = orderDao.addEvaluateOrder(evaluationOrderList);
         int num = orderDao.addEvaluateOrderGoodsImages(evaluationImagesList);
         if(0 == count || 0 == num){
-            return AppResponse.bizError("新增评价失败");
+            return AppResponse.versionError("新增评价失败");
         }
         //根据评价商品的id查询该商品的星级平均数
         List<GoodsInfo> goodsInfo = orderDao.getEvaluationGoodsRank(listGoodsId);
         //更新商品的星级
         int rank = orderDao.updateGoodsRank(goodsInfo);
         if(0 == rank){
-            return AppResponse.bizError("更新商品等级失败");
+            return AppResponse.versionError("更新商品等级失败");
         }
         return AppResponse.success("新增评价成功");
     }
