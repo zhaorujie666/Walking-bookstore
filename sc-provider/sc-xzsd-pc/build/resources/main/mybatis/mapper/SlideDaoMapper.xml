@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.slide.dao.SlideDao">
+    <!--统计排序否存在和商品是否已经被使用-->
+    <select id="countSortAndGoodsIsUse" parameterType="com.xzsd.pc.slide.entity.SlideInfo" resultType="int">
+        select
+        if(count(sort) != 0, 1, 0) +
+        if((select count(goods_id) from t_sys_slide
+        where  goods_id = #{goodsId}
+        and is_delete = 0
+        <if test="slideshowId != null and slideshowId != ''">
+            and id != #{slideshowId}
+        </if>) != 0, 2, 0)
+        from t_sys_slide
+        where sort = #{slideshowNum}
+        and is_delete = 0
+        <if test="slideshowId != null and slideshowId != ''">
+            and id != #{slideshowId}
+        </if>
+    </select>
+
     <!--统计sort出现的次数-->
     <select id="countSort" parameterType="com.xzsd.pc.slide.entity.SlideInfo" resultType="int">
         select count(*)

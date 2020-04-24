@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.hotgoods.dao.HotGoodsDao">
+    <!--统计排序和商品是否存在-->
+    <select id="countSortAndGoodsIsUse" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
+        select
+        if(count(sort) != 0, 1, 0) +
+        if((select count(goods_id)
+        from t_hot_goods
+        where goods_id = #{goodsId}
+        <if test="hotGoodsId != null and hotGoodsId != '' ">
+            and id != #{hotGoodsId}
+        </if>
+        and is_delete = 0) != 0, 2, 0)
+        from t_hot_goods
+        where sort = #{hotGoodsNum}
+        <if test="hotGoodsId != null and hotGoodsId != '' ">
+            and id != #{hotGoodsId}
+        </if>
+        and is_delete = 0
+    </select>
+
     <!--统计排序是否出现重复的序号-->
     <select id="countSort" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
         select count(sort)

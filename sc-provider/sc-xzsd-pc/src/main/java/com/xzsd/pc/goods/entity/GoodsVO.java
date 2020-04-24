@@ -184,7 +184,7 @@ public class GoodsVO {
     }
 
     public void setGoodsShelfTime(String goodsShelfTime) {
-        this.goodsShelfTime = goodsShelfTime;
+        this.goodsShelfTime = goodsShelfTime.replace(".0", "");
     }
 
     public int getGoodsViewsNum() {

@@ -5,8 +5,9 @@
 <mapper namespace="com.neusoft.oauth.dao.UacLogDao">
 
     <insert id="saveLog" parameterType="com.neusoft.oauth.dao.UacLogDao">
-        insert into t_sys_uaa_log
-        (os,
+        insert into t_sys_uaa_log(
+        id,
+        os,
         browser,
         ip,
         request_url,
@@ -20,6 +21,7 @@
         is_deleted,
         version)
         values(
+        #{id},
         #{os},
         #{browser},
         #{ip},

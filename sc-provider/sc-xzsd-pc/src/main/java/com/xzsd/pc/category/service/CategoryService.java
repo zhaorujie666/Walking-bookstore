@@ -109,7 +109,12 @@ public class CategoryService {
         //查询是否存在二级分类
         int num = categoryDao.countParentId(categoryId);
         if(num != 0){
-            return AppResponse.versionError("存在二级分类，不能删除！");
+            return AppResponse.versionError("存在二级分类，不能被删除！");
+        }
+        //查询当前分页下是否有商品
+        int cnt = categoryDao.countGoods(categoryId);
+        if(cnt != 0){
+            return AppResponse.versionError("当前分页存在商品，不能被删除！");
         }
         int count = categoryDao.deleteGoodsCategory(categoryId, loginId);
         if(count == 0){

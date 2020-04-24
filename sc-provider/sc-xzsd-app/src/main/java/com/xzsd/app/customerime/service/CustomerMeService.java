@@ -27,6 +27,11 @@ public class CustomerMeService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateInviteCode(CustomerMe customerMe){
+        //判断输入的邀请码是否存在
+        int inviteCode = customerMeDao.countStoreInviteCode(customerMe);
+        if(0 == inviteCode){
+            return AppResponse.versionError("你输入的门店邀请码不存在，请输入正确的邀请码");
+        }
         int count = customerMeDao.updateInviteCode(customerMe);
         if(0 == count){
             return AppResponse.versionError("修改邀请码失败");

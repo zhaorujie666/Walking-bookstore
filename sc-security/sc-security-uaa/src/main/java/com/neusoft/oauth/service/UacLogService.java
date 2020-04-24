@@ -2,6 +2,7 @@ package com.neusoft.oauth.service;
 
 import com.neusoft.oauth.dao.UacLogDao;
 import com.neusoft.oauth.entity.UaaLog;
+import com.neusoft.util.StringUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +26,7 @@ public class UacLogService {
      * @return 保存结果
      */
     public int saveLog(UaaLog uaaLog) {
+        uaaLog.setId(StringUtil.getCommonCode(2));
         return uacLogDao.saveLog(uaaLog);
     }
 }

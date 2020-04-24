@@ -18,6 +18,13 @@ public interface UserDao {
     String getUserRole(@Param("loginUserId") String loginUserId);
 
     /**
+     * 统计用户账号或手机号
+     * @param userInfo
+     * @return
+     */
+    int countUserAccountAndPhone(UserInfo userInfo);
+
+    /**
      * 统计用户账号
      * @param userInfo
      * @return
@@ -57,7 +64,7 @@ public interface UserDao {
      * @param userInfo
      * @return
      */
-    List<UserVO> getListUser(UserInfo userInfo);
+    List<UserVO> queryListUserByPage(UserInfo userInfo);
 
     /**
      * 删除用户
@@ -66,4 +73,11 @@ public interface UserDao {
      * @return
      */
     int deleteUser(@Param("listUserId") List<String> listUserId, @Param("loginUserId") String loginUserId);
+
+    /**
+     * 查询当前要删除的用户是否绑定门店
+     * @param listUserId
+     * @return
+     */
+    List<String> queryBindStore(@Param("listUserId") List<String> listUserId);
 }

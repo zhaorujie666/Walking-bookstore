@@ -63,4 +63,10 @@ public interface CategoryDao {
      */
     int countParentId(@Param("classifyId") String classifyId);
 
+    /**
+     * 查询当前删除的商品分页是否存在商品
+     * @param classifyId
+     * @return
+     */
+    int countGoods(@Param("classifyId") String classifyId);
 }

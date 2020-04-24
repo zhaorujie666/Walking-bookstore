@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -125,7 +126,7 @@ public class StoreService {
             listStore = storeDao.getListStoreByAdmin(storeInfo);
         }
         PageInfo<StoreVO> pageData = new PageInfo<>(listStore);
-        return AppResponse.success("查询成功！", pageData);
+        return AppResponse.success("查询门店信息列表成功！", pageData);
     }
 
     /**
@@ -137,7 +138,24 @@ public class StoreService {
     public AppResponse deleteStoreById(String storeId, String loginUserId){
         //分离字符串
         List<String> listStoreId = Arrays.asList(storeId.split(","));
-        int count = storeDao.deleteStoreById(listStoreId, loginUserId);
+        List<String> list = storeDao.queryStoreBindOrder(listStoreId);
+        List<String> storeIdList = new ArrayList<>();
+        int j;
+        int flag = 0;
+        //去除已经和订单绑定的门店id
+        for (int i = 0; i < listStoreId.size(); i++) {
+            for (j = 0; j < list.size(); j++) {
+                if(!listStoreId.get(i).equals(list.get(j))){
+                    flag++;
+                }
+            }
+            //判断次数是否相同，相同就说明该门店id和订单绑定了
+            if(j == flag){
+                storeIdList.add(listStoreId.get(i));
+            }
+            flag = 0;
+        }
+        int count = storeDao.deleteStoreById(storeIdList, loginUserId);
         if(count == 0){
             return AppResponse.versionError("删除失败！");
         }

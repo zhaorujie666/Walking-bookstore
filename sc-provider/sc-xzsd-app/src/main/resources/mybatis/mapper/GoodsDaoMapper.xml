@@ -87,7 +87,6 @@
         on t2.category_second = t1.id
 	    where t1.parent_id = #{classifyId}
         and t1.is_delete = 0
-        and t2.is_delete = 0
         order by t1.create_time desc
     </select>
 

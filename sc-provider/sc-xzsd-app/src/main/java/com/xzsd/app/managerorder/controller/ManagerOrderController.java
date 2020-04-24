@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @date 2020/4/14
  */
 @RestController
-@RequestMapping("manangerOrder")
+@RequestMapping("managerOrder")
 public class ManagerOrderController {
     private static final Logger logger = LoggerFactory.getLogger(ManagerOrderController.class);
 
@@ -53,7 +53,7 @@ public class ManagerOrderController {
      * @author zhaorujie
      * @date 2020/4/14
      */
-    @PostMapping("updateManangerOrderState")
+    @PostMapping("updateManagerOrderState")
     public AppResponse updateOrderStatus(ManagerOrder managerOrder){
         try {
             //获取登录用户id

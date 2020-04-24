@@ -24,7 +24,7 @@
 
     <!--查询热门位商品-->
     <select id="getListHotGoods" parameterType="com.xzsd.app.homepage.entity.HotGoods"
-            resultType="com.xzsd.app.homepage.entity.HotGoodsVO">
+            resultType="com.xzsd.app.homepage.entity.HotGoods">
         select
         t1.goods_id as goodsId,
         t2.goods_name as goodsName,
@@ -32,6 +32,8 @@
         t2.selling_price as goodsPrice
         from t_hot_goods t1, t_goods_info t2
         where t1.goods_id = t2.id
+        and t1.is_delete = 0
+        and t2.is_delete = 0
         order by t1.sort asc
         limit #{showNumber}
     </select>

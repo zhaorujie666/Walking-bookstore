@@ -8,6 +8,28 @@
         where user_id = #{loginUserId}
     </select>
 
+    <!--统计用户账号或手机号-->
+    <select id="countUserAccountAndPhone" parameterType="com.xzsd.pc.user.entity.UserInfo" resultType="int">
+        select
+        if(count(user_acct) != 0, 1, 0) +
+        if((select count(phone)
+        from t_sys_user
+        where phone = #{phone}
+        <if test="userId != null and userId != ''">
+            and user_id != #{userId}
+        </if>
+        <if test="role != null and role != ''">
+            and role = #{role}
+        </if>
+        and is_delete = 0) != 0, 2, 0)
+        from t_sys_user
+        where user_acct = #{userAcct}
+        <if test="userId != null and userId != ''">
+            and user_id != #{userId}
+        </if>
+        and is_delete = 0
+    </select>
+
     <!--统计用户账号-->
     <select id="countUserAccount" parameterType="com.xzsd.pc.user.entity.UserInfo" resultType="int">
         select count(user_acct)
@@ -53,18 +75,8 @@
             #{imagePath},
             #{sex},
             #{phone},
-            <if test="idCard != null and idCard != ''">
-                #{idCard},
-            </if>
-            <if test="idCard == null">
-                '',
-            </if>
-            <if test="mail != null and mail != ''">
-                #{mail},
-            </if>
-            <if test="mail == null">
-                '',
-            </if>
+            #{idCard},
+            #{mail},
             0,
             now(),
             #{createUser},
@@ -101,6 +113,9 @@
             phone = #{phone},
             email = #{mail},
             id_card = #{idCard},
+            <if test="imagePath != null and imagePath != ''">
+              user_image = #{imagePath},
+            </if>
             user_password = #{userPassword},
             role = #{role},
             update_time = now(),
@@ -111,7 +126,7 @@
     </update>
 
     <!--查询用户列表（分页）-->
-    <select id="getListUser" parameterType="com.xzsd.pc.user.entity.UserInfo"
+    <select id="queryListUserByPage" parameterType="com.xzsd.pc.user.entity.UserInfo"
             resultType="com.xzsd.pc.user.entity.UserVO">
         select
         user_id as userId,
@@ -152,4 +167,17 @@
             #{userId}
         </foreach>
     </update>
+
+    <!--查询当前要删除的用户是否绑定门店-->
+    <select id="queryBindStore" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        distinct
+        manager_id as userId
+        from t_store_info
+        where is_delete = 0
+        and manager_id in
+        <foreach item="item" index="index" collection="listUserId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

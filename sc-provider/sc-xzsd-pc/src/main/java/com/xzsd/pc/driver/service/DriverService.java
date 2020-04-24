@@ -6,6 +6,7 @@ import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.driver.dao.DriverDao;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import com.xzsd.pc.driver.entity.DriverVO;
+import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.util.PasswordUtils;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,8 @@ public class DriverService {
 
     @Resource
     private DriverDao driverDao;
+    @Resource
+    private UserDao userDao;
 
     /**
      * demo 新增用户
@@ -35,7 +38,17 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addDriver(DriverInfo driverInfo){
-        // 校验司机账号和手机号是否存在
+        int cnt = driverDao.countDriverAccountAndPhone(driverInfo);
+        if(cnt == 1){
+            return AppResponse.versionError("账号已存在，请重新输入");
+        }
+        if(cnt == 2){
+            return AppResponse.versionError("手机号已存在，请重新输入");
+        }
+        if(cnt == 3){
+            return AppResponse.versionError("账号和手机号已存在，请重新输入");
+        }
+        /*// 校验司机账号和手机号是否存在
         int countDriverAccount = driverDao.countDriverAccount(driverInfo);
         if(countDriverAccount != 0){
             return AppResponse.versionError("账号已存在，请重新输入");
@@ -44,7 +57,7 @@ public class DriverService {
         int countPhone = driverDao.countPhone(driverInfo);
         if(0 != countPhone){
             return AppResponse.versionError("手机号已存在，请重新输入");
-        }
+        }*/
         driverInfo.setDriverId(StringUtil.getCommonCode(2));
         driverInfo.setIsDelete(0);
         driverInfo.setDriverInfoId(StringUtil.getCommonCode(2));
@@ -86,7 +99,20 @@ public class DriverService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver(DriverInfo driverInfo){
         DriverVO driver = driverDao.getDriverById(driverInfo.getDriverId());
-        //判断当前账号是否是当前要修改的账号
+        //判断当前账号和手机号是否已经修改
+        if(!driver.getUserAcct().equals(driverInfo.getUserAcct()) || !driver.getPhone().equals(driverInfo.getPhone())){
+            int cnt = driverDao.countDriverAccountAndPhone(driverInfo);
+            if(cnt == 1){
+                return AppResponse.versionError("账号已存在，请重新输入");
+            }
+            if(cnt == 2){
+                return AppResponse.versionError("手机号已存在，请重新输入");
+            }
+            if(cnt == 3){
+                return AppResponse.versionError("账号和手机号已存在，请重新输入");
+            }
+        }
+        /*//判断当前账号是否是当前要修改的账号
         if(driver.getUserAcct().equals(driverInfo.getUserAcct()) == false){
             //校验账号是否存在
             int count = driverDao.countDriverAccount(driverInfo);
@@ -101,9 +127,9 @@ public class DriverService {
             if(0 != countPhone){
                 return AppResponse.versionError("手机号已存在，请重新输入");
             }
-        }
+        }*/
         //判断密码有没有修改
-        if(driver.getUserPassword().equals(driverInfo.getUserPassword()) == false){
+        if(!driver.getUserPassword().equals(driverInfo.getUserPassword())){
             //密码加密
             String password = driverInfo.getUserPassword();
             String pwd = PasswordUtils.generatePassword(password);
@@ -146,6 +172,10 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteDriverById(String driverId, String loginId){
+        String userRole = userDao.getUserRole(loginId);
+        if("2".equals(userRole)){
+            return AppResponse.versionError("你没有权限");
+        }
         List<String> listDriverId = Arrays.asList(driverId.split(","));
         int count = driverDao.deleteDriverById(listDriverId, loginId);
         int num = driverDao.deleteDriverAreaById(listDriverId, loginId);

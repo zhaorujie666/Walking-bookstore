@@ -21,6 +21,10 @@ public class OrderInfo {
      */
     private String goodsId;
     /**
+     * 购物车id
+     */
+    private String shopCartId;
+    /**
      * 商品价格
      */
     private String goodsPrice;
@@ -211,5 +215,13 @@ public class OrderInfo {
 
     public void setStoreId(String storeId) {
         this.storeId = storeId;
+    }
+
+    public String getShopCartId() {
+        return shopCartId;
+    }
+
+    public void setShopCartId(String shopCartId) {
+        this.shopCartId = shopCartId;
     }
 }

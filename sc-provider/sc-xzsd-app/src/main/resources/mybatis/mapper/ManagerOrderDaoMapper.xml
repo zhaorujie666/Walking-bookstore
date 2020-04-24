@@ -27,13 +27,20 @@
         and t2.user_id = t6.user_id
         and t2.is_delete = 0
         and t3.is_delete = 0
-        <if test="orderStateId != null and orderStateId != ''">
-            and t2.order_status = #{orderStateId}
+        <if test="orderStateId == 0">
+            and t2.order_status = '0'
+        </if>
+        <if test="orderStateId == 2">
+            and t2.order_status = '2'
+        </if>
+        <if test="orderStateId == 4">
+            and t2.order_status in(4,5)
         </if>
         <if test="keyword != null and keyword != ''">
             and (t4.goods_name like concat('%', #{keyword}, '%')
             or t1.id like concat('%', #{keyword}, '%'))
         </if>
+        order by t2.create_time desc
     </select>
 
     <!--查询店长订单下的商品-->
@@ -57,6 +64,7 @@
         where t1.manager_id = #{userId}
         and t2.is_delete = 0
         and t3.is_delete = 0
+        order by t3.create_time desc
     </select>
 
     <!--更新订单状态-->

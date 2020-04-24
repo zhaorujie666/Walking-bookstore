@@ -16,6 +16,13 @@ import java.util.List;
 @Mapper
 public interface SlideDao {
     /**
+     * 统计排序否存在和商品是否已经被使用
+     * @param slideInfo
+     * @return
+     */
+    int countSortAndGoodsIsUse(SlideInfo slideInfo);
+
+    /**
      * 统计sort出现的次数
      * @param slideInfo
      * @return

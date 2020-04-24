@@ -1,11 +1,9 @@
 package com.xzsd.app.homepage.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.xzsd.app.homepage.dao.HomepageDao;
 import com.xzsd.app.homepage.entity.HotGoods;
-import com.xzsd.app.homepage.entity.HotGoodsVO;
+import com.xzsd.app.homepage.entity.HotGoodsList;
 import com.xzsd.app.homepage.entity.Slideshow;
 import com.xzsd.app.homepage.entity.SlideshowList;
 import org.springframework.stereotype.Service;
@@ -54,10 +52,10 @@ public class HomepageService {
             return AppResponse.success("查询热门位商品成功", null);
         }
         hotGoods.setShowNumber(number);
-        //分页
-        PageHelper.startPage(hotGoods.getPageNum(), hotGoods.getPageSize());
-        List<HotGoodsVO> listHotGoods = homepageDao.getListHotGoods(hotGoods);
-        PageInfo<HotGoodsVO> pageData = new PageInfo<>(listHotGoods);
-        return AppResponse.success("查询热门位商品成功", pageData);
+        List<HotGoods> listHotGoods = homepageDao.getListHotGoods(hotGoods);
+        //封装数据
+        HotGoodsList list = new HotGoodsList();
+        list.setList(listHotGoods);
+        return AppResponse.success("查询热门位商品成功", list);
     }
 }

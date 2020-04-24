@@ -77,4 +77,11 @@ public interface StoreDao {
      * @return
      */
     int deleteStoreById(@Param("listStoreId") List<String> listStoreId, @Param("loginUserId") String loginUserId);
+
+    /**
+     * 查询当前要删除的门店是否有订单
+     * @param listStoreId
+     * @return
+     */
+    List<String> queryStoreBindOrder(@Param("listStoreId") List<String> listStoreId);
 }

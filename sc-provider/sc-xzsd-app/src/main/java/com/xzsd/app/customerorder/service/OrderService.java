@@ -38,6 +38,7 @@ public class OrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addCustomerOrder(OrderInfo orderInfo){
+        //看用户是否绑定了门店邀请码
         String inviteCode = userInfoDao.getUserInviteCode(orderInfo.getUserId());
         if("".equals(inviteCode)){
             return AppResponse.versionError("请先绑定店铺邀请码，再来购买");
@@ -48,22 +49,29 @@ public class OrderService {
         List<String> listGoodsId = Arrays.asList(orderInfo.getGoodsId().split(","));
         List<String> listGoodsPrice = Arrays.asList(orderInfo.getGoodsPrice().split(","));
         List<String> listGoodsNum = Arrays.asList(orderInfo.getClientGoodsNum().split(","));
+        List<String> shopCartIdList = Arrays.asList(orderInfo.getShopCartId().split(","));
         //查询商品的库存情况
         List<GoodsInfo> listGoodsInventory = orderDao.getListGoodsInventory(listGoodsId);
         List<OrderInfo> orderInfoList = new ArrayList<>();
         int totalGoodsNum = 0;
         double totalGoodsPrice = 0;
         //遍历每一个商品，商品价格和购买数量
-        for (int i = 0; i < listGoodsId.size() && i < listGoodsPrice.size() &&  i< listGoodsNum.size() && i < listGoodsInventory.size(); i++) {
-            //判断当前购买商品的商品是否超过商品的库存数量
-            if(listGoodsInventory.get(i).getGoodsInventory() < Integer.valueOf(listGoodsNum.get(i))){
-                return AppResponse.success("当前购买的商品已超过库存，请重新选择购买数量", listGoodsInventory.get(i).getGoodsName());
-            }
-            //库存数量减去当前购买的数量
-            listGoodsInventory.get(i).setGoodsInventory(listGoodsInventory.get(i).getGoodsInventory() - Integer.valueOf(listGoodsNum.get(i)));
-            //判断商品的库存是否等于0，如果等于0就把商品的状态改为（0：售罄）
-            if(listGoodsInventory.get(i).getGoodsInventory() == 0){
-                listGoodsInventory.get(i).setGoodsStatus("0");
+        for (int i = 0; i < listGoodsId.size() && i < listGoodsPrice.size() &&  i < listGoodsNum.size(); i++) {
+            for(int j = 0; j < listGoodsInventory.size(); j++){
+                if(listGoodsId.get(i).equals(listGoodsInventory.get(j).getGoodsId())){
+                    //判断当前购买商品的商品是否超过商品的库存数量
+                    if(listGoodsInventory.get(j).getGoodsInventory() < Integer.valueOf(listGoodsNum.get(i))){
+                        return AppResponse.versionError("当前购买的商品已超过库存，请重新选择购买数量");
+                    }
+                    //库存数量减去当前购买的数量
+                    listGoodsInventory.get(j).setGoodsInventory(listGoodsInventory.get(j).getGoodsInventory() - Integer.valueOf(listGoodsNum.get(i)));
+                    //商品的销售量
+                    listGoodsInventory.get(j).setSales(listGoodsInventory.get(j).getSales() + Integer.valueOf(listGoodsNum.get(i)));
+                    //判断商品的库存是否等于0，如果等于0就把商品的状态改为（0：售罄）
+                    if(listGoodsInventory.get(j).getGoodsInventory() == 0){
+                        listGoodsInventory.get(j).setGoodsStatus("0");
+                    }
+                }
             }
             //计算订单总购买数
             totalGoodsNum = totalGoodsNum + Integer.valueOf(listGoodsNum.get(i));
@@ -97,6 +105,13 @@ public class OrderService {
         int goodsInventory = orderDao.updateGoodsInventory(listGoodsInventory);
         if(0 == goodsInventory){
             return AppResponse.versionError("更新商品库存失败");
+        }
+        //删除购物车,只有购物车id不为0，才删除
+        if(!"0".equals(shopCartIdList.get(0))){
+            int shoppingCard = orderDao.deleteShoppingCard(shopCartIdList, orderInfo.getUserId());
+            if(0 == shoppingCard){
+                return AppResponse.versionError("删除购物车失败");
+            }
         }
         return AppResponse.success("新增订单成功");
     }
@@ -177,7 +192,7 @@ public class OrderService {
     }
 
     /**
-     * 新增订单商品评价
+     * 订单的商品评价
      * @param obj
      * @param userId
      * @return
@@ -186,12 +201,12 @@ public class OrderService {
     public AppResponse addEvaluateOrder(JSONObject obj, String userId){
         //转成java实体类
         EvaluationOrder evaluationOrder = obj.toJavaObject(EvaluationOrder.class);
+        //获取评价商品集合
+        List<EvaluationGoods> evaluateList = evaluationOrder.getEvaluateList();
         //评价商品集合
         List<EvaluationOrder> evaluationOrderList = new ArrayList<>();
         //评价商品图片集合
         List<EvaluationImages> evaluationImagesList = new ArrayList<>();
-        //获取评价商品集合
-        List<EvaluationGoods> evaluateList = evaluationOrder.getEvaluateList();
         //商品id集合，为更新商品等级
         List<String> listGoodsId = new ArrayList<>();
         for (int i = 0; i < evaluateList.size(); i++) {
@@ -212,25 +227,33 @@ public class OrderService {
             evaluationOrderInfo.setEvaluateContent(evaluateList.get(i).getEvaluateContent());
             evaluationOrderList.add(evaluationOrderInfo);
             List<EvaluationImages> imageList = evaluateList.get(i).getImageList();
-            for(int j = 0; j < imageList.size(); j++){
-                EvaluationImages evaluationImages = new EvaluationImages();
-                //设置商品评价图片表id
-                evaluationImages.setImageId(StringUtil.getCommonCode(2));
-                //设置图片排序
-                evaluationImages.setImageNum(imageList.get(j).getImageNum());
-                //设置图片路径
-                evaluationImages.setImagePath(imageList.get(j).getImagePath());
-                //设置评价表id
-                evaluationImages.setEvaluationId(evaluationId);
-                //设置用户id
-                evaluationImages.setUserId(userId);
-                evaluationImagesList.add(evaluationImages);
+            if(imageList.size() > 0){
+                for(int j = 0; j < imageList.size(); j++){
+                    EvaluationImages evaluationImages = new EvaluationImages();
+                    //设置商品评价图片表id
+                    evaluationImages.setImageId(StringUtil.getCommonCode(2));
+                    //设置图片排序
+                    evaluationImages.setImageNum(imageList.get(j).getImageNum());
+                    //设置图片路径
+                    evaluationImages.setImagePath(imageList.get(j).getImagePath());
+                    //设置评价表id
+                    evaluationImages.setEvaluationId(evaluationId);
+                    //设置用户id
+                    evaluationImages.setUserId(userId);
+                    evaluationImagesList.add(evaluationImages);
+                }
             }
         }
         int count = orderDao.addEvaluateOrder(evaluationOrderList);
-        int num = orderDao.addEvaluateOrderGoodsImages(evaluationImagesList);
-        if(0 == count || 0 == num){
+        if(0 == count){
             return AppResponse.versionError("新增评价失败");
+        }
+        //判断又没有传评价图片
+        if(evaluationImagesList.size() > 0){
+            int num = orderDao.addEvaluateOrderGoodsImages(evaluationImagesList);
+            if(0 == num){
+                return AppResponse.versionError("新增商品评价图片失败");
+            }
         }
         //根据评价商品的id查询该商品的星级平均数
         List<GoodsInfo> goodsInfo = orderDao.getEvaluationGoodsRank(listGoodsId);
@@ -239,6 +262,12 @@ public class OrderService {
         if(0 == rank){
             return AppResponse.versionError("更新商品等级失败");
         }
+        //更新订单状态为已完成已评价
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setOrderStateId("5");
+        orderInfo.setOrderId(evaluationOrder.getOrderId());
+        orderInfo.setUserId(evaluationOrder.getUserId());
+        orderDao.updateOrderStatus(orderInfo);
         return AppResponse.success("新增评价成功");
     }
 }

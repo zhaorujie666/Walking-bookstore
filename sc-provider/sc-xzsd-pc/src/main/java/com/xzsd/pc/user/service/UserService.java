@@ -1,20 +1,20 @@
 package com.xzsd.pc.user.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.user.entity.UserInfo;
 import com.xzsd.pc.user.entity.UserVO;
 import com.xzsd.pc.util.PasswordUtils;
-import com.xzsd.pc.util.RandomUtil;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.neusoft.core.page.PageUtils.getPageInfo;
 
 /**
  * @DescriptionDemo 用户的实现类
@@ -34,16 +34,18 @@ public class UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addUser(UserInfo userInfo){
-        //校验是否存在相同的用户账号
-        int num = userDao.countUserAccount(userInfo);
-        if(num != 0){
+        //查询账号和手机是否存在
+        int num = userDao.countUserAccountAndPhone(userInfo);
+        if(num == 1){
             return AppResponse.versionError("存在相同的用户账号，请重新输入！");
         }
-        //校验是否存在相同的手机号
-        int countPhone = userDao.countPhone(userInfo);
-        if(0 != countPhone){
+        if(num == 2){
             return AppResponse.versionError("该手机号已经存在，请重新输入");
         }
+        if(num == 3){
+            return AppResponse.versionError("存在相同的用户账号和手机号，请重新输入");
+        }
+        String image = userInfo.getImagePath();
         //设置id
         userInfo.setUserId(StringUtil.getCommonCode(2));
         //密码加密
@@ -78,18 +80,17 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUserInfo(UserInfo userInfo){
         UserVO user = userDao.getUserInfoById(userInfo.getUserId());
-        if(!user.getUserAcct().equals(userInfo.getUserAcct())){
-            //校验是否存在相同的账号
-            int num = userDao.countUserAccount(userInfo);
-            if(num != 0){
+        if(!user.getUserAcct().equals(userInfo.getUserAcct()) || !user.getPhone().equals(userInfo.getPhone())){
+            //查询账号和手机是否存在
+            int num = userDao.countUserAccountAndPhone(userInfo);
+            if(num == 1){
                 return AppResponse.versionError("存在相同的用户账号，请重新输入！");
             }
-        }
-        if(!user.getPhone().equals(userInfo.getPhone())){
-            //校验是否存在相同的手机号
-            int countPhone = userDao.countPhone(userInfo);
-            if(countPhone != 0){
+            if(num == 2){
                 return AppResponse.versionError("该手机号已经存在，请重新输入");
+            }
+            if(num == 3){
+                return AppResponse.versionError("存在相同的用户账号和手机号，请重新输入");
             }
         }
         if(!user.getUserPassword().equals(userInfo.getUserPassword())){
@@ -112,10 +113,8 @@ public class UserService {
      */
     public AppResponse getListUser(UserInfo userInfo){
         //分页查询
-        PageHelper.startPage(userInfo.getPageNum(), userInfo.getPageSize());
-        List<UserVO> listUser = userDao.getListUser(userInfo);
-        PageInfo<UserVO> pageData = new PageInfo<>(listUser);
-        return AppResponse.success("查询用户列表成功！", pageData);
+        List<UserVO> listUser = userDao.queryListUserByPage(userInfo);
+        return AppResponse.success("查询用户列表成功！", getPageInfo(listUser));
     }
 
     /**
@@ -126,7 +125,31 @@ public class UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteUser(String userId, String loginUserId){
-        List<String> listUserId = Arrays.asList(userId.split(","));
+        String userRole = userDao.getUserRole(loginUserId);
+        if("2".equals(userRole)){
+            return AppResponse.versionError("您没有权限，请获取权限");
+        }
+        List<String> list = Arrays.asList(userId.split(","));
+        List<String> managerIdList = userDao.queryBindStore(list);
+        //去除已经绑定门店的店长编号
+        List<String> listUserId = new ArrayList<>();
+        int j;
+        int flag = 0;
+        for (int i = 0; i < list.size(); i++) {
+            for(j = 0; j < managerIdList.size(); j++){
+                if(!list.get(i).equals(managerIdList.get(j))){
+                    flag++;
+                }
+            }
+            //判断次数是否相同，相同就说明该用户id和门店绑定了
+            if(flag == j){
+                listUserId.add(list.get(i));
+            }
+            flag = 0;
+        }
+        if(listUserId.size() == 0){
+            return AppResponse.versionError("该店长已经绑定门店，不能删除");
+        }
         int count = userDao.deleteUser(listUserId, loginUserId);
         if(count == 0){
             return AppResponse.versionError("删除用户失败，请刷新页面");

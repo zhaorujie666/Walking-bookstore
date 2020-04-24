@@ -200,4 +200,18 @@
             #{storeId}
         </foreach>
     </update>
+
+    <!--查询当前要删除的门店是否有订单-->
+    <select id="queryStoreBindOrder" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        distinct
+        store_id as storeId
+        from t_order_info
+        where is_delete = 0
+        and order_status in (0,1,2,3)
+        and store_id in
+        <foreach collection="listStoreId" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

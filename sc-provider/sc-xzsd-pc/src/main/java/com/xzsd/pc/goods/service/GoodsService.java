@@ -166,6 +166,11 @@ public class GoodsService {
     public AppResponse getListGoods(GoodsInfo goodsInfo){
         PageHelper.startPage(goodsInfo.getPageNum(), goodsInfo.getPageSize());
         List<GoodsVO> listGoods = goodsDao.getListGoods(goodsInfo);
+        //处理时间格式，不让有.0出现
+        /*for (int i = 0; i < listGoods.size(); i++) {
+            String[] split = listGoods.get(i).getGoodsShelfTime().split(".");
+            listGoods.get(i).setGoodsShelfTime(split[0]);
+        }*/
         PageInfo<GoodsVO> pageData = new PageInfo<>(listGoods);
         return AppResponse.success("查询成功！", pageData);
     }

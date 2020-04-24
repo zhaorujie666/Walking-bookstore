@@ -69,16 +69,19 @@
     <!--查询门店详情信息-->
     <select id="getStoreInfoById" parameterType="java.lang.String" resultType="com.xzsd.pc.store.entity.StoreVO">
         select
-        t1.id storeId,
-        t1.store_name storeName,
-        t1.phone phone,
-        t1.manager_id userId,
-        t1.business_code businessCode,
-        t2.area_name provinceName,
-        t3.area_name cityName,
-        t4.area_name areaName,
-        t1.store_address address,
-        t1.version version
+        t1.id as storeId,
+        t1.store_name as storeName,
+        t1.phone as phone,
+        t1.manager_id as userId,
+        t1.province as provinceId,
+        t1.city as cityId,
+        t1.county as areaId,
+        t1.business_code as businessCode,
+        t2.area_name as provinceName,
+        t3.area_name as cityName,
+        t4.area_name as areaName,
+        t1.store_address as address,
+        t1.version as version
         from t_store_info t1, t_area t2, t_area t3, t_area t4
         where t1.id = #{storeId}
         and t2.id = t1.province
@@ -197,4 +200,18 @@
             #{storeId}
         </foreach>
     </update>
+
+    <!--查询当前要删除的门店是否有订单-->
+    <select id="queryStoreBindOrder" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        distinct
+        store_id as storeId
+        from t_order_info
+        where is_delete = 0
+        and order_status in (0,1,2,3)
+        and store_id in
+        <foreach collection="listStoreId" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

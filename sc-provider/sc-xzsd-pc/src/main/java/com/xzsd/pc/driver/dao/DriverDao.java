@@ -15,7 +15,12 @@ import java.util.List;
  */
 @Mapper
 public interface DriverDao {
-
+    /**
+     * 统计司机账号和手机号是否存在
+     * @param driverInfo
+     * @return
+     */
+    int countDriverAccountAndPhone(DriverInfo driverInfo);
     /**
      * 统计司机账号数量
      * @param driverInfo 司机信息

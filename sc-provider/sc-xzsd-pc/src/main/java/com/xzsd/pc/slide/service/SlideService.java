@@ -37,14 +37,25 @@ public class SlideService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addSlide(SlideInfo slideInfo){
-        //校验是否存在相同的排序
+        //校验排序是否重复和商品是否已经被选择
+        int count = slideDao.countSortAndGoodsIsUse(slideInfo);
+        if(count == 1){
+            return AppResponse.versionError("出现重复的排序，请重新输入！");
+        }
+        if(count == 2){
+            return AppResponse.versionError("该商品已经被选择，请重新选择");
+        }
+        if(count == 3){
+            return AppResponse.versionError("出现重复的排序和该商品已经被选择，请重新选择");
+        }
+        /*//校验是否存在相同的排序
         int countSort = slideDao.countSort(slideInfo);
         if(countSort != 0){
             return AppResponse.versionError("出现重复的排序或当前的商品已被选择，请重新输入！");
-        }
+        }*/
         slideInfo.setSlideshowId(StringUtil.getCommonCode(2));
-        int count = slideDao.addSlide(slideInfo);
-        if(count == 0){
+        int num = slideDao.addSlide(slideInfo);
+        if(num == 0){
             return AppResponse.versionError("新增轮播图失败！");
         }
         return AppResponse.success("新增轮播图成功！");

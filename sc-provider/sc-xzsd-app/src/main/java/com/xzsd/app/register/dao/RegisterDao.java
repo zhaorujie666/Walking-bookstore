@@ -11,6 +11,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RegisterDao {
     /**
+     * 统计绑定的店铺邀请码是否存在
+     * @param register
+     * @return
+     */
+    int countManagerInviteCode(Register register);
+
+    /**
      * 注册用户
      * @param register
      * @return

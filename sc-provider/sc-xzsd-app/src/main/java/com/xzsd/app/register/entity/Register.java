@@ -49,7 +49,7 @@ public class Register {
     /**
      * 用户头像
      */
-    private String userImage;
+    private String imagePath;
 
     public String getUserId() {
         return userId;
@@ -131,11 +131,11 @@ public class Register {
         this.inviteCode = inviteCode;
     }
 
-    public String getUserImage() {
-        return userImage;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setUserImage(String userImage) {
-        this.userImage = userImage;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

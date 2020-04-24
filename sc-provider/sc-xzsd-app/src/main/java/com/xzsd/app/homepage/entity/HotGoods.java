@@ -23,14 +23,6 @@ public class HotGoods {
      */
     private String goodsPrice;
     /**
-     * 一页多少条
-     */
-    private int pageSize;
-    /**
-     * 第几页
-     */
-    private int pageNum;
-    /**
      * 展示数量
      */
     private int showNumber;
@@ -65,22 +57,6 @@ public class HotGoods {
 
     public void setGoodsPrice(String goodsPrice) {
         this.goodsPrice = goodsPrice;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
     }
 
     public int getShowNumber() {

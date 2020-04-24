@@ -11,13 +11,13 @@ public class SecondCategoryList {
     /**
      * 商品二级分类集合
      */
-    private List<GoodsCategory> towClassifyList;
+    private List<GoodsCategory> twoClassifyList;
 
-    public List<GoodsCategory> getTowClassifyList() {
-        return towClassifyList;
+    public List<GoodsCategory> getTwoClassifyList() {
+        return twoClassifyList;
     }
 
-    public void setTowClassifyList(List<GoodsCategory> towClassifyList) {
-        this.towClassifyList = towClassifyList;
+    public void setTwoClassifyList(List<GoodsCategory> twoClassifyList) {
+        this.twoClassifyList = twoClassifyList;
     }
 }

@@ -50,6 +50,10 @@ public class GoodsInfo {
      * 商品状态
      */
     private String goodsStatus;
+    /**
+     * 商品的销售量
+     */
+    private int sales;
 
     public String getGoodsId() {
         return goodsId;
@@ -137,5 +141,13 @@ public class GoodsInfo {
 
     public void setGoodsStatus(String goodsStatus) {
         this.goodsStatus = goodsStatus;
+    }
+
+    public int getSales() {
+        return sales;
+    }
+
+    public void setSales(int sales) {
+        this.sales = sales;
     }
 }

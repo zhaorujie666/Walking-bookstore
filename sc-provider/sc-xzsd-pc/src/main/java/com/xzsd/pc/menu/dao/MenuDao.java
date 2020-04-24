@@ -31,6 +31,13 @@ public interface MenuDao {
     int addMenu(Menu menu);
 
     /**
+     * 统计是否存在相同的菜单名或菜单路由
+     * @param menu
+     * @return
+     */
+    int countMenuNameAndMenuPath(Menu menu);
+
+    /**
      * 统计是否存在相同的菜单名
      * @param menu
      * @return

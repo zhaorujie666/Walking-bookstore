@@ -33,7 +33,7 @@ public class UploadController {
      * @date 2020-3-28
      */
     @PostMapping("uploadImage")
-    public AppResponse imagesUpload(List<MultipartFile> imageFile) {
+    public AppResponse imagesUpload(MultipartFile imageFile) {
         try{
             return uploadService.imagesUpload(imageFile);
         }catch (Exception e){
@@ -42,4 +42,22 @@ public class UploadController {
             throw e;
         }
     }
+
+    /**
+     * 图片上传
+     * @param imageFile
+     * @return
+     * @author zhaorujie
+     * @date 2020-3-28
+     *//*
+    @PostMapping("uploadImage")
+    public AppResponse imagesUpload(List<MultipartFile> imageFile) {
+        try{
+            return uploadService.imagesUpload(imageFile);
+        }catch (Exception e){
+            logger.error("图片上传失败");
+            System.out.println(e.toString());
+            throw e;
+        }
+    }*/
 }

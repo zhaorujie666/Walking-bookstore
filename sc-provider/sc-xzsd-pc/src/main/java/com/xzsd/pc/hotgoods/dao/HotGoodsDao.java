@@ -15,6 +15,12 @@ import java.util.List;
  */
 @Mapper
 public interface HotGoodsDao {
+    /**
+     * 统计排序和商品是否存在
+     * @param hotGoodsInfo
+     * @return
+     */
+    int countSortAndGoodsIsUse(HotGoodsInfo hotGoodsInfo);
 
     /**
      * 统计排序是否出现重复的序号

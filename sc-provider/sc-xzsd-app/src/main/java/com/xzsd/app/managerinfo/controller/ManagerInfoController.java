@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @date 2020/4/14
  */
 @RestController
-@RequestMapping("manangerInformation")
+@RequestMapping("/managerInformation")
 public class ManagerInfoController {
     private static final Logger logger = LoggerFactory.getLogger(ManagerInfoController.class);
 
@@ -28,7 +28,7 @@ public class ManagerInfoController {
      * 查询司机信息列表
      * @return
      */
-    @PostMapping("listManangerDrivers")
+    @PostMapping("listManagerDrivers")
     public AppResponse getListDriver(){
         try {
             String userId = SecurityUtils.getCurrentUserId();

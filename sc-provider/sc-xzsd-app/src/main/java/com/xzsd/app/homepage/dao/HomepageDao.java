@@ -1,10 +1,8 @@
 package com.xzsd.app.homepage.dao;
 
 import com.xzsd.app.homepage.entity.HotGoods;
-import com.xzsd.app.homepage.entity.HotGoodsVO;
 import com.xzsd.app.homepage.entity.Slideshow;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public interface HomepageDao {
      * @param hotGoods
      * @return
      */
-    List<HotGoodsVO> getListHotGoods(HotGoods hotGoods);
+    List<HotGoods> getListHotGoods(HotGoods hotGoods);
 
     /**
      * 查询首页轮播图展示的数量

@@ -41,7 +41,7 @@ public class OrderController {
         try {
             //获取登录id
             String userId = SecurityUtils.getCurrentUserId();
-            orderInfo.setUserId("2020041709114513419");
+            orderInfo.setUserId(userId);
             return orderService.addCustomerOrder(orderInfo);
         }catch (Exception e){
             logger.error("新增订单失败");

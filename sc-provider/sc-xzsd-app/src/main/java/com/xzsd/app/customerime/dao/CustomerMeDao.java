@@ -11,6 +11,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CustomerMeDao {
     /**
+     * 查询门店邀请码是否存在
+     * @param customerMe
+     * @return
+     */
+    int countStoreInviteCode(CustomerMe customerMe);
+
+    /**
      * 修改邀请码
      * @param customerInfo
      * @return

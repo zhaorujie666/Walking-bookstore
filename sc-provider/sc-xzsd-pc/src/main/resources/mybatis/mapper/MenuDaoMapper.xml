@@ -29,19 +29,9 @@
         values (
             #{menuId},
             #{menuName},
-            <if test="menuPath != null and menuPath != ''">
-                #{menuPath},
-            </if>
-            <if test="menuPath == null">
-                '',
-            </if>
+            #{menuPath},
             '菜单',
-            <if test="menuComment != null and menuComment != ''">
-                #{menuComment},
-            </if>
-            <if test="menuComment == null">
-                '',
-            </if>
+            #{menuComment},
             0,
             now(),
             #{createUser},
@@ -49,6 +39,25 @@
             0
         )
     </insert>
+
+    <!--统计是否存在相同的菜单名或菜单路由-->
+    <select id="countMenuNameAndMenuPath" parameterType="com.xzsd.pc.menu.entity.Menu" resultType="int">
+        select
+        if(count(menu_name) != 0, 1, 0) +
+        if((select count(menu_path)
+        from t_sys_menu
+        where menu_path = #{menuPath}
+        <if test="menuId != null and menuId != ''">
+            and menu_id != #{menuId}
+        </if>
+        and is_delete = 0) != 0, 2, 0)
+        from t_sys_menu
+        where menu_name = #{menuName}
+        <if test="menuId != null and menuId != ''">
+            and menu_id != #{menuId}
+        </if>
+        and is_delete = 0
+    </select>
 
     <!--统计是否存在相同的菜单名-->
     <select id="countMenuName" parameterType="com.xzsd.pc.menu.entity.Menu" resultType="int">
@@ -106,7 +115,8 @@
     <select id="getPageHomeMenu" parameterType="java.lang.String" resultType="com.xzsd.pc.menu.entity.Menu">
         select
         menu_id as menuId,
-        menu_name as menuName
+        menu_name as menuName,
+        menu_path as menuPath
         from t_sys_menu
         where is_delete = 0
         <if test="role == 2">

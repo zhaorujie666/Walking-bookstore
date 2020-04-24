@@ -35,7 +35,18 @@ public class HotGoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addHotGoods(HotGoodsInfo hotGoodsInfo){
-        //校验排序是否重复
+        //校验排序是否重复和商品是否已经被选择
+        int count = hotGoodsDao.countSortAndGoodsIsUse(hotGoodsInfo);
+        if(count == 1){
+            return AppResponse.versionError("出现重复的排序，请重新输入！");
+        }
+        if(count == 2){
+            return AppResponse.versionError("该商品已经被选择，请重新选择");
+        }
+        if(count == 3){
+            return AppResponse.versionError("出现重复的排序和该商品已经被选择，请重新选择");
+        }
+        /*//校验排序是否重复
         int num = hotGoodsDao.countSort(hotGoodsInfo);
         if(num != 0){
             return AppResponse.versionError("出现重复的排序，请重新输入！");
@@ -44,7 +55,7 @@ public class HotGoodsService {
         int goodsIsUse = hotGoodsDao.countGoodsIsUse(hotGoodsInfo);
         if(goodsIsUse != 0){
             return AppResponse.versionError("该商品已经被选择，请重新选择");
-        }
+        }*/
         hotGoodsInfo.setHotGoodsId(StringUtil.getCommonCode(2));
         hotGoodsDao.addHotGoods(hotGoodsInfo);
         return AppResponse.success("新增热门商品成功！");
@@ -71,7 +82,20 @@ public class HotGoodsService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateHotGoods(HotGoodsInfo hotGoodsInfo){
         HotGoodsVO hotGoods = hotGoodsDao.getHotGoodsById(hotGoodsInfo.getHotGoodsId());
-        if(hotGoods.getHotGoodsNum() != hotGoodsInfo.getHotGoodsNum()){
+        if(hotGoods.getHotGoodsNum() != hotGoodsInfo.getHotGoodsNum() || !hotGoods.getGoodsId().equals(hotGoodsInfo.getGoodsId())){
+            //校验排序是否重复和商品是否已经被选择
+            int count = hotGoodsDao.countSortAndGoodsIsUse(hotGoodsInfo);
+            if(count == 1){
+                return AppResponse.versionError("出现重复的排序，请重新输入！");
+            }
+            if(count == 2){
+                return AppResponse.versionError("该商品已经被选择，请重新选择");
+            }
+            if(count == 3){
+                return AppResponse.versionError("出现重复的排序和该商品已经被选择，请重新选择");
+            }
+        }
+        /*if(hotGoods.getHotGoodsNum() != hotGoodsInfo.getHotGoodsNum()){
             //校验排序是否重复
             int num = hotGoodsDao.countSort(hotGoodsInfo);
             if(0 != num){
@@ -84,7 +108,7 @@ public class HotGoodsService {
             if(0 != goodsIsUse){
                 return AppResponse.versionError("该商品已经被选择，请重新选择");
             }
-        }
+        }*/
         int count = hotGoodsDao.updateHotGoods(hotGoodsInfo);
         if(count == 0){
             return AppResponse.versionError("修改热门商品失败！");

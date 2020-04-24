@@ -73,6 +73,9 @@ public class ManagerOrderService {
         if(orderDetails == null){
             return AppResponse.versionError("查询订单详情失败");
         }
+        //处理时间格式，不让有.0出现
+        /*String[] split = orderDetails.getCrateTime().split(".");
+        orderDetails.setCrateTime(split[0]);*/
         orderDetails.setAddress(orderDetails.getProvinceName() + orderDetails.getCityName() + orderDetails.getAreaName() + orderDetails.getAddress());
         return AppResponse.success("查询订单详情成功", orderDetails);
     }

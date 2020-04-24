@@ -121,7 +121,9 @@
             selling_price = #{goodsPrice},
             publisher = #{goodsPress},
             author = #{goodsAuthor},
-            goods_image = #{imagePath},
+            <if test="imagePath != null and imagePath != ''">
+                goods_image = #{imagePath},
+            </if>
             update_user = #{updateUser},
             update_time = now(),
             version = version + 1
@@ -206,7 +208,8 @@
     <!--查询删除的商品是否已经被轮播图或热门商品使用-->
     <select id="querySlideAndHotGoods" parameterType="java.lang.String" resultType="java.lang.String">
         select
-        distinct t1.id as goodsId
+        distinct
+        t1.id as goodsId
         from t_goods_info t1, t_sys_slide t2, t_hot_goods t3
         where (t1.id = t2.goods_id or t1.id = t3.goods_id)
         and t1.is_delete = 0

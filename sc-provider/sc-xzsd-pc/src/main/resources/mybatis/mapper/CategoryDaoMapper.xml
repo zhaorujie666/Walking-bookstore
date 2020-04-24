@@ -28,12 +28,7 @@
             #{classifyId},
             #{classifyName},
             #{classifyParent},
-            <if test="classifyComment != null and classifyComment != ''">
-                #{classifyComment},
-            </if>
-            <if test="classifyComment == null">
-                '',
-            </if>
+            #{classifyComment},
             #{isDelete},
             <if test="classifyParent == 0">
                 1,
@@ -129,5 +124,15 @@
         count(parent_id)
         from t_goods_category
         where parent_id = #{classifyId}
+        and is_delete = 0
+    </select>
+
+    <!--查询当前删除的商品分页是否存在商品-->
+    <select id="countGoods" parameterType="java.lang.String" resultType="int">
+        select
+        count(id)
+        from t_goods_info
+        where category_second = #{classifyId}
+        and is_delete = 0
     </select>
 </mapper>

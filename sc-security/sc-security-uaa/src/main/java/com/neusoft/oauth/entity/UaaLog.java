@@ -12,7 +12,7 @@ import java.sql.Timestamp;
  */
 public class UaaLog {
 
-    private Long id;
+    private String id;
 
     /**
      * 操作系统
@@ -73,11 +73,11 @@ public class UaaLog {
      */
     private Timestamp gmtModified;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

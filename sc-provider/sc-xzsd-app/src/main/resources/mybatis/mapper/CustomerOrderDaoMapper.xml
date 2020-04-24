@@ -66,14 +66,15 @@
         </foreach>
     </insert>
     
-    <!--查询新增订单中的商品库存数量-->
+    <!--查询新增订单中的商品库存数量和商品的销售量-->
     <select id="getListGoodsInventory" parameterType="java.lang.String"
             resultType="com.xzsd.app.customerorder.entity.GoodsInfo">
         select
         id as goodsId,
         goods_name as goodsName,
         stock as goodsInventory,
-        goods_status as goodsStatus
+        goods_status as goodsStatus,
+        sales as sales
         from t_goods_info
         where id in
         <foreach item="goodsId" index="index" collection="listGoodsId" open="(" separator="," close=")">
@@ -87,7 +88,7 @@
             update t_goods_info
             set
                 stock = #{item.goodsInventory, jdbcType=INTEGER},
-                sales = sales + 1,
+                sales = #{item.sales, jdbcType=INTEGER},
                 update_time = now(),
                 <if test="item.goodsStatus != null and item.goodsStatus != ''">
                     goods_status = #{item.goodsStatus, jdbcType=VARCHAR},
@@ -97,6 +98,21 @@
                 id = #{item.goodsId, jdbcType=VARCHAR}
             </where>
         </foreach>
+    </update>
+
+    <!--删除购物车-->
+    <update id="deleteShoppingCard" parameterType="java.lang.String">
+        update t_shopping_cart
+        set
+            is_delete = 1,
+            update_time = now(),
+            update_user = #{userId},
+            version = version + 1
+            where id in
+            <foreach item="item" index="index"  collection="shopCartIdList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+
     </update>
 
     <!--查询订单列表（分页）-->
@@ -115,13 +131,20 @@
         and t1.user_id = #{userId}
         and t1.is_delete = 0
         and t2.is_delete = 0
-        <if test="orderStateId != null and orderStateId != ''">
-            and t1.order_status = #{orderStateId}
+        <if test="orderStateId == 0">
+            and t1.order_status = '0'
+        </if>
+        <if test="orderStateId == 2">
+            and t1.order_status = '2'
+        </if>
+        <if test="orderStateId == 4">
+            and t1.order_status in (4,5)
         </if>
         <if test="keyword != null and keyword != ''">
             and (t3.goods_name like concat('%', #{keyword}, '%')
             or t1.id like concat('%', #{keyword}, '%'))
         </if>
+        order by t1.create_time desc
     </select>
 
     <!--查询订单列表下的商品-->
@@ -140,6 +163,7 @@
         and t2.user_id = #{userId}
         and t2.is_delete = 0
         and t3.is_delete = 0
+        order by t2.create_time
     </select>
 
     <!--修改订单状态-->
@@ -151,7 +175,9 @@
             update_time = now(),
             version = version + 1
         where id = #{orderId}
-        and version = #{version}
+        <if test="version != null and version != ''">
+            and version = #{version}
+        </if>
     </update>
 
     <!--查询订单详情映射-->

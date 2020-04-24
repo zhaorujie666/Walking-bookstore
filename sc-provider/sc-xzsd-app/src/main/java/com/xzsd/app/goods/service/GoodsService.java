@@ -49,6 +49,11 @@ public class GoodsService {
         PageHelper.startPage(goodsEvaluation.getPageNum(), goodsEvaluation.getPageSize());
         //查询当前商品的所有评价
         List<GoodsEvaluationVO> listGoodsEvaluation = goodsDao.getListGoodsEvaluation(goodsEvaluation);
+        //处理时间格式，不让有.0出现
+        /*for (int i = 0; i < listGoodsEvaluation.size(); i++) {
+            String[] split = listGoodsEvaluation.get(i).getCreateTime().split(".");
+            listGoodsEvaluation.get(i).setCreateTime(split[0]);
+        }*/
         PageInfo<GoodsEvaluationVO> pageData = new PageInfo<>(listGoodsEvaluation);
         //查询当前商品的所有评价下的每个用户的评价图片
         List<EvaluationImage> listGoodsImage = goodsDao.getListGoodsImage(goodsEvaluation);
@@ -96,7 +101,7 @@ public class GoodsService {
         }
         //封装数据
         SecondCategoryList secondCategory = new SecondCategoryList();
-        secondCategory.setTowClassifyList(secondGoodsCategory);
+        secondCategory.setTwoClassifyList(secondGoodsCategory);
         return AppResponse.success("获取商品二级分类及商品成功", secondCategory);
     }
 }

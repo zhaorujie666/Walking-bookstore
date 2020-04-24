@@ -178,7 +178,7 @@ public class OrderInfoVO {
     }
 
     public void setCrateTime(String crateTime) {
-        this.crateTime = crateTime;
+        this.crateTime = crateTime.replace(".0", "");
     }
 
     public String getUserId() {

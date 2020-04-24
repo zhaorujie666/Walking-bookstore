@@ -44,6 +44,11 @@ public class OrderService {
         }else if("0".equals(orderInfo.getRole()) || "1".equals(orderInfo.getRole())){
             listOrder = orderDao.getListOrderByAdmin(orderInfo);
         }
+        //处理时间格式，不让有.0出现
+        /*for (int i = 0; i < listOrder.size(); i++) {
+            String[] split = listOrder.get(i).getPayTime().split(".");
+            listOrder.get(i).setPayTime(split[0]);
+        }*/
         PageInfo<OrderVO> pageData = new PageInfo<>(listOrder);
         return AppResponse.success("查询订单列表成功！", pageData);
     }
