@@ -34,6 +34,11 @@ public class GoodsService {
         if(null == goodsInfo){
             return AppResponse.versionError("查询商品详情失败");
         }
+        //每进入一次商品详情页面浏览量就加一
+        int count = goodsDao.updateGoodsViewNumber(goodsId);
+        if(0 == count){
+            return AppResponse.versionError("更新商品的浏览量");
+        }
         return AppResponse.success("查询商品详情成功", goodsInfo);
     }
 
@@ -49,11 +54,6 @@ public class GoodsService {
         PageHelper.startPage(goodsEvaluation.getPageNum(), goodsEvaluation.getPageSize());
         //查询当前商品的所有评价
         List<GoodsEvaluationVO> listGoodsEvaluation = goodsDao.getListGoodsEvaluation(goodsEvaluation);
-        //处理时间格式，不让有.0出现
-        /*for (int i = 0; i < listGoodsEvaluation.size(); i++) {
-            String[] split = listGoodsEvaluation.get(i).getCreateTime().split(".");
-            listGoodsEvaluation.get(i).setCreateTime(split[0]);
-        }*/
         PageInfo<GoodsEvaluationVO> pageData = new PageInfo<>(listGoodsEvaluation);
         //查询当前商品的所有评价下的每个用户的评价图片
         List<EvaluationImage> listGoodsImage = goodsDao.getListGoodsImage(goodsEvaluation);
@@ -95,9 +95,18 @@ public class GoodsService {
      * @data 2020/4/12
      */
     public AppResponse getSecondGoodsCategory(String classifyId){
+        //获取所有二级分类
         List<GoodsCategory> secondGoodsCategory = goodsDao.getSecondGoodsCategory(classifyId);
-        if(secondGoodsCategory.size() == 0){
-            return AppResponse.versionError("获取商品二级分类及商品失败");
+        //获取所有商品
+        List<GoodsInfo> goodsList = goodsDao.getGoodsList(classifyId);
+        for (int i = 0; i < secondGoodsCategory.size(); i++) {
+            List<GoodsInfo> goodsInfoList = new ArrayList<>();
+            for(int j = 0; j < goodsList.size(); j++){
+                if(secondGoodsCategory.get(i).getClassifyId().equals(goodsList.get(j).getGoodsSecondCategory())){
+                    goodsInfoList.add(goodsList.get(j));
+                }
+            }
+            secondGoodsCategory.get(i).setGoodsList(goodsInfoList);
         }
         //封装数据
         SecondCategoryList secondCategory = new SecondCategoryList();

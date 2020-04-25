@@ -148,7 +148,7 @@ public class UserService {
             flag = 0;
         }
         if(listUserId.size() == 0){
-            return AppResponse.versionError("该店长已经绑定门店，不能删除");
+            return AppResponse.versionError("该店长已经绑定门店，请先把绑定的门店删除");
         }
         int count = userDao.deleteUser(listUserId, loginUserId);
         if(count == 0){

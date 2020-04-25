@@ -35,7 +35,7 @@ public class GoodsCategoryVO {
     /**
      * 二级分类
      */
-    private List<SecondCategoryVO> twoClassifyList;
+    private List<GoodsCategoryVO> twoClassifyList;
 
     public String getClassifyId() {
         return classifyId;
@@ -85,11 +85,11 @@ public class GoodsCategoryVO {
         this.version = version;
     }
 
-    public List<SecondCategoryVO> getTwoClassifyList() {
+    public List<GoodsCategoryVO> getTwoClassifyList() {
         return twoClassifyList;
     }
 
-    public void setTwoClassifyList(List<SecondCategoryVO> twoClassifyList) {
+    public void setTwoClassifyList(List<GoodsCategoryVO> twoClassifyList) {
         this.twoClassifyList = twoClassifyList;
     }
 }

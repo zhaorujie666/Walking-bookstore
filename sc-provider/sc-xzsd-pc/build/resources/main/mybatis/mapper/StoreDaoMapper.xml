@@ -3,10 +3,18 @@
 <mapper namespace="com.xzsd.pc.store.dao.StoreDao">
     <!--统计营业执照数量-->
     <select id="countBusinessCode" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
-        select count(*)
+        select
+        if(count(business_code) != 0, 1, 0) +
+        if((select count(user_id)
+        from t_sys_user
+        where user_id= #{userId}
+        and is_delete = 0) != 0, 2, 0)
         from t_store_info
         where business_code = #{businessCode}
         and is_delete = 0
+        <if test="storeId != null and storeId != ''">
+            and id != #{storeId}
+        </if>
     </select>
 
     <!--校验是否出现重复的邀请码-->

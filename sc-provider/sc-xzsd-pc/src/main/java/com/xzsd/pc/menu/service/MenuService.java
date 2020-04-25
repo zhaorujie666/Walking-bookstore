@@ -62,17 +62,6 @@ public class MenuService {
         if(count == 3){
             return AppResponse.versionError("存在相同的菜单名和菜单路由，请重新输入");
         }
-        /*//判断是否存在相同的菜单名
-        int count = menuDao.countMenuName(menu);
-        if(count != 0){
-            return AppResponse.versionError("存在相同的菜单名，请重新输入");
-        }
-        //判断是否存在相同的菜单路由
-        int countMenuUrl = menuDao.countMenuUrl(menu);
-        if(0 != countMenuUrl){
-            return AppResponse.versionError("存在相同的菜单路由，请重新输入");
-        }*/
-
         //设置菜单编码
         menu.setMenuId(StringUtil.getCommonCode(2));
         int addMenu = menuDao.addMenu(menu);
@@ -107,34 +96,17 @@ public class MenuService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateMenu(Menu menu){
-        Menu menuInfo = menuDao.getMenuById(menu.getMenuId());
-        if(!menuInfo.getMenuName().equals(menu.getMenuName()) || !menuInfo.getMenuPath().equals(menu.getMenuPath())){
-            //判断是否存在相同的菜单名和菜单路由
-            int count = menuDao.countMenuNameAndMenuPath(menu);
-            if(count == 1){
-                return AppResponse.versionError("存在相同的菜单名，请重新输入");
-            }
-            if(count == 2){
-                return AppResponse.versionError("存在相同的菜单路由，请重新输入");
-            }
-            if(count == 3){
-                return AppResponse.versionError("存在相同的菜单名和菜单路由，请重新输入");
-            }
+        //判断是否存在相同的菜单名和菜单路由
+        int count = menuDao.countMenuNameAndMenuPath(menu);
+        if(count == 1){
+            return AppResponse.versionError("存在相同的菜单名，请重新输入");
         }
-        /*if(menuInfo.getMenuName().equals(menu.getMenuName()) == false){
-            //判断是否存在相同的菜单名
-            int count = menuDao.countMenuName(menu);
-            if(0 != count){
-                return AppResponse.versionError("存在相同的菜单名，请重新输入");
-            }
+        if(count == 2){
+            return AppResponse.versionError("存在相同的菜单路由，请重新输入");
         }
-        if(menuInfo.getMenuPath().equals(menu.getMenuPath()) == false){
-            //判断是否存在相同的菜单路由
-            int countMenuUrl = menuDao.countMenuUrl(menu);
-            if( 0 != countMenuUrl){
-                return AppResponse.versionError("存在相同的菜单路由，请重新输入");
-            }
-        }*/
+        if(count == 3){
+            return AppResponse.versionError("存在相同的菜单名和菜单路由，请重新输入");
+        }
         int updateMenu = menuDao.updateMenu(menu);
         if(0 == updateMenu){
             return AppResponse.versionError("修改菜单失败");

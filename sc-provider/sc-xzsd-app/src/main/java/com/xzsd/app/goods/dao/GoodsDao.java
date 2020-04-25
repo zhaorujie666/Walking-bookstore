@@ -16,7 +16,14 @@ public interface GoodsDao {
      * @param goodsId
      * @return
      */
-    GoodsInfo getGoodsInfoById(String goodsId);
+    GoodsInfo getGoodsInfoById(@Param("goodsId") String goodsId);
+
+    /**
+     * 更新商品浏览量
+     * @param goodsId
+     * @return
+     */
+    int updateGoodsViewNumber(@Param("goodsId") String goodsId);
 
     /**
      * 查询商品评价列表
@@ -44,4 +51,11 @@ public interface GoodsDao {
      * @return
      */
     List<GoodsCategory> getSecondGoodsCategory(@Param("classifyId") String classifyId);
+
+    /**
+     * 查询二级分类下的商品
+     * @param classifyId
+     * @return
+     */
+    List<GoodsInfo> getGoodsList(@Param("classifyId") String classifyId);
 }

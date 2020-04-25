@@ -46,6 +46,10 @@ public class GoodsInfo {
      * 版本号
      */
     private String version;
+    /**
+     * 商品的二级分类id
+     */
+    private String goodsSecondCategory;
 
     public String getGoodsId() {
         return goodsId;
@@ -125,5 +129,13 @@ public class GoodsInfo {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getGoodsSecondCategory() {
+        return goodsSecondCategory;
+    }
+
+    public void setGoodsSecondCategory(String goodsSecondCategory) {
+        this.goodsSecondCategory = goodsSecondCategory;
     }
 }

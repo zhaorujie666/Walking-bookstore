@@ -48,11 +48,6 @@ public class SlideService {
         if(count == 3){
             return AppResponse.versionError("出现重复的排序和该商品已经被选择，请重新选择");
         }
-        /*//校验是否存在相同的排序
-        int countSort = slideDao.countSort(slideInfo);
-        if(countSort != 0){
-            return AppResponse.versionError("出现重复的排序或当前的商品已被选择，请重新输入！");
-        }*/
         slideInfo.setSlideshowId(StringUtil.getCommonCode(2));
         int num = slideDao.addSlide(slideInfo);
         if(num == 0){

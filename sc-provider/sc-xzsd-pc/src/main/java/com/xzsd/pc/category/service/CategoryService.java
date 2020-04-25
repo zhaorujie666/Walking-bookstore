@@ -5,12 +5,14 @@ import com.xzsd.pc.category.dao.CategoryDao;
 import com.xzsd.pc.category.entity.CategoryList;
 import com.xzsd.pc.category.entity.GoodsCategory;
 import com.xzsd.pc.category.entity.GoodsCategoryVO;
+import com.xzsd.pc.category.entity.SecondCategoryVO;
 import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,20 +29,11 @@ public class CategoryService {
     /**
      * 新增商品分类
      * @param goodsCategory
-     * @param loginId
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse addGoodsCategory(GoodsCategory goodsCategory, String loginId){
-
-        //校验是否存在相同的分类名
-        int count = categoryDao.countGoodsCategoryName(goodsCategory);
-        if(count != 0){
-            return AppResponse.versionError("存在相同的分类名，请重新输入！");
-        }
+    public AppResponse addGoodsCategory(GoodsCategory goodsCategory){
         goodsCategory.setClassifyId(StringUtil.getCommonCode(2));
-        goodsCategory.setIsDelete(0);
-        goodsCategory.setCreateUser(loginId);
         //判断是否插入成功
         int categoryNum = categoryDao.addGoodsCategory(goodsCategory);
         if(categoryNum == 0){
@@ -66,20 +59,10 @@ public class CategoryService {
     /**
      * 修改商品分类信息
      * @param goodsCategory
-     * @param loginId
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse updateGoodsCategoryById(GoodsCategory goodsCategory, String loginId){
-        GoodsCategoryVO category = categoryDao.getGoodsCategoryById(goodsCategory.getClassifyId());
-        //判断当前的分类名称是否存在相同的，只有修改后存在相同的分类名才会提示重新输入
-        if(!category.getClassifyName().equals(goodsCategory.getClassifyName())){
-            int count = categoryDao.countGoodsCategoryName(goodsCategory);
-            if(0 != count){
-                return AppResponse.versionError("存在相同的分类名，请重新输入！");
-            }
-        }
-        goodsCategory.setUpdateUser(loginId);
+    public AppResponse updateGoodsCategoryById(GoodsCategory goodsCategory){
         int categoryNum = categoryDao.updateGoodsCategoryById(goodsCategory);
         if(categoryNum == 0){
             return AppResponse.versionError("修改失败！");
@@ -93,9 +76,24 @@ public class CategoryService {
      */
     public AppResponse getListGoodsCategory(){
         List<GoodsCategoryVO> listGoodsCategory = categoryDao.getListFirstAndSecondGoodsCategory();
+        List<GoodsCategoryVO> goodsCategoryList = new ArrayList<>();
+        //把二级分类拼接到一级分类上
+        for (int i = 0; i < listGoodsCategory.size(); i++) {
+            List<GoodsCategoryVO> secondCategoryList = new ArrayList<>();
+            for (int j = 0; j < listGoodsCategory.size(); j++){
+                if(listGoodsCategory.get(i).getClassifyId().equals(listGoodsCategory.get(j).getClassifyParent())){
+                    secondCategoryList.add(listGoodsCategory.get(j));
+                }
+            }
+            listGoodsCategory.get(i).setTwoClassifyList(secondCategoryList);
+            //父级id为0就添加到集合里
+            if("0".equals(listGoodsCategory.get(i).getClassifyParent())){
+                goodsCategoryList.add(listGoodsCategory.get(i));
+            }
+        }
         CategoryList categoryList = new CategoryList();
-        categoryList.setOneClassifyList(listGoodsCategory);
-        return AppResponse.success("查询成功！", categoryList);
+        categoryList.setOneClassifyList(goodsCategoryList);
+        return AppResponse.success("查询商品分类列表成功！", categoryList);
     }
 
     /**

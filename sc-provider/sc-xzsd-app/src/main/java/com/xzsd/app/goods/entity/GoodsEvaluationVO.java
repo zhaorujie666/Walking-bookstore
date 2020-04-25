@@ -74,7 +74,7 @@ public class GoodsEvaluationVO {
     }
 
     public void setCreateTime(String createTime) {
-        this.createTime = createTime.replace(",0", "");
+        this.createTime = createTime.replace("0.", "");
     }
 
     public List<EvaluationImage> getImageList() {

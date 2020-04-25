@@ -38,16 +38,9 @@ public class GoodsService {
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addGoods(GoodsInfo goodsInfo){
         //判断是否出现重复的书号
-        int count = goodsDao.countBookNumber(goodsInfo.getIsbn());
+        int count = goodsDao.countBookNumber(goodsInfo);
         if(count != 0){
             return AppResponse.versionError("书号重复，请输入正确的书号！");
-        }
-        //判断传入的字段是否为空
-        if(null == goodsInfo.getGoodsAdvertise()){
-            goodsInfo.setGoodsAdvertise("");
-        }
-        if(null == goodsInfo.getGoodsDescribe()){
-            goodsInfo.setGoodsDescribe("");
         }
         //生成商品id
         goodsInfo.setGoodsId(StringUtil.getCommonCode(2));
@@ -102,20 +95,10 @@ public class GoodsService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsInfo(GoodsInfo goodsInfo){
-        GoodsVTO goods = goodsDao.getGoodsInfoById(goodsInfo.getGoodsId());
-        //判断当前的书号有没有改变
-        if(goods.getIsbn().equals(goodsInfo.getIsbn()) == false){
-            int count = goodsDao.countBookNumber(goodsInfo.getIsbn());
-            if(0 != count){
-                return AppResponse.versionError("存在相同的书号，请输入正确的书号！");
-            }
-        }
-        //判断传入的字段是否为空
-        if(null == goodsInfo.getGoodsAdvertise()){
-            goodsInfo.setGoodsAdvertise("");
-        }
-        if(null == goodsInfo.getGoodsDescribe()){
-            goodsInfo.setGoodsDescribe("");
+        //判断是否出现重复的书号
+        int count = goodsDao.countBookNumber(goodsInfo);
+        if(0 != count){
+            return AppResponse.versionError("存在相同的书号，请输入正确的书号！");
         }
         int number = goodsDao.updateGoodsInfo(goodsInfo);
         if(number == 0){
@@ -166,13 +149,8 @@ public class GoodsService {
     public AppResponse getListGoods(GoodsInfo goodsInfo){
         PageHelper.startPage(goodsInfo.getPageNum(), goodsInfo.getPageSize());
         List<GoodsVO> listGoods = goodsDao.getListGoods(goodsInfo);
-        //处理时间格式，不让有.0出现
-        /*for (int i = 0; i < listGoods.size(); i++) {
-            String[] split = listGoods.get(i).getGoodsShelfTime().split(".");
-            listGoods.get(i).setGoodsShelfTime(split[0]);
-        }*/
         PageInfo<GoodsVO> pageData = new PageInfo<>(listGoods);
-        return AppResponse.success("查询成功！", pageData);
+        return AppResponse.success("查询商品列表成功！", pageData);
     }
 
     /**

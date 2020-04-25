@@ -120,7 +120,10 @@
         from t_sys_menu
         where is_delete = 0
         <if test="role == 2">
-            and is_manager = 1
+            and role = 2
+        </if>
+        <if test="role == 0 or role == 1">
+            and role in(0, 1)
         </if>
     </select>
 </mapper>

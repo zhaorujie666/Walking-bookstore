@@ -92,6 +92,10 @@ public class StoreInfo {
      * 版本号
      */
     private String version;
+    /**
+     * 登录用户id
+     */
+    private String loginUserId;
 
     public int getPageSize() {
         return pageSize;
@@ -259,5 +263,13 @@ public class StoreInfo {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getLoginUserId() {
+        return loginUserId;
+    }
+
+    public void setLoginUserId(String loginUserId) {
+        this.loginUserId = loginUserId;
     }
 }

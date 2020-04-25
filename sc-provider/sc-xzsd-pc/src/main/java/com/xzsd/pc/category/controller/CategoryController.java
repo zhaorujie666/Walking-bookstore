@@ -38,7 +38,8 @@ public class CategoryController {
         try {
             //获取用户id
             String userId = SecurityUtils.getCurrentUserId();
-            return categoryService.addGoodsCategory(goodsCategory, userId);
+            goodsCategory.setUpdateUser(userId);
+            return categoryService.addGoodsCategory(goodsCategory);
         }catch (Exception e){
             logger.error("新增失败", e);
             System.out.println(e.toString());
@@ -76,7 +77,8 @@ public class CategoryController {
         try {
             //获取用户id
             String userId = SecurityUtils.getCurrentUserId();
-            return categoryService.updateGoodsCategoryById(goodsCategory, userId);
+            goodsCategory.setUpdateUser(userId);
+            return categoryService.updateGoodsCategoryById(goodsCategory);
         }catch (Exception e){
             logger.error("修改成功", e);
             System.out.println(e.toString());

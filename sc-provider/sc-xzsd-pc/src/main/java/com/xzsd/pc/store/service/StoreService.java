@@ -28,6 +28,9 @@ public class StoreService {
     @Resource
     private StoreDao storeDao;
 
+    @Resource
+    private UserDao userDao;
+
     /**
      * 新增门店信息
      * @param storeInfo
@@ -35,14 +38,16 @@ public class StoreService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addStore(StoreInfo storeInfo){
+        String userRole = userDao.getUserRole(storeInfo.getLoginUserId());
+        if("2".equals(userRole)){
+            return AppResponse.versionError("你没有权限新增门店");
+        }
         //校验是否存在相同的营业执政编码
-        int countBusinessCode = storeDao.countBusinessCode(storeInfo);
-        if(countBusinessCode != 0){
+        int count = storeDao.countBusinessCode(storeInfo);
+        if((count & 1) == 1){
             return AppResponse.versionError("营业执照编码已存在，请重新输入！");
         }
-        //校验店长的编号是否存在
-        StoreInfo managerId = storeDao.getManagerId(storeInfo);
-        if(managerId == null){
+        if(count != 2){
             return AppResponse.versionError("该店长编号不存在，请重新输入！");
         }
         storeInfo.setStoreId(StringUtil.getCommonCode(2));
@@ -84,22 +89,13 @@ public class StoreService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateStore(StoreInfo storeInfo){
-        StoreVO store = storeDao.getStoreInfoById(storeInfo.getStoreId());
-        //判断店长id有没有修改
-        if(!store.getUserId().equals(storeInfo.getUserId()) ){
-            //校验店长编号是否存在
-            StoreInfo managerId = storeDao.getManagerId(storeInfo);
-            if(managerId == null){
-                return AppResponse.versionError("该店长编号不存在，请重新输入！");
-            }
+        //校验是否存在相同的营业执政编码
+        int count = storeDao.countBusinessCode(storeInfo);
+        if((count & 1) == 1){
+            return AppResponse.versionError("营业执照编码已存在，请重新输入！");
         }
-        //判断营业执政编码有没有修改
-        if(!store.getBusinessCode().equals(storeInfo.getBusinessCode())){
-            //校验营业执政编码是否存在
-            int count = storeDao.countBusinessCode(storeInfo);
-            if(count != 0){
-                return AppResponse.versionError("营业执照编码已存在，请重新输入！");
-            }
+        if(count != 2){
+            return AppResponse.versionError("该店长编号不存在，请重新输入！");
         }
         //更新门店
         int num = storeDao.updateStore(storeInfo);
@@ -154,6 +150,9 @@ public class StoreService {
                 storeIdList.add(listStoreId.get(i));
             }
             flag = 0;
+        }
+        if(storeIdList.size() == 0){
+            return AppResponse.versionError("该门店已经和订单绑定，不能删除");
         }
         int count = storeDao.deleteStoreById(storeIdList, loginUserId);
         if(count == 0){

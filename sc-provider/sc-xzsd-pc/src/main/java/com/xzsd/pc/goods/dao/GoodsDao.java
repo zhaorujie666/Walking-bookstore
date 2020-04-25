@@ -20,10 +20,10 @@ public interface GoodsDao {
 
     /**
      * 统计是否出现重复的书号个数
-     * @param isbn
+     * @param goodsInfo
      * @return
      */
-    int countBookNumber(@Param("isbn") String isbn);
+    int countBookNumber(GoodsInfo goodsInfo);
 
     /**
      * 新增商品

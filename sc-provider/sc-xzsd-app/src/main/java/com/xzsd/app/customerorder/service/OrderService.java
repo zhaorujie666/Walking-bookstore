@@ -104,7 +104,7 @@ public class OrderService {
         //更新商品库存和销售量，只有库存为0时再更新商品状态
         int goodsInventory = orderDao.updateGoodsInventory(listGoodsInventory);
         if(0 == goodsInventory){
-            return AppResponse.versionError("更新商品库存失败");
+            return AppResponse.versionError("更新商品库存和销售量失败");
         }
         //删除购物车,只有购物车id不为0，才删除
         if(!"0".equals(shopCartIdList.get(0))){
@@ -154,6 +154,36 @@ public class OrderService {
         int count = orderDao.updateOrderStatus(orderInfo);
         if(0 == count){
             return AppResponse.versionError("修改订单状态失败");
+        }
+        //订单状态取消后恢复库存和销售量
+        if("1".equals(orderInfo.getOrderStateId())){
+            OrderInfoVO customerOrder = orderDao.getCustomerOrderById(orderInfo.getOrderId());
+            List<GoodsInfo> goodsList = customerOrder.getGoodsList();
+            List<String> listGoodsId = new ArrayList<>();
+            for (int i = 0; i < goodsList.size(); i++) {
+                listGoodsId.add(goodsList.get(i).getGoodsId());
+            }
+            //查询商品的库存情况
+            List<GoodsInfo> listGoodsInventory = orderDao.getListGoodsInventory(listGoodsId);
+            for (int i = 0; i < goodsList.size(); i++) {
+                for(int j = 0; j < listGoodsInventory.size(); j++){
+                    if(goodsList.get(i).getGoodsId().equals(listGoodsInventory.get(j).getGoodsId())){
+                        //库存数量加上当前购买的数量
+                        listGoodsInventory.get(j).setGoodsInventory(listGoodsInventory.get(j).getGoodsInventory() + goodsList.get(i).getCartGoodsCount());
+                        //商品的销售量减去退货的商品数量
+                        listGoodsInventory.get(j).setSales(listGoodsInventory.get(j).getSales() - goodsList.get(i).getCartGoodsCount());
+                        //判断商品的库存是否等于0，如果不等于0就把商品的状态改为（1：在售）
+                        if(listGoodsInventory.get(j).getGoodsInventory()  != 0){
+                            listGoodsInventory.get(j).setGoodsStatus("1");
+                        }
+                    }
+                }
+            }
+            //更新商品库存和销售量，更新商品状态
+            int goodsInventory = orderDao.updateGoodsInventory(listGoodsInventory);
+            if(0 == goodsInventory){
+                return AppResponse.versionError("更新商品库存失败");
+            }
         }
         return AppResponse.success("修改订单状态成功");
     }
@@ -226,8 +256,8 @@ public class OrderService {
             //设置评价内容
             evaluationOrderInfo.setEvaluateContent(evaluateList.get(i).getEvaluateContent());
             evaluationOrderList.add(evaluationOrderInfo);
-            List<EvaluationImages> imageList = evaluateList.get(i).getImageList();
-            if(imageList.size() > 0){
+            if(evaluateList.get(i).getImageList() != null){
+                List<EvaluationImages> imageList = evaluateList.get(i).getImageList();
                 for(int j = 0; j < imageList.size(); j++){
                     EvaluationImages evaluationImages = new EvaluationImages();
                     //设置商品评价图片表id
@@ -248,7 +278,7 @@ public class OrderService {
         if(0 == count){
             return AppResponse.versionError("新增评价失败");
         }
-        //判断又没有传评价图片
+        //判断有没有传评价图片
         if(evaluationImagesList.size() > 0){
             int num = orderDao.addEvaluateOrderGoodsImages(evaluationImagesList);
             if(0 == num){

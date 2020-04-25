@@ -1477,7 +1477,7 @@
     </column>
     <column id="352" parent="247" name="is_delete">
       <Position>6</Position>
-      <DataType>int(1)|0s</DataType>
+      <DataType>varchar(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="353" parent="247" name="create_time">
@@ -2094,10 +2094,10 @@
       <DataType>varchar(64)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="473" parent="255" name="is_manager">
+    <column id="473" parent="255" name="role">
       <Position>7</Position>
       <Comment>0不是，1是</Comment>
-      <DataType>int(1)|0s</DataType>
+      <DataType>varchar(64)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="474" parent="255" name="is_delete">

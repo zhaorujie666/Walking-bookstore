@@ -40,6 +40,7 @@ public class StoreController {
             //获取用户角色
             String userId = SecurityUtils.getCurrentUserId();
             storeInfo.setCreateUser(userId);
+            storeInfo.setLoginUserId(userId);
             return storeService.addStore(storeInfo);
         }catch (Exception e){
             logger.error("门店新增失败", e);
@@ -79,6 +80,7 @@ public class StoreController {
             //获取用户的id
             String userId = SecurityUtils.getCurrentUserId();
             storeInfo.setUpdateUser(userId);
+            storeInfo.setLoginUserId(userId);
             return storeService.updateStore(storeInfo);
         }catch (Exception e){
             logger.error("修改门店信息失败", e);

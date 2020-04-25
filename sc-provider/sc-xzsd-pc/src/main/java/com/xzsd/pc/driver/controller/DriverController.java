@@ -41,6 +41,7 @@ public class DriverController {
             //获取用户角色
             String userId = SecurityUtils.getCurrentUserId();
             driverInfo.setCreateUser(userId);
+            driverInfo.setLoginUserId(userId);
             return driverService.addDriver(driverInfo);
         } catch (Exception e){
             logger.error("用户新增失败", e);
@@ -80,6 +81,7 @@ public class DriverController {
             //获取用户角色
             String userId = SecurityUtils.getCurrentUserId();
             driverInfo.setUpdateUser(userId);
+            driverInfo.setLoginUserId(userId);
             return driverService.updateDriver(driverInfo);
         } catch (Exception e){
             logger.error("修改司机信息失败", e);

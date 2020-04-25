@@ -30,7 +30,7 @@ public class DriverService {
     private UserDao userDao;
 
     /**
-     * demo 新增用户
+     * demo 新增司机
      * @param driverInfo
      * @return
      * @Author zhaorujie
@@ -38,6 +38,10 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addDriver(DriverInfo driverInfo){
+        String userRole = userDao.getUserRole(driverInfo.getLoginUserId());
+        if("2".equals(userRole)){
+            return AppResponse.versionError("你没有权限，不能新增司机");
+        }
         int cnt = driverDao.countDriverAccountAndPhone(driverInfo);
         if(cnt == 1){
             return AppResponse.versionError("账号已存在，请重新输入");
@@ -48,18 +52,7 @@ public class DriverService {
         if(cnt == 3){
             return AppResponse.versionError("账号和手机号已存在，请重新输入");
         }
-        /*// 校验司机账号和手机号是否存在
-        int countDriverAccount = driverDao.countDriverAccount(driverInfo);
-        if(countDriverAccount != 0){
-            return AppResponse.versionError("账号已存在，请重新输入");
-        }
-        // 校验手机号是否存在
-        int countPhone = driverDao.countPhone(driverInfo);
-        if(0 != countPhone){
-            return AppResponse.versionError("手机号已存在，请重新输入");
-        }*/
         driverInfo.setDriverId(StringUtil.getCommonCode(2));
-        driverInfo.setIsDelete(0);
         driverInfo.setDriverInfoId(StringUtil.getCommonCode(2));
         //密码加密
         String password = driverInfo.getUserPassword();
@@ -68,7 +61,7 @@ public class DriverService {
         //新增司机
         int count = driverDao.addDriver(driverInfo);
         int num = driverDao.addDriverArea(driverInfo);
-        if(count == 0 && num == 0){
+        if(count == 0 || num == 0){
             return AppResponse.versionError("新增失败！");
         }
         return AppResponse.success("新增成功！");
@@ -98,6 +91,10 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver(DriverInfo driverInfo){
+        String userRole = userDao.getUserRole(driverInfo.getLoginUserId());
+        if("2".equals(userRole)){
+            return AppResponse.versionError("你没有权限");
+        }
         DriverVO driver = driverDao.getDriverById(driverInfo.getDriverId());
         //判断当前账号和手机号是否已经修改
         if(!driver.getUserAcct().equals(driverInfo.getUserAcct()) || !driver.getPhone().equals(driverInfo.getPhone())){
@@ -112,22 +109,6 @@ public class DriverService {
                 return AppResponse.versionError("账号和手机号已存在，请重新输入");
             }
         }
-        /*//判断当前账号是否是当前要修改的账号
-        if(driver.getUserAcct().equals(driverInfo.getUserAcct()) == false){
-            //校验账号是否存在
-            int count = driverDao.countDriverAccount(driverInfo);
-            if(count != 0){
-                return AppResponse.versionError("该司机账号已存在，请重新输入！");
-            }
-        }
-        //判断当前手机号是否是修改
-        if(driver.getPhone().equals(driverInfo.getPhone()) == false){
-            // 校验手机号是否存在
-            int countPhone = driverDao.countPhone(driverInfo);
-            if(0 != countPhone){
-                return AppResponse.versionError("手机号已存在，请重新输入");
-            }
-        }*/
         //判断密码有没有修改
         if(!driver.getUserPassword().equals(driverInfo.getUserPassword())){
             //密码加密
@@ -174,7 +155,7 @@ public class DriverService {
     public AppResponse deleteDriverById(String driverId, String loginId){
         String userRole = userDao.getUserRole(loginId);
         if("2".equals(userRole)){
-            return AppResponse.versionError("你没有权限");
+            return AppResponse.versionError("你没有权限，不能删除");
         }
         List<String> listDriverId = Arrays.asList(driverId.split(","));
         int count = driverDao.deleteDriverById(listDriverId, loginId);

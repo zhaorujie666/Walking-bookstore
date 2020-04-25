@@ -16,12 +16,6 @@ import java.util.List;
 @Mapper
 public interface CategoryDao {
     /**
-     * 统计商品分类的名称
-     * @param goodsCategory
-     * @return
-     */
-    int countGoodsCategoryName(GoodsCategory goodsCategory);
-    /**
      * 新增商品分类
      * @param goodsCategory
      * @return

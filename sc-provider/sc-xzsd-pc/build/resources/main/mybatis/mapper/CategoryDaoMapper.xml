@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.category.dao.CategoryDao">
-
-    <!--统计商品分类的名称-->
-    <select id="countGoodsCategoryName" parameterType="com.xzsd.pc.category.entity.GoodsCategory" resultType="int">
-        select count(category_name)
-        from t_goods_category
-        where category_name = #{classifyName}
-        and is_delete = 0
-    </select>
-
     <!--新增商品分类-->
     <insert id="addGoodsCategory" parameterType="com.xzsd.pc.category.entity.GoodsCategory">
         insert into t_goods_category(
@@ -29,7 +20,7 @@
             #{classifyName},
             #{classifyParent},
             #{classifyComment},
-            #{isDelete},
+            0,
             <if test="classifyParent == 0">
                 1,
             </if>
@@ -71,41 +62,17 @@
     </update>
 
     <!--查询商品一二级分类列表-->
-    <select id="getListFirstAndSecondGoodsCategory" resultMap="listGoodsCategory">
+    <select id="getListFirstAndSecondGoodsCategory" resultType="com.xzsd.pc.category.entity.GoodsCategoryVO">
         select
-        t1.id as fid,
-        t1.category_name as fcategory_name,
-        t1.parent_id  as fparent_id,
-        t1.rank as frank,
-        t1.version as fversion,
-        t2.id as sid,
-        t2.category_name as Scategory_name,
-        t2.parent_id as sparent_id,
-        t2.rank srank,
-        t2.version as sversion
+        t1.id as classifyId,
+        t1.category_name as classifyName,
+        t1.parent_id  as classifyParent,
+        t1.rank as rank,
+        t1.version as version
         from t_goods_category t1
-        left join t_goods_category t2
-        on t1.id = t2.parent_id
-        where t1.parent_id = 0
-        and t1.is_delete = 0
-        and t2.is_delete = 0
+        where  t1.is_delete = 0
         order by t1.create_time desc
     </select>
-    <!--商品一二级分类映射集合-->
-    <resultMap id="listGoodsCategory" type="com.xzsd.pc.category.entity.GoodsCategoryVO">
-        <id property="classifyId" column="fid" jdbcType="VARCHAR"/>
-        <result property="classifyName" column="fcategory_name" jdbcType="VARCHAR"/>
-        <result property="classifyParent" column="fparent_id" jdbcType="VARCHAR"/>
-        <result property="rank" column="frank" jdbcType="VARCHAR"/>
-        <result property="version" column="fversion" jdbcType="VARCHAR"/>
-        <collection property="twoClassifyList" ofType="com.xzsd.pc.category.entity.SecondCategoryVO">
-            <result property="classifyId" column="sid" jdbcType="VARCHAR"/>
-            <result property="classifyName" column="scategory_name" jdbcType="VARCHAR"/>
-            <result property="classifyParent" column="sparent_id" jdbcType="VARCHAR"/>
-            <result property="rank" column="srank" jdbcType="VARCHAR"/>
-            <result property="version" column="sversion" jdbcType="VARCHAR"/>
-        </collection>
-    </resultMap>
 
     <!--删除商品分类-->
     <update id="deleteGoodsCategory" parameterType="java.lang.String">

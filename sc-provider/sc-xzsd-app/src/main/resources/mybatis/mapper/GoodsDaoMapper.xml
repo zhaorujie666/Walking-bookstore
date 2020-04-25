@@ -20,6 +20,17 @@
         and id = #{goodsId}
     </select>
 
+    <!--更新商品浏览量-->
+    <update id="updateGoodsViewNumber" parameterType="java.lang.String">
+        update t_goods_info
+        set
+            view_num = view_num + 1,
+            version = version + 1,
+            update_time = now()
+        where id = #{goodsId}
+        and is_delete = 0
+    </update>
+
     <!--查询商品评价列表-->
     <select id="getListGoodsEvaluation" parameterType="com.xzsd.app.goods.entity.GoodsEvaluation"
             resultType="com.xzsd.app.goods.entity.GoodsEvaluationVO">
@@ -71,27 +82,36 @@
         from t_goods_category
         where is_delete = 0
         and parent_id = 0
-        order by create_time desc
+        order by create_time asc
     </select>
 
-    <!--查询商品二级分类级商品信息-->
-    <select id="getSecondGoodsCategory" parameterType="java.lang.String" resultMap="SecondGoodsCategory">
+    <!--查询商品二级分类级-->
+    <select id="getSecondGoodsCategory" parameterType="java.lang.String" resultType="com.xzsd.app.goods.entity.GoodsCategory">
         select
         t1.id as classifyId,
-        t1.category_name as classifyName,
-        t2.id as goodsId,
-        t2.goods_name as goodsName,
-        t2.goods_image as goodsImagePath,
-        t2.selling_price as goodsPrice
-        from t_goods_category t1 left join t_goods_info t2
-        on t2.category_second = t1.id
+        t1.category_name as classifyName
+        from t_goods_category t1
 	    where t1.parent_id = #{classifyId}
+        and t1.is_delete = 0
+        order by t1.create_time asc
+    </select>
+
+    <!--查询二级分类下的商品-->
+    <select id="getGoodsList" parameterType="java.lang.String" resultType="com.xzsd.app.goods.entity.GoodsInfo">
+        select
+        t1.id as goodsId,
+        t1.goods_name as goodsName,
+        t1.goods_image as goodsImagePath,
+        t1.selling_price as goodsPrice,
+        t1.category_second as goodsSecondCategory
+        from t_goods_info t1
+	    where category_first = #{classifyId}
         and t1.is_delete = 0
         order by t1.create_time desc
     </select>
 
     <!--查询商品二级分类级商品信息映射-->
-    <resultMap id="SecondGoodsCategory" type="com.xzsd.app.goods.entity.GoodsCategory">
+    <!--<resultMap id="SecondGoodsCategory" type="com.xzsd.app.goods.entity.GoodsCategory">
         <id property="classifyId" column="classifyId"/>
         <result property="classifyName" column="classifyName"/>
         <collection property="goodsList" ofType="com.xzsd.app.goods.entity.GoodsInfo">
@@ -100,5 +120,5 @@
             <result property="goodsImagePath" column="goodsImagePath"/>
             <result property="goodsPrice" column="goodsPrice"/>
         </collection>
-    </resultMap>
+    </resultMap>-->
 </mapper>

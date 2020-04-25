@@ -44,11 +44,6 @@ public class OrderService {
         }else if("0".equals(orderInfo.getRole()) || "1".equals(orderInfo.getRole())){
             listOrder = orderDao.getListOrderByAdmin(orderInfo);
         }
-        //处理时间格式，不让有.0出现
-        /*for (int i = 0; i < listOrder.size(); i++) {
-            String[] split = listOrder.get(i).getPayTime().split(".");
-            listOrder.get(i).setPayTime(split[0]);
-        }*/
         PageInfo<OrderVO> pageData = new PageInfo<>(listOrder);
         return AppResponse.success("查询订单列表成功！", pageData);
     }
@@ -77,11 +72,11 @@ public class OrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateOrderStatus(OrderInfo orderInfo){
-        String role = userDao.getUserRole(orderInfo.getLoginUserId());
+        /*String role = userDao.getUserRole(orderInfo.getLoginUserId());
         //判断只有店长才能修改订单
         if("2".equals(role) == false){
             return AppResponse.versionError("您不能修改订单状态，只有店长才可以！");
-        }
+        }*/
         List<String> listOrderId = Arrays.asList(orderInfo.getOrderId().split(","));
         List<String> listVersion = Arrays.asList(orderInfo.getVersion().split(","));
         List<OrderInfo> orderList = new ArrayList<>();

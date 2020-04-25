@@ -141,7 +141,7 @@
         version as version
         from t_sys_user
         where is_delete = 0
-        and role in (0, 1, 2)
+        and role in (1, 2)
         <if test="userAcct != null and userAcct != ''">
             and user_acct like concat('%', #{userAcct}, '%')
         </if>

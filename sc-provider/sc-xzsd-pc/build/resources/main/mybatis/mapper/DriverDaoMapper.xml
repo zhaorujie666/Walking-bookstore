@@ -92,7 +92,7 @@
             #{provinceId},
             #{cityId},
             #{areaId},
-            #{isDelete},
+            0,
             now(),
             #{createUser},
             now(),
@@ -178,7 +178,7 @@
         where u.is_delete = 0
         and u.role = 3
         and d.is_delete = 0
-        and u.user_id= d.driver_id
+        and u.user_id = d.driver_id
         <if test="driverId != null and driverId != ''">
             and u.user_id like concat('%', #{driverId}, '%')
         </if>
@@ -204,22 +204,24 @@
         t1.user_name as userName,
         t1.phone as phone,
         t1.id_card as idCard,
-        t1.user_acct userAcct,
-        t1.version version
+        t1.user_acct as userAcct,
+        t1.version as version
         from t_sys_user t1, t_driver_info t2, t_store_info t3
         where t1.is_delete = 0
         and t1.role = 3
+        and t1.is_delete = 0
         and t2.is_delete = 0
+        and t3.is_delete = 0
         and t1.user_id= t2.driver_id
         and t2.province = t3.province
         and t2.city = t3.city
         and t2.county = t3.county
         and t3.manager_id = #{loginUserId}
         <if test="driverId != null and driverId != ''">
-            and u.user_id like concat('%', #{driverId}, '%')
+            and t1.user_id like concat('%', #{driverId}, '%')
         </if>
         <if test="userName != null and userName != ''">
-            and u.user_name like concat('%', #{userName}, '%')
+            and t1.user_name like concat('%', #{userName}, '%')
         </if>
         <if test="provinceId != null and provinceId != ''">
             and t2.province = #{provinceId}

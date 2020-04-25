@@ -70,6 +70,8 @@ public interface OrderDao {
      */
     int updateOrderStatus(OrderInfo orderInfo);
 
+
+
     /**
      * 查询订单详情
      * @param orderId
