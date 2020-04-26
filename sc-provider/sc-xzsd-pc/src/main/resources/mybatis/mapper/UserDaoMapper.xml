@@ -18,9 +18,6 @@
         <if test="userId != null and userId != ''">
             and user_id != #{userId}
         </if>
-        <if test="role != null and role != ''">
-            and role = #{role}
-        </if>
         and is_delete = 0) != 0, 2, 0)
         from t_sys_user
         where user_acct = #{userAcct}

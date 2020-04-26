@@ -29,7 +29,7 @@ public class DriverInfoService {
     public AppResponse getListStoreInfo(DriverInfo driverInfo){
         List<DriverInfo> listStoreInfo = driverInfoDao.getListStoreInfo(driverInfo);
         if(listStoreInfo.size() == 0){
-            return AppResponse.versionError("查询门店信息失败");
+            return AppResponse.versionError("当前司机账号没有绑定门店");
         }
         for (int i = 0; i < listStoreInfo.size(); i++) {
             listStoreInfo.get(i).setAddress(listStoreInfo.get(i).getProvinceName()

@@ -32,7 +32,7 @@ public class RegisterService {
         if(0 != count){
             return AppResponse.versionError("存在相同的账号或手机号，请重新输入！");
         }
-        if(register.getInviteCode() != null){
+        if(register.getInviteCode() != null || "".equals(register.getInviteCode())){
             int code = registerDao.countManagerInviteCode(register);
             if(0 == code){
                 return AppResponse.versionError("你绑定的门店邀请码不存在，请输入正确的邀请码");

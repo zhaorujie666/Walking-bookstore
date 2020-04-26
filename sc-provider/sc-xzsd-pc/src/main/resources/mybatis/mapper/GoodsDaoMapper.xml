@@ -6,7 +6,9 @@
         select count(book_number)
         from t_goods_info
         where book_number = #{isbn}
-        and id != #{goodsId}
+        <if test="goodsId != null and goodsId != ''">
+            and id != #{goodsId}
+        </if>
         and is_delete = 0
     </select>
 
@@ -183,7 +185,7 @@
             set
             goods_status = #{item.goodsStateId},
             update_time = now(),
-            <if test="goodsStateId == 1">
+            <if test="item.goodsStateId == 1">
                 start_time = now(),
             </if>
             update_user = #{item.updateUser, jdbcType=VARCHAR},

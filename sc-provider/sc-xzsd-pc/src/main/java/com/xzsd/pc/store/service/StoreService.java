@@ -132,6 +132,10 @@ public class StoreService {
      * @return
      */
     public AppResponse deleteStoreById(String storeId, String loginUserId){
+        String userRole = userDao.getUserRole(loginUserId);
+        if("2".equals(userRole)){
+            return AppResponse.versionError("你没有权限删除门店");
+        }
         //分离字符串
         List<String> listStoreId = Arrays.asList(storeId.split(","));
         List<String> list = storeDao.queryStoreBindOrder(listStoreId);

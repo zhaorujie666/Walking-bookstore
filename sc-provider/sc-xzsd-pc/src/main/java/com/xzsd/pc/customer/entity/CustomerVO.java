@@ -30,6 +30,10 @@ public class CustomerVO {
      * 身份证
      */
     private String idCard;
+    /**
+     * 用户id
+     */
+    private String userId;
 
     public String getUserAcct() {
         return userAcct;
@@ -77,5 +81,13 @@ public class CustomerVO {
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
