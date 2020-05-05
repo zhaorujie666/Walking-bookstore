@@ -18,8 +18,8 @@ import java.util.List;
 
 /**
  * @DescriptionDemo 门店的实现类
- * @Author zhaorujie
- * @Date 2020-03-25
+ * @author zhaorujie
+ * @date 2020-03-25
  */
 @Service
 public class StoreService {
@@ -31,6 +31,8 @@ public class StoreService {
      * 新增门店信息
      * @param storeInfo
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addStore(StoreInfo storeInfo){
@@ -68,6 +70,8 @@ public class StoreService {
      * 查询门店详情
      * @param storeId
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     public AppResponse getStoreInfoById(String storeId){
         StoreVO storeInfo = storeDao.getStoreInfoById(storeId);
@@ -81,6 +85,8 @@ public class StoreService {
      * 修改门店信息
      * @param storeInfo
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateStore(StoreInfo storeInfo){
@@ -104,8 +110,8 @@ public class StoreService {
      * 查询门店信息列表（分页）
      * @param storeInfo
      * @return
-     * @Author zhaorujie
-     * @Date 2020-03-26
+     * @author zhaorujie
+     * @date 2020-03-26
      */
     public AppResponse getListStore(StoreInfo storeInfo){
         List<StoreVO> listStore = null;
@@ -126,6 +132,8 @@ public class StoreService {
      * @param loginUserId 登录用户id
      * @param nowRole 登录用户角色
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     public AppResponse deleteStoreById(String storeId, String loginUserId, String nowRole){
         if("2".equals(nowRole)){

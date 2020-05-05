@@ -7,7 +7,6 @@ import com.xzsd.pc.hotgoods.dao.HotGoodsDao;
 import com.xzsd.pc.hotgoods.entity.HotGoodsInfo;
 import com.xzsd.pc.hotgoods.entity.HotGoodsShowNumber;
 import com.xzsd.pc.hotgoods.entity.HotGoodsVO;
-import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,13 +24,13 @@ import java.util.List;
 public class HotGoodsService {
     @Resource
     private HotGoodsDao hotGoodsDao;
-    @Resource
-    private UserDao userDao;
 
     /**
      * 新增热门商品
      * @param hotGoodsInfo
      * @return
+     * @author zhaorujie
+     * @date 2020-3-31
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addHotGoods(HotGoodsInfo hotGoodsInfo){
@@ -55,6 +54,8 @@ public class HotGoodsService {
      * 查询热门商品详情
      * @param hotGoodsId
      * @return
+     * @author zhaorujie
+     * @date 2020-3-31
      */
     public AppResponse getHotGoodsById(String hotGoodsId){
         HotGoodsVO hotGoods = hotGoodsDao.getHotGoodsById(hotGoodsId);
@@ -68,6 +69,8 @@ public class HotGoodsService {
      * 修改热门商品
      * @param hotGoodsInfo
      * @return
+     * @author zhaorujie
+     * @date 2020-3-31
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateHotGoods(HotGoodsInfo hotGoodsInfo){
@@ -93,6 +96,8 @@ public class HotGoodsService {
      * 查询热门商品列表（分页）
      * @param hotGoodsInfo
      * @return
+     * @author zhaorujie
+     * @date 2020-3-31
      */
     public AppResponse getListHotGoods(HotGoodsInfo hotGoodsInfo){
         PageHelper.startPage(hotGoodsInfo.getPageNum(), hotGoodsInfo.getPageSize());
@@ -129,6 +134,8 @@ public class HotGoodsService {
      * @param hotGoodsId
      * @param userId
      * @return
+     * @author zhaorujie
+     * @date 2020-3-31
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteHotGoods(String hotGoodsId, String userId){

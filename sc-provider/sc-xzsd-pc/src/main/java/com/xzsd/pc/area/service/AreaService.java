@@ -26,14 +26,11 @@ public class AreaService {
      * 查询省市区信息
      * @param areaInfo
      * @return
-     * @Author zhaorujie
-     * @Date 2020-03-25
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     public AppResponse getListArea(AreaInfo areaInfo){
         List<AreaVO> listArea = areaDao.getListArea(areaInfo);
-        if(listArea.size() == 0){
-            return AppResponse.bizError("查询失败！");
-        }
         //这是为了封装成接口文档需要的名称
         AreaList areaList = new AreaList();
         areaList.setAreaList(listArea);

@@ -2,8 +2,8 @@ package com.xzsd.pc.goods.entity;
 
 /**
  * @Description 商品实体类
- * @Author zhaorujie
- * @Date 2020-03-24
+ * @author zhaorujie
+ * @date 2020-03-24
  */
 public class GoodsInfo {
     /**

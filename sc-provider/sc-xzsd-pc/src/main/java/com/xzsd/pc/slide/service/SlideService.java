@@ -124,7 +124,7 @@ public class SlideService {
      * @param goodsInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-29
+     * @date 2020-03-29
      */
     public AppResponse getSlideAndHotGoods(GoodsInfo goodsInfo){
         PageHelper.startPage(goodsInfo.getPageNum(), goodsInfo.getPageSize());

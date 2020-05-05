@@ -15,8 +15,8 @@ import java.util.*;
 /**
  * @ClassName MenuService
  * @Description 菜单管理，增删改查
- * @Author zhaorujie
- * @Date 2020-4-8
+ * @author zhaorujie
+ * @date 2020-4-8
  */
 @Service
 public class MenuService {
@@ -28,14 +28,11 @@ public class MenuService {
      * 查询菜单列表
      *
      * @return
-     * @Author zhaorujie
-     * @Date 2020-4-8
+     * @author zhaorujie
+     * @date 2020-4-8
      */
     public AppResponse getListMenu(){
         List<Menu> listMenuVO = menuDao.getListMenu();
-        if(listMenuVO.size() == 0){
-            return AppResponse.versionError("查询菜单列表失败！");
-        }
         //封装成接口文档对应的list名称
         MenuList menuList = new MenuList();
         menuList.setMenuList(listMenuVO);
@@ -46,8 +43,8 @@ public class MenuService {
      * 新增菜单
      * @param menu
      * @return
-     * @Author zhaorujie
-     * @Date 2020-4-8
+     * @author zhaorujie
+     * @date 2020-4-8
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addMenu(Menu menu){
@@ -74,8 +71,8 @@ public class MenuService {
      * 查询用户详情
      * @param menuId
      * @return
-     * @Author zhaorujie
-     * @Date 2020-4-8
+     * @author zhaorujie
+     * @date 2020-4-8
      */
     public AppResponse getMenuById(String menuId){
         Menu menu = menuDao.getMenuById(menuId);
@@ -90,8 +87,8 @@ public class MenuService {
      *
      * @param menu
      * @return
-     * @Author zhaorujie
-     * @Date 2020-4-8
+     * @author zhaorujie
+     * @date 2020-4-8
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateMenu(Menu menu){
@@ -119,8 +116,8 @@ public class MenuService {
      * @param menuId
      * @param loginUserId
      * @return
-     * @Author zhaorujie
-     * @Date 2020-4-8
+     * @author zhaorujie
+     * @date 2020-4-8
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteMenu(String menuId, String loginUserId){
@@ -135,14 +132,11 @@ public class MenuService {
      * 根据角色查询菜单
      * @param role
      * @return
-     * @Author zhaorujie
-     * @Date 2020-4-15
+     * @author zhaorujie
+     * @date 2020-4-15
      */
     public AppResponse getPageHomeMenu(String role){
         List<Menu> pageHomeMenu = menuDao.getPageHomeMenu(role);
-        if(pageHomeMenu.size() == 0){
-            return AppResponse.versionError("根据角色查询到菜单为空");
-        }
         //封装数据
         MenuList menuList = new MenuList();
         menuList.setMenuList(pageHomeMenu);

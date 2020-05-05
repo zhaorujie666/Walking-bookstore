@@ -2,7 +2,6 @@ package com.xzsd.pc.user.service;
 
 import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.user.dao.UserDao;
-import com.xzsd.pc.user.entity.UserDetails;
 import com.xzsd.pc.user.entity.UserInfo;
 import com.xzsd.pc.user.entity.UserVO;
 import com.xzsd.pc.util.PasswordUtils;

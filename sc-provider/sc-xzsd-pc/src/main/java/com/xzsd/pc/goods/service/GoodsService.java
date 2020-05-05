@@ -76,9 +76,6 @@ public class GoodsService {
      */
     public AppResponse getListGoodsCategory(String classifyId){
         List<GoodsCategoryVO> listGoodsCategory = goodsDao.getListGoodsCategory(classifyId);
-        if(listGoodsCategory.size() == 0){
-            return AppResponse.versionError("当前商品分类为空！");
-        }
         //封装成接口文档需要的名称
         GoodsCategoryList goodsClassifyList = new GoodsCategoryList();
         goodsClassifyList.setGoodsClassifyList(listGoodsCategory);

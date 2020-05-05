@@ -17,8 +17,8 @@ import java.util.List;
 
 /**
  * @DescriptionDemo 商品分类的实现类
- * @Author zhaorujie
- * @Date 2020-03-25
+ * @author zhaorujie
+ * @date 2020-03-25
  */
 @Service
 public class CategoryService {
@@ -30,6 +30,8 @@ public class CategoryService {
      * 新增商品分类
      * @param goodsCategory
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addGoodsCategory(GoodsCategory goodsCategory){
@@ -42,11 +44,12 @@ public class CategoryService {
         return AppResponse.success("新增成功！");
     }
 
-
     /**
      * 查询商品分类详情
      * @param categoryId
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     public AppResponse getGoodsCategoryById(String categoryId){
         GoodsCategoryVO goodsCategory = categoryDao.getGoodsCategoryById(categoryId);
@@ -60,6 +63,8 @@ public class CategoryService {
      * 修改商品分类信息
      * @param goodsCategory
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsCategoryById(GoodsCategory goodsCategory){
@@ -73,6 +78,8 @@ public class CategoryService {
     /**
      * 查询商品分类列表
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     public AppResponse getListGoodsCategory(){
         List<GoodsCategoryVO> listGoodsCategory = categoryDao.getListFirstAndSecondGoodsCategory();
@@ -91,6 +98,7 @@ public class CategoryService {
                 goodsCategoryList.add(listGoodsCategory.get(i));
             }
         }
+        //封装数据
         CategoryList categoryList = new CategoryList();
         categoryList.setOneClassifyList(goodsCategoryList);
         return AppResponse.success("查询商品分类列表成功！", categoryList);
@@ -102,6 +110,8 @@ public class CategoryService {
      * @param loginId
      * @param classifyParent
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteGoodsCategory(String categoryId, String loginId, String classifyParent){

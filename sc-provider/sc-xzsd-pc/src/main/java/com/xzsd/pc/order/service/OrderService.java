@@ -52,9 +52,6 @@ public class OrderService {
      */
     public AppResponse getOrderDetailsById(String orderId){
         List<OrderDetails> orderDetails = orderDao.getOrderDetailsById(orderId);
-        if(orderDetails.size() == 0){
-            return AppResponse.versionError("查询订单详情失败！");
-        }
         //封装成接口文档需要的名称
         OrderDetailsList orderDetailsList = new OrderDetailsList();
         orderDetailsList.setOrderDeepenList(orderDetails);

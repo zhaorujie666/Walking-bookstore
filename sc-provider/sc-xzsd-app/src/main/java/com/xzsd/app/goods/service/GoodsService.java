@@ -83,9 +83,6 @@ public class GoodsService {
      */
     public AppResponse getFirstGoodsCategory(){
         List<GoodsCategory> firstGoodsCategory = goodsDao.getFirstGoodsCategory();
-        if(firstGoodsCategory.size() == 0){
-            return AppResponse.versionError("获取商品一级分类失败");
-        }
         //封装数据
         FirstCategoryList firstCategory = new FirstCategoryList();
         firstCategory.setOneClassifyList(firstGoodsCategory);

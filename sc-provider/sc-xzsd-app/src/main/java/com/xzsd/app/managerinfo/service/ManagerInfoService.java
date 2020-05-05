@@ -29,9 +29,6 @@ public class ManagerInfoService {
      */
     public AppResponse getListDriver(String userId){
         List<ManagerInfo> listDriver = mangerInfoDao.getListDriver(userId);
-        if(listDriver.size() == 0){
-            return AppResponse.versionError("当前门店没有司机");
-        }
         //封装数据
         ManagerInfoList list = new ManagerInfoList();
         list.setList(listDriver);

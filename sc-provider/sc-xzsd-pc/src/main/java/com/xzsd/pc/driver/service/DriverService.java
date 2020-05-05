@@ -4,10 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.driver.dao.DriverDao;
-import com.xzsd.pc.driver.entity.DriverDetails;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import com.xzsd.pc.driver.entity.DriverVO;
-import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.util.PasswordUtils;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -19,23 +17,21 @@ import java.util.List;
 
 /**
  * @DescriptionDemo 司机的实现类
- * @Author zhaorujie
- * @Date 2020-03-24
+ * @author zhaorujie
+ * @date 2020-03-24
  */
 @Service
 public class DriverService {
 
     @Resource
     private DriverDao driverDao;
-    @Resource
-    private UserDao userDao;
 
     /**
      * demo 新增司机
      * @param driverInfo
      * @return
-     * @Author zhaorujie
-     * @Date 2020-03-24
+     * @author zhaorujie
+     * @date 2020-03-24
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addDriver(DriverInfo driverInfo){
@@ -71,8 +67,8 @@ public class DriverService {
      * demo 查询司机详情
      * @param driverId 司机id
      * @return
-     * @Author zhaorujie
-     * @Date 2020-03-24
+     * @author zhaorujie
+     * @date 2020-03-24
      */
     public AppResponse getDriverById(String driverId){
         DriverVO driverInfo = driverDao.getDriverById(driverId);
@@ -86,8 +82,8 @@ public class DriverService {
      * 修改司机信息
      * @param driverInfo
      * @return
-     * @Author zhaorujie
-     * @Date 2020-03-25
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver(DriverInfo driverInfo){
@@ -128,8 +124,8 @@ public class DriverService {
      * 查询司机列表（分页）
      * @param driverInfo
      * @return
-     * @Author zhaorujie
-     * @Date 2020-03-25
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     public AppResponse getListDriver(DriverInfo driverInfo){
         PageHelper.startPage(driverInfo.getPageNum(), driverInfo.getPageSize());
@@ -149,8 +145,8 @@ public class DriverService {
      * @param nowRole 登录角色
      * @param loginId 登录人id
      * @return
-     * @Author zhaorujie
-     * @Date 2020-03-25
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteDriverById(String driverId, String loginId, String nowRole){

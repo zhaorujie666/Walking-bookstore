@@ -29,9 +29,7 @@ public class HomepageService {
      */
     public AppResponse getListSlideshow(){
         List<Slideshow> listSlideshow = homepageDao.getListSlideshow();
-        if(listSlideshow.size() == 0){
-            return AppResponse.versionError("查询首页轮播图失败");
-        }
+        //封装数据
         SlideshowList slideshowList = new SlideshowList();
         slideshowList.setSlideshowList(listSlideshow);
         return AppResponse.success("查询首页轮播图成功", slideshowList);

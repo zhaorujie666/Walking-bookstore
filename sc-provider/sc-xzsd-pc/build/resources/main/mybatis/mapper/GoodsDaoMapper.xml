@@ -127,6 +127,12 @@
             <if test="imagePath != null and imagePath != ''">
                 goods_image = #{imagePath},
             </if>
+            <if test="goodsInventory == 0">
+                goods_status = 0,
+            </if>
+            <if test="goodsInventory != 0">
+                goods_status = 1,
+            </if>
             update_user = #{updateUser},
             update_time = now(),
             version = version + 1

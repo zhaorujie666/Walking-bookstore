@@ -238,9 +238,7 @@ public class OrderService {
      */
     public AppResponse getListOrderEvaluation(String orderId){
         List<GoodsInfo> orderEvaluation = orderDao.getListOrderEvaluation(orderId);
-        if(orderEvaluation.size() == 0){
-            return AppResponse.versionError("查询订单评价列表的商品信息失败");
-        }
+        //封装数据
         OrderInfoVO orderInfo= new OrderInfoVO();
         orderInfo.setGoodsList(orderEvaluation);
         return AppResponse.success("查询订单评价列表的商品信息成功", orderInfo);
