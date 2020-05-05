@@ -20,9 +20,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/order")
 public class OrderController {
-
     public static final Logger logger = LoggerFactory.getLogger(OrderController.class);
-
     @Resource
     private OrderService orderService;
 

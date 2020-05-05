@@ -15,15 +15,13 @@ import javax.annotation.Resource;
 
 /**
  * @Description增删改查Driver
- * @Author zhaorujie
- * @Date 2020-03-24
+ * @author zhaorujie
+ * @date 2020-03-24
  */
 @RestController
 @RequestMapping("/driver")
 public class DriverController {
-
     private static final Logger logger = LoggerFactory.getLogger(DriverController.class);
-
     @Resource
     private DriverService driverService;
 
@@ -32,7 +30,7 @@ public class DriverController {
      * @param driverInfo
      * @return AppResponse
      * @author zhaorujie
-     * @Date 2020-03-24
+     * @date 2020-03-24
      */
     @PostMapping("addDriver")
     public AppResponse addDriver(DriverInfo driverInfo){
@@ -54,7 +52,7 @@ public class DriverController {
      * @param driverId 司机id
      * @return AppResponse
      * @author zhaorujie
-     * @Date 2020-03-25
+     * @date 2020-03-25
      */
     @PostMapping("getDriver")
     public AppResponse getDriverById(String driverId){
@@ -72,7 +70,7 @@ public class DriverController {
      * @param driverInfo
      * @return AppResponse
      * @author zhaorujie
-     * @Date 2020-03-25
+     * @date 2020-03-25
      */
     @PostMapping("updateDriver")
     public AppResponse updateDriver(DriverInfo driverInfo){
@@ -93,8 +91,8 @@ public class DriverController {
      * 查询司机列表（分页）
      * @param driverInfo
      * @return
-     * @Author zhaorujie
-     * @Date 2020-03-25
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @PostMapping("listDrivers")
     public AppResponse getListDriver(DriverInfo driverInfo){
@@ -115,8 +113,8 @@ public class DriverController {
      * @param driverId 司机id
      * @param nowRole 登录角色
      * @return
-     * @Author zhaorujie
-     * @Date 2020-03-25
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @PostMapping("deleteDriver")
     public AppResponse deleteDriverById(String driverId, String nowRole){

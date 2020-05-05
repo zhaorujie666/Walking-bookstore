@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * @ClassName MenuDao
  * @Description 菜单管理Dao层
- * @Author zhaorujie
- * @Date 2020-4-8
+ * @author zhaorujie
+ * @date 2020-4-8
  */
 @Mapper
 public interface MenuDao {

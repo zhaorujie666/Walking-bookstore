@@ -22,7 +22,6 @@ import java.util.List;
  */
 @Service
 public class DriverService {
-
     @Resource
     private DriverDao driverDao;
 

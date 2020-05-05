@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * @ClassName goodsCategoryDao
  * @Description goodsCategory
- * @Author zhaorujie
- * @Date 2020-03-26
+ * @author zhaorujie
+ * @date 2020-03-26
  */
 @Mapper
 public interface CategoryDao {

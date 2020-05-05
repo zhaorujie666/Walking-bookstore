@@ -23,7 +23,6 @@ import java.util.List;
  */
 @Service
 public class StoreService {
-
     @Resource
     private StoreDao storeDao;
 

@@ -52,6 +52,8 @@ public class UserInfoService {
      *
      * @param userInfo
      * @return
+     * @author zhaorujie
+     * @date 2020/4/8
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUserInfo(UserInfo userInfo){
@@ -67,6 +69,8 @@ public class UserInfoService {
      *
      * @param userInfo
      * @return
+     * @author zhaorujie
+     * @date 2020/4/8
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUserPassword(UserInfo userInfo){

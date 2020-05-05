@@ -14,8 +14,8 @@ import javax.annotation.Resource;
 
 /**
  * @Description增删改查goodsCategory
- * @Author zhaorujie
- * @Date 2020-03-25
+ * @author zhaorujie
+ * @date 2020-03-25
  */
 @RestController
 @RequestMapping("/goodsClassify")
@@ -30,7 +30,7 @@ public class CategoryController {
      * @param goodsCategory
      * @return
      * @author zhaorujie
-     * @Date 2020-03-26
+     * @date 2020-03-26
      */
     @PostMapping("addGoodsClassify")
     public AppResponse addGoodsCategory(GoodsCategory goodsCategory){
@@ -51,7 +51,7 @@ public class CategoryController {
      * @param classifyId
      * @return
      * @author zhaorujie
-     * @Date 2020-03-26
+     * @date 2020-03-26
      */
     @PostMapping("getGoodsClassify")
     public AppResponse getGoodsCategoryById(String classifyId){
@@ -69,7 +69,7 @@ public class CategoryController {
      * @param goodsCategory
      * @return
      * @author zhaorujie
-     * @Date 2020-03-26
+     * @date 2020-03-26
      */
     @PostMapping("updateGoodsClassify")
     public AppResponse updateGoodsCategoryById(GoodsCategory goodsCategory){
@@ -89,7 +89,7 @@ public class CategoryController {
      * 查询商品分类列表
      * @return
      * @author zhaorujie
-     * @Date 2020-03-26
+     * @date 2020-03-26
      */
     @PostMapping("listAllGoodsClassify")
     public AppResponse getListGoodsCategory(){
@@ -108,7 +108,7 @@ public class CategoryController {
      * @param classifyParent
      * @return
      * @author zhaorujie
-     * @Date 2020-03-27
+     * @date 2020-03-27
      */
     @PostMapping("deleteGoodsClassify")
     public AppResponse deleteGoodsCategory(String classifyId, String classifyParent) {

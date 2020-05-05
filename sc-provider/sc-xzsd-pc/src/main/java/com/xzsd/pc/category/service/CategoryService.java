@@ -22,7 +22,6 @@ import java.util.List;
  */
 @Service
 public class CategoryService {
-
     @Resource
     private CategoryDao categoryDao;
 
@@ -125,7 +124,7 @@ public class CategoryService {
             //查询当前分页下是否有商品
             int cnt = categoryDao.countGoods(categoryId);
             if(cnt != 0){
-                return AppResponse.versionError("当前分页存在商品，不能被删除！");
+                return AppResponse.versionError("当前分类存在商品，不能被删除！");
             }
         }
         int count = categoryDao.deleteGoodsCategory(categoryId, loginId);

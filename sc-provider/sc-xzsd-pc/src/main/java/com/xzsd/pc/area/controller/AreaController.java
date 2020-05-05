@@ -14,13 +14,12 @@ import javax.annotation.Resource;
 
 /**
  * @Description 查省市区
- * @Author zhaorujie
- * @Date 2020-03-25
+ * @author zhaorujie
+ * @date 2020-03-25
  */
 @RestController
 @RequestMapping("/selectCombox")
 public class AreaController {
-
     private static final Logger logger = LoggerFactory.getLogger(AreaController.class);
 
     @Resource
@@ -31,7 +30,7 @@ public class AreaController {
      * @param areaInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-25
+     * @date 2020-03-25
      */
     @PostMapping("listArea")
     public AppResponse getListArea(AreaInfo areaInfo){

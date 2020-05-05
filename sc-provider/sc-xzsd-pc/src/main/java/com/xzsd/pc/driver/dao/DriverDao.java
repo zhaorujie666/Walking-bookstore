@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * @ClassName DriverDao
  * @Description Driver
- * @Author zhaorujie
- * @Date 2020-03-24
+ * @author zhaorujie
+ * @date 2020-03-24
  */
 @Mapper
 public interface DriverDao {
@@ -79,6 +79,7 @@ public interface DriverDao {
      * @return
      */
     int deleteDriverById(@Param("listDriverId") List<String> listDriverId, @Param("loginId") String loginId);
+
     /**
      * 删除司机地区
      * @param listDriverId

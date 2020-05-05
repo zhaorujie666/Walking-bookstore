@@ -24,7 +24,6 @@ import java.util.List;
  */
 @Service
 public class SlideService {
-
     @Resource
     private SlideDao slideDao;
 

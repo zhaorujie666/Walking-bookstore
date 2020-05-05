@@ -20,7 +20,6 @@ import javax.annotation.Resource;
 @RequestMapping("/imageUpload")
 public class UploadController {
     private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
-
     @Resource
     private UploadService uploadService;
 

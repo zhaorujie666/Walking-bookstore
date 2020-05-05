@@ -21,12 +21,9 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/slideshowHome")
 public class SlideController {
-
     private static final Logger logger = LoggerFactory.getLogger(SlideController.class);
-
     @Resource
     private SlideService slideService;
-
 
     /**
      * 新增轮播图

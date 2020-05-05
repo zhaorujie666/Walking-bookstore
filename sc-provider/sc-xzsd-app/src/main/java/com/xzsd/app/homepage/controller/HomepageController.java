@@ -19,7 +19,6 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("clientHome")
 public class HomepageController {
-
     private static final Logger logger = LoggerFactory.getLogger(HomepageController.class);
 
     @Resource

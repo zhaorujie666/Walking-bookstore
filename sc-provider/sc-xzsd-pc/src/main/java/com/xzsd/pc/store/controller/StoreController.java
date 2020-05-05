@@ -14,15 +14,13 @@ import javax.annotation.Resource;
 
 /**
  * @Description 门店管理增删改查StoreInfo
- * @Author zhaorujie
- * @Date 2020-03-25
+ * @author zhaorujie
+ * @date 2020-03-25
  */
 @RestController
 @RequestMapping("/store")
 public class StoreController {
-
     private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
-
     @Resource
     private StoreService storeService;
 
@@ -31,7 +29,7 @@ public class StoreController {
      * @param storeInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-25
+     * @date 2020-03-25
      */
     @PostMapping("addStore")
     public AppResponse addStore(StoreInfo storeInfo){
@@ -53,7 +51,7 @@ public class StoreController {
      * @param storeId
      * @return
      * @author zhaorujie
-     * @Date 2020-03-26
+     * @date 2020-03-26
      */
     @PostMapping("getStore")
     public AppResponse getStoreInfoById(String storeId){
@@ -71,7 +69,7 @@ public class StoreController {
      * @param storeInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-26
+     * @date 2020-03-26
      */
     @PostMapping("updateStore")
     public AppResponse updateStore(StoreInfo storeInfo){
@@ -93,7 +91,7 @@ public class StoreController {
      * @param storeInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-26
+     * @date 2020-03-26
      */
     @PostMapping("listStores")
     public AppResponse getListStore(StoreInfo storeInfo){
@@ -115,7 +113,7 @@ public class StoreController {
      * @param nowRole 登录的用户角色·
      * @return
      * @author zhaorujie
-     * @Date 2020-03-26
+     * @date 2020-03-26
      */
     @PostMapping("deleteStore")
     public AppResponse deleteStoreById(String storeId, String nowRole){

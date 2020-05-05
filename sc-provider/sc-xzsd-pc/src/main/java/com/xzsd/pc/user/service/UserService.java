@@ -23,7 +23,6 @@ import static com.neusoft.core.page.PageUtils.getPageInfo;
  */
 @Service
 public class UserService {
-
     @Resource
     private UserDao userDao;
 
@@ -31,9 +30,15 @@ public class UserService {
      * 新增用户
      * @param userInfo
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addUser(UserInfo userInfo){
+        //排除司机和客户登录后台可以新增用户
+        if("3".equals(userInfo.getNowRole()) || "4".equals(userInfo.getNowRole())){
+            return AppResponse.versionError("你没有权限");
+        }
         if(userInfo.getRole().equals(userInfo.getNowRole())){
             return AppResponse.versionError("管理员不能新增管理员，只用超级管理员才能新增管理员");
         }
@@ -65,6 +70,8 @@ public class UserService {
      * 查询用户详情
      * @param userId
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     public AppResponse getUserInfoById(String userId){
         UserVO userInfo = userDao.getUserInfoById(userId);
@@ -78,9 +85,15 @@ public class UserService {
      * 修改用户信息
      * @param userInfo
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUserInfo(UserInfo userInfo){
+        //排除司机和客户登录后台可以修改用户信息
+        if("3".equals(userInfo.getNowRole()) || "4".equals(userInfo.getNowRole())){
+            return AppResponse.versionError("你没有权限");
+        }
         if(userInfo.getRole().equals(userInfo.getNowRole())){
             return AppResponse.versionError("管理员不能修改管理员的信息，并且不能把店长改为管理员，只有超级管理员才能");
         }
@@ -115,8 +128,13 @@ public class UserService {
      * 查询用户列表（分页）
      * @param userInfo
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     public AppResponse getListUser(UserInfo userInfo){
+        if("3".equals(userInfo.getNowRole()) || "4".equals(userInfo.getNowRole())){
+            return AppResponse.versionError("你没有权限");
+        }
         //分页查询
         List<UserVO> listUser = userDao.queryListUserByPage(userInfo);
         return AppResponse.success("查询用户列表成功！", getPageInfo(listUser));
@@ -126,6 +144,8 @@ public class UserService {
      * 删除用户
      * @param userInfo
      * @return
+     * @author zhaorujie
+     * @date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteUser(UserInfo userInfo){

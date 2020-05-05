@@ -23,7 +23,6 @@ import java.util.List;
  */
 @Service
 public class OrderService {
-
     @Resource
     private OrderDao orderDao;
 

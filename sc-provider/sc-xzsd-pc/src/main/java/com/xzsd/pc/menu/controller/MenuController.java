@@ -15,15 +15,13 @@ import javax.annotation.Resource;
 /**
  * @ClassName MenuService
  * @Description 菜单管理
- * @Author zhaorujie
- * @Date 2020-4-8
+ * @author zhaorujie
+ * @date 2020-4-8
  */
 @RestController
 @RequestMapping("/menu")
 public class MenuController {
-
     private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
-
     @Resource
     private MenuService menuService;
 

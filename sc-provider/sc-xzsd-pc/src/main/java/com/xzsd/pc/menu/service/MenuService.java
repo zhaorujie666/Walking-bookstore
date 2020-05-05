@@ -20,7 +20,6 @@ import java.util.*;
  */
 @Service
 public class MenuService {
-
     @Resource
     private MenuDao menuDao;
 

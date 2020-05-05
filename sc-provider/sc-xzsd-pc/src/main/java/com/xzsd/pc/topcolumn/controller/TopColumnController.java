@@ -20,7 +20,6 @@ import javax.annotation.Resource;
 @RequestMapping("topOfColumn")
 public class TopColumnController {
     public static final Logger logger = LoggerFactory.getLogger(TopColumnController.class);
-
     @Resource
     private TopColumnService topColumnService;
 

@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * @ClassName GoodsDao
  * @Description Goods
- * @Author zhaorujie
- * @Date 2020-03-28
+ * @author zhaorujie
+ * @date 2020-03-28
  */
 @Mapper
 public interface GoodsDao {

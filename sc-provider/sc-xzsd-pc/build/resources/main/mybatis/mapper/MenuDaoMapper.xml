@@ -106,11 +106,14 @@
         menu_path as menuPath
         from t_sys_menu
         where is_delete = 0
+        <if test="role == 0 or role == 1">
+            and is_manager = 0
+        </if>
         <if test="role == 2">
             and is_manager = 1
         </if>
-        <if test="role == 0 or role == 1">
-            and is_manager = 0
+        <if test="role == 3 or role == 4">
+            and is_manager = 2
         </if>
     </select>
 </mapper>

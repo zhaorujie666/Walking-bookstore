@@ -14,15 +14,13 @@ import javax.annotation.Resource;
 
 /**
  * @Description增删改查GoodsInfo
- * @Author zhaorujie
- * @Date 2020-03-28
+ * @author zhaorujie
+ * @date 2020-03-28
  */
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {
-
     private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
-
     @Resource
     private GoodsService goodsService;
 
@@ -31,7 +29,7 @@ public class GoodsController {
      * @param goodsInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @PostMapping("addGoods")
     public AppResponse addGoods(GoodsInfo goodsInfo){
@@ -52,7 +50,7 @@ public class GoodsController {
      * @param goodsId 商品id
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @PostMapping("getGoods")
     public AppResponse getGoodsInfoById(String goodsId){
@@ -70,7 +68,7 @@ public class GoodsController {
      * @param classifyId 商品分类id
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @PostMapping("listGoodsClassify")
     public AppResponse getListGoodsCategory(String classifyId){
@@ -88,7 +86,7 @@ public class GoodsController {
      * @param goodsInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @PostMapping("updateGoods")
     public AppResponse updateGoodsInfo(GoodsInfo goodsInfo){
@@ -109,7 +107,7 @@ public class GoodsController {
      * @param goodsInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @PostMapping("updateGoodsShelfState")
     public AppResponse updateGoodsStatus(GoodsInfo goodsInfo){
@@ -130,7 +128,7 @@ public class GoodsController {
      * @param goodsInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @PostMapping("listGoods")
     public AppResponse getListGoods(GoodsInfo goodsInfo){
@@ -148,7 +146,7 @@ public class GoodsController {
      * @param goodsId 商品id
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @PostMapping("deleteGoods")
     public AppResponse deleteGoods(String goodsId){

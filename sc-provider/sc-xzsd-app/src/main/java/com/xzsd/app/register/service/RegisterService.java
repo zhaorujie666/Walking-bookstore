@@ -22,9 +22,10 @@ public class RegisterService {
 
     /**
      * 注册用户
-     *
      * @param register
      * @return
+     * @author zhaorujie
+     * @date 2020/4/8
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse registerUser(Register register){

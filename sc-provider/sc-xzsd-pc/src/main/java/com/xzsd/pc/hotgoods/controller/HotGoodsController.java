@@ -21,9 +21,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/hotGoods")
 public class HotGoodsController {
-
     private static final Logger logger = LoggerFactory.getLogger(HotGoodsController.class);
-
     @Resource
     private HotGoodsService hotGoodsService;
 

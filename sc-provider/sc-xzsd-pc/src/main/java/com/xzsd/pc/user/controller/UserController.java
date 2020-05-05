@@ -14,15 +14,13 @@ import javax.annotation.Resource;
 
 /**
  * @Description 增删改查UserInfo
- * @Author zhaorujie
- * @Date 2020-03-27
+ * @author zhaorujie
+ * @date 2020-03-27
  */
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
     @Resource
     private UserService userService;
 
@@ -31,7 +29,7 @@ public class UserController {
      * @param userInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-3-27
+     * @date 2020-3-27
      */
     @PostMapping("addUser")
     public AppResponse addUser(UserInfo userInfo){
@@ -52,7 +50,7 @@ public class UserController {
      * @param userId
      * @return
      * @author zhaorujie
-     * @Date 2020-3-27
+     * @date 2020-3-27
      */
     @PostMapping("getUser")
     public AppResponse getUserInfoById(String userId){
@@ -70,7 +68,7 @@ public class UserController {
      * @param userInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-3-27
+     * @date 2020-3-27
      */
     @PostMapping("updateUser")
     public AppResponse updateUserInfo(UserInfo userInfo){
@@ -91,7 +89,7 @@ public class UserController {
      * @param userInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-3-27
+     * @date 2020-3-27
      */
     @PostMapping("listUsers")
     public AppResponse getListUser(UserInfo userInfo){
@@ -109,7 +107,7 @@ public class UserController {
      * @param userInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-3-27
+     * @date 2020-3-27
      */
     @PostMapping("deleteUser")
     public AppResponse deleteUser(UserInfo userInfo){

@@ -14,13 +14,12 @@ import javax.annotation.Resource;
 
 /**
  * @Description增删改查CustomerInfo
- * @Author zhaorujie
- * @Date 2020-03-25
+ * @author zhaorujie
+ * @date 2020-03-25
  */
 @RestController
 @RequestMapping("/client")
 public class CustomerController {
-
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
     @Resource
     private CustomerService customerService;
@@ -30,7 +29,7 @@ public class CustomerController {
      * @param customerInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-26
+     * @date 2020-03-26
      */
     @PostMapping("listClients")
     public AppResponse getListCustomers(CustomerInfo customerInfo){

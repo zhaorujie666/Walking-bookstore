@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * @ClassName StoreDao 门店Dao层
  * @Description Store
- * @Author zhaorujie
- * @Date 2020-03-25
+ * @author zhaorujie
+ * @date 2020-03-25
  */
 @Mapper
 public interface StoreDao {

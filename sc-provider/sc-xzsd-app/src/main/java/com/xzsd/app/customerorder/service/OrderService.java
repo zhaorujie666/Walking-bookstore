@@ -323,7 +323,10 @@ public class OrderService {
         orderInfo.setOrderStateId("5");
         orderInfo.setOrderId(evaluationOrder.getOrderId());
         orderInfo.setUserId(evaluationOrder.getUserId());
-        orderDao.updateOrderStatus(orderInfo);
+        int flag = orderDao.updateOrderStatus(orderInfo);
+        if(0 == flag){
+            return AppResponse.versionError("更新订单状态失败");
+        }
         return AppResponse.success("新增评价成功");
     }
 }
