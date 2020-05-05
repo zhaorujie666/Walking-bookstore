@@ -18,31 +18,12 @@
         <if test="userId != null and userId != ''">
             and user_id != #{userId}
         </if>
-        <if test="role != null and role != ''">
-            and role = #{role}
-        </if>
         and is_delete = 0) != 0, 2, 0)
         from t_sys_user
         where user_acct = #{userAcct}
         <if test="userId != null and userId != ''">
             and user_id != #{userId}
         </if>
-        and is_delete = 0
-    </select>
-
-    <!--统计用户账号-->
-    <select id="countUserAccount" parameterType="com.xzsd.pc.user.entity.UserInfo" resultType="int">
-        select count(user_acct)
-        from t_sys_user
-        where user_acct = #{userAcct}
-        and is_delete = 0
-    </select>
-
-    <!--统计手机号-->
-    <select id="countPhone" parameterType="com.xzsd.pc.user.entity.UserInfo" resultType="int">
-        select count(phone)
-        from t_sys_user
-        where phone = #{phone}
         and is_delete = 0
     </select>
 

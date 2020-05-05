@@ -4,13 +4,15 @@
     <!--查询首页轮播图-->
     <select id="getListSlideshow" resultType="com.xzsd.app.homepage.entity.Slideshow">
         select
-        image_url as slideshowPath,
-        goods_id as goodsId
-        from t_sys_slide
-        where slide_status = 1
-        and is_delete = 0
-        and now() between start_time and end_time
-        order by sort asc
+        t1.image_url as slideshowPath,
+        t1.goods_id as goodsId
+        from t_sys_slide t1, t_goods_info t2
+        where t1.goods_id = t2.id
+        and t1.slide_status = 1
+        and t1.is_delete = 0
+        and t2.is_delete = 0
+        and now() between t1.start_time and t1.end_time
+        order by t1.sort asc
     </select>
 
     <!--查询热门位展示的数量-->
@@ -32,6 +34,7 @@
         t2.selling_price as goodsPrice
         from t_hot_goods t1, t_goods_info t2
         where t1.goods_id = t2.id
+        and t2.goods_status = 1
         and t1.is_delete = 0
         and t2.is_delete = 0
         order by t1.sort asc

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xzsd.pc.store.dao.StoreDao">
-    <!--统计营业执照数量-->
+    <!--统计营业执照数量和店长编号-->
     <select id="countBusinessCode" parameterType="com.xzsd.pc.store.entity.StoreInfo" resultType="int">
         select
         if(count(business_code) != 0, 1, 0) +
         if((select count(user_id)
         from t_sys_user
         where user_id= #{userId}
+        and role = '2'
         and is_delete = 0) != 0, 2, 0)
         from t_store_info
         where business_code = #{businessCode}
@@ -62,17 +63,6 @@
             0
         )
     </insert>
-    
-    <!--查询店长编号id-->
-    <select id="getManagerId" parameterType="com.xzsd.pc.store.entity.StoreInfo"
-            resultType="com.xzsd.pc.store.entity.StoreInfo">
-        select
-        user_id as userId,
-        phone as phone
-        from t_sys_user
-        where user_id= #{userId}
-        and is_delete = 0
-    </select>
 
     <!--查询门店详情信息-->
     <select id="getStoreInfoById" parameterType="java.lang.String" resultType="com.xzsd.pc.store.entity.StoreVO">
@@ -216,7 +206,7 @@
         store_id as storeId
         from t_order_info
         where is_delete = 0
-        and order_status in (0,1,2,3)
+        and order_status in (0, 2, 3)
         and store_id in
         <foreach collection="listStoreId" item="item" index="index" open="(" separator="," close=")">
             #{item}

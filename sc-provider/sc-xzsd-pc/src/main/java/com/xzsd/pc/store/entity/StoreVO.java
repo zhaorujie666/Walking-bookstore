@@ -1,7 +1,7 @@
 package com.xzsd.pc.store.entity;
 
 /**
- * @Description 实体类
+ * @Description 门店实体类
  * @Author zhaorujie
  * @Date 2020-03-24
  */
@@ -29,7 +29,7 @@ public class StoreVO {
     /**
      * 电话
      */
-    private String phone;
+    private long phone;
     /**
      * 邀请码
      */
@@ -70,6 +70,10 @@ public class StoreVO {
      * 版本号
      */
     private String version;
+    /**
+     * 登录用户的角色
+     */
+    private String newRole;
 
     public String getStoreId() {
         return storeId;
@@ -111,11 +115,11 @@ public class StoreVO {
         this.userName = userName;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
@@ -197,5 +201,13 @@ public class StoreVO {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getNewRole() {
+        return newRole;
+    }
+
+    public void setNewRole(String newRole) {
+        this.newRole = newRole;
     }
 }

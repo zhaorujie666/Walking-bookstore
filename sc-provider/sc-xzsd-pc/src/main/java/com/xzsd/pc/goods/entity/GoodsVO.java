@@ -1,7 +1,7 @@
 package com.xzsd.pc.goods.entity;
 
 /**
- * @Description 实体类
+ * @Description 商品列表实体类
  * @Author zhaorujie
  * @Date 2020-03-24
  */
@@ -25,11 +25,11 @@ public class GoodsVO {
     /**
      * 定价
      */
-    private String goodsOriginalCost;
+    private double goodsOriginalCost;
     /**
      * 售价
      */
-    private String goodsPrice;
+    private double goodsPrice;
     /**
      * 销售量
      */
@@ -115,19 +115,19 @@ public class GoodsVO {
         this.supplierName = supplierName;
     }
 
-    public String getGoodsOriginalCost() {
+    public double getGoodsOriginalCost() {
         return goodsOriginalCost;
     }
 
-    public void setGoodsOriginalCost(String goodsOriginalCost) {
+    public void setGoodsOriginalCost(double goodsOriginalCost) {
         this.goodsOriginalCost = goodsOriginalCost;
     }
 
-    public String getGoodsPrice() {
+    public double getGoodsPrice() {
         return goodsPrice;
     }
 
-    public void setGoodsPrice(String goodsPrice) {
+    public void setGoodsPrice(double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
 

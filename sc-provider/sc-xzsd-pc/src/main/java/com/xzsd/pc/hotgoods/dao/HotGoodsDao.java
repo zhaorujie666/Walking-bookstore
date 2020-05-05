@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @Description 热门商品
+ * @Description 热门商品Dao层
  * @author zhaorujie
  * @date 2020-3-31
  */
@@ -21,20 +21,6 @@ public interface HotGoodsDao {
      * @return
      */
     int countSortAndGoodsIsUse(HotGoodsInfo hotGoodsInfo);
-
-    /**
-     * 统计排序是否出现重复的序号
-     * @param hotGoodsInfo
-     * @return
-     */
-    int countSort(HotGoodsInfo hotGoodsInfo);
-
-    /**
-     * 统计该商品是否已经被使用
-     * @param hotGoodsInfo
-     * @return
-     */
-    int countGoodsIsUse(HotGoodsInfo hotGoodsInfo);
 
     /**
      * 新增热门商品

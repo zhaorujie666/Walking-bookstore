@@ -33,7 +33,7 @@ public class UserVO {
     /**
      * 电话
      */
-    private String phone;
+    private long phone;
     /**
      * 邮箱
      */
@@ -50,6 +50,10 @@ public class UserVO {
      * 版本号
      */
     private String version;
+    /**
+     * 登录用户的角色
+     */
+    private String newRole;
 
     public String getUserId() {
         return userId;
@@ -99,11 +103,11 @@ public class UserVO {
         this.sex = sex;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
@@ -137,5 +141,13 @@ public class UserVO {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getNewRole() {
+        return newRole;
+    }
+
+    public void setNewRole(String newRole) {
+        this.newRole = newRole;
     }
 }

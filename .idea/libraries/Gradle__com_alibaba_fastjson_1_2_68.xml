@@ -2,10 +2,14 @@
   <library name="Gradle: com.alibaba:fastjson:1.2.68">
     <CLASSES>
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/com.alibaba/fastjson/1.2.68/9e3d29f05bcfab1c15a1357ebf2dd513c1d42f49/fastjson-1.2.68.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.alibaba/fastjson/1.2.68/9e3d29f05bcfab1c15a1357ebf2dd513c1d42f49/fastjson-1.2.68.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/com.alibaba/fastjson/1.2.68/9e3d29f05bcfab1c15a1357ebf2dd513c1d42f49/fastjson-1.2.68.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/com.alibaba/fastjson/1.2.68/df86f4fea46f5e3b54d3ae690fee59b1f8c9e2da/fastjson-1.2.68-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.alibaba/fastjson/1.2.68/df86f4fea46f5e3b54d3ae690fee59b1f8c9e2da/fastjson-1.2.68-sources.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/com.alibaba/fastjson/1.2.68/df86f4fea46f5e3b54d3ae690fee59b1f8c9e2da/fastjson-1.2.68-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

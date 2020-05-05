@@ -1,9 +1,9 @@
-package com.xzsd.app.customerime.controller;
+package com.xzsd.app.customerme.controller;
 
 import com.neusoft.core.restful.AppResponse;
 import com.neusoft.security.client.utils.SecurityUtils;
-import com.xzsd.app.customerime.entity.CustomerMe;
-import com.xzsd.app.customerime.service.CustomerMeService;
+import com.xzsd.app.customerme.entity.CustomerMe;
+import com.xzsd.app.customerme.service.CustomerMeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;

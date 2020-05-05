@@ -36,6 +36,10 @@ public class EvaluationOrder {
      * 评价星级
      */
     private int evaluateScore;
+    /**
+     * 版本号
+     */
+    private String version;
 
     public String getEvaluationId() {
         return evaluationId;
@@ -91,5 +95,13 @@ public class EvaluationOrder {
 
     public void setEvaluateScore(int evaluateScore) {
         this.evaluateScore = evaluateScore;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 }

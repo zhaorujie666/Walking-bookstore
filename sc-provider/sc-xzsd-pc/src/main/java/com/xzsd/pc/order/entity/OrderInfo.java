@@ -3,9 +3,9 @@ package com.xzsd.pc.order.entity;
 import java.util.Date;
 
 /**
- * @Description 实体类
- * @Author zhaorujie
- * @Date 2020-03-27
+ * @Description 订单实体类
+ * @author zhaorujie
+ * @date 2020-03-27
  */
 public class OrderInfo {
     /**

@@ -3,7 +3,7 @@ package com.xzsd.pc.category.entity;
 import java.util.List;
 
 /**
- * @Description 实体类
+ * @Description 商品分类实体类
  * @Author zhaorujie
  * @Date 2020-03-26
  */

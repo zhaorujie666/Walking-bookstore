@@ -14,7 +14,8 @@
         star_level as goodsEvaluateScore,
         author as goodsAuthor,
         publisher as goodsPress,
-        version as version
+        version as version,
+        sales as goodsSales
         from t_goods_info
         where is_delete = 0
         and id = #{goodsId}
@@ -40,13 +41,15 @@
         t1.appraise_info as evaluateContent,
         t1.star_level as evaluateScore,
         t1.create_time as createTime,
-        t1.user_id as userId
-        from t_goods_appraise t1, t_sys_user t2, t_goods_appraise_images t3
-        where t1.user_id = t2.user_id
-        and t1.goods_id = #{goodsId}
+        t1.user_id as userId,
+        t3.appraise_id as appraiseId
+        from t_goods_appraise t1
+        left join t_sys_user t2
+        on t1.user_id = t2.	user_id
+        left join t_goods_appraise_images t3
+        on t1.id = t3.appraise_id
+        where t1.goods_id = #{goodsId}
         and t1.is_delete = 0
-        and t3.is_delete = 0
-		and t1.id = t3.appraise_id
 		<if test="evaluateScore == 1">
             and t1.star_level in(0,1)
         </if>
@@ -106,19 +109,8 @@
         t1.category_second as goodsSecondCategory
         from t_goods_info t1
 	    where category_first = #{classifyId}
+	    and t1.goods_status = 1
         and t1.is_delete = 0
         order by t1.create_time desc
     </select>
-
-    <!--查询商品二级分类级商品信息映射-->
-    <!--<resultMap id="SecondGoodsCategory" type="com.xzsd.app.goods.entity.GoodsCategory">
-        <id property="classifyId" column="classifyId"/>
-        <result property="classifyName" column="classifyName"/>
-        <collection property="goodsList" ofType="com.xzsd.app.goods.entity.GoodsInfo">
-            <id property="goodsId" column="goodsId"/>
-            <result property="goodsName" column="goodsName"/>
-            <result property="goodsImagePath" column="goodsImagePath"/>
-            <result property="goodsPrice" column="goodsPrice"/>
-        </collection>
-    </resultMap>-->
 </mapper>

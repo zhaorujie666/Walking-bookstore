@@ -25,7 +25,6 @@ public class CategoryController {
     @Resource
     private CategoryService categoryService;
 
-
     /**
      * 新增商品分类
      * @param goodsCategory
@@ -106,16 +105,17 @@ public class CategoryController {
     /**
      * 删除商品分类
      * @param classifyId
+     * @param classifyParent
      * @return
      * @author zhaorujie
      * @Date 2020-03-27
      */
     @PostMapping("deleteGoodsClassify")
-    public AppResponse deleteGoodsCategory(String classifyId) {
+    public AppResponse deleteGoodsCategory(String classifyId, String classifyParent) {
         try {
             //获取用户id
             String userId = SecurityUtils.getCurrentUserId();
-            return categoryService.deleteGoodsCategory(classifyId, userId);
+            return categoryService.deleteGoodsCategory(classifyId, userId, classifyParent);
         } catch (Exception e) {
             logger.error("删除失败", e);
             System.out.println(e.toString());

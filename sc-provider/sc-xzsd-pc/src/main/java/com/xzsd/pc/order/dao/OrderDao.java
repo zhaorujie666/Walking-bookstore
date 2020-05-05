@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @ClassName orderDao
- * @Description order
+ * @Description order订单
  * @Author zhaorujie
  * @Date 2020-03-230
  */
@@ -44,4 +44,11 @@ public interface OrderDao {
      * @return
      */
     int updateOrderStatus(@Param("orderList") List<OrderInfo> orderList);
+
+    /**
+     * 获取要更新的订单状态
+     * @param orderIdList
+     * @return
+     */
+    List<OrderVO> getListOrderStatus(@Param("orderIdList") List<String> orderIdList);
 }

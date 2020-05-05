@@ -3,7 +3,7 @@ package com.xzsd.pc.store.entity;
 import java.util.Date;
 
 /**
- * @Description 实体类
+ * @Description 门店实体类
  * @Author zhaorujie
  * @Date 2020-03-24
  */
@@ -39,7 +39,7 @@ public class StoreInfo {
     /**
      * 电话
      */
-    private String phone;
+    private long phone;
     /**
      * 邀请码
      */
@@ -96,6 +96,10 @@ public class StoreInfo {
      * 登录用户id
      */
     private String loginUserId;
+    /**
+     * 登录用户的角色
+     */
+    private String nowRole;
 
     public int getPageSize() {
         return pageSize;
@@ -153,11 +157,11 @@ public class StoreInfo {
         this.userName = userName;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
@@ -271,5 +275,13 @@ public class StoreInfo {
 
     public void setLoginUserId(String loginUserId) {
         this.loginUserId = loginUserId;
+    }
+
+    public String getNowRole() {
+        return nowRole;
+    }
+
+    public void setNowRole(String nowRole) {
+        this.nowRole = nowRole;
     }
 }

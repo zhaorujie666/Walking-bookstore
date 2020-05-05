@@ -3,7 +3,6 @@ package com.xzsd.pc.customer.dao;
 import com.xzsd.pc.customer.entity.CustomerInfo;
 import com.xzsd.pc.customer.entity.CustomerVO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

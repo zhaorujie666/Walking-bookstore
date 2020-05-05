@@ -34,7 +34,7 @@
             0
         )
     </insert>
-    
+
     <!--新增客户订单的商品信息-->
     <insert id="addCustomerOrderGoodsInfo" parameterType="java.util.List">
         insert into t_order_details(
@@ -65,7 +65,7 @@
             0)
         </foreach>
     </insert>
-    
+
     <!--查询新增订单中的商品库存数量和商品的销售量-->
     <select id="getListGoodsInventory" parameterType="java.lang.String"
             resultType="com.xzsd.app.customerorder.entity.GoodsInfo">
@@ -192,6 +192,7 @@
         <result column="provinceName" property="provinceName"/>
         <result column="cityName" property="cityName"/>
         <result column="areaName" property="areaName"/>
+        <result column="version" property="version"/>
         <collection property="goodsList" ofType="com.xzsd.app.customerorder.entity.GoodsInfo">
             <id column="goodsId" property="goodsId"/>
             <result column="goodsName" property="goodsName"/>
@@ -201,7 +202,7 @@
             <result column="goodsDescribe" property="goodsDescribe"/>
         </collection>
     </resultMap>
-    
+
     <!--查询订单详情-->
     <select id="getCustomerOrderById" parameterType="java.lang.String"
             resultMap="orderDetailsById">
@@ -221,7 +222,8 @@
         t4.store_address as address,
         t5.area_name as provinceName,
         t6.area_name as cityName,
-        t7.area_name as areaName
+        t7.area_name as areaName,
+        t1.version as version
         from t_order_info t1
         left join t_order_details t2
         on t1.id = t2.order_id
@@ -319,7 +321,7 @@
             resultType="com.xzsd.app.customerorder.entity.GoodsInfo">
         select
         goods_id as goodsId,
-        avg (star_level) as average
+        convert(avg (star_level), decimal(11,1)) as average
         from t_goods_appraise
         where is_delete = 0
         and goods_id in

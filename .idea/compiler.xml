@@ -2,6 +2,66 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="com.neusoft.sc-admin-server.main" target="1.8" />
+      <module name="com.neusoft.sc-admin-server.test" target="1.8" />
+      <module name="com.neusoft.sc-api-gateway.main" target="1.8" />
+      <module name="com.neusoft.sc-api-gateway.test" target="1.8" />
+      <module name="com.neusoft.sc-common-base.main" target="1.8" />
+      <module name="com.neusoft.sc-common-base.test" target="1.8" />
+      <module name="com.neusoft.sc-common-client.main" target="1.8" />
+      <module name="com.neusoft.sc-common-client.test" target="1.8" />
+      <module name="com.neusoft.sc-common-log.main" target="1.8" />
+      <module name="com.neusoft.sc-common-log.test" target="1.8" />
+      <module name="com.neusoft.sc-common-util.main" target="1.8" />
+      <module name="com.neusoft.sc-common-util.test" target="1.8" />
+      <module name="com.neusoft.sc-common.main" target="1.8" />
+      <module name="com.neusoft.sc-common.test" target="1.8" />
+      <module name="com.neusoft.sc-config-server.main" target="1.8" />
+      <module name="com.neusoft.sc-config-server.test" target="1.8" />
+      <module name="com.neusoft.sc-core.main" target="1.8" />
+      <module name="com.neusoft.sc-core.test" target="1.8" />
+      <module name="com.neusoft.sc-eureka-server.main" target="1.8" />
+      <module name="com.neusoft.sc-eureka-server.test" target="1.8" />
+      <module name="com.neusoft.sc-job.main" target="1.8" />
+      <module name="com.neusoft.sc-job.test" target="1.8" />
+      <module name="com.neusoft.sc-log.main" target="1.8" />
+      <module name="com.neusoft.sc-log.test" target="1.8" />
+      <module name="com.neusoft.sc-monitor.main" target="1.8" />
+      <module name="com.neusoft.sc-monitor.test" target="1.8" />
+      <module name="com.neusoft.sc-project.main" target="1.8" />
+      <module name="com.neusoft.sc-project.test" target="1.8" />
+      <module name="com.neusoft.sc-provider-api.main" target="1.8" />
+      <module name="com.neusoft.sc-provider-api.test" target="1.8" />
+      <module name="com.neusoft.sc-provider.main" target="1.8" />
+      <module name="com.neusoft.sc-provider.test" target="1.8" />
+      <module name="com.neusoft.sc-security-client.main" target="1.8" />
+      <module name="com.neusoft.sc-security-client.test" target="1.8" />
+      <module name="com.neusoft.sc-security-core.main" target="1.8" />
+      <module name="com.neusoft.sc-security-core.test" target="1.8" />
+      <module name="com.neusoft.sc-security-uaa.main" target="1.8" />
+      <module name="com.neusoft.sc-security-uaa.test" target="1.8" />
+      <module name="com.neusoft.sc-security.main" target="1.8" />
+      <module name="com.neusoft.sc-security.test" target="1.8" />
+      <module name="com.neusoft.sc-service-api.main" target="1.8" />
+      <module name="com.neusoft.sc-service-api.test" target="1.8" />
+      <module name="com.neusoft.sc-service.main" target="1.8" />
+      <module name="com.neusoft.sc-service.test" target="1.8" />
+      <module name="com.neusoft.sc-shardingjdbc.main" target="1.8" />
+      <module name="com.neusoft.sc-shardingjdbc.test" target="1.8" />
+      <module name="com.neusoft.sc-support.main" target="1.8" />
+      <module name="com.neusoft.sc-support.test" target="1.8" />
+      <module name="com.neusoft.sc-web-auth.main" target="1.8" />
+      <module name="com.neusoft.sc-web-auth.test" target="1.8" />
+      <module name="com.neusoft.sc-web-static.main" target="1.8" />
+      <module name="com.neusoft.sc-web-static.test" target="1.8" />
+      <module name="com.neusoft.sc-web.main" target="1.8" />
+      <module name="com.neusoft.sc-web.test" target="1.8" />
+      <module name="com.neusoft.sc-xzsd-app.main" target="1.8" />
+      <module name="com.neusoft.sc-xzsd-app.test" target="1.8" />
+      <module name="com.neusoft.sc-xzsd-pc.main" target="1.8" />
+      <module name="com.neusoft.sc-xzsd-pc.test" target="1.8" />
+      <module name="com.neusoft.sc-zipkin-server.main" target="1.8" />
+      <module name="com.neusoft.sc-zipkin-server.test" target="1.8" />
       <module name="sc-admin-server_main" target="1.8" />
       <module name="sc-admin-server_test" target="1.8" />
       <module name="sc-api-gateway_main" target="1.8" />

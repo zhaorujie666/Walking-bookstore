@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/sc2019.iml" filepath="$PROJECT_DIR$/sc2019.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.neusoft.sc2019.iml" filepath="$PROJECT_DIR$/.idea/modules/com.neusoft.sc2019.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sc-api-gateway/sc2019.sc-api-gateway.iml" filepath="$PROJECT_DIR$/.idea/modules/sc-api-gateway/sc2019.sc-api-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sc-api-gateway/sc2019.sc-api-gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sc-api-gateway/sc2019.sc-api-gateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sc-api-gateway/sc2019.sc-api-gateway.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sc-api-gateway/sc2019.sc-api-gateway.test.iml" />

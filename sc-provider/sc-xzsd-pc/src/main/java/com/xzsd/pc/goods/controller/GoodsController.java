@@ -49,7 +49,7 @@ public class GoodsController {
 
     /**
      * 查询商品详情
-     * @param goodsId
+     * @param goodsId 商品id
      * @return
      * @author zhaorujie
      * @Date 2020-03-28
@@ -67,7 +67,7 @@ public class GoodsController {
 
     /**
      * 获取商品分类
-     * @param classifyId
+     * @param classifyId 商品分类id
      * @return
      * @author zhaorujie
      * @Date 2020-03-28
@@ -145,7 +145,7 @@ public class GoodsController {
 
     /**
      * 删除商品
-     * @param goodsId
+     * @param goodsId 商品id
      * @return
      * @author zhaorujie
      * @Date 2020-03-28

@@ -5,14 +5,14 @@
     <select id="getListOrder" parameterType="com.xzsd.pc.order.entity.OrderInfo"
             resultType="com.xzsd.pc.order.entity.OrderVO">
         select
-            t1.id orderId,
-            t1.total_price orderAllCost,
-            t1.order_status orderStateId,
-            t1.store_id storeId,
-            t2.user_name userName,
-            t2.phone phone,
-            t1.defray_time payTime,
-            t1.version version
+        t1.id as orderId,
+        t1.total_price as orderAllCost,
+        t1.order_status as orderStateId,
+        t1.store_id as storeId,
+        t2.user_name as userName,
+        t2.phone as phone,
+        t1.defray_time as payTime,
+        t1.version as version
         from t_order_info t1, t_sys_user t2
         where t1.user_id = t2.user_id
         and t1.is_delete = 0
@@ -87,14 +87,14 @@
     <select id="getOrderDetailsById" parameterType="java.lang.String"
             resultType="com.xzsd.pc.order.entity.OrderDetails">
         select
-        t1.order_id orderId,
-        t1.user_id userId,
-        t1.goods_id goodsId,
-        t2.goods_name goodsName,
-        t1.buy_number goodsCount,
-        t1.total_price theGoodsAllPrice,
-        t2.selling_price goodsPrice,
-        t2.old_price goodsShelfCost
+        t1.order_id as orderId,
+        t1.user_id as userId,
+        t1.goods_id as goodsId,
+        t2.goods_name as goodsName,
+        t1.buy_number as goodsCount,
+        t1.total_price as theGoodsAllPrice,
+        t2.selling_price as goodsPrice,
+        t2.old_price as goodsShelfCost
         from t_order_details t1, t_goods_info t2
         where t1.order_id = #{orderId}
         and t1.goods_id = t2.id
@@ -116,4 +116,17 @@
             </where>
         </foreach>
     </update>
+
+    <!--获取要更新的订单状态-->
+    <select id="getListOrderStatus" parameterType="java.lang.String" resultType="com.xzsd.pc.order.entity.OrderVO">
+        select
+        id as orderId,
+        order_status as orderStateId
+        from t_order_info
+        where is_delete = 0
+        and id in
+        <foreach item="item" index="index" collection="orderIdList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

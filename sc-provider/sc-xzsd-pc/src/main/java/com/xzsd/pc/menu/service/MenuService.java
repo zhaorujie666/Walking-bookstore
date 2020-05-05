@@ -5,7 +5,6 @@ import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.menu.dao.MenuDao;
 import com.xzsd.pc.menu.entity.MenuList;
 import com.xzsd.pc.menu.entity.Menu;
-import com.xzsd.pc.menu.entity.MenuVO;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,7 +61,7 @@ public class MenuService {
         if(count == 3){
             return AppResponse.versionError("存在相同的菜单名和菜单路由，请重新输入");
         }
-        //设置菜单编码
+        //设置菜单id
         menu.setMenuId(StringUtil.getCommonCode(2));
         int addMenu = menuDao.addMenu(menu);
         if(0 == addMenu){
@@ -142,7 +141,7 @@ public class MenuService {
     public AppResponse getPageHomeMenu(String role){
         List<Menu> pageHomeMenu = menuDao.getPageHomeMenu(role);
         if(pageHomeMenu.size() == 0){
-            return AppResponse.versionError("根据角色查询菜单失败");
+            return AppResponse.versionError("根据角色查询到菜单为空");
         }
         //封装数据
         MenuList menuList = new MenuList();

@@ -3,11 +3,15 @@
     <CLASSES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-config-server/1.4.3.RELEASE/811eee073bbb31933a4d87ba30b2cbc0ba07f53a/spring-cloud-config-server-1.4.3.RELEASE.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-config-server/1.4.3.RELEASE/811eee073bbb31933a4d87ba30b2cbc0ba07f53a/spring-cloud-config-server-1.4.3.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-config-server/1.4.3.RELEASE/811eee073bbb31933a4d87ba30b2cbc0ba07f53a/spring-cloud-config-server-1.4.3.RELEASE.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-config-server/1.4.3.RELEASE/811eee073bbb31933a4d87ba30b2cbc0ba07f53a/spring-cloud-config-server-1.4.3.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-config-server/1.4.3.RELEASE/51c33875557c4689c5c59bcb0651ccbfd8876e1c/spring-cloud-config-server-1.4.3.RELEASE-sources.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-config-server/1.4.3.RELEASE/51c33875557c4689c5c59bcb0651ccbfd8876e1c/spring-cloud-config-server-1.4.3.RELEASE-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-config-server/1.4.3.RELEASE/51c33875557c4689c5c59bcb0651ccbfd8876e1c/spring-cloud-config-server-1.4.3.RELEASE-sources.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-config-server/1.4.3.RELEASE/51c33875557c4689c5c59bcb0651ccbfd8876e1c/spring-cloud-config-server-1.4.3.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

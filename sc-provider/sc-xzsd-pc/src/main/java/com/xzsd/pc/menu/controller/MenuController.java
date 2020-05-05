@@ -6,7 +6,6 @@ import com.xzsd.pc.menu.entity.Menu;
 import com.xzsd.pc.menu.service.MenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,6 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/menu")
-@Validated
 public class MenuController {
 
     private static final Logger logger = LoggerFactory.getLogger(MenuController.class);

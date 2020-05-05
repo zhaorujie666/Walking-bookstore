@@ -20,22 +20,6 @@
         and is_delete = 0
     </select>
 
-    <!--统计排序是否出现重复的序号-->
-    <select id="countSort" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
-        select count(sort)
-        from t_hot_goods
-        where sort = #{hotGoodsNum}
-        and is_delete = 0
-    </select>
-
-    <!--统计该商品是否已经被使用-->
-    <select id="countGoodsIsUse" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo" resultType="int">
-        select count(goods_id)
-        from t_hot_goods
-        where goods_id = #{goodsId}
-        and is_delete = 0
-    </select>
-
     <!--新增热门商品-->
     <insert id="addHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo">
         insert into t_hot_goods(
@@ -90,13 +74,13 @@
     <select id="getListHotGoods" parameterType="com.xzsd.pc.hotgoods.entity.HotGoodsInfo"
             resultType="com.xzsd.pc.hotgoods.entity.HotGoodsVO">
         select
-        t1.id hotGoodsId,
-        t1.sort hotGoodsNum,
-        t1.goods_id goodsId,
-        t2.goods_name goodsName,
-        t2.selling_price goodsPrice,
-        t2.goods_introduction goodsDescribe,
-        t1.version version
+        t1.id as hotGoodsId,
+        t1.sort as hotGoodsNum,
+        t1.goods_id as goodsId,
+        t2.goods_name as goodsName,
+        t2.selling_price as goodsPrice,
+        t2.goods_introduction as goodsDescribe,
+        t1.version as version
         from t_hot_goods t1, t_goods_info t2
         where t1.goods_id = t2.id
         and t1.is_delete = 0

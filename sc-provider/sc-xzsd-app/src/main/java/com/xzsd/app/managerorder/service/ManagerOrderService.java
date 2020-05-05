@@ -32,10 +32,15 @@ public class ManagerOrderService {
      * @date 2020/4/14
      */
     public AppResponse getListMangerOrder(ManagerOrder managerOrder){
+        //分页
         PageHelper.startPage(managerOrder.getPageNum(), managerOrder.getPageSize());
         List<ManagerOrderVO> listMangerOrder = managerOrderDao.getListManagerOrder(managerOrder);
-        List<GoodsInfo> listOrderGoods = managerOrderDao.getListOrderGoods(managerOrder);
         PageInfo<ManagerOrderVO> pageData = new PageInfo<>(listMangerOrder);
+        if(pageData.getList().size() == 0){
+            return AppResponse.success("该状态下的订单为空", pageData);
+        }
+        //查询订单下的商品信息
+        List<GoodsInfo> listOrderGoods = managerOrderDao.getListOrderGoods(managerOrder);
         for (int i = 0; i < listMangerOrder.size(); i++) {
             List<GoodsInfo> list = new ArrayList<>();
             for(int j = 0; j < listOrderGoods.size(); j++){
@@ -73,9 +78,6 @@ public class ManagerOrderService {
         if(orderDetails == null){
             return AppResponse.versionError("查询订单详情失败");
         }
-        //处理时间格式，不让有.0出现
-        /*String[] split = orderDetails.getCrateTime().split(".");
-        orderDetails.setCrateTime(split[0]);*/
         orderDetails.setAddress(orderDetails.getProvinceName() + orderDetails.getCityName() + orderDetails.getAreaName() + orderDetails.getAddress());
         return AppResponse.success("查询订单详情成功", orderDetails);
     }

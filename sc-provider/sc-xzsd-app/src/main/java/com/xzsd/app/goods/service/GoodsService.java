@@ -55,19 +55,24 @@ public class GoodsService {
         //查询当前商品的所有评价
         List<GoodsEvaluationVO> listGoodsEvaluation = goodsDao.getListGoodsEvaluation(goodsEvaluation);
         PageInfo<GoodsEvaluationVO> pageData = new PageInfo<>(listGoodsEvaluation);
+        if(pageData.getList().size() == 0){
+            return AppResponse.success("该商品未有评价", pageData);
+        }
         //查询当前商品的所有评价下的每个用户的评价图片
         List<EvaluationImage> listGoodsImage = goodsDao.getListGoodsImage(goodsEvaluation);
         for (int i = 0; i < listGoodsEvaluation.size(); i++) {
-            List<EvaluationImage> imageList = new ArrayList<>();
-            for(int j = 0; j < listGoodsImage.size(); j++){
-                //判断用户的id是否相等
-                if(listGoodsEvaluation.get(i).getUserId().equals(listGoodsImage.get(j).getUserId())){
-                    imageList.add(listGoodsImage.get(j));
+            if(listGoodsEvaluation.get(i).getAppraiseId() != null){
+                List<EvaluationImage> imageList = new ArrayList<>();
+                for(int j = 0; j < listGoodsImage.size(); j++){
+                    //判断用户的id是否相等
+                    if(listGoodsEvaluation.get(i).getUserId().equals(listGoodsImage.get(j).getUserId())){
+                        imageList.add(listGoodsImage.get(j));
+                    }
                 }
+                listGoodsEvaluation.get(i).setImageList(imageList);
             }
-            listGoodsEvaluation.get(i).setImageList(imageList);
         }
-        return AppResponse.success("查询商品评价成功",pageData);
+        return AppResponse.success("查询商品评价成功", pageData);
     }
 
     /**

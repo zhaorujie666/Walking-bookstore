@@ -1,8 +1,8 @@
-package com.xzsd.app.customerime.service;
+package com.xzsd.app.customerme.service;
 
 import com.neusoft.core.restful.AppResponse;
-import com.xzsd.app.customerime.dao.CustomerMeDao;
-import com.xzsd.app.customerime.entity.CustomerMe;
+import com.xzsd.app.customerme.dao.CustomerMeDao;
+import com.xzsd.app.customerme.entity.CustomerMe;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -17,9 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @DescriptionDemo 商品增删改查
- * @Author zhaorujie
- * @Date 2020-03-28
+ * @description 商品增删改查
+ * @author zhaorujie
+ * @date 2020-03-28
  */
 @Service
 public class GoodsService {
@@ -27,13 +27,12 @@ public class GoodsService {
     @Resource
     private GoodsDao goodsDao;
 
-
     /**
      * 新增商品
      * @param goodsInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addGoods(GoodsInfo goodsInfo){
@@ -58,10 +57,10 @@ public class GoodsService {
      * @param goodsId
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     public AppResponse getGoodsInfoById(String goodsId){
-        GoodsVTO goodsInfo = goodsDao.getGoodsInfoById(goodsId);
+        GoodsDetails goodsInfo = goodsDao.getGoodsInfoById(goodsId);
         if(goodsInfo == null){
             return AppResponse.versionError("查询商品详情失败！");
         }
@@ -73,12 +72,12 @@ public class GoodsService {
      * @param classifyId
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     public AppResponse getListGoodsCategory(String classifyId){
         List<GoodsCategoryVO> listGoodsCategory = goodsDao.getListGoodsCategory(classifyId);
         if(listGoodsCategory.size() == 0){
-            return AppResponse.versionError("获取商品分类失败！");
+            return AppResponse.versionError("当前商品分类为空！");
         }
         //封装成接口文档需要的名称
         GoodsCategoryList goodsClassifyList = new GoodsCategoryList();
@@ -91,7 +90,7 @@ public class GoodsService {
      * @param goodsInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsInfo(GoodsInfo goodsInfo){
@@ -112,15 +111,20 @@ public class GoodsService {
      * @param goodsInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateGoodsStatus(GoodsInfo goodsInfo){
         //分割字符
         List<String> listGoodsId = Arrays.asList(goodsInfo.getGoodsId().split(","));
         List<String> listVersion = Arrays.asList(goodsInfo.getVersion().split(","));
+        List<String> goodsInventories = Arrays.asList(goodsInfo.getGoodsInventories().split(","));
         List<GoodsInfo> goodsInfoList = new ArrayList<>();
-        for (int i = 0; i < listGoodsId.size() && i <listVersion.size(); i++) {
+        for (int i = 0; i < listGoodsId.size() && i <listVersion.size() && i < goodsInventories.size(); i++) {
+            //当库存为0时即状态为售罄，就不能把商品状态改为在售
+            if(Integer.valueOf(goodsInventories.get(i)) == 0 && "1".equals(goodsInfo.getGoodsStateId())){
+                continue;
+            }
             GoodsInfo info = new GoodsInfo();
             //设置商品id
             info.setGoodsId(listGoodsId.get(i));
@@ -131,6 +135,9 @@ public class GoodsService {
             //设置商品状态
             info.setGoodsStateId(goodsInfo.getGoodsStateId());
             goodsInfoList.add(info);
+        }
+        if(goodsInfoList.size() == 0){
+            return AppResponse.versionError("当前商品已售罄库存为0，不能再把商品上架！");
         }
         int count = goodsDao.updateGoodsStatus(goodsInfoList);
         if(count == 0){
@@ -144,7 +151,7 @@ public class GoodsService {
      * @param goodsInfo
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     public AppResponse getListGoods(GoodsInfo goodsInfo){
         PageHelper.startPage(goodsInfo.getPageNum(), goodsInfo.getPageSize());
@@ -155,11 +162,11 @@ public class GoodsService {
 
     /**
      * 删除商品
-     * @param goodsId
-     * @param userId
+     * @param goodsId 商品id
+     * @param userId 登录用户id
      * @return
      * @author zhaorujie
-     * @Date 2020-03-28
+     * @date 2020-03-28
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse deleteGoods(String goodsId, String userId){
@@ -168,7 +175,7 @@ public class GoodsService {
         //去除已经被轮播图和热门商品使用的商品id
         List<String> listGoodsId = new ArrayList<>();
         int flag = 0;
-        int j = 0;
+        int j;
         for (int i = 0; i < list.size(); i++) {
             for(j = 0; j < goodsIdList.size(); j++){
                if(!list.get(i).equals(goodsIdList.get(j))){

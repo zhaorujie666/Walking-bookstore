@@ -3,11 +3,15 @@
     <CLASSES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.apache.rocketmq/rocketmq-common/4.2.0/80c69776efc45705778c2792fa02e62d453895e2/rocketmq-common-4.2.0.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.apache.rocketmq/rocketmq-common/4.2.0/80c69776efc45705778c2792fa02e62d453895e2/rocketmq-common-4.2.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.rocketmq/rocketmq-common/4.2.0/80c69776efc45705778c2792fa02e62d453895e2/rocketmq-common-4.2.0.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.apache.rocketmq/rocketmq-common/4.2.0/80c69776efc45705778c2792fa02e62d453895e2/rocketmq-common-4.2.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.apache.rocketmq/rocketmq-common/4.2.0/d386ed3a987b4772d715e561f02fec2e86a2446c/rocketmq-common-4.2.0-sources.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.apache.rocketmq/rocketmq-common/4.2.0/d386ed3a987b4772d715e561f02fec2e86a2446c/rocketmq-common-4.2.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.rocketmq/rocketmq-common/4.2.0/d386ed3a987b4772d715e561f02fec2e86a2446c/rocketmq-common-4.2.0-sources.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.apache.rocketmq/rocketmq-common/4.2.0/d386ed3a987b4772d715e561f02fec2e86a2446c/rocketmq-common-4.2.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

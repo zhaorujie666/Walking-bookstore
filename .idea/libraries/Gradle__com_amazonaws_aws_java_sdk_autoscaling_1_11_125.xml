@@ -3,11 +3,15 @@
     <CLASSES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-autoscaling/1.11.125/ed5950d2906ac8bf7c18b0e176d80ba2b431e160/aws-java-sdk-autoscaling-1.11.125.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-autoscaling/1.11.125/ed5950d2906ac8bf7c18b0e176d80ba2b431e160/aws-java-sdk-autoscaling-1.11.125.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-autoscaling/1.11.125/ed5950d2906ac8bf7c18b0e176d80ba2b431e160/aws-java-sdk-autoscaling-1.11.125.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-autoscaling/1.11.125/ed5950d2906ac8bf7c18b0e176d80ba2b431e160/aws-java-sdk-autoscaling-1.11.125.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-autoscaling/1.11.125/b628d29f2faf7626c5b7c73d13856ad2a705dee8/aws-java-sdk-autoscaling-1.11.125-sources.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-autoscaling/1.11.125/b628d29f2faf7626c5b7c73d13856ad2a705dee8/aws-java-sdk-autoscaling-1.11.125-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-autoscaling/1.11.125/b628d29f2faf7626c5b7c73d13856ad2a705dee8/aws-java-sdk-autoscaling-1.11.125-sources.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/com.amazonaws/aws-java-sdk-autoscaling/1.11.125/b628d29f2faf7626c5b7c73d13856ad2a705dee8/aws-java-sdk-autoscaling-1.11.125-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

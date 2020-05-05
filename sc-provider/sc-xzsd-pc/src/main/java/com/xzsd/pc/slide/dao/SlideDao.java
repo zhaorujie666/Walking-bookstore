@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**@Description SlideDao
+/**@Description SlideDao 轮播图Dao层
  * @author zhaorujie
  * @data 2020-3-29
  */
@@ -21,13 +21,6 @@ public interface SlideDao {
      * @return
      */
     int countSortAndGoodsIsUse(SlideInfo slideInfo);
-
-    /**
-     * 统计sort出现的次数
-     * @param slideInfo
-     * @return
-     */
-    int countSort(SlideInfo slideInfo);
 
     /**
      * 新增轮播图

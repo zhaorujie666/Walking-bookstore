@@ -1,7 +1,7 @@
 package com.xzsd.pc.order.entity;
 
 /**
- * @Description 实体类
+ * @Description 订单实体类
  * @Author zhaorujie
  * @Date 2020-03-27
  */

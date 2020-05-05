@@ -17,6 +17,9 @@
         and t2.invitation_code = t3.invitation_code
         and t1.role = 4
         and t3.manager_id = #{userId}
+        and t1.is_delete = 0
+        and t2.is_delete = 0
+        and t3.is_delete = 0
         <if test="userName != null and userName != ''">
             and t1.user_name like concat('%', #{userName}, '%')
         </if>
@@ -35,9 +38,11 @@
         sex as sex,
         phone as phone,
         email as mail,
+        user_id as userId,
         id_card as idCard
         from t_sys_user
         where role = 4
+        and is_delete = 0
         <if test="userName != null and userName != ''">
             and user_name like concat('%', #{userName}, '%')
         </if>

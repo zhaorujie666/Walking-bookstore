@@ -6,7 +6,6 @@ import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.store.dao.StoreDao;
 import com.xzsd.pc.store.entity.StoreInfo;
 import com.xzsd.pc.store.entity.StoreVO;
-import com.xzsd.pc.user.dao.UserDao;
 import com.xzsd.pc.util.RandomUtil;
 import com.xzsd.pc.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -28,9 +27,6 @@ public class StoreService {
     @Resource
     private StoreDao storeDao;
 
-    @Resource
-    private UserDao userDao;
-
     /**
      * 新增门店信息
      * @param storeInfo
@@ -38,8 +34,7 @@ public class StoreService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addStore(StoreInfo storeInfo){
-        String userRole = userDao.getUserRole(storeInfo.getLoginUserId());
-        if("2".equals(userRole)){
+        if("2".equals(storeInfo.getNowRole())){
             return AppResponse.versionError("你没有权限新增门店");
         }
         //校验是否存在相同的营业执政编码
@@ -128,12 +123,12 @@ public class StoreService {
     /**
      * 删除门店信息
      * @param storeId
-     * @param loginUserId
+     * @param loginUserId 登录用户id
+     * @param nowRole 登录用户角色
      * @return
      */
-    public AppResponse deleteStoreById(String storeId, String loginUserId){
-        String userRole = userDao.getUserRole(loginUserId);
-        if("2".equals(userRole)){
+    public AppResponse deleteStoreById(String storeId, String loginUserId, String nowRole){
+        if("2".equals(nowRole)){
             return AppResponse.versionError("你没有权限删除门店");
         }
         //分离字符串
@@ -142,7 +137,7 @@ public class StoreService {
         List<String> storeIdList = new ArrayList<>();
         int j;
         int flag = 0;
-        //去除已经和订单绑定的门店id
+        //去除已经和订单绑定且订单的为状态还没完成的门店id
         for (int i = 0; i < listStoreId.size(); i++) {
             for (j = 0; j < list.size(); j++) {
                 if(!listStoreId.get(i).equals(list.get(j))){

@@ -1,7 +1,7 @@
 package com.xzsd.pc.customer.entity;
 
 /**
- * @Description 实体类
+ * @Description 客户实体类
  * @Author zhaorujie
  * @Date 2020-03-26
  */

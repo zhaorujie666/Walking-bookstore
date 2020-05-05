@@ -11,9 +11,6 @@
         <if test="driverId != null and driverId != ''">
             and user_id != #{driverId}
         </if>
-        <if test="role != null and role != ''">
-            and role = #{role}
-        </if>
         and phone = #{phone}) != 0, 2, 0)
         from t_sys_user
         where is_delete = 0
@@ -21,22 +18,6 @@
             and user_id != #{driverId}
         </if>
         and user_acct = #{userAcct}
-    </select>
-
-    <!--统计司机账号-->
-    <select id="countDriverAccount" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">
-        select count(user_acct)
-        from t_sys_user
-        where is_delete = 0
-        and user_acct = #{userAcct}
-    </select>
-
-    <!--统计手机号数量-->
-    <select id="countPhone" parameterType="com.xzsd.pc.driver.entity.DriverInfo" resultType="int">
-        select count(phone)
-        from t_sys_user
-        where is_delete = 0
-        and phone = #{phone}
     </select>
 
     <!--新增司机-->
@@ -238,7 +219,7 @@
     <!--删除司机-->
     <update id="deleteDriverById" parameterType="java.lang.String">
         update t_sys_user
-        set 
+        set
             is_delete = 1,
             update_time = now(),
             update_user = #{loginId},

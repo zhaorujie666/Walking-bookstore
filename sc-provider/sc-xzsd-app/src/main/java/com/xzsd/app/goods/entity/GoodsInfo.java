@@ -50,6 +50,10 @@ public class GoodsInfo {
      * 商品的二级分类id
      */
     private String goodsSecondCategory;
+    /**
+     * 销售量
+     */
+    private int goodsSales;
 
     public String getGoodsId() {
         return goodsId;
@@ -137,5 +141,13 @@ public class GoodsInfo {
 
     public void setGoodsSecondCategory(String goodsSecondCategory) {
         this.goodsSecondCategory = goodsSecondCategory;
+    }
+
+    public int getGoodsSales() {
+        return goodsSales;
+    }
+
+    public void setGoodsSales(int goodsSales) {
+        this.goodsSales = goodsSales;
     }
 }

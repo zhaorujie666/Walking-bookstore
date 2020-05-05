@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.driver.dao.DriverDao;
+import com.xzsd.pc.driver.entity.DriverDetails;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import com.xzsd.pc.driver.entity.DriverVO;
 import com.xzsd.pc.user.dao.UserDao;
@@ -38,8 +39,7 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addDriver(DriverInfo driverInfo){
-        String userRole = userDao.getUserRole(driverInfo.getLoginUserId());
-        if("2".equals(userRole)){
+        if("2".equals(driverInfo.getNowRole())){
             return AppResponse.versionError("你没有权限，不能新增司机");
         }
         int cnt = driverDao.countDriverAccountAndPhone(driverInfo);
@@ -69,7 +69,7 @@ public class DriverService {
 
     /**
      * demo 查询司机详情
-     * @param driverId
+     * @param driverId 司机id
      * @return
      * @Author zhaorujie
      * @Date 2020-03-24
@@ -91,13 +91,12 @@ public class DriverService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateDriver(DriverInfo driverInfo){
-        String userRole = userDao.getUserRole(driverInfo.getLoginUserId());
-        if("2".equals(userRole)){
-            return AppResponse.versionError("你没有权限");
+        if("2".equals(driverInfo.getNowRole())){
+            return AppResponse.versionError("你没有权限修改司机信息");
         }
         DriverVO driver = driverDao.getDriverById(driverInfo.getDriverId());
         //判断当前账号和手机号是否已经修改
-        if(!driver.getUserAcct().equals(driverInfo.getUserAcct()) || !driver.getPhone().equals(driverInfo.getPhone())){
+        if(!driver.getUserAcct().equals(driverInfo.getUserAcct()) || String.valueOf(driver.getPhone()).equals(driverInfo.getPhone())){
             int cnt = driverDao.countDriverAccountAndPhone(driverInfo);
             if(cnt == 1){
                 return AppResponse.versionError("账号已存在，请重新输入");
@@ -146,15 +145,16 @@ public class DriverService {
 
     /**
      * 删除司机信息
-     * @param driverId
+     * @param driverId 司机id
+     * @param nowRole 登录角色
+     * @param loginId 登录人id
      * @return
      * @Author zhaorujie
      * @Date 2020-03-25
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse deleteDriverById(String driverId, String loginId){
-        String userRole = userDao.getUserRole(loginId);
-        if("2".equals(userRole)){
+    public AppResponse deleteDriverById(String driverId, String loginId, String nowRole){
+        if("2".equals(nowRole)){
             return AppResponse.versionError("你没有权限，不能删除");
         }
         List<String> listDriverId = Arrays.asList(driverId.split(","));

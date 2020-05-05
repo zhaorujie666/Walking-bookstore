@@ -1,5 +1,6 @@
 package com.xzsd.pc.user.dao;
 
+import com.xzsd.pc.user.entity.UserDetails;
 import com.xzsd.pc.user.entity.UserInfo;
 import com.xzsd.pc.user.entity.UserVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -7,6 +8,11 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * @Description 用户管理Dao层
+ * @author zhaorujie
+ * @date 2020-3-27
+ */
 @Mapper
 public interface UserDao {
 
@@ -23,20 +29,6 @@ public interface UserDao {
      * @return
      */
     int countUserAccountAndPhone(UserInfo userInfo);
-
-    /**
-     * 统计用户账号
-     * @param userInfo
-     * @return
-     */
-    int countUserAccount(UserInfo userInfo);
-
-    /**
-     * 统计手机号
-     * @param userInfo
-     * @return
-     */
-    int countPhone(UserInfo userInfo);
 
     /**
      * 添加用户

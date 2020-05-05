@@ -27,7 +27,6 @@ public class DriverController {
     @Resource
     private DriverService driverService;
 
-
     /**
      * demo 新增司机
      * @param driverInfo
@@ -51,8 +50,8 @@ public class DriverController {
     }
 
     /**
-     * 司机详情
-     * @param driverId
+     * 查询司机详情
+     * @param driverId 司机id
      * @return AppResponse
      * @author zhaorujie
      * @Date 2020-03-25
@@ -113,17 +112,18 @@ public class DriverController {
 
     /**
      * 删除司机
-     * @param driverId
+     * @param driverId 司机id
+     * @param nowRole 登录角色
      * @return
      * @Author zhaorujie
      * @Date 2020-03-25
      */
     @PostMapping("deleteDriver")
-    public AppResponse deleteDriverById(String driverId){
+    public AppResponse deleteDriverById(String driverId, String nowRole){
         try {
             //获取用户角色
             String userId = SecurityUtils.getCurrentUserId();
-            return driverService.deleteDriverById(driverId, userId);
+            return driverService.deleteDriverById(driverId, userId, nowRole);
         }catch (Exception e){
             logger.error("删除司机失败", e);
             System.out.println(e.toString());

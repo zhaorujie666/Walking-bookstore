@@ -2,7 +2,6 @@ package com.xzsd.pc.menu.dao;
 
 
 import com.xzsd.pc.menu.entity.Menu;
-import com.xzsd.pc.menu.entity.MenuVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +9,7 @@ import java.util.List;
 
 /**
  * @ClassName MenuDao
- * @Description 菜单管理
+ * @Description 菜单管理Dao层
  * @Author zhaorujie
  * @Date 2020-4-8
  */
@@ -36,20 +35,6 @@ public interface MenuDao {
      * @return
      */
     int countMenuNameAndMenuPath(Menu menu);
-
-    /**
-     * 统计是否存在相同的菜单名
-     * @param menu
-     * @return
-     */
-    int countMenuName(Menu menu);
-
-    /**
-     * 统计是否存在相同的菜单路由
-     * @param menu
-     * @return
-     */
-    int countMenuUrl(Menu menu);
 
     /**
      * 查询菜单详情

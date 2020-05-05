@@ -3,11 +3,15 @@
     <CLASSES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-netflix-turbine/1.4.4.RELEASE/5545d915ae36f1f357111ab4ca7f997025d4783b/spring-cloud-starter-netflix-turbine-1.4.4.RELEASE.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-netflix-turbine/1.4.4.RELEASE/5545d915ae36f1f357111ab4ca7f997025d4783b/spring-cloud-starter-netflix-turbine-1.4.4.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-netflix-turbine/1.4.4.RELEASE/5545d915ae36f1f357111ab4ca7f997025d4783b/spring-cloud-starter-netflix-turbine-1.4.4.RELEASE.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-netflix-turbine/1.4.4.RELEASE/5545d915ae36f1f357111ab4ca7f997025d4783b/spring-cloud-starter-netflix-turbine-1.4.4.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-netflix-turbine/1.4.4.RELEASE/e8bae2e6750f840fd840a5ec9e4d56ad02e2ee99/spring-cloud-starter-netflix-turbine-1.4.4.RELEASE-sources.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-netflix-turbine/1.4.4.RELEASE/e8bae2e6750f840fd840a5ec9e4d56ad02e2ee99/spring-cloud-starter-netflix-turbine-1.4.4.RELEASE-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-netflix-turbine/1.4.4.RELEASE/e8bae2e6750f840fd840a5ec9e4d56ad02e2ee99/spring-cloud-starter-netflix-turbine-1.4.4.RELEASE-sources.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-netflix-turbine/1.4.4.RELEASE/e8bae2e6750f840fd840a5ec9e4d56ad02e2ee99/spring-cloud-starter-netflix-turbine-1.4.4.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

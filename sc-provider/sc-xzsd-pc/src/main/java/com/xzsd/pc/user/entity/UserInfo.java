@@ -1,7 +1,5 @@
 package com.xzsd.pc.user.entity;
 
-import java.util.Date;
-
 /**
  * @Description 用户实体类
  * @Author zhaorujie
@@ -39,7 +37,7 @@ public class UserInfo {
     /**
      * 手机
      */
-    private String phone;
+    private long phone;
     /**
      * 邮箱
      */
@@ -88,6 +86,10 @@ public class UserInfo {
      * 版本号
      */
     private String version;
+    /**
+     * 登录用户的角色
+     */
+    private String nowRole;
 
     public String getUserId() {
         return userId;
@@ -145,11 +147,11 @@ public class UserInfo {
         this.sex = sex;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
@@ -247,5 +249,13 @@ public class UserInfo {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getNowRole() {
+        return nowRole;
+    }
+
+    public void setNowRole(String nowRole) {
+        this.nowRole = nowRole;
     }
 }

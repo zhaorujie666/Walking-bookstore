@@ -9,6 +9,7 @@
         version as version
         from t_sys_menu
         where is_delete = 0
+        and is_manager = 0
         order by create_time asc
     </select>
 
@@ -20,6 +21,7 @@
             menu_path,
             is_menu,
             remark,
+            is_manager,
             is_delete,
             create_time,
             create_user,
@@ -32,6 +34,7 @@
             #{menuPath},
             '菜单',
             #{menuComment},
+            0,
             0,
             now(),
             #{createUser},
@@ -56,22 +59,6 @@
         <if test="menuId != null and menuId != ''">
             and menu_id != #{menuId}
         </if>
-        and is_delete = 0
-    </select>
-
-    <!--统计是否存在相同的菜单名-->
-    <select id="countMenuName" parameterType="com.xzsd.pc.menu.entity.Menu" resultType="int">
-        select count(menu_name)
-        from t_sys_menu
-        where menu_name = #{menuName}
-        and is_delete = 0
-    </select>
-
-    <!--统计是否存在相同的菜单路由-->
-    <select id="countMenuUrl" parameterType="com.xzsd.pc.menu.entity.Menu" resultType="int">
-        select count(menu_path)
-        from t_sys_menu
-        where menu_path = #{menuPath}
         and is_delete = 0
     </select>
 
@@ -120,10 +107,10 @@
         from t_sys_menu
         where is_delete = 0
         <if test="role == 2">
-            and role = 2
+            and is_manager = 1
         </if>
         <if test="role == 0 or role == 1">
-            and role in(0, 1)
+            and is_manager = 0
         </if>
     </select>
 </mapper>

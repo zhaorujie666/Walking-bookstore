@@ -2,6 +2,7 @@ package com.xzsd.pc.user.service;
 
 import com.neusoft.core.restful.AppResponse;
 import com.xzsd.pc.user.dao.UserDao;
+import com.xzsd.pc.user.entity.UserDetails;
 import com.xzsd.pc.user.entity.UserInfo;
 import com.xzsd.pc.user.entity.UserVO;
 import com.xzsd.pc.util.PasswordUtils;
@@ -18,8 +19,8 @@ import static com.neusoft.core.page.PageUtils.getPageInfo;
 
 /**
  * @DescriptionDemo 用户的实现类
- * @Author zhaorujie
- * @Date 2020-03-25
+ * @author zhaorujie
+ * @date 2020-03-25
  */
 @Service
 public class UserService {
@@ -34,6 +35,9 @@ public class UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse addUser(UserInfo userInfo){
+        if(userInfo.getRole().equals(userInfo.getNowRole())){
+            return AppResponse.versionError("管理员不能新增管理员，只用超级管理员才能新增管理员");
+        }
         //查询账号和手机是否存在
         int num = userDao.countUserAccountAndPhone(userInfo);
         if(num == 1){
@@ -45,7 +49,6 @@ public class UserService {
         if(num == 3){
             return AppResponse.versionError("存在相同的用户账号和手机号，请重新输入");
         }
-        String image = userInfo.getImagePath();
         //设置id
         userInfo.setUserId(StringUtil.getCommonCode(2));
         //密码加密
@@ -79,8 +82,11 @@ public class UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateUserInfo(UserInfo userInfo){
+        if(userInfo.getRole().equals(userInfo.getNowRole())){
+            return AppResponse.versionError("管理员不能修改管理员的信息，并且不能把店长改为管理员，只有超级管理员才能");
+        }
         UserVO user = userDao.getUserInfoById(userInfo.getUserId());
-        if(!user.getUserAcct().equals(userInfo.getUserAcct()) || !user.getPhone().equals(userInfo.getPhone())){
+        if(!user.getUserAcct().equals(userInfo.getUserAcct()) || !String.valueOf(user.getPhone()).equals(userInfo.getPhone())){
             //查询账号和手机是否存在
             int num = userDao.countUserAccountAndPhone(userInfo);
             if(num == 1){
@@ -119,38 +125,39 @@ public class UserService {
 
     /**
      * 删除用户
-     * @param userId
-     * @param loginUserId
+     * @param userInfo
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public AppResponse deleteUser(String userId, String loginUserId){
-        String userRole = userDao.getUserRole(loginUserId);
-        if("2".equals(userRole)){
-            return AppResponse.versionError("您没有权限，请获取权限");
-        }
-        List<String> list = Arrays.asList(userId.split(","));
+    public AppResponse deleteUser(UserInfo userInfo){
+        //分割字符
+        List<String> list = Arrays.asList(userInfo.getUserId().split(","));
+        List<String> roleList = Arrays.asList(userInfo.getRole().split(","));
+        //查询店长绑定的门店
         List<String> managerIdList = userDao.queryBindStore(list);
         //去除已经绑定门店的店长编号
         List<String> listUserId = new ArrayList<>();
         int j;
         int flag = 0;
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size() && i < roleList.size(); i++) {
+            if(userInfo.getNowRole().equals(roleList.get(i))){
+                continue;
+            }
             for(j = 0; j < managerIdList.size(); j++){
                 if(!list.get(i).equals(managerIdList.get(j))){
                     flag++;
                 }
             }
-            //判断次数是否相同，相同就说明该用户id和门店绑定了
+            //判断次数是否相同，相同就说明该用户id没和门店绑定了
             if(flag == j){
                 listUserId.add(list.get(i));
             }
             flag = 0;
         }
         if(listUserId.size() == 0){
-            return AppResponse.versionError("该店长已经绑定门店，请先把绑定的门店删除");
+            return AppResponse.versionError("管理员不能删除管理员或该店长已经绑定门店，不能删除");
         }
-        int count = userDao.deleteUser(listUserId, loginUserId);
+        int count = userDao.deleteUser(listUserId, userInfo.getUpdateUser());
         if(count == 0){
             return AppResponse.versionError("删除用户失败，请刷新页面");
         }

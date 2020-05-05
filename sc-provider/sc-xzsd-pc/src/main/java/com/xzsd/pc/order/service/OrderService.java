@@ -8,7 +8,6 @@ import com.xzsd.pc.order.entity.OrderDetails;
 import com.xzsd.pc.order.entity.OrderDetailsList;
 import com.xzsd.pc.order.entity.OrderInfo;
 import com.xzsd.pc.order.entity.OrderVO;
-import com.xzsd.pc.user.dao.UserDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Description OrderDao订单实现类
+ * @Description OrderDao订单的实现类
  * @author zhaorujie
  * @date 2020-3-30
  */
@@ -28,9 +27,6 @@ public class OrderService {
     @Resource
     private OrderDao orderDao;
 
-    @Resource
-    private UserDao userDao;
-
     /**
      * 查询订单列表（分页）
      * @param orderInfo
@@ -39,6 +35,7 @@ public class OrderService {
     public AppResponse getListOrder(OrderInfo orderInfo){
         List<OrderVO> listOrder = null;
         PageHelper.startPage(orderInfo.getPageNum(), orderInfo.getPageSize());
+        //店长查自己的订单，管理员查全部
         if("2".equals(orderInfo.getRole())){
             listOrder = orderDao.getListOrder(orderInfo);
         }else if("0".equals(orderInfo.getRole()) || "1".equals(orderInfo.getRole())){
@@ -47,7 +44,6 @@ public class OrderService {
         PageInfo<OrderVO> pageData = new PageInfo<>(listOrder);
         return AppResponse.success("查询订单列表成功！", pageData);
     }
-
 
     /**
      * 查询订单详情
@@ -72,21 +68,30 @@ public class OrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     public AppResponse updateOrderStatus(OrderInfo orderInfo){
-        /*String role = userDao.getUserRole(orderInfo.getLoginUserId());
-        //判断只有店长才能修改订单
-        if("2".equals(role) == false){
-            return AppResponse.versionError("您不能修改订单状态，只有店长才可以！");
-        }*/
+        //分割字符
         List<String> listOrderId = Arrays.asList(orderInfo.getOrderId().split(","));
         List<String> listVersion = Arrays.asList(orderInfo.getVersion().split(","));
+        //查询当前要修改的订单状态
+        List<OrderVO> listOrderStatus = orderDao.getListOrderStatus(listOrderId);
         List<OrderInfo> orderList = new ArrayList<>();
         for (int i = 0; i < listOrderId.size() && i < listVersion.size(); i++) {
-            OrderInfo order = new OrderInfo();
-            order.setOrderId(listOrderId.get(i));
-            order.setVersion(listVersion.get(i));
-            order.setOrderStateId(orderInfo.getOrderStateId());
-            order.setUpdateUser(orderInfo.getUpdateUser());
-            orderList.add(order);
+            for(int j = 0; j < listOrderStatus.size(); j++){
+                if(listOrderId.get(i).equals(listOrderStatus.get(j).getOrderId())){
+                    //如果当前要删除的订单状态为4已完成未评价或5已完成已评价就不让修改订单状态，已完成的订单不能再改了
+                    if("4".equals(listOrderStatus.get(j).getOrderStateId()) || "5".equals(listOrderStatus.get(j).getOrderStateId())){
+                        continue;
+                    }
+                    OrderInfo order = new OrderInfo();
+                    order.setOrderId(listOrderId.get(i));
+                    order.setVersion(listVersion.get(i));
+                    order.setOrderStateId(orderInfo.getOrderStateId());
+                    order.setUpdateUser(orderInfo.getUpdateUser());
+                    orderList.add(order);
+                }
+            }
+        }
+        if(orderList.size() == 0){
+            return AppResponse.versionError("当前订单状态为已完成，不能再修改订单状态");
         }
         int count = orderDao.updateOrderStatus(orderList);
         if(count == 0){

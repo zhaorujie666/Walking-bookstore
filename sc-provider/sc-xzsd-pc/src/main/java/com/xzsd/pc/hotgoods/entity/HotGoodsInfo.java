@@ -1,7 +1,7 @@
 package com.xzsd.pc.hotgoods.entity;
 
 /**
- * @Description 实体类
+ * @Description 热门商品实体类
  * @author zhaorujie
  * @date 2020-3-31
  */

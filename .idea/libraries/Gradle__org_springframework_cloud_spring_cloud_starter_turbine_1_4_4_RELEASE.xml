@@ -3,11 +3,15 @@
     <CLASSES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-turbine/1.4.4.RELEASE/4a90f71f98fbca92eef42e778e980282eb6c31e4/spring-cloud-starter-turbine-1.4.4.RELEASE.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-turbine/1.4.4.RELEASE/4a90f71f98fbca92eef42e778e980282eb6c31e4/spring-cloud-starter-turbine-1.4.4.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-turbine/1.4.4.RELEASE/4a90f71f98fbca92eef42e778e980282eb6c31e4/spring-cloud-starter-turbine-1.4.4.RELEASE.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-turbine/1.4.4.RELEASE/4a90f71f98fbca92eef42e778e980282eb6c31e4/spring-cloud-starter-turbine-1.4.4.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-turbine/1.4.4.RELEASE/376650e74aedac017e2777c496fb75962ae0d9da/spring-cloud-starter-turbine-1.4.4.RELEASE-sources.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-turbine/1.4.4.RELEASE/376650e74aedac017e2777c496fb75962ae0d9da/spring-cloud-starter-turbine-1.4.4.RELEASE-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-turbine/1.4.4.RELEASE/376650e74aedac017e2777c496fb75962ae0d9da/spring-cloud-starter-turbine-1.4.4.RELEASE-sources.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-turbine/1.4.4.RELEASE/376650e74aedac017e2777c496fb75962ae0d9da/spring-cloud-starter-turbine-1.4.4.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

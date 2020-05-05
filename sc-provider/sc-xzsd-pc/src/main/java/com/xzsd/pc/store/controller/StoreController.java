@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * @Description增删改查StoreInfo
+ * @Description 门店管理增删改查StoreInfo
  * @Author zhaorujie
  * @Date 2020-03-25
  */
@@ -25,7 +25,6 @@ public class StoreController {
 
     @Resource
     private StoreService storeService;
-
 
     /**
      * 新增门店信息
@@ -112,16 +111,17 @@ public class StoreController {
 
     /**
      * 删除门店
-     * @param storeId
+     * @param storeId 门店id
+     * @param nowRole 登录的用户角色·
      * @return
      * @author zhaorujie
      * @Date 2020-03-26
      */
     @PostMapping("deleteStore")
-    public AppResponse deleteStoreById(String storeId){
+    public AppResponse deleteStoreById(String storeId, String nowRole){
         try {
             String userId = SecurityUtils.getCurrentUserId();
-            return storeService.deleteStoreById(storeId, userId);
+            return storeService.deleteStoreById(storeId, userId, nowRole);
         }catch (Exception e){
             logger.error("删除门店成功", e);
             System.out.println(e.toString());

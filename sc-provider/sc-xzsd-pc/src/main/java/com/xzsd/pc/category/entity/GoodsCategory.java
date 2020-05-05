@@ -1,6 +1,5 @@
 package com.xzsd.pc.category.entity;
 
-import java.util.Date;
 import java.util.List;
 
 /**

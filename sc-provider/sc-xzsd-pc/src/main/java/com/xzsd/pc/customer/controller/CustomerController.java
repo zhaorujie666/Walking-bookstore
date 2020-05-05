@@ -25,7 +25,6 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
-
     /**
      * 查询客户列表（分页）
      * @param customerInfo

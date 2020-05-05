@@ -3,11 +3,15 @@
     <CLASSES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-netflix-eureka-server/1.4.4.RELEASE/ec4ec498982bd3ac06b3b31cf5e74e36903ebdca/spring-cloud-netflix-eureka-server-1.4.4.RELEASE.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-netflix-eureka-server/1.4.4.RELEASE/ec4ec498982bd3ac06b3b31cf5e74e36903ebdca/spring-cloud-netflix-eureka-server-1.4.4.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-netflix-eureka-server/1.4.4.RELEASE/ec4ec498982bd3ac06b3b31cf5e74e36903ebdca/spring-cloud-netflix-eureka-server-1.4.4.RELEASE.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-netflix-eureka-server/1.4.4.RELEASE/ec4ec498982bd3ac06b3b31cf5e74e36903ebdca/spring-cloud-netflix-eureka-server-1.4.4.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-netflix-eureka-server/1.4.4.RELEASE/1fd53555345e26b5801310f2108cdfdb23a17c77/spring-cloud-netflix-eureka-server-1.4.4.RELEASE-sources.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-netflix-eureka-server/1.4.4.RELEASE/1fd53555345e26b5801310f2108cdfdb23a17c77/spring-cloud-netflix-eureka-server-1.4.4.RELEASE-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-netflix-eureka-server/1.4.4.RELEASE/1fd53555345e26b5801310f2108cdfdb23a17c77/spring-cloud-netflix-eureka-server-1.4.4.RELEASE-sources.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-netflix-eureka-server/1.4.4.RELEASE/1fd53555345e26b5801310f2108cdfdb23a17c77/spring-cloud-netflix-eureka-server-1.4.4.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

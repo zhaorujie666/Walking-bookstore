@@ -3,11 +3,15 @@
     <CLASSES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-hystrix-dashboard/1.4.4.RELEASE/ce9b7f6e60180fded9545d0fe865c30f96840d2c/spring-cloud-starter-hystrix-dashboard-1.4.4.RELEASE.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-hystrix-dashboard/1.4.4.RELEASE/ce9b7f6e60180fded9545d0fe865c30f96840d2c/spring-cloud-starter-hystrix-dashboard-1.4.4.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-hystrix-dashboard/1.4.4.RELEASE/ce9b7f6e60180fded9545d0fe865c30f96840d2c/spring-cloud-starter-hystrix-dashboard-1.4.4.RELEASE.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-hystrix-dashboard/1.4.4.RELEASE/ce9b7f6e60180fded9545d0fe865c30f96840d2c/spring-cloud-starter-hystrix-dashboard-1.4.4.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://D:/gradle-5.6.4/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-hystrix-dashboard/1.4.4.RELEASE/f025167635f72a5b41c89556ff62968ac2b75923/spring-cloud-starter-hystrix-dashboard-1.4.4.RELEASE-sources.jar!/" />
       <root url="jar://D:/Program Files/Maven/gradle-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-hystrix-dashboard/1.4.4.RELEASE/f025167635f72a5b41c89556ff62968ac2b75923/spring-cloud-starter-hystrix-dashboard-1.4.4.RELEASE-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-hystrix-dashboard/1.4.4.RELEASE/f025167635f72a5b41c89556ff62968ac2b75923/spring-cloud-starter-hystrix-dashboard-1.4.4.RELEASE-sources.jar!/" />
+      <root url="jar://E:/Program Files/Maven/maven-repository/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-starter-hystrix-dashboard/1.4.4.RELEASE/f025167635f72a5b41c89556ff62968ac2b75923/spring-cloud-starter-hystrix-dashboard-1.4.4.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

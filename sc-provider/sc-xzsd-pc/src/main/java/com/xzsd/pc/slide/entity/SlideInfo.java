@@ -1,12 +1,8 @@
 package com.xzsd.pc.slide.entity;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Date;
-import java.util.List;
 
 /**
- * @Description 实体类
+ * @Description 轮播图实体类
  * @Author zhaorujie
  * @Date 2020-03-29
  */

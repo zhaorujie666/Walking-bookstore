@@ -36,6 +36,10 @@ public class GoodsEvaluationVO {
      * 用户id
      */
     private String userId;
+    /**
+     * 评价表id
+     */
+    private String appraiseId;
 
     public String getGoodsId() {
         return goodsId;
@@ -91,5 +95,13 @@ public class GoodsEvaluationVO {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getAppraiseId() {
+        return appraiseId;
+    }
+
+    public void setAppraiseId(String appraiseId) {
+        this.appraiseId = appraiseId;
     }
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * 图片上传到腾讯云对象存储
@@ -42,22 +41,4 @@ public class UploadController {
             throw e;
         }
     }
-
-    /**
-     * 图片上传
-     * @param imageFile
-     * @return
-     * @author zhaorujie
-     * @date 2020-3-28
-     *//*
-    @PostMapping("uploadImage")
-    public AppResponse imagesUpload(List<MultipartFile> imageFile) {
-        try{
-            return uploadService.imagesUpload(imageFile);
-        }catch (Exception e){
-            logger.error("图片上传失败");
-            System.out.println(e.toString());
-            throw e;
-        }
-    }*/
 }

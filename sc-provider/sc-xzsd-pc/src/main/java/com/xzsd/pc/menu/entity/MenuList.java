@@ -2,6 +2,9 @@ package com.xzsd.pc.menu.entity;
 
 import java.util.List;
 
+/**
+ * 封装数据实体类
+ */
 public class MenuList {
     /**
      * 封装数据

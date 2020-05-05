@@ -1,12 +1,7 @@
 package com.xzsd.pc.goods.entity;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Date;
-import java.util.List;
-
 /**
- * @Description 实体类
+ * @Description 商品实体类
  * @Author zhaorujie
  * @Date 2020-03-24
  */
@@ -38,11 +33,11 @@ public class GoodsInfo {
     /**
      * 定价
      */
-    private String goodsOriginalCost;
+    private double goodsOriginalCost;
     /**
      * 售价
      */
-    private String goodsPrice;
+    private double goodsPrice;
     /**
      * 销售量
      */
@@ -131,6 +126,10 @@ public class GoodsInfo {
      * 用户id
      */
     private String userId;
+    /**
+     * 修改商品状态是的库存
+     */
+    private String goodsInventories;
 
     public int getPageSize() {
         return pageSize;
@@ -180,19 +179,19 @@ public class GoodsInfo {
         this.supplierName = supplierName;
     }
 
-    public String getGoodsOriginalCost() {
+    public double getGoodsOriginalCost() {
         return goodsOriginalCost;
     }
 
-    public void setGoodsOriginalCost(String goodsOriginalCost) {
+    public void setGoodsOriginalCost(double goodsOriginalCost) {
         this.goodsOriginalCost = goodsOriginalCost;
     }
 
-    public String getGoodsPrice() {
+    public double getGoodsPrice() {
         return goodsPrice;
     }
 
-    public void setGoodsPrice(String goodsPrice) {
+    public void setGoodsPrice(double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
 
@@ -370,5 +369,13 @@ public class GoodsInfo {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getGoodsInventories() {
+        return goodsInventories;
+    }
+
+    public void setGoodsInventories(String goodsInventories) {
+        this.goodsInventories = goodsInventories;
     }
 }

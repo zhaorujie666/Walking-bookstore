@@ -3,7 +3,7 @@ package com.xzsd.pc.goods.dao;
 import com.xzsd.pc.category.entity.GoodsCategoryVO;
 import com.xzsd.pc.goods.entity.GoodsInfo;
 import com.xzsd.pc.goods.entity.GoodsVO;
-import com.xzsd.pc.goods.entity.GoodsVTO;
+import com.xzsd.pc.goods.entity.GoodsDetails;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -37,7 +37,7 @@ public interface GoodsDao {
      * @param goodsId
      * @return
      */
-    GoodsVTO getGoodsInfoById(@Param("goodsId") String goodsId);
+    GoodsDetails getGoodsInfoById(@Param("goodsId") String goodsId);
 
     /**
      * 查询商品一二级分类列表

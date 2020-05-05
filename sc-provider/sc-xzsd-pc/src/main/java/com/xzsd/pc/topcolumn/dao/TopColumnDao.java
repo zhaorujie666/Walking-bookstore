@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * @Description 顶部栏查询
+ * @Description 顶部栏查询Dao层
  * @author zhaorujie
  * @date 2020/4/9
  */

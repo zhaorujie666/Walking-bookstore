@@ -1,7 +1,7 @@
 package com.xzsd.pc.driver.entity;
 
 /**
- * @Description 实体类
+ * @Description 司机实体类
  * @Author zhaorujie
  * @Date 2020-03-24
  */
@@ -25,7 +25,7 @@ public class DriverVO {
     /**
      * 电话
      */
-    private String phone;
+    private long phone;
     /**
      * 身份证
      */
@@ -66,6 +66,10 @@ public class DriverVO {
      * 司机地址信息表id
      */
     private String driverInfoId;
+    /**
+     * 登录用户的角色
+     */
+    private String newRole;
 
     public String getDriverId() {
         return driverId;
@@ -99,11 +103,11 @@ public class DriverVO {
         this.userName = userName;
     }
 
-    public String getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
@@ -185,5 +189,13 @@ public class DriverVO {
 
     public void setDriverInfoId(String driverInfoId) {
         this.driverInfoId = driverInfoId;
+    }
+
+    public String getNewRole() {
+        return newRole;
+    }
+
+    public void setNewRole(String newRole) {
+        this.newRole = newRole;
     }
 }

@@ -10,6 +10,9 @@ import java.util.List;
  * @date
  */
 public class GoodsCategoryList {
+    /**
+     * 封装数据
+     */
     private List<GoodsCategoryVO> goodsClassifyList;
 
     public List<GoodsCategoryVO> getGoodsClassifyList() {

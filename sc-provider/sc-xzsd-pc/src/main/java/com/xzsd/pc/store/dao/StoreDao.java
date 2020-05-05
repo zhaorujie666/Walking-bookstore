@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @ClassName StoreDao
+ * @ClassName StoreDao 门店Dao层
  * @Description Store
  * @Author zhaorujie
  * @Date 2020-03-25
@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface StoreDao {
     /**
-     * 统计营业执照编码数量
+     * 统计营业执照编码数量和店长编
      * @param storeInfo 门店信息
      * @return
      */
@@ -34,13 +34,6 @@ public interface StoreDao {
      * @return
      */
     int addStore(StoreInfo storeInfo);
-
-    /**
-     * 查询店长编号
-     * @param storeInfo
-     * @return
-     */
-    StoreInfo getManagerId(StoreInfo storeInfo);
 
     /**
      * 查询门店详情信息

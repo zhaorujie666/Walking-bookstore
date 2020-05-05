@@ -51,8 +51,8 @@ public class UploadService {
      * @return
      * @author zhaorujie
      * @Date 2020-03-29
-     *//*
-    public AppResponse imagesUpload(List<MultipartFile> imageFile) {
+     */
+    /*public AppResponse imagesUpload(List<MultipartFile> imageFile) {
         COSClientUtil cosClientUtil = new COSClientUtil();
         String name, imgUrl;
         String  url = "";

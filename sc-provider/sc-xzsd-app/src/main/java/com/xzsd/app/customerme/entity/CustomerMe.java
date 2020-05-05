@@ -1,4 +1,4 @@
-package com.xzsd.app.customerime.entity;
+package com.xzsd.app.customerme.entity;
 
 /**
  * @Description 客户端邀请码修改

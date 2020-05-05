@@ -13,6 +13,7 @@
             t.is_delete as locked
         FROM t_sys_user t
         WHERE t.user_acct = #{username}
+        and t.is_delete = 0
     </select>
 
 </mapper>

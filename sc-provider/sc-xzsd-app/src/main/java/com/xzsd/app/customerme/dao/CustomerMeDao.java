@@ -1,6 +1,6 @@
-package com.xzsd.app.customerime.dao;
+package com.xzsd.app.customerme.dao;
 
-import com.xzsd.app.customerime.entity.CustomerMe;
+import com.xzsd.app.customerme.entity.CustomerMe;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

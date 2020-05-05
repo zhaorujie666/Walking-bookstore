@@ -1,7 +1,7 @@
 package com.xzsd.pc.category.entity;
 
 /**
- * @Description 实体类
+ * @Description 商品二级分类实体类
  * @Author zhaorujie
  * @Date 2020-03-26
  */

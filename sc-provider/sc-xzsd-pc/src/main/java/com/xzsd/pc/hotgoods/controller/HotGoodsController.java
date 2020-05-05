@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * @Description 增删改查
+ * @Description 热门商品增删改查
  * @author zhaorujie
  * @date 2020-3-31
  */

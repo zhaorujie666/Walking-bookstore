@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * @Description增删改查UserInfo
+ * @Description 增删改查UserInfo
  * @Author zhaorujie
  * @Date 2020-03-27
  */
@@ -106,15 +106,18 @@ public class UserController {
 
     /**
      * 删除用户
-     * @param userId
+     * @param userInfo
      * @return
+     * @author zhaorujie
+     * @Date 2020-3-27
      */
     @PostMapping("deleteUser")
-    public AppResponse deleteUser(String userId){
+    public AppResponse deleteUser(UserInfo userInfo){
         try {
             //获取登录用户id
-            String loginUserId = SecurityUtils.getCurrentUserId();
-            return userService.deleteUser(userId, loginUserId);
+            String userId = SecurityUtils.getCurrentUserId();
+            userInfo.setUpdateUser(userId);
+            return userService.deleteUser(userInfo);
         }catch (Exception e){
             logger.error("删除用户失败", e);
             System.out.println(e.toString());

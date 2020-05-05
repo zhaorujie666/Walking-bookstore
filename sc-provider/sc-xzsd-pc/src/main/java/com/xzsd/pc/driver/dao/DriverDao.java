@@ -1,5 +1,6 @@
 package com.xzsd.pc.driver.dao;
 
+import com.xzsd.pc.driver.entity.DriverDetails;
 import com.xzsd.pc.driver.entity.DriverInfo;
 import com.xzsd.pc.driver.entity.DriverVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,19 +22,6 @@ public interface DriverDao {
      * @return
      */
     int countDriverAccountAndPhone(DriverInfo driverInfo);
-    /**
-     * 统计司机账号数量
-     * @param driverInfo 司机信息
-     * @return
-     */
-    int countDriverAccount(DriverInfo driverInfo);
-
-    /**
-     * 统计手机数量
-     * @param driverInfo
-     * @return
-     */
-    int countPhone(DriverInfo driverInfo);
 
     /**
      * 新增司机
