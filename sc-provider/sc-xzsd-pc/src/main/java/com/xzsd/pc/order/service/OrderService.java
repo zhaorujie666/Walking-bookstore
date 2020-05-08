@@ -70,11 +70,18 @@ public class OrderService {
         //查询当前要修改的订单状态
         List<OrderVO> listOrderStatus = orderDao.getListOrderStatus(listOrderId);
         List<OrderInfo> orderList = new ArrayList<>();
+        int flag = 0;
+        int cnt = 0;
         for (int i = 0; i < listOrderId.size() && i < listVersion.size(); i++) {
             for(int j = 0; j < listOrderStatus.size(); j++){
                 if(listOrderId.get(i).equals(listOrderStatus.get(j).getOrderId())){
                     //如果当前要删除的订单状态为4已完成未评价或5已完成已评价就不让修改订单状态，已完成的订单不能再改了
                     if("4".equals(listOrderStatus.get(j).getOrderStateId()) || "5".equals(listOrderStatus.get(j).getOrderStateId())){
+                        cnt++;
+                        continue;
+                    }
+                    if("0".equals(listOrderStatus.get(j).getOrderStateId()) && "3".equals(orderInfo.getOrderStateId())){
+                        flag++;
                         continue;
                     }
                     OrderInfo order = new OrderInfo();
@@ -86,8 +93,10 @@ public class OrderService {
                 }
             }
         }
-        if(orderList.size() == 0){
+        if(orderList.size() == 0 && cnt != 0){
             return AppResponse.versionError("当前订单状态为已完成，不能再修改订单状态");
+        }else if(orderList.size() == 0 && flag != 0){
+            return AppResponse.versionError("当前订单状态为已下单，不能直接把订单改为已取货");
         }
         int count = orderDao.updateOrderStatus(orderList);
         if(count == 0){
